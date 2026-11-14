@@ -13,6 +13,7 @@ Usage:
 import argparse, csv, json, random
 from collections import Counter, defaultdict
 from pathlib import Path
+import sys
 
 
 def split(rows, train_frac, seed, stratify=True):
@@ -54,6 +55,10 @@ def main():
     a = ap.parse_args()
 
     rows = [json.loads(l) for l in open(a.input, encoding="utf-8") if l.strip()]
+    # Keep machine-readable source IDs on every re-split (see add_source_ids.py)
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from add_source_ids import annotate
+    annotate(rows)
     ids = [r["id"] for r in rows]
     assert len(ids) == len(set(ids)), "duplicate question ids"
 

@@ -8,7 +8,9 @@ A question is used for Recall@k only if at least one expected source is in the s
 (`retrieval_eval = true`). Questions answered from facts.yaml or the PSI CSV tables are left
 to the tool / fact layer.
 
-Usage:  python evaluation/add_source_ids.py          (rewrites train/test .jsonl and .csv)
+Usage:  python evaluation/add_source_ids.py   (rewrites questions/train/test .jsonl and .csv)
+
+split_dataset.py calls annotate() itself, so the IDs survive every re-split.
 """
 import csv
 import json
@@ -39,6 +41,18 @@ TITLE_TO_ID = {
 }
 
 
+# Titles that are deliberately NOT in the manifest (outside the corpus). Any other unmapped
+# title is an error, so a new question with a typo or a new source cannot slip through silently.
+KNOWN_EXTERNAL = (
+    "Apollo 1 (NASA SMA)",
+    "Apollo 13 (NASA SMA)",
+    "25 Years Ago: Fire Aboard Space Station Mir",
+    "NASA Spinoff: Fireman's Air Tanks",
+    "NASA Spinoff: Fire Detector",
+    "PSI-99 Saffire-II investigation record",  # no PSI-99 metadata file in raw/psi
+)
+
+
 def map_source(title):
     for prefix, sid in TITLE_TO_ID.items():
         if title.startswith(prefix):
@@ -46,36 +60,60 @@ def map_source(title):
     return None
 
 
-def main():
+def load_reference():
     chunks = [json.loads(l) for l in open(ROOT / "processed" / "chunks.jsonl", encoding="utf-8")]
     indexed = {c["source_id"] for c in chunks if not c.get("exclude_from_default_search")}
     manifest = {r["source_id"] for r in csv.DictReader(open(ROOT / "reference" / "manifest.csv", encoding="utf-8-sig"))}
+    return indexed, manifest
 
-    for split in ("train", "test"):
-        path = EVAL / f"{split}.jsonl"
-        rows = [json.loads(l) for l in open(path, encoding="utf-8") if l.strip()]
+
+def annotate(rows, indexed=None, manifest=None):
+    """Add expected_source_ids / unmapped_sources / retrieval_eval to every row (in place)."""
+    if indexed is None or manifest is None:
+        indexed, manifest = load_reference()
+    errors = []
+    for r in rows:
+        ids, unmapped = [], []
+        for t in r["expected_sources"]:
+            sid = map_source(t)
+            if sid:
+                if sid not in manifest:
+                    errors.append(f"{r['id']}: {sid} not in manifest")
+                ids.append(sid)
+            else:
+                if not t.startswith(KNOWN_EXTERNAL):
+                    errors.append(f"{r['id']}: unknown source title {t!r} (add it to TITLE_TO_ID or KNOWN_EXTERNAL)")
+                unmapped.append(t)
+        r["expected_source_ids"] = list(dict.fromkeys(ids))
+        r["unmapped_sources"] = unmapped
+        r["retrieval_eval"] = bool(r["answerable"]) and any(s in indexed for s in ids)
+    if errors:
+        raise ValueError("\n".join(errors))
+    return rows
+
+
+def write_rows(rows, path):
+    with open(path, "w", encoding="utf-8") as f:
         for r in rows:
-            ids, unmapped = [], []
-            for t in r["expected_sources"]:
-                sid = map_source(t)
-                if sid:
-                    assert sid in manifest, sid
-                    ids.append(sid)
-                else:
-                    unmapped.append(t)
-            r["expected_source_ids"] = list(dict.fromkeys(ids))
-            r["unmapped_sources"] = unmapped
-            r["retrieval_eval"] = bool(r["answerable"]) and any(s in indexed for s in ids)
-        with open(path, "w", encoding="utf-8") as f:
-            for r in rows:
-                f.write(json.dumps(r, ensure_ascii=False) + "\n")
-        with open(path.with_suffix(".csv"), "w", encoding="utf-8-sig", newline="") as f:
-            w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
-            w.writeheader()
-            for r in rows:
-                w.writerow({k: (" | ".join(v) if isinstance(v, list) else v) for k, v in r.items()})
+            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+    with open(path.with_suffix(".csv"), "w", encoding="utf-8-sig", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+        w.writeheader()
+        for r in rows:
+            w.writerow({k: (" | ".join(v) if isinstance(v, list) else v) for k, v in r.items()})
+
+
+def main():
+    indexed, manifest = load_reference()
+    for name in ("questions", "train", "test"):
+        path = EVAL / f"{name}.jsonl"
+        if not path.exists():
+            continue
+        rows = [json.loads(l) for l in open(path, encoding="utf-8") if l.strip()]
+        annotate(rows, indexed, manifest)
+        write_rows(rows, path)
         n_ret = sum(r["retrieval_eval"] for r in rows)
-        print(f"{split}: {len(rows)} questions, {n_ret} usable for Recall@k")
+        print(f"{name}: {len(rows)} questions, {n_ret} usable for Recall@k")
 
 
 if __name__ == "__main__":
