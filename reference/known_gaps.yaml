@@ -1,0 +1,26 @@
+# KNOWN TOPIC GAPS v1
+# Topics the corpus is known NOT to cover and that are not tied to one investigation, so they cannot
+# be derived from the golden table or the manifest. A question matching `pattern` gets
+# answer_type = no_data and the `statement` is added to the evidence bundle's `gaps` (rule R-006).
+#
+# Gaps that ARE derivable are not listed here; evidence.py computes them:
+#   - partial gravity [F-019]                     -> router.PARTIAL_GRAVITY_RE
+#   - investigation without any source (DAFT-2)   -> golden table evidence_level / n_sources
+#   - investigation without results in the corpus -> manifest role + status
+#   - condition unknown in the golden table       -> o2 / pressure / flow columns
+#
+# Add an entry only after checking the corpus (chunks + facts.yaml), and record how it was checked.
+# `pattern` is a case-insensitive Python regex.
+
+gaps:
+  - id: G-001
+    topic: battery fires
+    pattern: "batter(?:y|ies)[^.?!]*(?:fire|thermal|runaway|burn|combust|ignit)|(?:fire|thermal|runaway)[^.?!]*batter(?:y|ies)|lithium[- ]ion"
+    statement: "Battery fires: no investigation in the corpus tested battery or lithium-ion thermal-runaway fires; the investigations cover solid fabrics and plastics, liquid fuel droplets and gas flames."
+    checked: "2026-11-14: 'battery' occurs in the chunks only as instrument power; 'runaway' occurs nowhere."
+
+  - id: G-002
+    topic: Artemis II smoke alarm
+    pattern: "(?:trigger|caus|\\bwhy\\b)[^.?!]*artemis|artemis[^.?!]*(?:trigger|caus|\\bwhy\\b|(?:actual|real) fire|was there a fire|what happened)"
+    statement: "Artemis II smoke alarm: the corpus only mentions that a smoke alarm event occurred during Artemis II testing [F-024]; it gives no cause and does not say whether there was a fire."
+    checked: "2026-11-14: 'Artemis' occurs in facts.yaml F-024 only; it occurs in no indexed chunk. The pattern covers questions about the cause or about a fire; whether the event happened is answered by F-024."

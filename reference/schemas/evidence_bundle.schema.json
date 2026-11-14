@@ -1,0 +1,483 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "evidence_bundle.schema.json",
+  "title": "EvidenceBundle",
+  "description": "All evidence the tools returned for one question. Every number and citation in an answer must come from this object. Unknown values are the string 'unknown' or null, never 0.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "question",
+    "intent",
+    "investigations",
+    "answer_type",
+    "facts",
+    "table_rows",
+    "tests",
+    "chunks",
+    "conflicts",
+    "calculations",
+    "gaps",
+    "versions"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "question": {
+      "type": "string"
+    },
+    "intent": {
+      "enum": [
+        "out_of_scope",
+        "partial_gravity",
+        "calculation",
+        "lunar_check",
+        "conflict",
+        "comparison",
+        "ranking",
+        "general"
+      ],
+      "description": "Router decision (router.py)."
+    },
+    "investigations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Canonical investigation IDs named in the question."
+    },
+    "answer_type": {
+      "enum": [
+        "answer",
+        "no_data",
+        "out_of_scope"
+      ],
+      "description": "Decided by rules and tools, never by the LLM. no_data and out_of_scope mean the answer must be a refusal that states the gaps."
+    },
+    "facts": {
+      "type": "array",
+      "description": "facts.yaml records; cite as [F-005].",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "claim"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "claim": {
+            "type": "string"
+          },
+          "topic": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "table_rows": {
+      "type": "array",
+      "description": "Golden-table rows (unverified LLM draft unless verified).",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "fields",
+          "evidence",
+          "verified"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "object"
+          },
+          "evidence": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "source_id",
+                  "page"
+                ],
+                "properties": {
+                  "source_id": {
+                    "type": "string"
+                  },
+                  "page": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "verified": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "tests": {
+      "type": "array",
+      "description": "Single PSI test rows; cite as [PSI-69 test 37].",
+      "items": {
+        "type": "object",
+        "required": [
+          "investigation",
+          "source_id",
+          "psi_id",
+          "row",
+          "test",
+          "o2",
+          "pressure_psi"
+        ],
+        "properties": {
+          "investigation": {
+            "type": "string"
+          },
+          "source_id": {
+            "type": "string"
+          },
+          "psi_id": {
+            "type": "string"
+          },
+          "row": {
+            "type": "integer",
+            "description": "Line number in the PSI CSV (header = 1)."
+          },
+          "test": {
+            "type": "string"
+          },
+          "flex_id": {
+            "type": "string"
+          },
+          "fuel": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "o2": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "Mole fraction; null if unknown or a range."
+          },
+          "o2_min": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "o2_max": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "pressure_psi": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "flow_cm_s": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "match": {
+            "enum": [
+              "joint",
+              "closest",
+              "listed"
+            ]
+          },
+          "pressure_excess_psi": {
+            "type": "number"
+          },
+          "o2_shortfall": {
+            "type": "number"
+          },
+          "notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "test_scan": {
+      "type": "object",
+      "description": "Summary of the row-by-row condition screen.",
+      "required": [
+        "thresholds",
+        "n_scanned",
+        "n_known",
+        "n_joint_matches"
+      ],
+      "properties": {
+        "thresholds": {
+          "type": "object"
+        },
+        "n_scanned": {
+          "type": "integer"
+        },
+        "n_known": {
+          "type": "integer"
+        },
+        "n_unknown_o2_or_pressure": {
+          "type": "integer"
+        },
+        "n_joint_matches": {
+          "type": "integer"
+        },
+        "investigations_with_known_tests": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "chunks": {
+      "type": "array",
+      "description": "Retrieved passages; cite as [S-013 p.12].",
+      "items": {
+        "type": "object",
+        "required": [
+          "chunk_id",
+          "source_id",
+          "page",
+          "text",
+          "score"
+        ],
+        "properties": {
+          "chunk_id": {
+            "type": "string"
+          },
+          "source_id": {
+            "type": "string"
+          },
+          "page": {
+            "type": [
+              "integer",
+              "string"
+            ]
+          },
+          "text": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number"
+          },
+          "section_title": {
+            "type": "string"
+          },
+          "investigation_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "conflicts": {
+      "type": "array",
+      "description": "Cross-source conflicts: show BOTH values (R-007).",
+      "items": {
+        "type": "object",
+        "required": [
+          "investigation_id",
+          "field",
+          "value_1",
+          "source_1",
+          "value_2",
+          "source_2",
+          "chosen",
+          "rationale"
+        ],
+        "properties": {
+          "investigation_id": {
+            "type": "string"
+          },
+          "field": {
+            "type": "string"
+          },
+          "value_1": {
+            "type": "string"
+          },
+          "source_1": {
+            "type": "string"
+          },
+          "value_2": {
+            "type": "string"
+          },
+          "source_2": {
+            "type": "string"
+          },
+          "chosen": {
+            "type": "string"
+          },
+          "rationale": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "calculations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "formula",
+          "result",
+          "unit"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "formula": {
+            "type": "string"
+          },
+          "result": {
+            "type": "number"
+          },
+          "unit": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "inputs": {
+            "type": "object"
+          },
+          "cross_check": {
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "What the repository does not have, e.g. 'DAFT-2: no source'."
+    },
+    "ranking": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "rank",
+          "id",
+          "score",
+          "confidence",
+          "unknown_features"
+        ],
+        "properties": {
+          "rank": {
+            "type": "integer"
+          },
+          "id": {
+            "type": "string"
+          },
+          "score": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "confidence": {
+            "type": "number"
+          },
+          "unknown_features": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "rules": {
+      "type": "array",
+      "description": "Agent rules R-001..R-008 (always all of them).",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "rule"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "rule": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "description": "Citation metadata for every source ID in the bundle.",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "found"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "found": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "route": {
+      "type": "object",
+      "description": "Router debug output (matched intents, decided_by, tools)."
+    },
+    "versions": {
+      "type": "object",
+      "required": [
+        "data",
+        "index",
+        "golden_table"
+      ],
+      "properties": {
+        "data": {
+          "type": "string"
+        },
+        "index": {
+          "type": "string"
+        },
+        "golden_table": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

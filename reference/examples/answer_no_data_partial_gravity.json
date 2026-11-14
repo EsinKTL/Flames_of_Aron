@@ -1,0 +1,497 @@
+{
+  "text": "LLM answer not available - showing evidence summary.\nData not available in repository.\n- Gap: Partial gravity: NASA PSI contains no partial-gravity combustion test data [F-019]; 0-g and 1-g results only bound intermediate gravity levels [F-021].\n- Currently, NASA PSI does not contain partial-gravity combustion test data. Future investigations such as the Lunar-g Combustion Investigation (LUCI) and Flammability of Materials on the Moon (FM2) are slated to address this gap. [F-019]\n- In ACME's E-FIELD Flames (Electric-Field Effects on Laminar Diffusion Flames) experiment, partial gravity was simulated by applying electric fields to act upon naturally occurring chemi-ions in flames. [F-020]\n- Microgravity (0-g) and normal gravity (1-g) experimental results establish physical bounds that bracket expected combustion behavior at intermediate gravity levels (such as Lunar 1/6-g or Martian 3/8-g). [F-021]\n- To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere. [F-004]\n- The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower. [F-005]\n- According to the challenge text, this represents more than a 40% increase in oxygen concentration compared to Earth's atmosphere, substantially increasing material flammability. [F-006]\n- In free fall, buoyancy-driven natural convection and buoyant rise of hot exhaust gases are absent, causing flames to behave dramatically differently from terrestrial flames; for example, a candle flame becomes a dim blue, spherical diffusion flame. [F-008]\n- ACME-E-FIELD (golden table, unverified draft): O2 unknown-unknown, pressure unknown-unknown psi, same-test lunar match: unknown\n- Passages retrieved: [S-023:10], [S-036:1], [S-023:3], [S-030:1], [S-023:4]",
+  "model": "none/evidence-summary",
+  "answer_type": "no_data",
+  "citations": [
+    "F-019",
+    "F-021",
+    "F-020",
+    "F-004",
+    "F-005",
+    "F-006",
+    "F-008",
+    "S-023:10",
+    "S-036:1",
+    "S-023:3",
+    "S-030:1",
+    "S-023:4"
+  ],
+  "validation": {
+    "passed": false,
+    "errors": [
+      "no LLM configured"
+    ],
+    "retried": false,
+    "fallback_used": true
+  },
+  "bundle": {
+    "schema_version": "1.0",
+    "question": "How would cabin fabric burn in lunar gravity?",
+    "intent": "partial_gravity",
+    "investigations": [],
+    "answer_type": "no_data",
+    "facts": [
+      {
+        "id": "F-019",
+        "claim": "Currently, NASA PSI does not contain partial-gravity combustion test data. Future investigations such as the Lunar-g Combustion Investigation (LUCI) and Flammability of Materials on the Moon (FM2) are slated to address this gap.",
+        "topic": "data gap",
+        "source": "Challenge text, 'Partial-gravity data'"
+      },
+      {
+        "id": "F-020",
+        "claim": "In ACME's E-FIELD Flames (Electric-Field Effects on Laminar Diffusion Flames) experiment, partial gravity was simulated by applying electric fields to act upon naturally occurring chemi-ions in flames.",
+        "topic": "partial-gravity simulation",
+        "source": "Challenge text, 'Partial-gravity data'"
+      },
+      {
+        "id": "F-021",
+        "claim": "Microgravity (0-g) and normal gravity (1-g) experimental results establish physical bounds that bracket expected combustion behavior at intermediate gravity levels (such as Lunar 1/6-g or Martian 3/8-g).",
+        "topic": "intermediate gravity",
+        "source": "Challenge text, 'Partial-gravity data'"
+      },
+      {
+        "id": "F-004",
+        "claim": "To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere.",
+        "topic": "lunar base atmosphere",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-005",
+        "claim": "The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower.",
+        "topic": "lunar base atmosphere",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-006",
+        "claim": "According to the challenge text, this represents more than a 40% increase in oxygen concentration compared to Earth's atmosphere, substantially increasing material flammability.",
+        "topic": "lunar base atmosphere",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-008",
+        "claim": "In free fall, buoyancy-driven natural convection and buoyant rise of hot exhaust gases are absent, causing flames to behave dramatically differently from terrestrial flames; for example, a candle flame becomes a dim blue, spherical diffusion flame.",
+        "topic": "microgravity flame",
+        "source": "Challenge text, 'Background'"
+      }
+    ],
+    "table_rows": [
+      {
+        "id": "ACME-E-FIELD",
+        "fields": {
+          "name": "Electric-Field Effects on Laminar Diffusion Flames (ACME E-FIELD Flames)",
+          "category": "prevention",
+          "fuel_type": "gas",
+          "fuel_material": "methane and ethylene (pure and diluted)",
+          "fuel_shape_size": "same coflow burner as the CLD Flame experiment; gas-jet and coflow configurations; nozzle diameter not found",
+          "o2_min": "unknown",
+          "o2_max": "unknown",
+          "o2_raw": "unknown",
+          "o2_note": "no accessible source gives a numeric O2",
+          "pressure_psi_min": "unknown",
+          "pressure_psi_max": "unknown",
+          "pressure_raw": "unknown",
+          "pressure_note": "unknown",
+          "flow_cm_s_min": "unknown",
+          "flow_cm_s_max": "unknown",
+          "flow_raw": "coflow and non-coflow (gas-jet) flames; no numeric speed found",
+          "flow_note": "unknown",
+          "gravity_regime": "microgravity | simulation (challenge text claim, not confirmed in a primary source)",
+          "hardware": "CIR (ACME): up to 10 kV between the burner and a flat circular wire-mesh electrode above it",
+          "lunar_o2_flag": "unknown",
+          "lunar_pressure_flag": "unknown",
+          "lunar_joint_flag": "unknown",
+          "lunar_note": "O2 upper bound and/or pressure lower bound unknown",
+          "main_finding": "Clear correlations were found between flame luminosity, combustion intensity and ion current, and highly diluted flames could be stabilized by very weak electric fields; the team reported that soot could be eliminated in some flames by changing the electric field.",
+          "test_count": "unknown (Phase I: 11 test days)",
+          "evidence_level": "LLM draft",
+          "has_conflict": "yes"
+        },
+        "evidence": {
+          "name": [
+            {
+              "source_id": "S-058",
+              "page": "web: page header"
+            }
+          ],
+          "category": [
+            {
+              "source_id": "S-058",
+              "page": "web: Space Applications"
+            }
+          ],
+          "fuel_material": [
+            {
+              "source_id": "S-056",
+              "page": "web: p.7"
+            }
+          ],
+          "fuel_shape_size": [
+            {
+              "source_id": "S-026",
+              "page": "p.16"
+            },
+            {
+              "source_id": "S-056",
+              "page": "web: p.7"
+            },
+            {
+              "source_id": "S-058",
+              "page": "web: Experiment Description"
+            }
+          ],
+          "hardware": [
+            {
+              "source_id": "S-026",
+              "page": "p.16"
+            },
+            {
+              "source_id": "S-058",
+              "page": "web: Science Objectives"
+            }
+          ],
+          "main_finding": [
+            {
+              "source_id": "S-053",
+              "page": "web: slide 7"
+            },
+            {
+              "source_id": "S-053",
+              "page": "web: slide 7"
+            },
+            {
+              "source_id": "S-057",
+              "page": "web: body text"
+            },
+            {
+              "source_id": "S-054",
+              "page": "web: E-FIELD paragraph"
+            }
+          ],
+          "test_count": [
+            {
+              "source_id": "S-057",
+              "page": "web: body text"
+            }
+          ]
+        },
+        "verified": false
+      }
+    ],
+    "tests": [],
+    "chunks": [
+      {
+        "chunk_id": "S-023_p010_c03",
+        "source_id": "S-023",
+        "page": 10,
+        "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | IV. Results and Discussion]\nThis model was developed to reflect\ncargo and trash that approximates sealed volumes where gas cannot escape. Similarly, the secondary constant volume\n(SCV) model divides the total vehicle volume into two sub-volumes, but instead assumes that the two sub-volumes\ndo exchange gas such that both volumes remain constant. This model can be used to predict gases trapped between\nbags. In the case of Saffire IV, the SCM and SCV model predicted the same volume of 18.7m3. These SCM and SCV models were developed to reflect the potential behavior of trash within Cygnus: the SCM\nmodel approximates sealed volumes where gases cannot escape from trash bags, and the SCV model approximates\ngases trapped between bags. Because these models represent different potential trash packing scenarios, O release conditions are considered based on both models and knowledge of how the vehicle trash was packed. While the model\nin this work uses perfect rectangular boxes to represent cargo and trash, the real trash bags are amorphous in shape,\nand the cargo is wrapped in a porous Nomex fabric that could also provide more air for mixing. This increase in\nvolume would explain why the CO in the experiment would reach a smaller steady state value than in the model.",
+        "score": 0.01505,
+        "section_title": "IV. Results and Discussion",
+        "investigation_ids": [
+          "Saffire-IV"
+        ]
+      },
+      {
+        "chunk_id": "S-036_meta_c01",
+        "source_id": "S-036",
+        "page": 1,
+        "text": "[BASS | S-036: Official PSI Metadata | Study Approach, Objective & Hardware]\nStudy Identifier: PSI-26\nStudy Title: Burning and Suppression of Solids\nComment[Approach]: \"The experiment was conducted aboard the International Space Station (ISS) inside the Microgravity Glove Box (MSG). Custom-made fabric samples consisting of 75% cotton and 25% fiberglass (by mass) measuring were used as a fuel source as well as Nomex fabric and Ultem. A Kanthal wire (29-gage)igniter was used to initiate combustion at one end of the fabric. Airflow was controlled using a variable speed fan, with airflow speeds reaching as high as 40 cm/s. The airflow was directed along the fuel surface in either the opposed or concurrent direction.\nComment[Experiment Hardware]: Microgravity Science Glovebox\nComment[Hypothesis]: BASS experiments were based on the hypothesis that materials in microgravity, with adequate ventilation, burn as well if not better than the same material in normal gravity with other conditions being identical (pressure, oxygen concentration, temperature, etc.) To test this hypothesis with any but the thinnest materials requires extended microgravity time – longer than available in drop towers or parabolic aircraft.\nComment[Objective]: \"The two main objectives for BASS are to:\nComment[Research Impacts]: \"Current NASA spacecraft materials selection is based on a standard test method (NASA–STD–6001 Test 1) that segregates material based on 1-g behavior without consideration of low gravity effects. A critical element of this understanding is the radiative heat emission from the flame. These results are used in first order models and predictions of heat release in spacecraft fires and as a means to extend heat release data from tests like the NASA cone calorimeter test (NASA–STD–6001 Test 2) to a performance-based material selection process. Using nitrogen as a flame suppressant in microgravity provides a direct link to current and planned extinguishment techniques.\nStudy Design Type: Flame Spread: Fire safety: Fire suppression system: Forced Flow Flame: Damkohler number: Kinetic regime: Boundary layer\nStudy Design Type Term Accession Number: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/\nStudy Design Type Term Source REF: PSI: PSI: PSI: PSI: PSI: PSI: PSI",
+        "score": 0.01436,
+        "section_title": "Official PSI Metadata Summary",
+        "investigation_ids": [
+          "BASS"
+        ]
+      },
+      {
+        "chunk_id": "S-023_p003_c01",
+        "source_id": "S-023",
+        "page": 3,
+        "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | I. Introduction]\nFor context, Table 1 gives\nTable 1. Summary of Saffire-IV events. Events 7 and 8 were not completed\nall the events completed\ndue to technical and logistical issues and hence are omitted from this table. during Saffire-IV. The test\nEvent\ncampaign began with a scrub Description of Event Purpose of Event\nNumber\nof CO by pulling cabin air Reduce background CO ,\nthrough the lithium 2\n1 CO Scrub evaluate CO scrubber\nhydroxide bed of the FFD. In 2 2\nperformance\nevent two, CO was released Track tracer gas transport\nto determine the volume,\nthroughout cabin for vehicle\nwhich helped determine how 2 CO and HClrelease\n2 volume calculation and observe\nmuch oxygen should be\nHCl surface adsorption\nadded later in the experiment. 3 Flow visualization test Assess SFU air flow\nHydrogen Chloride (HCl)\nBurn: 40.64 cm wide × 50 cm long Sample burn with\nwas released after the oxygen 4\nSIBAL concurrent HCl release\nscrub to study its adsorption\nBurn: 40 cm wide × 18 cm long × 1 cm Sample burn, no HCl\nto surfaces. HCl was also 5\nthick 2-sided PMMA release\nreleased during the event 4\nEvaluate CO scrubber\nSIBAL burn to determine if 6 CO Scrub 2\n2 performance\nadsorption changed as a\n9 Flow visualization test Assess SFU air flow\nfunction of temperature. Flow visualization tests were\nperformed before and after the completion of the last burn events to determine if any major differences in air flow\nthrough the SFU had occurred. The PMMA in event number 5 did not extinguish when planned, causing the\ncancelation of other events.",
+        "score": 0.01403,
+        "section_title": "I. Introduction",
+        "investigation_ids": [
+          "Saffire-IV"
+        ]
+      },
+      {
+        "chunk_id": "S-030_meta_c01",
+        "source_id": "S-030",
+        "page": 1,
+        "text": "[BASS-II | S-030: Official PSI Metadata | Study Approach, Objective & Hardware]\nStudy Identifier: PSI-25\nStudy Title: Burning and Suppression of Solids - II\nComment[Approach]: To summarize, BASS-II's approach, microgravity combustion tests were performed aboard the International Space Station. Active crew support for real-time “lab partner” operations. The wind tunnel was installed in the Microgravity Science Glovebox which supplied power, imaging, and a level of containment. Fuel samples were mounted inside a small wind tunnel which could impose airflow speeds up to 40 cm/s. Main variables are airflow speed and oxygen concentration (oxygen varied below 21% by adding nitrogen). Flame appearance, flame growth, and spread rates were determined in both the opposed and concurrent flow.\nComment[Experiment Hardware]: Microgravity Science Glovebox (MSG)\nComment[Hypothesis]: \"BASS–II tests the hypothesis that materials in microgravity, with adequate ventilation, burn as well if not better than the same material in normal gravity with other conditions being identical (pressure, O2\nComment[Objective]: \"BASS-II results contribute to the combustion computational models used in the design of fire detection and suppression systems in microgravity and on Earth.\nComment[Research Impacts]: A primary goal of BASS-II is improved spacecraft fire safety, improved understanding of combustion in space and how to avoid it. If you’re on a mission far from Earth, a fire can be catastrophic. BASS-II helps engineers select the safest materials and improve firefighting methods on future space missions. In outer space, fuels burn as oval balls rather than with an upward pointed cone flame as they do on Earth. This simpler combustion process enables researchers to evaluate computer models of fuel burning. These models can then be used to more accurately study flames on Earth, such as in wildfires, building fires, energy recapture from waste recycling, and other combustion problems.\nStudy Design Type: Flame Spread: Solid Fuels: extinction limits: Forced Flow Velocity: MSG: BASS: Fire Suppression: Fire Safety\nStudy Design Type Term Accession Number: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/\nStudy Design Type Term Source REF: PSI: PSI: PSI: PSI: PSI: PSI: PSI: PSI",
+        "score": 0.01313,
+        "section_title": "Official PSI Metadata Summary",
+        "investigation_ids": [
+          "BASS-II"
+        ]
+      },
+      {
+        "chunk_id": "S-023_p004_c01",
+        "source_id": "S-023",
+        "page": 4,
+        "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | I. Introduction]\ntrash configuration were determined from crew photos. The free gas volume obtained from the model was 10.9 m3. This compared favorably with NG’s estimate of 11.1 m3 based on the dimensions of the packed bags. RS1 is located in the nadir bulkhead section of Cygnus while RS2 is in the forward starboard (FS) standoff. RS3\ncan be found in the forward port (FP) standoff, which is most directly in the flow path of Saffire. RS4 is in the aft port\n(AP), RS5 is in the aft starboard (AS), and RS6 is in the far zenith end cone of Cygnus. Figure 2 highlights four of the\nRS locations in Cygnus, as well as Saffire, the FFD, and the Cygnus ECLSS system that circulates the air. Not shown\nis RS2, which is approximately in the same location as RS3 but in the FS standoff, and RS5 which is approximately\nin the same location as RS4 but in the AS standoff. Table 2 gives flow rates of interest within the model. The flow in the Saffire duct gives a nominal velocity of 20\ncm/s, but is ramped down at certain times in the burn. The initial cabin air temperature was set to 25 °C for the SIBAL\nburn and 26 °C for the PMMA burn, while a constant temperature boundary condition for the surfaces were set at\n25 °C for both burns. The heat transfer into the vehicle from Saffire was determined by the experimental Saffire inlet\nand outlet temperatures.",
+        "score": 0.01301,
+        "section_title": "I. Introduction",
+        "investigation_ids": [
+          "Saffire-IV"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "calculations": [],
+    "gaps": [
+      "Partial gravity: NASA PSI contains no partial-gravity combustion test data [F-019]; 0-g and 1-g results only bound intermediate gravity levels [F-021]."
+    ],
+    "rules": [
+      {
+        "id": "R-001",
+        "rule": "Do NOT extrapolate microgravity results directly to Lunar or Martian gravity without explicitly stating the lack of direct partial-gravity empirical data and explaining bounding logic ([F-019], [F-021])."
+      },
+      {
+        "id": "R-002",
+        "rule": "When queried regarding combustion in Lunar or Martian gravity, explicitly clarify that NASA PSI currently contains no partial-gravity test data [F-019]. Mention E-FIELD electric field chemi-ion simulation [F-020] and 0-g/1-g bounding methodology [F-021] if relevant."
+      },
+      {
+        "id": "R-003",
+        "rule": "Never assess spacecraft fire flammability solely on oxygen percentage. Always evaluate oxygen partial pressure (via calculation), total pressure, diluent inert species (N2, CO2, He), and ventilation forced flow velocity together."
+      },
+      {
+        "id": "R-004",
+        "rule": "If asked about rocket engine or thruster propellant fires, clearly state that propulsion systems are outside the scope of PSI microgravity science due to momentum-dominated flow regimes [F-022]."
+      },
+      {
+        "id": "R-005",
+        "rule": "For every experimental finding reported, cite the exact test conditions: fuel type, geometry, oxygen concentration, ambient pressure, flow velocity, and hardware facility. If a condition is omitted in the source, label it as 'unspecified'; do NOT guess."
+      },
+      {
+        "id": "R-006",
+        "rule": "If an empirical value or data point is absent from the indexed chunks and Golden Table, state 'data not available in repository'. Never fabricate numerical values from LLM parametric memory."
+      },
+      {
+        "id": "R-007",
+        "rule": "When source documents report conflicting findings or values, present both sources with their respective document citations, PI names, and publication years; do not arbitrarily select one."
+      },
+      {
+        "id": "R-008",
+        "rule": "Clearly distinguish between empirical flight experiment findings (PSI / peer-reviewed reports), challenge guidelines, mathematical derivations, and speculative engineering hypotheses. Never present interpretation as an empirical fact."
+      }
+    ],
+    "route": {
+      "intent": "partial_gravity",
+      "investigations": [],
+      "matched_intents": [
+        "partial_gravity"
+      ],
+      "ambiguous": false,
+      "decided_by": "rules",
+      "out_of_scope_reason": null,
+      "tools": [
+        "get_facts",
+        "query_golden_table"
+      ],
+      "rules": [
+        "R-001",
+        "R-002"
+      ]
+    },
+    "versions": {
+      "data": "v2",
+      "index": "4aa3c9230f",
+      "golden_table": "draft"
+    },
+    "sources": [
+      {
+        "id": "F-019",
+        "found": true,
+        "kind": "fact",
+        "title": "Currently, NASA PSI does not contain partial-gravity combustion test data. Future investigations such as the Lunar-g Combustion Investigation (LUCI) and Flammability of Materials on the Moon (FM2) are slated to address this gap.",
+        "source": "Challenge text, 'Partial-gravity data'"
+      },
+      {
+        "id": "F-020",
+        "found": true,
+        "kind": "fact",
+        "title": "In ACME's E-FIELD Flames (Electric-Field Effects on Laminar Diffusion Flames) experiment, partial gravity was simulated by applying electric fields to act upon naturally occurring chemi-ions in flames.",
+        "source": "Challenge text, 'Partial-gravity data'"
+      },
+      {
+        "id": "F-021",
+        "found": true,
+        "kind": "fact",
+        "title": "Microgravity (0-g) and normal gravity (1-g) experimental results establish physical bounds that bracket expected combustion behavior at intermediate gravity levels (such as Lunar 1/6-g or Martian 3/8-g).",
+        "source": "Challenge text, 'Partial-gravity data'"
+      },
+      {
+        "id": "F-004",
+        "found": true,
+        "kind": "fact",
+        "title": "To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-005",
+        "found": true,
+        "kind": "fact",
+        "title": "The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-006",
+        "found": true,
+        "kind": "fact",
+        "title": "According to the challenge text, this represents more than a 40% increase in oxygen concentration compared to Earth's atmosphere, substantially increasing material flammability.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-008",
+        "found": true,
+        "kind": "fact",
+        "title": "In free fall, buoyancy-driven natural convection and buoyant rise of hot exhaust gases are absent, causing flames to behave dramatically differently from terrestrial flames; for example, a candle flame becomes a dim blue, spherical diffusion flame.",
+        "source": "Challenge text, 'Background'"
+      },
+      {
+        "id": "S-023",
+        "found": true,
+        "kind": "source",
+        "title": "Model Development of Large-Scale Spacecraft Fires during the Saffire-IV Experiments (ICES-2022-278)",
+        "authors": "Brooker J., Niehaus J.",
+        "year": "2022",
+        "url": "https://ntrs.nasa.gov/citations/20220002714",
+        "doi": null,
+        "investigation": "Saffire-IV",
+        "psi_id": null,
+        "role": "results",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-036",
+        "found": true,
+        "kind": "source",
+        "title": "PSI-26 investigation metadata (ISA-Tab)",
+        "authors": null,
+        "year": "2013",
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-26",
+        "doi": "10.60555/58h4-dy80",
+        "investigation": "BASS",
+        "psi_id": "PSI-26",
+        "role": "metadata",
+        "file_type": "txt",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-030",
+        "found": true,
+        "kind": "source",
+        "title": "PSI-25 investigation metadata (ISA-Tab)",
+        "authors": null,
+        "year": "2022",
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+        "doi": "10.60555/4qc4-de67",
+        "investigation": "BASS-II",
+        "psi_id": "PSI-25",
+        "role": "metadata",
+        "file_type": "txt",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-058",
+        "found": true,
+        "kind": "source",
+        "title": "Electric-Field Effects on Laminar Diffusion Flames (E-FIELD Flames) investigation page",
+        "authors": "NASA Science",
+        "year": "2022",
+        "url": "https://science.nasa.gov/biological-physical/investigations/e-field-flames",
+        "doi": null,
+        "investigation": "ACME-E-FIELD",
+        "psi_id": null,
+        "role": "design",
+        "file_type": "html",
+        "in_corpus": false,
+        "status": "not downloaded (web source cited in golden table)"
+      },
+      {
+        "id": "S-056",
+        "found": true,
+        "kind": "source",
+        "title": "Recent Research on Flames of Gaseous Fuel Aboard the International Space Station (JASMAC paper)",
+        "authors": "Stocker D.P.",
+        "year": "2021",
+        "url": "https://ntrs.nasa.gov/citations/20210021781",
+        "doi": null,
+        "investigation": "ACME-CFI-G;ACME-BRE;ACME-E-FIELD",
+        "psi_id": null,
+        "role": "overview",
+        "file_type": "pdf",
+        "in_corpus": false,
+        "status": "not downloaded (web source cited in golden table)"
+      },
+      {
+        "id": "S-026",
+        "found": true,
+        "kind": "source",
+        "title": "A Researcher's Guide to: Combustion Science (ISS mini-book, NP-2015-10-034-JSC)",
+        "authors": null,
+        "year": "2015",
+        "url": null,
+        "doi": null,
+        "investigation": "General",
+        "psi_id": null,
+        "role": "overview",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-053",
+        "found": true,
+        "kind": "source",
+        "title": "Recent Research on Flames of Gaseous Fuel Aboard the ISS (JASMAC-33 presentation)",
+        "authors": "Stocker D.P.",
+        "year": "2021",
+        "url": "https://ntrs.nasa.gov/citations/20210022542",
+        "doi": null,
+        "investigation": "ACME-CFI-G;ACME-BRE;ACME-E-FIELD",
+        "psi_id": null,
+        "role": "design",
+        "file_type": "pdf",
+        "in_corpus": false,
+        "status": "not downloaded (web source cited in golden table)"
+      },
+      {
+        "id": "S-057",
+        "found": true,
+        "kind": "source",
+        "title": "UCI Conducts Combustion Research aboard the International Space Station (news)",
+        "authors": "UC Irvine Samueli School of Engineering",
+        "year": "2018",
+        "url": "https://engineering.uci.edu/news/2018/6/uci-conducts-combustion-research-aboard-international-space-station",
+        "doi": null,
+        "investigation": "ACME-E-FIELD",
+        "psi_id": null,
+        "role": "results",
+        "file_type": "html",
+        "in_corpus": false,
+        "status": "not downloaded (web source cited in golden table)"
+      },
+      {
+        "id": "S-054",
+        "found": true,
+        "kind": "source",
+        "title": "Space Station's Quest for the Secrets of Fire",
+        "authors": "Sands K. (NASA GRC)",
+        "year": "2022",
+        "url": "https://www.nasa.gov/humans-in-space/space-stations-quest-for-the-secrets-of-fire/",
+        "doi": null,
+        "investigation": "ACME-CFI-G;ACME-BRE;ACME-E-FIELD;CFI",
+        "psi_id": null,
+        "role": "overview",
+        "file_type": "html",
+        "in_corpus": false,
+        "status": "not downloaded (web source cited in golden table)"
+      }
+    ]
+  },
+  "latency_ms": 0
+}

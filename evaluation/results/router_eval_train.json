@@ -1,0 +1,467 @@
+{
+  "split": "train",
+  "n_questions": 36,
+  "n_unanswerable": 8,
+  "correct_refusals": 8,
+  "false_refusals": [],
+  "answer_type_accuracy": 1.0,
+  "intents": {
+    "lunar_check": 3,
+    "calculation": 1,
+    "general": 23,
+    "partial_gravity": 1,
+    "comparison": 5,
+    "conflict": 1,
+    "out_of_scope": 2
+  },
+  "questions": [
+    {
+      "id": "Q01",
+      "type": "filter+rank",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "lunar_check",
+      "investigations": [],
+      "gaps": [
+        "Saffire-II: pressure unknown.",
+        "Saffire-III: pressure unknown.",
+        "SAME: o2, pressure unknown.",
+        "SAME-R: o2, pressure unknown.",
+        "DAFT: o2, pressure unknown.",
+        "DAFT-2: no source in the repository.",
+        "FLEX-2: o2, pressure unknown.",
+        "CFI: o2, pressure unknown.",
+        "ACME-E-FIELD: o2, pressure unknown."
+      ]
+    },
+    {
+      "id": "Q02",
+      "type": "calculation",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "calculation",
+      "investigations": [],
+      "gaps": []
+    },
+    {
+      "id": "Q03",
+      "type": "data gap",
+      "expected": "no_data",
+      "got": "no_data",
+      "correct": true,
+      "intent": "general",
+      "investigations": [
+        "SAME"
+      ],
+      "gaps": [
+        "SAME: no results document or test table in the local corpus (the golden-table row cites web sources only and is unverified)."
+      ]
+    },
+    {
+      "id": "Q05",
+      "type": "data gap",
+      "expected": "no_data",
+      "got": "no_data",
+      "correct": true,
+      "intent": "lunar_check",
+      "investigations": [],
+      "gaps": [
+        "ACME-CFI-G: no results document or test table in the local corpus (the golden-table row cites web sources only and is unverified).",
+        "Saffire-II: pressure unknown.",
+        "Saffire-III: pressure unknown.",
+        "SAME: o2, pressure unknown.",
+        "SAME-R: o2, pressure unknown.",
+        "DAFT: o2, pressure unknown.",
+        "DAFT-2: no source in the repository.",
+        "FLEX-2: o2, pressure unknown.",
+        "CFI: o2, pressure unknown.",
+        "ACME-E-FIELD: o2, pressure unknown."
+      ]
+    },
+    {
+      "id": "Q06",
+      "type": "synthesis",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "general",
+      "investigations": [],
+      "gaps": []
+    },
+    {
+      "id": "Q07",
+      "type": "data gap",
+      "expected": "no_data",
+      "got": "no_data",
+      "correct": true,
+      "intent": "partial_gravity",
+      "investigations": [],
+      "gaps": [
+        "Partial gravity: NASA PSI contains no partial-gravity combustion test data [F-019]; 0-g and 1-g results only bound intermediate gravity levels [F-021]."
+      ]
+    },
+    {
+      "id": "Q10",
+      "type": "comparison",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "comparison",
+      "investigations": [
+        "Saffire-II"
+      ],
+      "gaps": []
+    },
+    {
+      "id": "Q11",
+      "type": "comparison",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "general",
+      "investigations": [],
+      "gaps": []
+    },
+    {
+      "id": "Q16",
+      "type": "fact",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "general",
+      "investigations": [
+        "FLEX"
+      ],
+      "gaps": []
+    },
+    {
+      "id": "Q17",
+      "type": "synthesis",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "general",
+      "investigations": [],
+      "gaps": []
+    },
+    {
+      "id": "Q18",
+      "type": "data gap",
+      "expected": "no_data",
+      "got": "no_data",
+      "correct": true,
+      "intent": "general",
+      "investigations": [],
+      "gaps": [
+        "Battery fires: no investigation in the corpus tested battery or lithium-ion thermal-runaway fires; the investigations cover solid fabrics and plastics, liquid fuel droplets and gas flames. [G-001]"
+      ]
+    },
+    {
+      "id": "Q19",
+      "type": "synthesis",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "general",
+      "investigations": [],
+      "gaps": []
+    },
+    {
+      "id": "Q21",
+      "type": "fact",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "general",
+      "investigations": [],
+      "gaps": []
+    },
+    {
+      "id": "Q22",
+      "type": "comparison",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "comparison",
+      "investigations": [],
+      "gaps": []
+    },
+    {
+      "id": "Q23",
+      "type": "conflict",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "conflict",
+      "investigations": [
+        "FLEX"
+      ],
+      "gaps": []
+    },
+    {
+      "id": "Q27",
+      "type": "fact",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "general",
+      "investigations": [
+        "Saffire-I",
+        "Saffire-III"
+      ],
+      "gaps": []
+    },
+    {
+      "id": "Q28",
+      "type": "data gap",
+      "expected": "no_data",
+      "got": "no_data",
+      "correct": true,
+      "intent": "general",
+      "investigations": [],
+      "gaps": [
+        "Artemis II smoke alarm: the corpus only mentions that a smoke alarm event occurred during Artemis II testing [F-024]; it gives no cause and does not say whether there was a fire. [G-002]"
+      ]
+    },
+    {
+      "id": "Q29",
+      "type": "out of scope",
+      "expected": "out_of_scope",
+      "got": "out_of_scope",
+      "correct": true,
+      "intent": "out_of_scope",
+      "investigations": [],
+      "gaps": [
+        "Out of scope: rocket propulsion, thruster and re-entry heating are outside the PSI microgravity combustion investigations [F-022]."
+      ]
+    },
+    {
+      "id": "Q32",
+      "type": "fact",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "comparison",
+      "investigations": [],
+      "gaps": []
+    },
+    {
+      "id": "Q33",
+      "type": "fact",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "general",
+      "investigations": [
+        "BASS-II"
+      ],
+      "gaps": []
+    },
+    {
+      "id": "Q34",
+      "type": "fact",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "general",
+      "investigations": [
+        "BASS-II"
+      ],
+      "gaps": []
+    },
+    {
+      "id": "Q35",
+      "type": "fact",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "general",
+      "investigations": [
+        "BASS-II"
+      ],
+      "gaps": []
+    },
+    {
+      "id": "Q36",
+      "type": "fact",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "general",
+      "investigations": [],
+      "gaps": []
+    },
+    {
+      "id": "Q37",
+      "type": "data gap",
+      "expected": "no_data",
+      "got": "no_data",
+      "correct": true,
+      "intent": "general",
+      "investigations": [
+        "DAFT-2"
+      ],
+      "gaps": [
+        "DAFT-2: no source in the repository."
+      ]
+    },
+    {
+      "id": "Q38",
+      "type": "out of scope",
+      "expected": "out_of_scope",
+      "got": "out_of_scope",
+      "correct": true,
+      "intent": "out_of_scope",
+      "investigations": [],
+      "gaps": [
+        "Out of scope: medical guidance is not part of the microgravity combustion and fire-safety research data."
+      ]
+    },
+    {
+      "id": "Q39",
+      "type": "conflict",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "general",
+      "investigations": [
+        "BASS-II"
+      ],
+      "gaps": []
+    },
+    {
+      "id": "Q40",
+      "type": "comparison",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "comparison",
+      "investigations": [
+        "Saffire-I",
+        "BASS-II"
+      ],
+      "gaps": []
+    },
+    {
+      "id": "Q41",
+      "type": "synthesis",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "general",
+      "investigations": [
+        "Saffire-I",
+        "Saffire-II",
+        "Saffire-III"
+      ],
+      "gaps": []
+    },
+    {
+      "id": "Q42",
+      "type": "fact",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "general",
+      "investigations": [
+        "Saffire-I",
+        "Saffire-II",
+        "Saffire-III"
+      ],
+      "gaps": []
+    },
+    {
+      "id": "Q43",
+      "type": "conflict",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "general",
+      "investigations": [
+        "Saffire-I",
+        "Saffire-III"
+      ],
+      "gaps": []
+    },
+    {
+      "id": "Q44",
+      "type": "fact",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "general",
+      "investigations": [
+        "Saffire-II"
+      ],
+      "gaps": []
+    },
+    {
+      "id": "Q45",
+      "type": "synthesis",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "general",
+      "investigations": [
+        "Saffire-II"
+      ],
+      "gaps": []
+    },
+    {
+      "id": "Q46",
+      "type": "fact",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "lunar_check",
+      "investigations": [],
+      "gaps": [
+        "Saffire-II: pressure unknown.",
+        "Saffire-III: pressure unknown.",
+        "SAME: o2, pressure unknown.",
+        "SAME-R: o2, pressure unknown.",
+        "DAFT: o2, pressure unknown.",
+        "DAFT-2: no source in the repository.",
+        "FLEX-2: o2, pressure unknown.",
+        "CFI: o2, pressure unknown.",
+        "ACME-E-FIELD: o2, pressure unknown."
+      ]
+    },
+    {
+      "id": "Q47",
+      "type": "fact",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "general",
+      "investigations": [
+        "FLEX"
+      ],
+      "gaps": []
+    },
+    {
+      "id": "Q49",
+      "type": "fact",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "comparison",
+      "investigations": [
+        "FLEX"
+      ],
+      "gaps": []
+    },
+    {
+      "id": "Q50",
+      "type": "synthesis",
+      "expected": "answer",
+      "got": "answer",
+      "correct": true,
+      "intent": "general",
+      "investigations": [],
+      "gaps": []
+    }
+  ]
+}

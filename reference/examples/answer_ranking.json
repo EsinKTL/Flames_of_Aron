@@ -1,0 +1,641 @@
+{
+  "text": "LLM answer not available - showing evidence summary.\n- Spacesuits are pressurized with 100% oxygen up to only 4.3 psi. [F-001]\n- To prevent decompression sickness ('the bends'), astronauts perform a pre-breathe protocol by inhaling 100% oxygen to purge dissolved nitrogen from body tissues. [F-003]\n- To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere. [F-004]\n- The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower. [F-005]\n- According to the challenge text, this represents more than a 40% increase in oxygen concentration compared to Earth's atmosphere, substantially increasing material flammability. [F-006]\n- Rank 1: FLEX (score 0.65, confidence 0.909)\n- Rank 2: ACME-BRE (score 0.55, confidence 0.909)\n- Rank 3: ACME-CFI-G (score 0.55, confidence 0.909)\n- Rank 4: BASS (score 0.364, confidence 1.0)\n- Rank 5: BASS-II (score 0.364, confidence 1.0)\n- Passages retrieved: [S-023:6], [S-022:20], [S-023:2], [S-023:5], [S-025:2]",
+  "model": "none/evidence-summary",
+  "answer_type": "answer",
+  "citations": [
+    "F-001",
+    "F-003",
+    "F-004",
+    "F-005",
+    "F-006",
+    "S-023:6",
+    "S-022:20",
+    "S-023:2",
+    "S-023:5",
+    "S-025:2"
+  ],
+  "validation": {
+    "passed": false,
+    "errors": [
+      "no LLM configured"
+    ],
+    "retried": false,
+    "fallback_used": true
+  },
+  "bundle": {
+    "schema_version": "1.0",
+    "question": "Which investigations are most relevant to a lunar habitat?",
+    "intent": "ranking",
+    "investigations": [],
+    "answer_type": "answer",
+    "facts": [
+      {
+        "id": "F-001",
+        "claim": "Spacesuits are pressurized with 100% oxygen up to only 4.3 psi.",
+        "topic": "spacesuit",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-003",
+        "claim": "To prevent decompression sickness ('the bends'), astronauts perform a pre-breathe protocol by inhaling 100% oxygen to purge dissolved nitrogen from body tissues.",
+        "topic": "decompression",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-004",
+        "claim": "To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere.",
+        "topic": "lunar base atmosphere",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-005",
+        "claim": "The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower.",
+        "topic": "lunar base atmosphere",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-006",
+        "claim": "According to the challenge text, this represents more than a 40% increase in oxygen concentration compared to Earth's atmosphere, substantially increasing material flammability.",
+        "topic": "lunar base atmosphere",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      }
+    ],
+    "table_rows": [],
+    "tests": [],
+    "chunks": [
+      {
+        "chunk_id": "S-023_p006_c01",
+        "source_id": "S-023",
+        "page": 6,
+        "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | IV. Results and Discussion]\nThis could be due to a malfunction in the sensor or\npoor placement within Cygnus, such as being\nobstructed by too much trash. Figure 8 gives the temperature at the FFD. A\nvery weak experimental response is shown, while\nthe model response is closest to RS1, RS2, and\nRS5 that are not directly in the flow path. Also\nshown in Figure 8 is the mass mean temperature of\nthe model, which analogous to the CO response, compares well with the FFD temperature. Figure 9\ngives the RS behavior for the SIBAL burn\ntemperature. Similar to the CO response, the model has a higher temperature response than the\nexperiment. This is most prevalent in RS1, for\nwhich the experimental response is slow and does\nFigure 6. Normalized CO response from FFD and mean not reach steady state. This could be due to the\nvehicle CO concentration during SIBAL burn event. nadir bulkhead, and other items in that section of\nCygnus that absorb heat. This would increase the\nFigure 7. Normalized CO RS responses during SIBAL burn event. International Conference on Environmental Systems",
+        "score": 0.01278,
+        "section_title": "IV. Results and Discussion",
+        "investigation_ids": [
+          "Saffire-IV"
+        ]
+      },
+      {
+        "chunk_id": "S-022_p020_c01",
+        "source_id": "S-022",
+        "page": 20,
+        "text": "[Saffire-I, Saffire-II, Saffire-III | S-022: Saffire: A Novel Approach to Study of Spacecraft Fire Safety (Saffire I-III Results) | Far Field Diagnostics]\nForward Steps\n• The Saffire experiments were the first practical-scale spacecraft fire safety\ninvestigations. • In addition to pioneering a new research capability, they determined that\nconcurrent flames can achieve a steady spread rate and that overall the\nconcurrent spread rates are strongly influenced the the flow duct size. • The next Saffire series will examine larger fires of longer duration to\nexamine the impact of a fire on the vehicle habitability .",
+        "score": 0.01202,
+        "section_title": "Far Field Diagnostics",
+        "investigation_ids": [
+          "Saffire-I",
+          "Saffire-II",
+          "Saffire-III"
+        ]
+      },
+      {
+        "chunk_id": "S-023_p002_c02",
+        "source_id": "S-023",
+        "page": 2,
+        "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | I. Introduction]\nThe data collected by Saffire will\nhelp modelers develop tools to better predict the effect of a fire on a spacecraft. This work aims to develop a model\nthat can predict the burn events in Saffire IV. The model is a closed pressure chamber of the Cygnus vehicle filled\nwith trash and cargo after the resupply mission of NG-13 is completed. In the model, the Saffire unit inputs ambient\ntemperature cabin air and outputs hot air and species to imitate the effect of the combustion events. The heat addition\nrate (HAR) outputted by Saffire is derived using the difference between the experimentally captured inlet and outlet\ntemperature of Saffire. Downstream of Saffire, near the hatch of Cygnus (zenith) is the Far Field Diagnostic (FFD),\nwhere particle and combustion gas sensors are located. The model compares the experimental temperature and CO at the six RS locations throughout Cygnus and the FFD at the opposite end of Cygnus from Saffire. II. Saffire Experiment\nAll Saffire experiments have taken place on the NG Cygnus vehicle after a resupply mission to the ISS. The first\nthree Saffire missions focused on the large-scale flame spread in order to determine if tests conducted in 1-g and at\nsmaller scales are relevant to large-scale microgravity flame tests. The next three Saffire tests share that focus, while\nextending to the smoke plume transport and the fire’s effect on the vehicle. Figure 1 shows a schematic of a Cygnus vehicle with Saffire and the FFD but with the cargo hidden.",
+        "score": 0.01157,
+        "section_title": "I. Introduction",
+        "investigation_ids": [
+          "Saffire-IV"
+        ]
+      },
+      {
+        "chunk_id": "S-023_p005_c02",
+        "source_id": "S-023",
+        "page": 5,
+        "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | IV. Results and Discussion]\nIV. Results and Discussion\nIn Saffire-IV, the temperature and CO concentration of the RS measurements show\nvarying baseline values due to calibration\ndifferences10. Consequently, all RS and FFD\ntrends presented here are normalized by their preignition baseline, thereby scaling temperatures and\nconcentrations to initial cabin value. One example\nof non-normalized data is given for context by\nFigure 5, which shows the RS3 CO and temperature data for the SIBAL burn. The FFD\nresponse, shown in Figure 6, gives an excellent\nprediction. The model captures the upward trend\nin the FFD better than it does with most RS\nlocations, while also providing a better match of\nthe steady state value. The light blue line in Figure\nFigure 5. CO and Temperature response from RS3\n6 gives the mean CO for the vehicle and it 2 during SIBAL burn event. compares well with the data at the FFD. This is an\nindication the vehicle species concentration is well\nmixed in the section that contains the FFD. Figure 7 gives the RS responses to CO . Overall, there is a decent agreement between experimental and model values, with RS1 providing the best fit. The model rises earlier and overestimate the steady state CO value. RS3 rose the fastest and had the most overshoot of the steady state value since it was in the direct path of the Saffire outlet, with RS6 showing similar behavior for the same reason. The other four had\nto rely on mixing and diffusion before elevated CO was recorded. Experimentally, RS2 was by far the slowest to",
+        "score": 0.01153,
+        "section_title": "IV. Results and Discussion",
+        "investigation_ids": [
+          "Saffire-IV"
+        ]
+      },
+      {
+        "chunk_id": "S-025_p002_c02",
+        "source_id": "S-025",
+        "page": 2,
+        "text": "[General | S-025: NASA Microgravity Combustion Program Overview | Objectives]\nObjectives\nEdge view of Solid Inflammability Boundary at Low-Speed (SIBAL) fabric, a cotton-fiberglass blend,\nburning in air in lunar gravity (simulated in drop tower centrifuge). Edge view of Solid Inflammability Boundary at Low-Speed (SIBAL) fabric, a cotton-fiberglass blend,\nburning in air in lunar gravity (simulated in drop tower centrifuge). Left: downward burning, right: upward\nburning. Conduct the first-ever observations and measurements of flame spread on the Moon. Verify whether some materials burning in partial-gravity environments may be more flammable compared\nto 1g. Provide a bridge between the standard 1g material screening method\nand actual behavior in reduced gravity. Candle flame in microgravity, 1/6 gravity, and Earth gravity (left to right). Candle flame in microgravity, 1/6 gravity, and Earth gravity (left to right).",
+        "score": 0.0082,
+        "section_title": "Objectives",
+        "investigation_ids": [
+          "General"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "calculations": [],
+    "gaps": [],
+    "rules": [
+      {
+        "id": "R-001",
+        "rule": "Do NOT extrapolate microgravity results directly to Lunar or Martian gravity without explicitly stating the lack of direct partial-gravity empirical data and explaining bounding logic ([F-019], [F-021])."
+      },
+      {
+        "id": "R-002",
+        "rule": "When queried regarding combustion in Lunar or Martian gravity, explicitly clarify that NASA PSI currently contains no partial-gravity test data [F-019]. Mention E-FIELD electric field chemi-ion simulation [F-020] and 0-g/1-g bounding methodology [F-021] if relevant."
+      },
+      {
+        "id": "R-003",
+        "rule": "Never assess spacecraft fire flammability solely on oxygen percentage. Always evaluate oxygen partial pressure (via calculation), total pressure, diluent inert species (N2, CO2, He), and ventilation forced flow velocity together."
+      },
+      {
+        "id": "R-004",
+        "rule": "If asked about rocket engine or thruster propellant fires, clearly state that propulsion systems are outside the scope of PSI microgravity science due to momentum-dominated flow regimes [F-022]."
+      },
+      {
+        "id": "R-005",
+        "rule": "For every experimental finding reported, cite the exact test conditions: fuel type, geometry, oxygen concentration, ambient pressure, flow velocity, and hardware facility. If a condition is omitted in the source, label it as 'unspecified'; do NOT guess."
+      },
+      {
+        "id": "R-006",
+        "rule": "If an empirical value or data point is absent from the indexed chunks and Golden Table, state 'data not available in repository'. Never fabricate numerical values from LLM parametric memory."
+      },
+      {
+        "id": "R-007",
+        "rule": "When source documents report conflicting findings or values, present both sources with their respective document citations, PI names, and publication years; do not arbitrarily select one."
+      },
+      {
+        "id": "R-008",
+        "rule": "Clearly distinguish between empirical flight experiment findings (PSI / peer-reviewed reports), challenge guidelines, mathematical derivations, and speculative engineering hypotheses. Never present interpretation as an empirical fact."
+      }
+    ],
+    "route": {
+      "intent": "ranking",
+      "investigations": [],
+      "matched_intents": [
+        "ranking"
+      ],
+      "ambiguous": false,
+      "decided_by": "rules",
+      "out_of_scope_reason": null,
+      "tools": [
+        "rank_investigations"
+      ],
+      "rules": []
+    },
+    "versions": {
+      "data": "v2",
+      "index": "4aa3c9230f",
+      "golden_table": "draft"
+    },
+    "ranking": [
+      {
+        "rank": 1,
+        "id": "FLEX",
+        "score": 0.65,
+        "confidence": 0.909,
+        "rank_key": 0.591,
+        "features": {
+          "same_test_lunar_atmosphere": 0.5,
+          "o2_at_or_above_30pct": 1.0,
+          "pressure_at_or_below_10.2psi": 1.0,
+          "cabin_material_fuel": 0.0,
+          "forced_flow_tested": "unknown",
+          "results_in_local_corpus": 1.0
+        },
+        "unknown_features": [
+          "forced_flow_tested"
+        ],
+        "profile": "lunar",
+        "evidence_level": "LLM draft",
+        "verified": false
+      },
+      {
+        "rank": 2,
+        "id": "ACME-BRE",
+        "score": 0.55,
+        "confidence": 0.909,
+        "rank_key": 0.5,
+        "features": {
+          "same_test_lunar_atmosphere": 0.5,
+          "o2_at_or_above_30pct": 1.0,
+          "pressure_at_or_below_10.2psi": 1.0,
+          "cabin_material_fuel": 0.0,
+          "forced_flow_tested": "unknown",
+          "results_in_local_corpus": 0.0
+        },
+        "unknown_features": [
+          "forced_flow_tested"
+        ],
+        "profile": "lunar",
+        "evidence_level": "LLM draft",
+        "verified": false
+      },
+      {
+        "rank": 3,
+        "id": "ACME-CFI-G",
+        "score": 0.55,
+        "confidence": 0.909,
+        "rank_key": 0.5,
+        "features": {
+          "same_test_lunar_atmosphere": 0.5,
+          "o2_at_or_above_30pct": 1.0,
+          "pressure_at_or_below_10.2psi": 1.0,
+          "cabin_material_fuel": 0.0,
+          "forced_flow_tested": "unknown",
+          "results_in_local_corpus": 0.0
+        },
+        "unknown_features": [
+          "forced_flow_tested"
+        ],
+        "profile": "lunar",
+        "evidence_level": "LLM draft",
+        "verified": false
+      },
+      {
+        "rank": 4,
+        "id": "BASS",
+        "score": 0.364,
+        "confidence": 1.0,
+        "rank_key": 0.364,
+        "features": {
+          "same_test_lunar_atmosphere": 0.0,
+          "o2_at_or_above_30pct": 0.0,
+          "pressure_at_or_below_10.2psi": 0.0,
+          "cabin_material_fuel": 1.0,
+          "forced_flow_tested": 1.0,
+          "results_in_local_corpus": 1.0
+        },
+        "unknown_features": [],
+        "profile": "lunar",
+        "evidence_level": "LLM draft",
+        "verified": false
+      },
+      {
+        "rank": 5,
+        "id": "BASS-II",
+        "score": 0.364,
+        "confidence": 1.0,
+        "rank_key": 0.364,
+        "features": {
+          "same_test_lunar_atmosphere": 0.0,
+          "o2_at_or_above_30pct": 0.0,
+          "pressure_at_or_below_10.2psi": 0.0,
+          "cabin_material_fuel": 1.0,
+          "forced_flow_tested": 1.0,
+          "results_in_local_corpus": 1.0
+        },
+        "unknown_features": [],
+        "profile": "lunar",
+        "evidence_level": "LLM draft",
+        "verified": false
+      },
+      {
+        "rank": 6,
+        "id": "Saffire-I",
+        "score": 0.364,
+        "confidence": 1.0,
+        "rank_key": 0.364,
+        "features": {
+          "same_test_lunar_atmosphere": 0.0,
+          "o2_at_or_above_30pct": 0.0,
+          "pressure_at_or_below_10.2psi": 0.0,
+          "cabin_material_fuel": 1.0,
+          "forced_flow_tested": 1.0,
+          "results_in_local_corpus": 1.0
+        },
+        "unknown_features": [],
+        "profile": "lunar",
+        "evidence_level": "LLM draft",
+        "verified": false
+      },
+      {
+        "rank": 7,
+        "id": "Saffire-II",
+        "score": 0.667,
+        "confidence": 0.545,
+        "rank_key": 0.364,
+        "features": {
+          "same_test_lunar_atmosphere": "unknown",
+          "o2_at_or_above_30pct": 0.0,
+          "pressure_at_or_below_10.2psi": "unknown",
+          "cabin_material_fuel": 1.0,
+          "forced_flow_tested": 1.0,
+          "results_in_local_corpus": 1.0
+        },
+        "unknown_features": [
+          "same_test_lunar_atmosphere",
+          "pressure_at_or_below_10.2psi"
+        ],
+        "profile": "lunar",
+        "evidence_level": "LLM draft",
+        "verified": false
+      },
+      {
+        "rank": 8,
+        "id": "Saffire-III",
+        "score": 0.667,
+        "confidence": 0.545,
+        "rank_key": 0.364,
+        "features": {
+          "same_test_lunar_atmosphere": "unknown",
+          "o2_at_or_above_30pct": 0.0,
+          "pressure_at_or_below_10.2psi": "unknown",
+          "cabin_material_fuel": 1.0,
+          "forced_flow_tested": 1.0,
+          "results_in_local_corpus": 1.0
+        },
+        "unknown_features": [
+          "same_test_lunar_atmosphere",
+          "pressure_at_or_below_10.2psi"
+        ],
+        "profile": "lunar",
+        "evidence_level": "LLM draft",
+        "verified": false
+      },
+      {
+        "rank": 9,
+        "id": "SAME-R",
+        "score": 0.75,
+        "confidence": 0.364,
+        "rank_key": 0.273,
+        "features": {
+          "same_test_lunar_atmosphere": "unknown",
+          "o2_at_or_above_30pct": "unknown",
+          "pressure_at_or_below_10.2psi": "unknown",
+          "cabin_material_fuel": 1.0,
+          "forced_flow_tested": 1.0,
+          "results_in_local_corpus": 0.0
+        },
+        "unknown_features": [
+          "same_test_lunar_atmosphere",
+          "o2_at_or_above_30pct",
+          "pressure_at_or_below_10.2psi"
+        ],
+        "profile": "lunar",
+        "evidence_level": "LLM draft",
+        "verified": false
+      },
+      {
+        "rank": 10,
+        "id": "DAFT",
+        "score": 0.667,
+        "confidence": 0.273,
+        "rank_key": 0.182,
+        "features": {
+          "same_test_lunar_atmosphere": "unknown",
+          "o2_at_or_above_30pct": "unknown",
+          "pressure_at_or_below_10.2psi": "unknown",
+          "cabin_material_fuel": 1.0,
+          "forced_flow_tested": "unknown",
+          "results_in_local_corpus": 0.0
+        },
+        "unknown_features": [
+          "same_test_lunar_atmosphere",
+          "o2_at_or_above_30pct",
+          "pressure_at_or_below_10.2psi",
+          "forced_flow_tested"
+        ],
+        "profile": "lunar",
+        "evidence_level": "LLM draft",
+        "verified": false
+      },
+      {
+        "rank": 11,
+        "id": "SAME",
+        "score": 0.667,
+        "confidence": 0.273,
+        "rank_key": 0.182,
+        "features": {
+          "same_test_lunar_atmosphere": "unknown",
+          "o2_at_or_above_30pct": "unknown",
+          "pressure_at_or_below_10.2psi": "unknown",
+          "cabin_material_fuel": 1.0,
+          "forced_flow_tested": "unknown",
+          "results_in_local_corpus": 0.0
+        },
+        "unknown_features": [
+          "same_test_lunar_atmosphere",
+          "o2_at_or_above_30pct",
+          "pressure_at_or_below_10.2psi",
+          "forced_flow_tested"
+        ],
+        "profile": "lunar",
+        "evidence_level": "LLM draft",
+        "verified": false
+      },
+      {
+        "rank": 12,
+        "id": "SPICE",
+        "score": 0.091,
+        "confidence": 1.0,
+        "rank_key": 0.091,
+        "features": {
+          "same_test_lunar_atmosphere": 0.0,
+          "o2_at_or_above_30pct": 0.0,
+          "pressure_at_or_below_10.2psi": 0.0,
+          "cabin_material_fuel": 0.0,
+          "forced_flow_tested": 1.0,
+          "results_in_local_corpus": 0.0
+        },
+        "unknown_features": [],
+        "profile": "lunar",
+        "evidence_level": "LLM draft",
+        "verified": false
+      },
+      {
+        "rank": 13,
+        "id": "CFI",
+        "score": 0.333,
+        "confidence": 0.273,
+        "rank_key": 0.091,
+        "features": {
+          "same_test_lunar_atmosphere": "unknown",
+          "o2_at_or_above_30pct": "unknown",
+          "pressure_at_or_below_10.2psi": "unknown",
+          "cabin_material_fuel": 0.0,
+          "forced_flow_tested": "unknown",
+          "results_in_local_corpus": 1.0
+        },
+        "unknown_features": [
+          "same_test_lunar_atmosphere",
+          "o2_at_or_above_30pct",
+          "pressure_at_or_below_10.2psi",
+          "forced_flow_tested"
+        ],
+        "profile": "lunar",
+        "evidence_level": "LLM draft",
+        "verified": false
+      },
+      {
+        "rank": 14,
+        "id": "SLICE",
+        "score": 0.0,
+        "confidence": 0.909,
+        "rank_key": 0.0,
+        "features": {
+          "same_test_lunar_atmosphere": 0.0,
+          "o2_at_or_above_30pct": 0.0,
+          "pressure_at_or_below_10.2psi": 0.0,
+          "cabin_material_fuel": 0.0,
+          "forced_flow_tested": "unknown",
+          "results_in_local_corpus": 0.0
+        },
+        "unknown_features": [
+          "forced_flow_tested"
+        ],
+        "profile": "lunar",
+        "evidence_level": "LLM draft",
+        "verified": false
+      },
+      {
+        "rank": 15,
+        "id": "ACME-E-FIELD",
+        "score": 0.0,
+        "confidence": 0.273,
+        "rank_key": 0.0,
+        "features": {
+          "same_test_lunar_atmosphere": "unknown",
+          "o2_at_or_above_30pct": "unknown",
+          "pressure_at_or_below_10.2psi": "unknown",
+          "cabin_material_fuel": 0.0,
+          "forced_flow_tested": "unknown",
+          "results_in_local_corpus": 0.0
+        },
+        "unknown_features": [
+          "same_test_lunar_atmosphere",
+          "o2_at_or_above_30pct",
+          "pressure_at_or_below_10.2psi",
+          "forced_flow_tested"
+        ],
+        "profile": "lunar",
+        "evidence_level": "LLM draft",
+        "verified": false
+      },
+      {
+        "rank": 16,
+        "id": "FLEX-2",
+        "score": 0.0,
+        "confidence": 0.273,
+        "rank_key": 0.0,
+        "features": {
+          "same_test_lunar_atmosphere": "unknown",
+          "o2_at_or_above_30pct": "unknown",
+          "pressure_at_or_below_10.2psi": "unknown",
+          "cabin_material_fuel": 0.0,
+          "forced_flow_tested": "unknown",
+          "results_in_local_corpus": 0.0
+        },
+        "unknown_features": [
+          "same_test_lunar_atmosphere",
+          "o2_at_or_above_30pct",
+          "pressure_at_or_below_10.2psi",
+          "forced_flow_tested"
+        ],
+        "profile": "lunar",
+        "evidence_level": "LLM draft",
+        "verified": false
+      },
+      {
+        "rank": 17,
+        "id": "DAFT-2",
+        "score": 0.0,
+        "confidence": 0.091,
+        "rank_key": 0.0,
+        "features": {
+          "same_test_lunar_atmosphere": "unknown",
+          "o2_at_or_above_30pct": "unknown",
+          "pressure_at_or_below_10.2psi": "unknown",
+          "cabin_material_fuel": "unknown",
+          "forced_flow_tested": "unknown",
+          "results_in_local_corpus": 0.0
+        },
+        "unknown_features": [
+          "same_test_lunar_atmosphere",
+          "o2_at_or_above_30pct",
+          "pressure_at_or_below_10.2psi",
+          "cabin_material_fuel",
+          "forced_flow_tested"
+        ],
+        "profile": "lunar",
+        "evidence_level": "missing",
+        "verified": false
+      }
+    ],
+    "sources": [
+      {
+        "id": "F-001",
+        "found": true,
+        "kind": "fact",
+        "title": "Spacesuits are pressurized with 100% oxygen up to only 4.3 psi.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-003",
+        "found": true,
+        "kind": "fact",
+        "title": "To prevent decompression sickness ('the bends'), astronauts perform a pre-breathe protocol by inhaling 100% oxygen to purge dissolved nitrogen from body tissues.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-004",
+        "found": true,
+        "kind": "fact",
+        "title": "To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-005",
+        "found": true,
+        "kind": "fact",
+        "title": "The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-006",
+        "found": true,
+        "kind": "fact",
+        "title": "According to the challenge text, this represents more than a 40% increase in oxygen concentration compared to Earth's atmosphere, substantially increasing material flammability.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "S-023",
+        "found": true,
+        "kind": "source",
+        "title": "Model Development of Large-Scale Spacecraft Fires during the Saffire-IV Experiments (ICES-2022-278)",
+        "authors": "Brooker J., Niehaus J.",
+        "year": "2022",
+        "url": "https://ntrs.nasa.gov/citations/20220002714",
+        "doi": null,
+        "investigation": "Saffire-IV",
+        "psi_id": null,
+        "role": "results",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-022",
+        "found": true,
+        "kind": "source",
+        "title": "Saffire: A Novel Approach to Study of Spacecraft Fire Safety Using Un-manned Spacecraft",
+        "authors": "Urban D.L., Ferkul P., Olson S., Ruff G.A., Easton J.",
+        "year": "2017",
+        "url": "https://ntrs.nasa.gov/citations/20180005168",
+        "doi": null,
+        "investigation": "Saffire-I;Saffire-II;Saffire-III",
+        "psi_id": "PSI-99",
+        "role": "results",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-025",
+        "found": true,
+        "kind": "source",
+        "title": "Combustion Science (Glenn Research Center web page)",
+        "authors": null,
+        "year": null,
+        "url": null,
+        "doi": null,
+        "investigation": "General",
+        "psi_id": null,
+        "role": "context",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      }
+    ]
+  },
+  "latency_ms": 0
+}

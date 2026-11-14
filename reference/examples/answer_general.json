@@ -1,0 +1,622 @@
+{
+  "text": "LLM answer not available - showing evidence summary.\n- To prevent decompression sickness ('the bends'), astronauts perform a pre-breathe protocol by inhaling 100% oxygen to purge dissolved nitrogen from body tissues. [F-003]\n- To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere. [F-004]\n- The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower. [F-005]\n- According to the challenge text, this represents more than a 40% increase in oxygen concentration compared to Earth's atmosphere, substantially increasing material flammability. [F-006]\n- In free fall, buoyancy-driven natural convection and buoyant rise of hot exhaust gases are absent, causing flames to behave dramatically differently from terrestrial flames; for example, a candle flame becomes a dim blue, spherical diffusion flame. [F-008]\n- Saffire-II test 2-1 (listed): O2 0.215, pressure unknown [PSI-99:test2-1]\n- Saffire-II test 2-2 (listed): O2 0.221, pressure unknown [PSI-99:test2-2]\n- Saffire-II test 2-3 (listed): O2 0.221, pressure unknown [PSI-99:test2-3]\n- Saffire-II test 2-4 (listed): O2 0.221, pressure unknown [PSI-99:test2-4]\n- Saffire-II test 2-5 (listed): O2 0.221, pressure unknown [PSI-99:test2-5]\n- Saffire-II test 2-6 (listed): O2 0.221, pressure unknown [PSI-99:test2-6]\n- Saffire-II test 2-7 (listed): O2 0.221, pressure unknown [PSI-99:test2-7]\n- Saffire-II test 2-8 (listed): O2 0.22-0.221, pressure unknown [PSI-99:test2-8]\n- Saffire-II test 2-9 (listed): O2 0.219-0.22, pressure unknown [PSI-99:test2-9]\n- Saffire-II (golden table, unverified draft): O2 0.219-0.221, pressure unknown-unknown psi, same-test lunar match: unknown\n- Passages retrieved: [S-022:3], [S-022:26], [S-022:20], [S-022:19], [S-021:2]",
+  "model": "none/evidence-summary",
+  "answer_type": "answer",
+  "citations": [
+    "F-003",
+    "F-004",
+    "F-005",
+    "F-006",
+    "F-008",
+    "PSI-99:test2-1",
+    "PSI-99:test2-2",
+    "PSI-99:test2-3",
+    "PSI-99:test2-4",
+    "PSI-99:test2-5",
+    "PSI-99:test2-6",
+    "PSI-99:test2-7",
+    "PSI-99:test2-8",
+    "PSI-99:test2-9",
+    "S-022:3",
+    "S-022:26",
+    "S-022:20",
+    "S-022:19",
+    "S-021:2"
+  ],
+  "validation": {
+    "passed": false,
+    "errors": [
+      "no LLM configured"
+    ],
+    "retried": false,
+    "fallback_used": true
+  },
+  "bundle": {
+    "schema_version": "1.0",
+    "question": "In Saffire-II, what happened to the PMMA-plus-Nomex composite sample?",
+    "intent": "general",
+    "investigations": [
+      "Saffire-II"
+    ],
+    "answer_type": "answer",
+    "facts": [
+      {
+        "id": "F-003",
+        "claim": "To prevent decompression sickness ('the bends'), astronauts perform a pre-breathe protocol by inhaling 100% oxygen to purge dissolved nitrogen from body tissues.",
+        "topic": "decompression",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-004",
+        "claim": "To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere.",
+        "topic": "lunar base atmosphere",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-005",
+        "claim": "The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower.",
+        "topic": "lunar base atmosphere",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-006",
+        "claim": "According to the challenge text, this represents more than a 40% increase in oxygen concentration compared to Earth's atmosphere, substantially increasing material flammability.",
+        "topic": "lunar base atmosphere",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-008",
+        "claim": "In free fall, buoyancy-driven natural convection and buoyant rise of hot exhaust gases are absent, causing flames to behave dramatically differently from terrestrial flames; for example, a candle flame becomes a dim blue, spherical diffusion flame.",
+        "topic": "microgravity flame",
+        "source": "Challenge text, 'Background'"
+      }
+    ],
+    "table_rows": [
+      {
+        "id": "Saffire-II",
+        "fields": {
+          "name": "Spacecraft Fire Experiment-II (Saffire-II)",
+          "category": "prevention",
+          "fuel_type": "solid",
+          "fuel_material": "silicone sheet (2-1…2-4) | SIBAL fabric (2-5, 2-6) | PMMA + Nomex (2-7) | structured and flat PMMA (2-8, 2-9)",
+          "fuel_shape_size": "9 thin flat strips, each 50 mm × 290 mm; thickness 0.27-1.03 mm (silicone), 0.37 mm (SIBAL), 0.85 + 0.37 mm (PMMA+Nomex), 10 mm (PMMA)",
+          "o2_min": 0.219,
+          "o2_max": 0.221,
+          "o2_raw": "~ 22.1 (2-2…2-7) | 22.1 to 22.0 (2-8) | 22.0 to 21.9 (2-9) | CSV 2-1: ~ 21.5 (conflicting)",
+          "o2_note": "derived from CO2 production, referenced to the ISS initial O2 (PSI-99 Note 1); the CSV 2-1 value (21.5) was excluded — see the conflict list",
+          "pressure_psi_min": "unknown",
+          "pressure_psi_max": "unknown",
+          "pressure_raw": "'atmospheric pressure' (sample 9 only, no numeric value)",
+          "pressure_note": "no numeric total pressure found",
+          "flow_cm_s_min": 20.0,
+          "flow_cm_s_max": 25.0,
+          "flow_raw": "20 cm/s (all samples) | 25 cm/s (2-6, post-flight presentation)",
+          "flow_note": "the PSI-99 CSV gives 20 cm/s for 2-6; the pre-flight plan gives 30 cm/s for S6/S9 — 20-25 chosen",
+          "gravity_regime": "microgravity | normal (1-g ground comparison)",
+          "hardware": "other: Saffire flow unit with a 9-sample card (inside Cygnus, after unberthing from the ISS; not MSG/CIR)",
+          "lunar_o2_flag": "no",
+          "lunar_pressure_flag": "unknown",
+          "lunar_joint_flag": "unknown",
+          "lunar_note": "O2 upper bound and/or pressure lower bound unknown",
+          "main_finding": "None of the four silicone samples burned significantly in microgravity, and the source states that silicone flammability in microgravity appears reduced compared with 1-g at the flows tested; the 5 cm SIBAL strips burned completely (2.1 mm/s at 20 cm/s, 2.6 mm/s at 25 cm/s), while Nomex did not ignite despite the PMMA pilot flame.",
+          "test_count": "9 samples",
+          "evidence_level": "LLM draft",
+          "has_conflict": "yes"
+        },
+        "evidence": {
+          "fuel_material": [
+            {
+              "source_id": "S-022",
+              "page": "p.14"
+            }
+          ],
+          "fuel_shape_size": [
+            {
+              "source_id": "S-034",
+              "page": "row 2"
+            },
+            {
+              "source_id": "S-034",
+              "page": "row 8"
+            },
+            {
+              "source_id": "S-034",
+              "page": "row 10"
+            }
+          ],
+          "o2_raw": [
+            {
+              "source_id": "S-022",
+              "page": "p.30"
+            },
+            {
+              "source_id": "S-034",
+              "page": "row 3"
+            }
+          ],
+          "o2_note": [
+            {
+              "source_id": "S-034",
+              "page": "row 13"
+            }
+          ],
+          "pressure_raw": [
+            {
+              "source_id": "S-062",
+              "page": "web: p.6"
+            }
+          ],
+          "flow_cm_s_max": [
+            {
+              "source_id": "S-022",
+              "page": "p.23"
+            },
+            {
+              "source_id": "S-022",
+              "page": "p.30"
+            }
+          ],
+          "flow_raw": [
+            {
+              "source_id": "S-034",
+              "page": "row 7"
+            }
+          ],
+          "hardware": [
+            {
+              "source_id": "S-062",
+              "page": "web: p.6"
+            }
+          ],
+          "main_finding": [
+            {
+              "source_id": "S-034",
+              "page": "row 4"
+            },
+            {
+              "source_id": "S-022",
+              "page": "p.31"
+            },
+            {
+              "source_id": "S-022",
+              "page": "p.31"
+            },
+            {
+              "source_id": "S-034",
+              "page": "row 14"
+            },
+            {
+              "source_id": "S-041",
+              "page": "web: last slide"
+            }
+          ],
+          "test_count": [
+            {
+              "source_id": "S-020",
+              "page": "p.4"
+            }
+          ]
+        },
+        "verified": false
+      }
+    ],
+    "tests": [
+      {
+        "investigation": "Saffire-II",
+        "source_id": "S-034",
+        "psi_id": "PSI-99",
+        "row": 2,
+        "test": "2-1",
+        "fuel": "Silicone",
+        "o2": 0.215,
+        "o2_min": 0.215,
+        "o2_max": 0.215,
+        "pressure_psi": null,
+        "flow_cm_s": 20.0,
+        "notes": [
+          "O2 derived from measured CO2 production (table Note 1)"
+        ],
+        "match": "listed"
+      },
+      {
+        "investigation": "Saffire-II",
+        "source_id": "S-034",
+        "psi_id": "PSI-99",
+        "row": 3,
+        "test": "2-2",
+        "fuel": "Silicone",
+        "o2": 0.221,
+        "o2_min": 0.221,
+        "o2_max": 0.221,
+        "pressure_psi": null,
+        "flow_cm_s": 20.0,
+        "notes": [
+          "O2 derived from measured CO2 production (table Note 1)"
+        ],
+        "match": "listed"
+      },
+      {
+        "investigation": "Saffire-II",
+        "source_id": "S-034",
+        "psi_id": "PSI-99",
+        "row": 4,
+        "test": "2-3",
+        "fuel": "Silicone",
+        "o2": 0.221,
+        "o2_min": 0.221,
+        "o2_max": 0.221,
+        "pressure_psi": null,
+        "flow_cm_s": 20.0,
+        "notes": [
+          "O2 derived from measured CO2 production (table Note 1)"
+        ],
+        "match": "listed"
+      },
+      {
+        "investigation": "Saffire-II",
+        "source_id": "S-034",
+        "psi_id": "PSI-99",
+        "row": 5,
+        "test": "2-4",
+        "fuel": "Silicone",
+        "o2": 0.221,
+        "o2_min": 0.221,
+        "o2_max": 0.221,
+        "pressure_psi": null,
+        "flow_cm_s": 20.0,
+        "notes": [
+          "O2 derived from measured CO2 production (table Note 1)"
+        ],
+        "match": "listed"
+      },
+      {
+        "investigation": "Saffire-II",
+        "source_id": "S-034",
+        "psi_id": "PSI-99",
+        "row": 6,
+        "test": "2-5",
+        "fuel": "Cotton-Fiberglass (SIBAL)",
+        "o2": 0.221,
+        "o2_min": 0.221,
+        "o2_max": 0.221,
+        "pressure_psi": null,
+        "flow_cm_s": 20.0,
+        "notes": [
+          "O2 derived from measured CO2 production (table Note 1)"
+        ],
+        "match": "listed"
+      },
+      {
+        "investigation": "Saffire-II",
+        "source_id": "S-034",
+        "psi_id": "PSI-99",
+        "row": 7,
+        "test": "2-6",
+        "fuel": null,
+        "o2": 0.221,
+        "o2_min": 0.221,
+        "o2_max": 0.221,
+        "pressure_psi": null,
+        "flow_cm_s": 20.0,
+        "notes": [
+          "material cell is blank in the PSI table",
+          "O2 derived from measured CO2 production (table Note 1)"
+        ],
+        "match": "listed"
+      },
+      {
+        "investigation": "Saffire-II",
+        "source_id": "S-034",
+        "psi_id": "PSI-99",
+        "row": 8,
+        "test": "2-7",
+        "fuel": "PMMA & Nomex",
+        "o2": 0.221,
+        "o2_min": 0.221,
+        "o2_max": 0.221,
+        "pressure_psi": null,
+        "flow_cm_s": 20.0,
+        "notes": [
+          "O2 derived from measured CO2 production (table Note 1)"
+        ],
+        "match": "listed"
+      },
+      {
+        "investigation": "Saffire-II",
+        "source_id": "S-034",
+        "psi_id": "PSI-99",
+        "row": 9,
+        "test": "2-8",
+        "fuel": "PMMA",
+        "o2": null,
+        "o2_min": 0.22,
+        "o2_max": 0.221,
+        "pressure_psi": null,
+        "flow_cm_s": 20.0,
+        "notes": [
+          "O2 derived from measured CO2 production (table Note 1)"
+        ],
+        "match": "listed"
+      },
+      {
+        "investigation": "Saffire-II",
+        "source_id": "S-034",
+        "psi_id": "PSI-99",
+        "row": 10,
+        "test": "2-9",
+        "fuel": null,
+        "o2": null,
+        "o2_min": 0.219,
+        "o2_max": 0.22,
+        "pressure_psi": null,
+        "flow_cm_s": 20.0,
+        "notes": [
+          "material cell is blank in the PSI table",
+          "O2 derived from measured CO2 production (table Note 1)"
+        ],
+        "match": "listed"
+      }
+    ],
+    "chunks": [
+      {
+        "chunk_id": "S-022_p003_c01",
+        "source_id": "S-022",
+        "page": 3,
+        "text": "[Saffire-I, Saffire-II, Saffire-III | S-022: Saffire: A Novel Approach to Study of Spacecraft Fire Safety (Saffire I-III Results) | Introduction]\nIntroduction\n• Despite millennia of experience with fire, over 3,000 people die from fires each\nyear in the U.S. • Fire is a catastrophic hazard for spacecraft\n• However, without any empirical results, it is impossible to be sure that our\npredictions of fire behavior in a spacecraft are realistic. • What will kill you first? • CO buildup? • Other toxic products? • Heat? • Smoke? • Pressure Rise? • How should the crew respond? All inhabited types of structure, vehicle, or even\nopen space on earth have been the subject of\nfull scale fire studies and/or training.",
+        "score": 0.01457,
+        "section_title": "Introduction",
+        "investigation_ids": [
+          "Saffire-I",
+          "Saffire-II",
+          "Saffire-III"
+        ]
+      },
+      {
+        "chunk_id": "S-022_p026_c01",
+        "source_id": "S-022",
+        "page": 26,
+        "text": "[Saffire-I, Saffire-II, Saffire-III | S-022: Saffire: A Novel Approach to Study of Spacecraft Fire Safety (Saffire I-III Results) | Far Field Diagnostics]\nPlots of igniter current and thermocouple temperatures. X-distance along the sample for each\nthermocouple is shown on the diagram. Heights above the surface are indicated on the plot.",
+        "score": 0.01416,
+        "section_title": "Far Field Diagnostics",
+        "investigation_ids": [
+          "Saffire-I",
+          "Saffire-II",
+          "Saffire-III"
+        ]
+      },
+      {
+        "chunk_id": "S-022_p020_c01",
+        "source_id": "S-022",
+        "page": 20,
+        "text": "[Saffire-I, Saffire-II, Saffire-III | S-022: Saffire: A Novel Approach to Study of Spacecraft Fire Safety (Saffire I-III Results) | Far Field Diagnostics]\nForward Steps\n• The Saffire experiments were the first practical-scale spacecraft fire safety\ninvestigations. • In addition to pioneering a new research capability, they determined that\nconcurrent flames can achieve a steady spread rate and that overall the\nconcurrent spread rates are strongly influenced the the flow duct size. • The next Saffire series will examine larger fires of longer duration to\nexamine the impact of a fire on the vehicle habitability .",
+        "score": 0.0141,
+        "section_title": "Far Field Diagnostics",
+        "investigation_ids": [
+          "Saffire-I",
+          "Saffire-II",
+          "Saffire-III"
+        ]
+      },
+      {
+        "chunk_id": "S-022_p019_c01",
+        "source_id": "S-022",
+        "page": 19,
+        "text": "[Saffire-I, Saffire-II, Saffire-III | S-022: Saffire: A Novel Approach to Study of Spacecraft Fire Safety (Saffire I-III Results) | Objectives:]\nObjectives:\n♦ Demonstrate spacecraft fire monitoring and cleanup\ntechnologies in a realistic spacecraft fire scenario\n♦ Characterize fire growth in high O , low pressure atmospheres\n♦ Provide data to validate models of prediction of the\nimpact of a fire on vehicle habitability",
+        "score": 0.01364,
+        "section_title": "Objectives:",
+        "investigation_ids": [
+          "Saffire-I",
+          "Saffire-II",
+          "Saffire-III"
+        ]
+      },
+      {
+        "chunk_id": "S-021_p002_c03",
+        "source_id": "S-021",
+        "page": 2,
+        "text": "[Saffire-I, Saffire-II, Saffire-III | S-021: The Spacecraft Fire Experiment (Saffire) - Objectives, Development and Status | 2.1 Sample Materials]\n2.1 Sample Materials\nThe sample material for Saffire-I and III is a composite\nfabric consisting of cotton on a fiberglass substrate\n(75% cotton, 25% fiberglass by weight). It is called\nSIBAL cloth because it was developed for the Solid\nInflammability Boundary at Low-Speeds (SIBAL)\nspaceflight experiment and has been used in many space\nexperiments because it burns like cotton but maintains\nstructural integrity after the cotton is consumed. The\nobjective of the Saffire-I and III tests will be to\ndetermine how rapidly a large-scale fire grows in low-gravity and whether it reaches a steady-state spread rate. Saffire-I will be conducted at an air flow velocity of 20 Fans\nPower\nManagement\nSample card\n(flame sprea\nsample\nshown)\nCameras\nAvionics Bay Flow Duct\nSignal\nconditioning\ncard\nFlow\nstraightene\nFigure 1: Schematic of the Spacecraft Fire Safety\nDemonstration Experiment. The experiment module\nconsists of a flow duct containing the sample card\nand an avionics bay. All power, computer, and data\nacquisition modules are contained in the bay. The\nexperiment module is approximately 53- by 90- by\n133-cm. cm/s while Saffire-III will be run at a flow velocity of\n30 cm/s . Saffire-II has a sample card that contains 9 samples,\neach 5 cm x 29 cm. Table 1 lists the samples contained\non Saffire-II while Fig. 2 shows their locations on the\nsample card. These materials were selected because they\nhave normal gravity Maximum Oxygen Concentration\n(MOC) flammability limits that indicate they will burn\nin normal gravity just above and below 21% O by",
+        "score": 0.01349,
+        "section_title": "2.1 Sample Materials",
+        "investigation_ids": [
+          "Saffire-I",
+          "Saffire-II",
+          "Saffire-III"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "calculations": [],
+    "gaps": [],
+    "rules": [
+      {
+        "id": "R-001",
+        "rule": "Do NOT extrapolate microgravity results directly to Lunar or Martian gravity without explicitly stating the lack of direct partial-gravity empirical data and explaining bounding logic ([F-019], [F-021])."
+      },
+      {
+        "id": "R-002",
+        "rule": "When queried regarding combustion in Lunar or Martian gravity, explicitly clarify that NASA PSI currently contains no partial-gravity test data [F-019]. Mention E-FIELD electric field chemi-ion simulation [F-020] and 0-g/1-g bounding methodology [F-021] if relevant."
+      },
+      {
+        "id": "R-003",
+        "rule": "Never assess spacecraft fire flammability solely on oxygen percentage. Always evaluate oxygen partial pressure (via calculation), total pressure, diluent inert species (N2, CO2, He), and ventilation forced flow velocity together."
+      },
+      {
+        "id": "R-004",
+        "rule": "If asked about rocket engine or thruster propellant fires, clearly state that propulsion systems are outside the scope of PSI microgravity science due to momentum-dominated flow regimes [F-022]."
+      },
+      {
+        "id": "R-005",
+        "rule": "For every experimental finding reported, cite the exact test conditions: fuel type, geometry, oxygen concentration, ambient pressure, flow velocity, and hardware facility. If a condition is omitted in the source, label it as 'unspecified'; do NOT guess."
+      },
+      {
+        "id": "R-006",
+        "rule": "If an empirical value or data point is absent from the indexed chunks and Golden Table, state 'data not available in repository'. Never fabricate numerical values from LLM parametric memory."
+      },
+      {
+        "id": "R-007",
+        "rule": "When source documents report conflicting findings or values, present both sources with their respective document citations, PI names, and publication years; do not arbitrarily select one."
+      },
+      {
+        "id": "R-008",
+        "rule": "Clearly distinguish between empirical flight experiment findings (PSI / peer-reviewed reports), challenge guidelines, mathematical derivations, and speculative engineering hypotheses. Never present interpretation as an empirical fact."
+      }
+    ],
+    "route": {
+      "intent": "general",
+      "investigations": [
+        "Saffire-II"
+      ],
+      "matched_intents": [],
+      "ambiguous": true,
+      "decided_by": "default",
+      "out_of_scope_reason": null,
+      "tools": [
+        "search_documents",
+        "query_golden_table"
+      ],
+      "rules": [
+        "R-006",
+        "R-008"
+      ]
+    },
+    "versions": {
+      "data": "v2",
+      "index": "4aa3c9230f",
+      "golden_table": "draft"
+    },
+    "sources": [
+      {
+        "id": "F-003",
+        "found": true,
+        "kind": "fact",
+        "title": "To prevent decompression sickness ('the bends'), astronauts perform a pre-breathe protocol by inhaling 100% oxygen to purge dissolved nitrogen from body tissues.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-004",
+        "found": true,
+        "kind": "fact",
+        "title": "To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-005",
+        "found": true,
+        "kind": "fact",
+        "title": "The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-006",
+        "found": true,
+        "kind": "fact",
+        "title": "According to the challenge text, this represents more than a 40% increase in oxygen concentration compared to Earth's atmosphere, substantially increasing material flammability.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-008",
+        "found": true,
+        "kind": "fact",
+        "title": "In free fall, buoyancy-driven natural convection and buoyant rise of hot exhaust gases are absent, causing flames to behave dramatically differently from terrestrial flames; for example, a candle flame becomes a dim blue, spherical diffusion flame.",
+        "source": "Challenge text, 'Background'"
+      },
+      {
+        "id": "S-034",
+        "found": true,
+        "kind": "source",
+        "title": "SAFFIRE-II Experimental Table",
+        "authors": null,
+        "year": null,
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-99",
+        "doi": "10.60555/2chp-m469",
+        "investigation": "Saffire-II",
+        "psi_id": "PSI-99",
+        "role": "data table",
+        "file_type": "csv",
+        "in_corpus": false,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-022",
+        "found": true,
+        "kind": "source",
+        "title": "Saffire: A Novel Approach to Study of Spacecraft Fire Safety Using Un-manned Spacecraft",
+        "authors": "Urban D.L., Ferkul P., Olson S., Ruff G.A., Easton J.",
+        "year": "2017",
+        "url": "https://ntrs.nasa.gov/citations/20180005168",
+        "doi": null,
+        "investigation": "Saffire-I;Saffire-II;Saffire-III",
+        "psi_id": "PSI-99",
+        "role": "results",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-021",
+        "found": true,
+        "kind": "source",
+        "title": "The Spacecraft Fire Experiment (Saffire) Objectives, Development and Status",
+        "authors": "Schoren W., Ruff G.A., Urban D.L.",
+        "year": "2016",
+        "url": "https://ntrs.nasa.gov/citations/20170001636",
+        "doi": null,
+        "investigation": "Saffire-I;Saffire-II;Saffire-III",
+        "psi_id": "PSI-98",
+        "role": "overview",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-062",
+        "found": true,
+        "kind": "source",
+        "title": "Buoyancy Effects on Concurrent Flame Spread Over Thick PMMA",
+        "authors": "Thomsen M., Fernandez-Pello C., Ruff G.A., Urban D.L.",
+        "year": null,
+        "url": "https://ntrs.nasa.gov/citations/20200000557",
+        "doi": null,
+        "investigation": "Saffire-II",
+        "psi_id": "PSI-99",
+        "role": "results",
+        "file_type": "pdf",
+        "in_corpus": false,
+        "status": "not downloaded (web source cited in golden table)"
+      },
+      {
+        "id": "S-041",
+        "found": true,
+        "kind": "source",
+        "title": "Results of Large-Scale Spacecraft Flammability Tests (ICES-2017)",
+        "authors": "Ferkul P.V. et al.",
+        "year": "2017",
+        "url": "https://ntrs.nasa.gov/citations/20170008805",
+        "doi": null,
+        "investigation": "Saffire-I;Saffire-II",
+        "psi_id": "PSI-98;PSI-99",
+        "role": "results",
+        "file_type": "pdf",
+        "in_corpus": false,
+        "status": "not downloaded (web source cited in golden table)"
+      },
+      {
+        "id": "S-020",
+        "found": true,
+        "kind": "source",
+        "title": "Operation and Development Status of the Spacecraft Fire Experiments (Saffire)",
+        "authors": "Ruff G.A., Urban D.L.",
+        "year": "2016",
+        "url": "https://ntrs.nasa.gov/citations/20170000230",
+        "doi": null,
+        "investigation": "Saffire-I;Saffire-II;Saffire-III",
+        "psi_id": "PSI-98",
+        "role": "overview",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      }
+    ]
+  },
+  "latency_ms": 0
+}
