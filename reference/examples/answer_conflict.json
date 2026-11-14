@@ -1,26 +1,22 @@
 {
-  "text": "LLM answer not available - showing evidence summary.\n- To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere. [F-004]\n- According to the challenge text, this represents more than a 40% increase in oxygen concentration compared to Earth's atmosphere, substantially increasing material flammability. [F-006]\n- Flammability depends strongly on oxygen concentration; in microgravity, convective air flow speed is also critical. [F-007]\n- The flammability of solid materials such as fabrics (SIBAL, Nomex) and plastics (PMMA) has been investigated in the BASS, BASS-II, and Saffire-I, -II, -III flight experiments. [F-010]\n- Spacecraft fire detection in microgravity has been tested through the SAME and SAME-R (Smoke and Aerosol Measurement Experiment) flight investigations. [F-011]\n- BASS-II (golden table, unverified draft): O2 0.136-0.222, pressure 14.388-14.696 psi, same-test lunar match: no\n- Conflict [BASS-II | flow_cm_s_max]: up to 40 cm/s (S-030 row 40) vs 53 cm/s (Air display, T17) | ~55 cm/s hardware (S-031 row 117; S-007 p.12; S-005 p.7; S-004 p.3)\n- Passages retrieved: [S-007:134], [S-007:130], [S-007:106], [S-007:123], [S-007:108]",
-  "model": "none/evidence-summary",
+  "text": "### Maximum Flow Speed in BASS-II\n\nIn microgravity flammability research, forced convective flow speed is a critical parameter determining solid material flammability boundaries [F-007], [F-010].\n\n#### Golden Table Notice\nThe BASS-II dataset entry in the Golden Table is classified as an **unverified LLM draft** [S-030 p.row 34].\n\n---\n\n### Mandatory Conflict Report: Maximum Flow Speed (`flow_cm_s_max`)\n\nThere is a recorded conflict in the repository regarding the maximum flow speed achieved/reported for BASS-II:\n\n* **Value 1:** `up to 40 cm/s` (reported in S-030 row 40) [S-030 p.row 34].\n* **Value 2:** `53 cm/s (Air display, T17) | ~55 cm/s hardware` [S-031 p.row 117] [S-007 p.12] [S-005 p.7] [S-004 p.3].\n\n---\n\n### Flow Speed Breakdown & Details\n\n* **Hardware Capability:** The BASS-II flow duct hardware within the Microgravity Science Glovebox (MSG) achieves a maximum flow velocity of approximately **~55 cm/s** with no flow restrictors attached, and **~35 cm/s** when two perforated plate flow restrictors are attached [S-007 p.12] [S-030 p.row 44].\n* **Test Data Records:** The minimum flow velocity recorded was **0.0 cm/s** (flow off) [S-031 p.row 49]. The video air display registered a maximum value of **53 cm/s** during test T17 [S-031 p.row 117]. \n* **Measurement Note:** The air display flow sensor in the duct has a slow response time of approximately **1 minute**, meaning readings are only steady when flow settings are maintained over longer durations [S-010 p.1].",
+  "model": "gemini/gemini-3.6-flash",
   "answer_type": "answer",
   "citations": [
-    "F-004",
-    "F-006",
     "F-007",
     "F-010",
-    "F-011",
-    "S-007:134",
-    "S-007:130",
-    "S-007:106",
-    "S-007:123",
-    "S-007:108"
+    "S-030",
+    "S-031",
+    "S-007:12",
+    "S-005:7",
+    "S-004:3",
+    "S-010:1"
   ],
   "validation": {
-    "passed": false,
-    "errors": [
-      "no LLM configured"
-    ],
+    "passed": true,
+    "errors": [],
     "retried": false,
-    "fallback_used": true
+    "fallback_used": false
   },
   "bundle": {
     "schema_version": "1.0",
@@ -250,23 +246,23 @@
     "tests": [],
     "chunks": [
       {
-        "chunk_id": "S-007_p134_c01",
-        "source_id": "S-007",
-        "page": 134,
-        "text": "[BASS-II | S-007: NASA/TM-20210011385 BASS-II Summary Report | D.5 Analysis]\nThe maximum burn time is assumed to be the 2.5-min growth phase plus the 28-min sample\nregression phase, for a total of 30.5 min, as plotted in Figure D.5. The maximum temperatures reported in\nthe following information are for this maximum burn time. The heat release in the early phase is dominated by the ignition energy. Once the combustion heat\nrelease approaches steady state, the igniter is turned off and the flame is sustained. The maximum temperature will occur in the exhaust hardware. This metal (primarily copper)\nhardware is built to take the hot combustion gases and cool via conduction to the other hardware. The\nmaximum temperature if all of the combustion energy is only deposited in this heat sink under these\nworst-case assumptions, is 434 °C, which is below the melting point of the lowest melting material\n(aluminum at 660 °C) so this absolute worst-case maximum temperature will not cause damage to the\nhardware. This maximum temperature will not be realized in actuality because the heat will quickly\ndissipate to the main housing, which reaches a maximum temperature of 110 °C if all of the heat is\ndistributed only there. The experiment assembly dissipates the heat further, and the maximum\ntemperature of the entire experiment assembly is 62 °C. During the 10-min cooldown for these thick samples, both the flow through the BASS duct and the\nMSG air circulation fans help dissipate the heat.",
-        "score": 0.016,
-        "section_title": "D.5 Analysis",
+        "chunk_id": "S-010_p001_c02",
+        "source_id": "S-010",
+        "page": 1,
+        "text": "[BASS-II | S-010: BASS-II Data FAQ and PI Test Matrix Guide | Overview & Guide]\nFlow restrictors: perforated plates that could be attached to the inlet screen to increase the flow restriction and thus reduce the flow range. 0 is highest flow, lowest restriction; and 2 is lowest flow, highest restriction. Fan display: instantaneous fan voltagex10 on the video display. Maximum was 122, or 12.2 volts. Also listed sometimes are pot settings on the control box. 10 is max. Air display: flow speed measured in the duct in cm/s on the video display. Response time is very slow (~ 1 min), so reading is only steady for long times at the same flow setting. Radiometer gain: Uncalibrated radiometer gain, radiometer is displayed on the video. Adjusted to avoid saturation. Useful for relative flame intensity readings and flame dynamics (like pre-extinction oscillations). Video display data rate is 5 Hz. Total frames: digital Nikon still image frames shot, includes test and post-burn sample images. Calibrated initial and final O2: The O2 sensor was out of calibration, so the MCA ISS reading was used to correct the initial ISS ‘air’ reading of the sensor for the day via a constant offset. CO2 readings: CDM sensor readings. CO readings: CSA-CP sensor readings. OR = over range (> 1000 ppm) Videos: most test videos have the test number (PI initial+ # from test matrix) In the Misc video folder, there are backup test recordings, recordings of crew operations, etc.",
+        "score": 0.01357,
+        "section_title": "Overview & Guide",
         "investigation_ids": [
           "BASS-II"
         ]
       },
       {
-        "chunk_id": "S-007_p130_c03",
-        "source_id": "S-007",
-        "page": 130,
-        "text": "[BASS-II | S-007: NASA/TM-20210011385 BASS-II Summary Report | D.5 Analysis]\nD.5 Analysis\nAs can be seen in Figure D.2, the base of the flame (at x = 0) has the highest burning rate and there is\nan exponential decay in the regression rate away from that peak burning rate. Using peak regression rate\n(r ) for the four flow profiles given, we can extrapolate down to the 30-cm/s flow of interest. max\nThe exposed base of the flame (the upstream most point) will be the strongest part of the flame, and\nthe burning rate is expected to be a maximum there. Based on data in the Section D.7 from a 1-cm-sphere\nBASS test, we estimate the regression rate to be 3.05 mm/min, which is in keeping with the estimates\nfrom Figure D.2, as shown in Figure D.3. The downstream regression rates will decay exponentially from\nthere, as shown in Figure D.2.",
-        "score": 0.01256,
-        "section_title": "D.5 Analysis",
+        "chunk_id": "S-004_p005_c01",
+        "source_id": "S-004",
+        "page": 5,
+        "text": "[BASS-II | S-004: Concurrent Flame Growth, Spread and Extinction over Composite Fabric (BASS) | 3. Results and Discussion]\nSub Topic: Fire\nFigure 3: Flame development on 2.2 cm sample in 5 cm/s flow, 21% O (a): Top-view flame tracking. (b): Top-view image sequence. Flow is from right to left. Steady flame spread rates in different flow speeds and oxygen percentages are plotted in Fig. 4\nfor both 2.2-cm and 1.2-cm samples. Note in some cases flow speed was varied during the test. Steady flame spread here means the flame reached a constant spread rate for more than 20s. Flames\nspread more slowly across the narrower samples, at lower flow velocities and at lower oxygen\npercentages. 21% 21%, 1.2-cm\n21%, 1.2-cm\n21%\n17.2%, 1.2-cm\n17.1%\n18.8%\n18.8% 17.6% 16.9%\nFigure 4: Steady flame spread rate for both 2.2-cm and 1.2-cm wide samples. Figure 5 shows a typical flame quenching sequence in the BASS-II experiment. A 2.2 cm wide\nsample in 18.7% O was first ignited at 10 cm/s flow. Flow speed was decreased to 2.2 cm/s incrementally after ignition. Figure 6 shows flame tracking and flow speed vs. time. After ignition,\nthe flame started to grow. As the flow speed was reduced both flame length and flame width\ndropped accordingly with flow. After 25s, flow velocity was reduced to 2.2 cm/s and held there\nfor the remainder of the test. As shown in Fig. 5, both the flame length and flame width continued\nto decrease approaching a circular-shaped blue flame seen from the top. The size of the flame\ncontinues to shrink until extinction is reached. This is typical in a quenching extinction sequence.",
+        "score": 0.01299,
+        "section_title": "3. Results and Discussion",
         "investigation_ids": [
           "BASS-II"
         ]
@@ -276,19 +272,8 @@
         "source_id": "S-007",
         "page": 106,
         "text": "[BASS-II | S-007: NASA/TM-20210011385 BASS-II Summary Report | 7.1.4 Results and Discussion]\nFigure 7.4.—Steady flame spread rate for both 2.2- and 1.2-cm-wide samples. Figure 7.5 shows a typical flame quenching sequence in the BASS–II experiment. A 2.2-cm-wide\nsample in 18.7 percent O was first ignited at 10-cm/s flow. Flow speed was decreased to 2.2 cm/s incrementally after ignition. Figure 7.6 shows flame tracking and flow speed versus time. After ignition,\nthe flame started to grow. As the flow speed was reduced, both flame length and flame width dropped\naccordingly with flow. After 25 s, flow velocity was reduced to 2.2 cm/s and held there for the remainder\nof the test. As shown in Figure 7.5, both the flame length and flame width continued to decrease\napproaching a circular-shaped blue flame seen from the top. The size of the flame continues to shrink\nuntil extinction is reached. This is typical in a quenching extinction sequence. As the quenching limit is\napproached (in this case by turning down the flow velocity), the fuel pyrolysis rate and combustion heat\nrelease rate (HRR) are reduced, and radiation loss becomes a significant fraction of the HRR from the\nshrinking flame. When the flame becomes small enough, conduction becomes the additional heat loss. The postburn photo of the sample in Figure 7.5 shows the narrowing of the burnt region as the flame\nshrinks toward extinction with a substantial part of the fuel left unburnt along the two sides of the sample\nholder. Although this is a concurrently spreading flame, the quenching sequence shows similar\ncharacteristics in opposed flow (Ref.",
-        "score": 0.01229,
+        "score": 0.01284,
         "section_title": "7.1.4 Results and Discussion",
-        "investigation_ids": [
-          "BASS-II"
-        ]
-      },
-      {
-        "chunk_id": "S-007_p123_c02",
-        "source_id": "S-007",
-        "page": 123,
-        "text": "[BASS-II | S-007: NASA/TM-20210011385 BASS-II Summary Report | 2. Boundary and conditions:]\n2. Boundary and conditions:\na. Concentration of O coming into the work volume C = 0 (pure N )\n2 in 2\nb. C = c(t) (CSTR property)\nout\nc. Initial concentration of O in the work volume C(0) = C\n2 o\nThe rate of change of the O concentration c(t) with time t within the work volume V equation is given by the flow of gaseous N (r) multiplied by the difference between the inlet (C ) and outlet O\n2 in 2\nconcentrations (C )\nout\ndc\nV =r(C −C )=−rC =−rc(t) (B.1)\nin out out\ndt\n3. Integrating and applying initial conditions:\n−r \nc(t)=C\no\nexp t (B.2)\n V \nAstronaut Chris Cassidy conducted a calibration test on the morning of GMT (Greenwich Mean\nTime) 2013-095 in the Microgravity Science Glovebox (MSG) using a Compound Specific Analyzer-Combustion Products (CSA-CP) sensor taking O readings of the MSG working volume at intervals during the dilution. During dilution, the Burning and Suppression of Solids (BASS) duct fan was turned\nto maximum, and the working volume air circulation was deactivated. To validate the model, we used the\nfollowing values in the model based upon the test conditions:\n• MSG working volume (Ref. 1) = 0.255 m3\n• BASS–II hardware = ~0.005 m3\n• Net volume V = ~0.25 m3",
-        "score": 0.01216,
-        "section_title": "2. Boundary and conditions:",
         "investigation_ids": [
           "BASS-II"
         ]
@@ -298,8 +283,19 @@
         "source_id": "S-007",
         "page": 108,
         "text": "[BASS-II | S-007: NASA/TM-20210011385 BASS-II Summary Report | 7.1.4 Results and Discussion]\nIn addition, because of the limited number of tests, the quenching limit for the 1.2-cm-wide sample was not resolved. But it can be seen that\nthe narrow sample has a smaller flammable domain, as expected. Figure 7.7.—Flammability map for Solid Inflammability Boundary at Low Speeds (SIBAL)\nfabric in concurrent flow in microgravity. Dotted line marks experimental quenching\nboundary for 2.2-cm-wide sample. Flow speed (U0).",
-        "score": 0.01157,
+        "score": 0.01269,
         "section_title": "7.1.4 Results and Discussion",
+        "investigation_ids": [
+          "BASS-II"
+        ]
+      },
+      {
+        "chunk_id": "S-007_p130_c03",
+        "source_id": "S-007",
+        "page": 130,
+        "text": "[BASS-II | S-007: NASA/TM-20210011385 BASS-II Summary Report | D.5 Analysis]\nD.5 Analysis\nAs can be seen in Figure D.2, the base of the flame (at x = 0) has the highest burning rate and there is\nan exponential decay in the regression rate away from that peak burning rate. Using peak regression rate\n(r ) for the four flow profiles given, we can extrapolate down to the 30-cm/s flow of interest. max\nThe exposed base of the flame (the upstream most point) will be the strongest part of the flame, and\nthe burning rate is expected to be a maximum there. Based on data in the Section D.7 from a 1-cm-sphere\nBASS test, we estimate the regression rate to be 3.05 mm/min, which is in keeping with the estimates\nfrom Figure D.2, as shown in Figure D.3. The downstream regression rates will decay exponentially from\nthere, as shown in Figure D.2.",
+        "score": 0.01235,
+        "section_title": "D.5 Analysis",
         "investigation_ids": [
           "BASS-II"
         ]
@@ -373,7 +369,7 @@
     },
     "versions": {
       "data": "v2",
-      "index": "4aa3c9230f",
+      "index": "f5785a04fe",
       "golden_table": "draft"
     },
     "sources": [
@@ -411,6 +407,38 @@
         "kind": "fact",
         "title": "Spacecraft fire detection in microgravity has been tested through the SAME and SAME-R (Smoke and Aerosol Measurement Experiment) flight investigations.",
         "source": "Challenge text, 'Background'"
+      },
+      {
+        "id": "S-010",
+        "found": true,
+        "kind": "source",
+        "title": "BASS-II Data FAQ / ReadMe",
+        "authors": "Olson S.L.",
+        "year": "2017",
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+        "doi": null,
+        "investigation": "BASS-II",
+        "psi_id": "PSI-25",
+        "role": "overview",
+        "file_type": "docx",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-004",
+        "found": true,
+        "kind": "source",
+        "title": "Concurrent flame growth, spread and extinction over composite fabric samples in low speed purely forced flow in microgravity",
+        "authors": "Zhao X., T'ien J.S., Ferkul P.V., Olson S.L.",
+        "year": "2015",
+        "url": "https://ntrs.nasa.gov/citations/20150008962",
+        "doi": null,
+        "investigation": "BASS;BASS-II",
+        "psi_id": "PSI-25",
+        "role": "results",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
       },
       {
         "id": "S-007",
@@ -461,22 +489,6 @@
         "status": "downloaded"
       },
       {
-        "id": "S-010",
-        "found": true,
-        "kind": "source",
-        "title": "BASS-II Data FAQ / ReadMe",
-        "authors": "Olson S.L.",
-        "year": "2017",
-        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-        "doi": null,
-        "investigation": "BASS-II",
-        "psi_id": "PSI-25",
-        "role": "overview",
-        "file_type": "docx",
-        "in_corpus": true,
-        "status": "downloaded"
-      },
-      {
         "id": "S-031",
         "found": true,
         "kind": "source",
@@ -509,22 +521,6 @@
         "status": "downloaded"
       },
       {
-        "id": "S-004",
-        "found": true,
-        "kind": "source",
-        "title": "Concurrent flame growth, spread and extinction over composite fabric samples in low speed purely forced flow in microgravity",
-        "authors": "Zhao X., T'ien J.S., Ferkul P.V., Olson S.L.",
-        "year": "2015",
-        "url": "https://ntrs.nasa.gov/citations/20150008962",
-        "doi": null,
-        "investigation": "BASS;BASS-II",
-        "psi_id": "PSI-25",
-        "role": "results",
-        "file_type": "pdf",
-        "in_corpus": true,
-        "status": "downloaded"
-      },
-      {
         "id": "S-003",
         "found": true,
         "kind": "source",
@@ -542,5 +538,5 @@
       }
     ]
   },
-  "latency_ms": 0
+  "latency_ms": 17953
 }

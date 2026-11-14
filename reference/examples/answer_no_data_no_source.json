@@ -1,26 +1,19 @@
 {
-  "text": "LLM answer not available - showing evidence summary.\nData not available in repository.\n- Gap: DAFT-2: no source in the repository.\n- Gap: DAFT-2: o2 unknown.\n- To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere. [F-004]\n- The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower. [F-005]\n- According to the challenge text, this represents more than a 40% increase in oxygen concentration compared to Earth's atmosphere, substantially increasing material flammability. [F-006]\n- Flammability depends strongly on oxygen concentration; in microgravity, convective air flow speed is also critical. [F-007]\n- The highest oxygen concentration combustion tests in microgravity were conducted under ACME's Cool Flames Investigation with Gases (CFI-G). The combustion chamber was charged with nitrogen and fuel gas (e.g., propane), while an oxidizer stream containing up to 85% oxygen was delivered through a spherical porous burner to create an inverse diffusion flame. [F-018]\n- DAFT-2 (golden table, unverified draft): O2 unknown-unknown, pressure unknown-unknown psi, same-test lunar match: unknown\n- Passages retrieved: [S-023:10], [S-023:5], [S-023:3], [S-022:3], [S-011:9]",
-  "model": "none/evidence-summary",
+  "text": "Data not available in repository. \n\nThe specific oxygen concentration used during DAFT-2 (Dust and Aerosol measurement Feasibility Test-2) cannot be reported because:\n1. There is no source document for DAFT-2 available in the NASA Physical Sciences Informatics (PSI) repository.\n2. The oxygen concentration parameters (`o2_min`, `o2_max`, `o2_raw`) for DAFT-2 are completely unknown.\n\nFurthermore, the Golden Table entry referencing DAFT-2 is an unverified LLM draft where all test variables (including fuel parameters, ambient pressure, flow velocity, and oxygen limits) are listed as unknown.\n\n### Related Context on Oxygen Concentration in the Repository\n* **Microgravity Flammability:** Material flammability depends strongly on oxygen concentration and convective air flow velocity [F-007].\n* **Highest O₂ Testing:** The highest oxygen concentrations tested in microgravity within the available repository data were conducted under the ACME Cool Flames Investigation with Gases (CFI-G), which utilized an oxidizer stream containing up to 85% oxygen [F-018].\n* **Lunar Habitat Standards:** Anticipated intermediate atmospheres for lunar surface extravehicular activities (EVAs) target oxygen concentrations of 30% or higher at total pressures of 10.2 psi or lower [F-005] to reduce pre-breathe times [F-004], representing more than a 40% increase in oxygen concentration compared to Earth's atmosphere [F-006].",
+  "model": "gemini/gemini-3.6-flash",
   "answer_type": "no_data",
   "citations": [
-    "F-004",
-    "F-005",
-    "F-006",
     "F-007",
     "F-018",
-    "S-023:10",
-    "S-023:5",
-    "S-023:3",
-    "S-022:3",
-    "S-011:9"
+    "F-005",
+    "F-004",
+    "F-006"
   ],
   "validation": {
-    "passed": false,
-    "errors": [
-      "no LLM configured"
-    ],
+    "passed": true,
+    "errors": [],
     "retried": false,
-    "fallback_used": true
+    "fallback_used": false
   },
   "bundle": {
     "schema_version": "1.0",
@@ -101,58 +94,56 @@
     "tests": [],
     "chunks": [
       {
-        "chunk_id": "S-023_p010_c02",
-        "source_id": "S-023",
-        "page": 10,
-        "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | IV. Results and Discussion]\nHence, when\nthe fan was turned back on, a deflagration wave ignited the flame again. RS3 and RS6 are in the flow path, therefore\nchanges in Saffire flow will affect those locations disproportionately. RS1 is likely the closest sensor location, so even\nthough it is out of the flow path, there is still some effect. The model predicted a larger dip than was realized by the\nsensors. The CO prediction in both burn events over-predicted the steady state CO value. A reason for the difference\n2 2\ncould be the assumption of stoichiometric combustion. There is a region of the microgravity flame under an oxygen\nshadow, cast by the upstream part of the flame, which prevents combustion from continuing9,15. Soot, CO, unburned\nhydrocarbons could contribute to the differences between model and experiment. Another reason for the discrepancy\nis the free volume could be different than what the model and NG predicted. Calculations were performed after the\nevent 2 CO release that predicted a higher free volume10. Pressure, temperature, and concentration data from event 2 were used in two independent models, which applied different assumptions to the equations of state. The secondary\nconstant mass (SCM) model divides the total vehicle volume into the free volume, where the released gasses can mix,\nand a sub-volume of constant mass that does not exchange with the free volume. This model was developed to reflect\ncargo and trash that approximates sealed volumes where gas cannot escape.",
-        "score": 0.01471,
-        "section_title": "IV. Results and Discussion",
+        "chunk_id": "S-020_p004_c02",
+        "source_id": "S-020",
+        "page": 4,
+        "text": "[Saffire-II | S-020: Operation and Development Status of the Spacecraft Fire Experiments (Saffire) | B. Diagnostics]\nThis material will be expected to burn at the anticipated oxygen mole fraction of the\ncabin atmosphere (near 0.21 O mole fraction). A second redundant igniter is woven into the fabric at the downstream end of the sample in case of a failure of the upstream igniter or if the flame does not propagate the\nentire length of the sample. The objective of the tests to be conducted on Saffire-II is to investigate the low-gravity\nMaximum Oxygen Concentration (MOC) flammability limits in long-term low gravity.2 The configuration for these\nexperiments consists of nine samples of varying materials (denoted flammability samples) each having dimensions\nof approximately 5 cm wide by 29 cm long installed on the same panel in place of the single sample in Fig. 1. The\nSaffire-II sample card is shown in Fig. 2b. These samples emulate the configuration used in NASA-STD-6001 Test\n1.3 Each sample is ignited at the bottom using a hot wire. The oxygen concentration in the Cygnus vehicle will be\nnearly 21% by volume—the same as in the ISS when the hatch was closed. The materials have been selected to be\nnear their normal-gravity or hypothesized low-gravity maximum oxygen concentration in 21% O . This has complicated the selection of sample materials because most materials relevant for spacecraft do not have normal-gravity flammability limits near 21% oxygen by volume.4-6 Camera images are the primary diagnostics for these\ntests as the intended result is primarily to determine whether the flame propagates or self-extinguishes.",
+        "score": 0.01212,
+        "section_title": "B. Diagnostics",
         "investigation_ids": [
-          "Saffire-IV"
+          "Saffire-II"
         ]
       },
       {
-        "chunk_id": "S-023_p005_c03",
-        "source_id": "S-023",
-        "page": 5,
-        "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | IV. Results and Discussion]\nThe other four had\nto rely on mixing and diffusion before elevated CO was recorded. Experimentally, RS2 was by far the slowest to respond and did not even reach steady state, while all other responses reached steady state in at least 400 seconds. International Conference on Environmental Systems",
-        "score": 0.01162,
-        "section_title": "IV. Results and Discussion",
+        "chunk_id": "S-013_p025_c02",
+        "source_id": "S-013",
+        "page": 25,
+        "text": "[FLEX | S-013: NASA/TP-2015-216046 Detailed Results from FLEX | Appendix A - FLEX Summary Data Tables]\nFor cases where the droplet left the HiBMs field of\nview (FOV) before extinction, we did estimate (extrapolate\nthe burning history) to determine the extinction droplet\ndiameter if there was sufficient burning history and the length\nof time to extrapolate was not that long. If the droplet was\nnot in the HiBMS FOV for enough time, the extinction\ndroplet diameter is not listed. Notes—specific observations for a particular test, as explained\nin the notes at the bottom of the table\nFiber—Yes or No depending on whether a support fiber was in\nplace for the tests\nP—absolute ambient pressure\nO2—ambient oxygen mole fraction from detailed records of the\nchamber fill, recirculation, filter, and combustion history\nCO2—ambient carbon dioxide mole fraction from detailed\nrecords of the chamber fill, recirculation, filter, and\ncombustion history\nN2—ambient nitrogen mole fraction from detailed records of the\nchamber fill, recirculation, filter, and combustion history\nH2O—ambient water vapor mole fraction from detailed records\nof the chamber fill, recirculation, filter, and combustion\nhistory\nHeptane—ambient heptane (C H ) vapor mole fraction from\n7 16\ndetailed records of the chamber fill, recirculation, filter, and\ncombustion history\nMethanol—ambient methanol (CH OH) vapor mole fraction from detailed records of the chamber fill, recirculation, filter,\nand combustion history",
+        "score": 0.01198,
+        "section_title": "Appendix A - FLEX Summary Data Tables",
         "investigation_ids": [
-          "Saffire-IV"
+          "FLEX"
         ]
       },
       {
-        "chunk_id": "S-023_p003_c01",
-        "source_id": "S-023",
-        "page": 3,
-        "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | I. Introduction]\nFor context, Table 1 gives\nTable 1. Summary of Saffire-IV events. Events 7 and 8 were not completed\nall the events completed\ndue to technical and logistical issues and hence are omitted from this table. during Saffire-IV. The test\nEvent\ncampaign began with a scrub Description of Event Purpose of Event\nNumber\nof CO by pulling cabin air Reduce background CO ,\nthrough the lithium 2\n1 CO Scrub evaluate CO scrubber\nhydroxide bed of the FFD. In 2 2\nperformance\nevent two, CO was released Track tracer gas transport\nto determine the volume,\nthroughout cabin for vehicle\nwhich helped determine how 2 CO and HClrelease\n2 volume calculation and observe\nmuch oxygen should be\nHCl surface adsorption\nadded later in the experiment. 3 Flow visualization test Assess SFU air flow\nHydrogen Chloride (HCl)\nBurn: 40.64 cm wide × 50 cm long Sample burn with\nwas released after the oxygen 4\nSIBAL concurrent HCl release\nscrub to study its adsorption\nBurn: 40 cm wide × 18 cm long × 1 cm Sample burn, no HCl\nto surfaces. HCl was also 5\nthick 2-sided PMMA release\nreleased during the event 4\nEvaluate CO scrubber\nSIBAL burn to determine if 6 CO Scrub 2\n2 performance\nadsorption changed as a\n9 Flow visualization test Assess SFU air flow\nfunction of temperature. Flow visualization tests were\nperformed before and after the completion of the last burn events to determine if any major differences in air flow\nthrough the SFU had occurred. The PMMA in event number 5 did not extinguish when planned, causing the\ncancelation of other events.",
-        "score": 0.01086,
-        "section_title": "I. Introduction",
+        "chunk_id": "S-007_p068_c01",
+        "source_id": "S-007",
+        "page": 68,
+        "text": "[BASS-II | S-007: NASA/TM-20210011385 BASS-II Summary Report | 5.4 Oxygen Concentration Analysis]\n5.4 Oxygen Concentration Analysis\nThe BASS hardware does not have a provision to measure O concentration throughout the entire experiment. We have O data available at only the start and end of the test. Assuming a linear profile between these two points; we made O concentration graphs for each test (see Figure 5.2 for an example). This helps us estimate the O concentration at any given time during the experiment. Next, the average O\n2 2\nconcentration was calculated for each flow speed. Plots were created summarizing the average O concentration (vol%) versus opposed-flow speed (cm/s) for the one-sided and two-sided tests separately. The data points on these graphs are characterized according to the flame spread rate. Additionally, the\ndata points at which the flame extinguishes are also added to the summary graphs to see the effects of\nvarying O concentration through the duration of test. This analysis will serve as a reference point when more BASS operations are conducted in the future. 5.5 Numerical Modeling\nWe are modeling combustion of flat PMMA samples in microgravity using Fire Dynamics Simulator\n(FDS; v5.5.3; National Institute of Standards and Technology (NIST)) (Ref. 12), which is a\ncomputational fluid dynamics model of fire-driven fluid flow. The entire modeling for BASS–II is done\nin Direct Numerical Simulation (DNS) mode because of the laminar conditions and small domain. The\nmodel employs the same test sample and approximate BASS flow duct geometry as the experiment.",
+        "score": 0.01148,
+        "section_title": "5.4 Oxygen Concentration Analysis",
         "investigation_ids": [
-          "Saffire-IV"
+          "BASS-II"
         ]
       },
       {
-        "chunk_id": "S-022_p003_c01",
-        "source_id": "S-022",
-        "page": 3,
-        "text": "[Saffire-I, Saffire-II, Saffire-III | S-022: Saffire: A Novel Approach to Study of Spacecraft Fire Safety (Saffire I-III Results) | Introduction]\nIntroduction\n• Despite millennia of experience with fire, over 3,000 people die from fires each\nyear in the U.S. • Fire is a catastrophic hazard for spacecraft\n• However, without any empirical results, it is impossible to be sure that our\npredictions of fire behavior in a spacecraft are realistic. • What will kill you first? • CO buildup? • Other toxic products? • Heat? • Smoke? • Pressure Rise? • How should the crew respond? All inhabited types of structure, vehicle, or even\nopen space on earth have been the subject of\nfull scale fire studies and/or training.",
-        "score": 0.01031,
-        "section_title": "Introduction",
-        "investigation_ids": [
-          "Saffire-I",
-          "Saffire-II",
-          "Saffire-III"
-        ]
-      },
-      {
-        "chunk_id": "S-011_p009_c02",
-        "source_id": "S-011",
+        "chunk_id": "S-016_p009_c01",
+        "source_id": "S-016",
         "page": 9,
-        "text": "[BASS-II | S-011: Science Requirements Document (SRD) for BASS-II | Objectives:]\nObjectives:\n• To identify what is the worst case for material flammability in spacecraft\nenvironments, and how does that compare to the terrestrial upward burning used to\nscreen the materials for safe use aboard spacecraft. • To determine how quickly a fire in space can grow and if the flames reach a finite size\nor continue to grow. This has implications for firefighting strategies in spacecraft. Primary variables: The main variables to be tested are the effects of ambient oxygen\nconcentration, ventilation flow velocity, and fuel type, thickness, and geometry.",
-        "score": 0.0082,
-        "section_title": "Objectives:",
+        "text": "[FLEX | S-016: Methanol Droplet Combustion in Oxygen-Inert Environments (FLEX) | 3 Results]\n5thUSCombustionMeeting–Paper#070HE-0303 Topic:SprayandDroplet 0 1 2 3 4 5\n)mm(\nD\ntxe\nO2-N2-He\nO2-N2-CO2\nO2-N2\nD (mm) Figure5: Methanoldropletextinctiondiameterversusinitialdropletdiameterindiluent-substituted\nenvironments: thesizeofthebubbleisproportionaltoambientoxygenmolefraction. to sufficiently low values for the flame to go out (“radiative extinction”); this process is generally\nobserved for larger droplets at lower oxygen concentrations when the flame is large in size and\nlies farther away from the droplet surface. Flame extinctions in both modes were observed during the FLEX tests, and the results are summarized in Fig. 5, where the extinction diameter D\ne\nis plotted against the initial diameter D . This figure contains over 100 data points, covering a range of oxygen concentration, CO and He diluent concentrations, and initial droplet sizes, at two different pressure. In the legend the points are grouped into only three different categories,\naccording to the diluent present, for simplicity. The size of the data point is proportional to the\noxygen mole fraction of the test in this figure. Despite the lumping together of some of the independent variables, the figure clearly shows two different trends. As expected, the larger droplets\nat lower oxygen concentrations (smaller circles in figure) fall closer to the 45◦ line, showing that\nthedropletextinguishesratherquicklyafterignitionthroughradiativeheatloss. Atsmallerdroplet\nsizes, the data fall approximately along a straight line, irrespective of the diluent concentrations.",
+        "score": 0.01134,
+        "section_title": "3 Results",
+        "investigation_ids": [
+          "FLEX"
+        ]
+      },
+      {
+        "chunk_id": "S-008_p002_c01",
+        "source_id": "S-008",
+        "page": 2,
+        "text": "[BASS-II | S-008: BASS-2 Engineering Requirements | BASS-2 Engineering Requirements]\nBASS-2 Engineering Requirements\nAcceleration\nBASS-2 testing will be scheduled around planned thruster firing or spacecraft dock or undock. The acceleration environment will be measured by the Space Acceleration Measurement System (SAMS) during BASS-2 testing which will be installed into the Microgravity Science Glovebox (MSG) Work Volume. Oxygen Concentration\nThe BASS-2 experiment will include steps in crew procedures to install a Compound Specific Analyzer (CSA-O2) into the MSG to measure the Oxygen concentration. There is also a Major Constituent Analyzer available to measure the Columbus Module concentration. Crew inserts fuel sample and adjusts igniter and fuel base to desired position\nSample Frame Assembly is designed to allow for adjustment of the position of the BASS-2 solid fuel sample. The Igniter has a wire extension that the crew will be able to position as required to ignite the solid fuel sample. 4/14/2010",
+        "score": 0.01106,
+        "section_title": "BASS-2 Engineering Requirements",
         "investigation_ids": [
           "BASS-II"
         ]
@@ -218,7 +209,7 @@
     },
     "versions": {
       "data": "v2",
-      "index": "4aa3c9230f",
+      "index": "f5785a04fe",
       "golden_table": "draft"
     },
     "sources": [
@@ -258,54 +249,86 @@
         "source": "Challenge text, 'Spacesuits and oxygen concentration'"
       },
       {
-        "id": "S-023",
+        "id": "S-020",
         "found": true,
         "kind": "source",
-        "title": "Model Development of Large-Scale Spacecraft Fires during the Saffire-IV Experiments (ICES-2022-278)",
-        "authors": "Brooker J., Niehaus J.",
-        "year": "2022",
-        "url": "https://ntrs.nasa.gov/citations/20220002714",
-        "doi": null,
-        "investigation": "Saffire-IV",
-        "psi_id": null,
-        "role": "results",
-        "file_type": "pdf",
-        "in_corpus": true,
-        "status": "downloaded"
-      },
-      {
-        "id": "S-022",
-        "found": true,
-        "kind": "source",
-        "title": "Saffire: A Novel Approach to Study of Spacecraft Fire Safety Using Un-manned Spacecraft",
-        "authors": "Urban D.L., Ferkul P., Olson S., Ruff G.A., Easton J.",
-        "year": "2017",
-        "url": "https://ntrs.nasa.gov/citations/20180005168",
+        "title": "Operation and Development Status of the Spacecraft Fire Experiments (Saffire)",
+        "authors": "Ruff G.A., Urban D.L.",
+        "year": "2016",
+        "url": "https://ntrs.nasa.gov/citations/20170000230",
         "doi": null,
         "investigation": "Saffire-I;Saffire-II;Saffire-III",
-        "psi_id": "PSI-99",
+        "psi_id": "PSI-98",
+        "role": "overview",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-013",
+        "found": true,
+        "kind": "source",
+        "title": "Detailed Results From the Flame Extinguishment Experiment (FLEX), March 2009 to December 2011, NASA/TP-2015-216046",
+        "authors": "Dietrich D.L., Ferkul P.V., Bryg V.M., Nayagam M.V. vd.",
+        "year": "2015",
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-69",
+        "doi": null,
+        "investigation": "FLEX",
+        "psi_id": "PSI-69",
         "role": "results",
         "file_type": "pdf",
         "in_corpus": true,
         "status": "downloaded"
       },
       {
-        "id": "S-011",
+        "id": "S-007",
         "found": true,
         "kind": "source",
-        "title": "BASS-II Science Requirements",
-        "authors": null,
-        "year": null,
+        "title": "Burning and Suppression of Solids-II (BASS-II) Summary Report, NASA/TM-20210011385",
+        "authors": "Olson S.L., Ferkul P.V., Bhattacharjee S. vd.",
+        "year": "2021",
         "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
         "doi": null,
-        "investigation": "BASS-II;SPICE",
+        "investigation": "BASS-II",
+        "psi_id": "PSI-25",
+        "role": "results",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-016",
+        "found": true,
+        "kind": "source",
+        "title": "Methanol Droplet Combustion in Oxygen-Inert Environments in Microgravity",
+        "authors": "Nayagam V., Dietrich D.L., Hicks M.C., Williams F.A.",
+        "year": "2013",
+        "url": "https://ntrs.nasa.gov/citations/20130014061",
+        "doi": null,
+        "investigation": "FLEX",
+        "psi_id": "PSI-69",
+        "role": "results",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-008",
+        "found": true,
+        "kind": "source",
+        "title": "BASS-2 Engineering Requirements",
+        "authors": null,
+        "year": "2017",
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+        "doi": null,
+        "investigation": "BASS-II",
         "psi_id": "PSI-25",
         "role": "design",
-        "file_type": "pdf",
+        "file_type": "pptx",
         "in_corpus": true,
         "status": "downloaded"
       }
     ]
   },
-  "latency_ms": 0
+  "latency_ms": 6330
 }

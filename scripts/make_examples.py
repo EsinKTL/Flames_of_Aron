@@ -1,12 +1,13 @@
 """Write example Answer objects for the interface team (reference/examples/answer_*.json).
 
-Each file is a real Answer (contracts.ANSWER_SCHEMA) built by the pipeline for one question. The text
-is the templated evidence summary (model = "none/evidence-summary"), because no LLM is wired in yet;
-the bundle inside is exactly what the LLM will receive.
+Each file is a real Answer (contracts.ANSWER_SCHEMA) built by the pipeline for one question.
+Uses the real embedding model (all-MiniLM-L6-v2) and the configured LLM writer (or fallback summary
+when --provider none is passed or no API key is set).
 
 Usage:
-  python scripts/make_examples.py           # real embedding model
-  python scripts/make_examples.py --stub    # no model: passages are ranked by BM25 only
+  python scripts/make_examples.py                  # real embedding model + configured LLM (or fallback)
+  python scripts/make_examples.py --provider none  # real embedding model + templated evidence summary
+  python scripts/make_examples.py --stub           # zero-vector embedding stub
 """
 import argparse
 import json
@@ -34,7 +35,9 @@ EXAMPLES = {
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stub", action="store_true")
+    ap.add_argument("--stub", action="store_true", help="use zero-vector embedding stub")
+    ap.add_argument("--provider", default=None, help="LLM provider ('mistral', 'gemini', 'groq', or 'none')")
+    ap.add_argument("--model", default=None, help="LLM model name override")
     a = ap.parse_args()
     if a.stub:
         class Stub:
@@ -45,16 +48,20 @@ def main():
                 return np.zeros((len(texts), 384), dtype="float32")
         sys.modules["sentence_transformers"] = types.SimpleNamespace(SentenceTransformer=Stub)
 
-    import evidence
+    import agent
     import query_engine
     engine = query_engine.CombustionQueryEngine()
     OUT.mkdir(parents=True, exist_ok=True)
     for name, question in EXAMPLES.items():
-        answer = evidence.fallback_answer(evidence.build_evidence_bundle(question, engine))
+        answer = agent.answer_question(question, engine, provider=a.provider, model=a.model)
         path = OUT / f"answer_{name}.json"
         path.write_text(json.dumps(answer, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
         b = answer["bundle"]
-        print(f"{path.name:40} intent={b['intent']:15} answer_type={b['answer_type']:12} gaps={len(b['gaps'])}")
+        v = answer["validation"]
+        print(
+            f"{path.name:40} intent={b['intent']:15} answer_type={b['answer_type']:12} "
+            f"model={answer['model']:25} passed={v['passed']} retried={v['retried']} fallback={v['fallback_used']}"
+        )
 
 
 if __name__ == "__main__":

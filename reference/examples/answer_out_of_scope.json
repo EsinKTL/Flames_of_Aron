@@ -1,17 +1,15 @@
 {
-  "text": "LLM answer not available - showing evidence summary.\nThis question is outside the scope of the repository.\n- Gap: Out of scope: rocket propulsion, thruster and re-entry heating are outside the PSI microgravity combustion investigations [F-022].",
-  "model": "none/evidence-summary",
+  "text": "This topic is **out of scope** of the NASA Physical Science Informatics (PSI) microgravity combustion repository. \n\nRocket propulsion, thruster fire safety, and re-entry heating fall outside the scope of investigations in the NASA PSI repository [F-022]. In rocket propulsion systems, the extremely high gas velocities result in momentum-dominated flow regimes that render combustion dynamics independent of gravitational acceleration [F-022].",
+  "model": "gemini/gemini-3.6-flash",
   "answer_type": "out_of_scope",
   "citations": [
     "F-022"
   ],
   "validation": {
-    "passed": false,
-    "errors": [
-      "no LLM configured"
-    ],
+    "passed": true,
+    "errors": [],
     "retried": false,
-    "fallback_used": true
+    "fallback_used": false
   },
   "bundle": {
     "schema_version": "1.0",
@@ -87,7 +85,7 @@
     },
     "versions": {
       "data": "v2",
-      "index": "4aa3c9230f",
+      "index": "f5785a04fe",
       "golden_table": "draft"
     },
     "sources": [
@@ -100,5 +98,5 @@
       }
     ]
   },
-  "latency_ms": 0
+  "latency_ms": 4056
 }

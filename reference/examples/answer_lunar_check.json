@@ -1,6 +1,6 @@
 {
-  "text": "LLM answer not available - showing evidence summary.\n- Gap: Saffire-II: pressure unknown.\n- Gap: Saffire-III: pressure unknown.\n- Gap: SAME: o2, pressure unknown.\n- Gap: SAME-R: o2, pressure unknown.\n- Gap: DAFT: o2, pressure unknown.\n- Gap: DAFT-2: no source in the repository.\n- Gap: FLEX-2: o2, pressure unknown.\n- Gap: CFI: o2, pressure unknown.\n- Gap: ACME-E-FIELD: o2, pressure unknown.\n- Gap: 263 of 536 PSI test rows have an unknown O2 or pressure and could not be screened; only FLEX test rows have both.\n- The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower. [F-005]\n- Spacesuits are pressurized with 100% oxygen up to only 4.3 psi. [F-001]\n- In free fall, buoyancy-driven natural convection and buoyant rise of hot exhaust gases are absent, causing flames to behave dramatically differently from terrestrial flames; for example, a candle flame becomes a dim blue, spherical diffusion flame. [F-008]\n- Currently, NASA PSI does not contain partial-gravity combustion test data. Future investigations such as the Lunar-g Combustion Investigation (LUCI) and Flammability of Materials on the Moon (FM2) are slated to address this gap. [F-019]\n- Results from reduced-gravity combustion experiments (e.g., aboard the ISS) are made publicly available through the NASA Physical Science Informatics (PSI) repository. [F-023]\n- Test screen: 0 of 273 PSI tests with known O2 and pressure meet O2 >= 0.3 and total pressure <= 10.2 psi in the same test.\n- FLEX test 37 (closest): O2 0.34, pressure 10.332 psi, 0.132 psi above the limit [PSI-69:test37]\n- FLEX test 41 (closest): O2 0.3, pressure 10.332 psi, 0.132 psi above the limit [PSI-69:test41]\n- FLEX test 38 (closest): O2 0.34, pressure 10.334 psi, 0.134 psi above the limit [PSI-69:test38]\n- FLEX test 121 (closest): O2 0.18, pressure 10.177 psi [PSI-69:test121]\n- lunar habitat [F-005]: 0.3 * 10.2 = 3.06 psi\n- Earth sea level [F-002]: 0.209 * 14.7 = 3.072 psi\n- EVA spacesuit [F-001]: 1 * 4.3 = 4.3 psi\n- lunar habitat O2 vs. air [F-006]: 0.3 / 0.209 = 1.435 x air\n- ACME-CFI-G (golden table, unverified draft): O2 0.12-0.85, pressure 6.672-43.511 psi, same-test lunar match: partial\n- ACME-BRE (golden table, unverified draft): O2 0.21-0.4, pressure 8.122-14.504 psi, same-test lunar match: partial\n- FLEX (golden table, unverified draft): O2 0.12-0.34, pressure 10.177-44.859 psi, same-test lunar match: partial\n- SPICE (golden table, unverified draft): O2 0.2-0.23, pressure 14.504-14.649 psi, same-test lunar match: no\n- BASS-II (golden table, unverified draft): O2 0.136-0.222, pressure 14.388-14.696 psi, same-test lunar match: no\n- BASS (golden table, unverified draft): O2 0.17-0.22, pressure 14.696-14.696 psi, same-test lunar match: no\n- Saffire-I (golden table, unverified draft): O2 0.215-0.217, pressure 14.4719-14.5369 psi, same-test lunar match: no\n- SLICE (golden table, unverified draft): O2 0.21-0.21, pressure 14.504-14.504 psi, same-test lunar match: no\n- Saffire-II (golden table, unverified draft): O2 0.219-0.221, pressure unknown-unknown psi, same-test lunar match: unknown\n- Saffire-III (golden table, unverified draft): O2 0.21-0.212, pressure unknown-unknown psi, same-test lunar match: unknown\n- SAME (golden table, unverified draft): O2 unknown-unknown, pressure unknown-unknown psi, same-test lunar match: unknown\n- SAME-R (golden table, unverified draft): O2 unknown-unknown, pressure unknown-unknown psi, same-test lunar match: unknown\n- DAFT (golden table, unverified draft): O2 unknown-unknown, pressure unknown-unknown psi, same-test lunar match: unknown\n- DAFT-2 (golden table, unverified draft): O2 unknown-unknown, pressure unknown-unknown psi, same-test lunar match: unknown\n- FLEX-2 (golden table, unverified draft): O2 unknown-unknown, pressure unknown-unknown psi, same-test lunar match: unknown\n- CFI (golden table, unverified draft): O2 unknown-unknown, pressure unknown-unknown psi, same-test lunar match: unknown\n- ACME-E-FIELD (golden table, unverified draft): O2 unknown-unknown, pressure unknown-unknown psi, same-test lunar match: unknown\n- Passages retrieved: [S-037:1], [S-023:10], [S-023:6], [S-023:8], [S-023:7]",
-  "model": "none/evidence-summary",
+  "text": "### Lunar Base Atmospheric Thresholds & Gravity Context\n\nThe target atmospheric conditions for lunar base operations are defined as an oxygen concentration of $30\\%$ ($0.30$) or higher and a total pressure of $10.2\\text{ psi}$ or lower [F-005]. This baseline yields an oxygen partial pressure ($P_{\\text{O2}}$) of $3.06\\text{ psi}$ [C-001], representing a $43.5\\%$ increase in oxygen fraction compared to standard air [C-004]. For context, Earth sea-level $P_{\\text{O2}}$ is $3.07\\text{ psi}$ [C-002], EVA spacesuits operate at $100\\%\\text{ O}_2$ at $4.3\\text{ psi}$ ($P_{\\text{O2}} = 4.3\\text{ psi}$) [F-001], [C-003], and free-fall microgravity environments lack natural thermal buoyancy [F-008].\n\n*Partial-Gravity Data Gap:* The NASA Physical Science Informatics (PSI) repository currently contains no partial-gravity combustion test data; future missions/investigations such as LUCI and FM2 are designed to address this empirical gap [F-019]. Flight experiment results from reduced-gravity platforms are published via NASA PSI [F-023].\n\n---\n\n### Closest Individual Experiments in NASA PSI\n\nA scan of 536 test rows in the repository (273 fully specified tests and 263 tests with unknown $O_2$ or pressure) identified **zero tests** that simultaneously satisfied both lunar-base criteria ($O_2 \\ge 0.30$ and pressure $\\le 10.2\\text{ psi}$). \n\nThe individual test runs closest to these joint conditions were conducted under the **FLEX** investigation (PSI-69):\n\n1. **Test 37** ([PSI-69:test37], [S-032 p.row 38]):\n   - **Fuel:** Methanol\n   - **$O_2$ Fraction:** $0.34$ ($34\\%$) (meets $O_2 \\ge 0.30$)\n   - **Ambient Pressure:** $10.332\\text{ psi}$ (exceeds the $10.2\\text{ psi}$ limit by $0.132\\text{ psi}$)\n\n2. **Test 41** ([PSI-69:test41]):\n   - **Fuel:** Methanol\n   - **$O_2$ Fraction:** $0.30$ ($30\\%$) (meets $O_2 \\ge 0.30$)\n   - **Ambient Pressure:** $10.332\\text{ psi}$ (exceeds the $10.2\\text{ psi}$ limit by $0.132\\text{ psi}$)\n\n3. **Test 38** ([PSI-69:test38]):\n   - **Fuel:** Methanol\n   - **$O_2$ Fraction:** $0.34$ ($34\\%$) (meets $O_2 \\ge 0.30$)\n   - **Ambient Pressure:** $10.334\\text{ psi}$ (exceeds the $10.2\\text{ psi}$ limit by $0.134\\text{ psi}$)\n\n4. **Test 121** ([PSI-69:test121], [S-032 p.row 122]):\n   - **Fuel:** Methanol\n   - **$O_2$ Fraction:** $0.18$ ($18\\%$) (shortfall of $0.12$ below $0.30$)\n   - **Ambient Pressure:** $10.177\\text{ psi}$ (meets the pressure limit $\\le 10.2\\text{ psi}$)\n\n---\n\n### Investigation-Level Summary (Unverified LLM Draft Notice)\n\n*Notice:* The overall parameter boundaries listed below for investigations are compiled from an **unverified LLM draft** Golden Table.\n\n* **FLEX**: Recorded tests bound $O_2$ fractions up to $0.34$ [S-032 p.row 20] and pressures ranging from $10.177\\text{ psi}$ [S-032 p.row 122] to $44.859\\text{ psi}$ [S-032 p.row 13]. FLEX focused on low-pressure ($\\le 1\\text{ atm}$), nitrogen-diluted ambient conditions with elevated oxygen mole fractions [S-013 p.15] to evaluate limiting oxygen index (LOI) values for spacecraft fire safety [S-013 p.8].\n* **Saffire Series (Saffire-I, II, III)**: Objectives prioritized exploration atmospheres with oxygen mole fractions up to $0.34$ and reduced pressures down to $8.2\\text{ psia}$ [S-020 p.7]. Saffire-I recorded test pressures between $14.4719\\text{ psi}$ [S-035 p.CygnusPressureData!row 2] and $14.5369\\text{ psi}$ [S-035 p.CygnusPressureData!row 293].\n* **ACME-CFI-G & ACME-BRE**: Draft entries list facility capabilities covering $O_2$ ranges of $0.12$–$0.85$ (ACME-CFI-G) and $0.21$–$0.40$ (ACME-BRE), with total pressures of $6.672$–$43.511\\text{ psi}$ (ACME-CFI-G) and $8.122$–$14.504\\text{ psi}$ (ACME-BRE); joint per-test verification for lunar baseline compliance is not available.\n\n---\n\n### Repository Data Gaps\n\n* **Unscreened Tests:** 263 of 536 PSI test rows have an unknown $O_2$ concentration or total pressure and could not be evaluated.\n* **Unknown Pressure:** Total pressure is marked as unknown for **Saffire-II** and **Saffire-III**.\n* **Unknown Parameters:** Both $O_2$ fraction and pressure remain unknown in the repository for **SAME**, **SAME-R**, **DAFT**, **FLEX-2**, **CFI**, and **ACME-E-FIELD**.\n* **Missing Document:** **DAFT-2** has no source documentation in the repository.",
+  "model": "gemini/gemini-3.6-flash",
   "answer_type": "answer",
   "citations": [
     "F-005",
@@ -8,23 +8,26 @@
     "F-008",
     "F-019",
     "F-023",
+    "C-001",
+    "C-004",
+    "C-002",
+    "C-003",
+    "PSI-69",
     "PSI-69:test37",
     "PSI-69:test41",
     "PSI-69:test38",
     "PSI-69:test121",
-    "S-037:1",
-    "S-023:10",
-    "S-023:6",
-    "S-023:8",
-    "S-023:7"
+    "S-032",
+    "S-013:15",
+    "S-013:8",
+    "S-020:7",
+    "S-035"
   ],
   "validation": {
-    "passed": false,
-    "errors": [
-      "no LLM configured"
-    ],
+    "passed": true,
+    "errors": [],
     "retried": false,
-    "fallback_used": true
+    "fallback_used": false
   },
   "bundle": {
     "schema_version": "1.0",
@@ -474,25 +477,49 @@
     ],
     "chunks": [
       {
-        "chunk_id": "S-037_meta_c01",
-        "source_id": "S-037",
-        "page": 1,
-        "text": "[FLEX | S-037: Official PSI Metadata | Study Approach, Objective & Hardware]\nStudy Identifier: PSI-69\nStudy Title: Flame Extinguishment Experiment\nComment[Approach]: \"The FLEX experiments involve igniting and observing the burning behavior of relatively large droplets. A primary objective of the experiments is to determine the Limiting Oxygen Index (LOI) as a function of ambient pressure and determine how the presence of a suppressant influences the LOI .\nComment[Experiment Hardware]: Combustion Integrated Rack (CIR)-Fluids and Combustion Facility (FCF), Multi-user Droplet Combustion Appartatus (MDCA)\nComment[Hypothesis]: The primary hypothesis of the FLEX mission is that microgravity conditions fundamentally alter the combustion and extinction characteristics of liquid fuel droplets due to changes in species and energy transport dynamics, radiative heat loss, and chemical kinetics. Specifically, the hypothesis posits that the lack of buoyant convection in microgravity will lead to significant differences in the flammability limits and suppression efficacy of various fire suppressant agents compared to normal gravity conditions. This hypothesis underpins the design of the FLEX experiments, which aim to map flammability boundaries, quantify suppressant efficacy, and develop predictive models to improve fire safety in space environments.\nComment[Objective]: The FLEX (Flame Extinguishment Experiment) investigation aims to map the flammability limits of liquid fuels in microgravity environments, measure the effectiveness of various gaseous fire suppressants such as CO2, He, and SF6, and develop reliable predictive models for combustion limits under reduced gravity conditions. The mission seeks to validate and improve simplified models by incorporating detailed chemical reactions, heat transfer, and material movement, using both space-based data and extensive ground-based tests. Key flight experiment goals include obtaining high-resolution measurements of droplet burning rates, flame extinction behavior, heat radiation, soot levels, and temperature profiles, while systematically analyzing the effects of different ambient conditions and suppressant concentrations. These investigations are essential for advancing the fundamental understanding of combustion processes in microgravity and enhancing fire safety protocols for future space missions.\nComment[Research Impacts]: The research impacts and Earth benefits of the FLEX mission are significant and multifaceted. By enhancing our understanding of microgravity combustion, the mission directly contributes to improved fire safety protocols for future space missions, ensuring the safety of crew members in environments where traditional fire suppression methods may be ineffective. On Earth, the insights gained from these experiments have the potential to advance fire safety in confined and reduced-gravity environments, such as submarines or high-altitude aircraft. The mission's findings on the effectiveness of various fire suppressants, including CO2, He, and SF6, in microgravity can lead to the development of more efficient and less harmful fire suppression systems, reducing the risk of toxic byproducts during fire events. Additionally, the study of ''cool flames'' and low-temperature combustion processes observed in microgravity can inform the design of advanced combustion engines, leading to improved fuel efficiency and reduced emissions in automotive and industrial applications. Overall, the FLEX mission's contributions to combustion science have the potential to enhance both space exploration safety and terrestrial fire safety technologies.\nStudy Design Type: FLEX: Fuel Sooting: Droplet: Spacecraft Fire Safety: Diffusion Flames: Flames\nStudy Design Type Term Accession Number: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/\nStudy Design Type Term Source REF: PSI: PSI: PSI: PSI: PSI: PSI",
-        "score": 0.0154,
-        "section_title": "Official PSI Metadata Summary",
+        "chunk_id": "S-013_p015_c06",
+        "source_id": "S-013",
+        "page": 15,
+        "text": "[FLEX | S-013: NASA/TP-2015-216046 Detailed Results from FLEX | 4.0 Experimental Results]\nAfter the test matrix was reordered, the FLEX experiments\nfocused on low-pressure (≤1-atm), nitrogen-diluted, ambient\nenvironments. Table III provides details for the initial tests,\nwhich focused on ambient conditions with higher oxygen mole",
+        "score": 0.01308,
+        "section_title": "4.0 Experimental Results",
         "investigation_ids": [
           "FLEX"
         ]
       },
       {
-        "chunk_id": "S-023_p010_c02",
-        "source_id": "S-023",
-        "page": 10,
-        "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | IV. Results and Discussion]\nHence, when\nthe fan was turned back on, a deflagration wave ignited the flame again. RS3 and RS6 are in the flow path, therefore\nchanges in Saffire flow will affect those locations disproportionately. RS1 is likely the closest sensor location, so even\nthough it is out of the flow path, there is still some effect. The model predicted a larger dip than was realized by the\nsensors. The CO prediction in both burn events over-predicted the steady state CO value. A reason for the difference\n2 2\ncould be the assumption of stoichiometric combustion. There is a region of the microgravity flame under an oxygen\nshadow, cast by the upstream part of the flame, which prevents combustion from continuing9,15. Soot, CO, unburned\nhydrocarbons could contribute to the differences between model and experiment. Another reason for the discrepancy\nis the free volume could be different than what the model and NG predicted. Calculations were performed after the\nevent 2 CO release that predicted a higher free volume10. Pressure, temperature, and concentration data from event 2 were used in two independent models, which applied different assumptions to the equations of state. The secondary\nconstant mass (SCM) model divides the total vehicle volume into the free volume, where the released gasses can mix,\nand a sub-volume of constant mass that does not exchange with the free volume. This model was developed to reflect\ncargo and trash that approximates sealed volumes where gas cannot escape.",
-        "score": 0.01531,
-        "section_title": "IV. Results and Discussion",
+        "chunk_id": "S-020_p007_c03",
+        "source_id": "S-020",
+        "page": 7,
+        "text": "[Saffire-I, Saffire-II, Saffire-III | S-020: Operation and Development Status of the Spacecraft Fire Experiments (Saffire) | E. Flight Status and Operations Summary]\nOne interesting aspect of the objectives shown in Table 2 is that the fire behavior and modeling objective is a\nprimary objective – emphasizing the need to obtain data that can be used to extrapolate results to the different\nvehicles and habitats required to perform NASA’s exploration missions. Another observation is the priority placed\non material flammability in exploration atmospheres – e.g. in ambient conditions having oxygen mole fractions up\nto 0.34 and pressures of 8.2 psia. These conditions bound those considered for exploration missions. While elevated\noxygen and reduced pressure conditions are generally considered for planetary or asteroid operations where frequent\nextravehicular activities (EVA) are required, the Cygnus environment provides the unique opportunity to explore\nthese conditions at relevant scales and obtain data that can anchor computational models that will be applied during\nanalysis of fire scenarios. International Conference on Environmental Systems",
+        "score": 0.0129,
+        "section_title": "E. Flight Status and Operations Summary",
         "investigation_ids": [
-          "Saffire-IV"
+          "Saffire-I",
+          "Saffire-II",
+          "Saffire-III"
+        ]
+      },
+      {
+        "chunk_id": "S-026_p041_c01",
+        "source_id": "S-026",
+        "page": 41,
+        "text": "[General | S-026: NASA ISS Research Mini-Book: Combustion in Reduced Gravity | Ancillary Hardware Developments]\nAn alternative option with considerably less flexibility and scope has been proposed. It is termed the SCWO-D (for DEvice for the study of Critical LIquids and\nCrystallization [DECLIC]) and envisions build-up of an insert to be installed in the\nDECLIC facility. This option, because of the constraints imposed by fitting into an\nexisting facility, will be limited in capability and will only be able to accomplish a\nsubset of the science scope described above. The primary limiting features are: (i)\nthe reactor volume (approximately 0.5 percent of Option 1), which limits the range\nof hydrodynamic studies (e.g., no bulk fluid motion); (ii) the diagnostic limitations\nthat are due to the reliance on existing DECLIC hardware (e.g., no Raman\nspectroscopic diagnostic will eliminate chemical kinetic studies); (iii) a single optical\naxis, making simultaneous reaction zone and precipitate transport observations\ndifficult if not impossible; and (iv) experiments may be limited to “quasi-steady”\nprocesses since constant pressure conditions will be difficult to maintain for any\nsignificant time because of the volume limitations. New Initiatives\nBesides the SoFIE and ACME experiments planned to be conducted in CIR on the\nISS, there are a number of new combustion initiatives that are envisioned for future\nISS research. Some of these may be undertaken more readily in the near term as spinoffs of existing research since they require relatively smaller resources and hence may\nbe faster to develop.",
+        "score": 0.01207,
+        "section_title": "Ancillary Hardware Developments",
+        "investigation_ids": [
+          "General"
+        ]
+      },
+      {
+        "chunk_id": "S-013_p008_c02",
+        "source_id": "S-013",
+        "page": 8,
+        "text": "[FLEX | S-013: NASA/TP-2015-216046 Detailed Results from FLEX | Unknown section]\nMost of the tests were\nconducted at pressures between 0.7 and 1 atm, and many of the\ntests were in air. A principle objective was to determine the\nlimiting oxygen index (LOI), the oxygen percentage below which\ncombustion would not occur. This objective reflected the FLEX\nfocus on investigating fire safety in spacecraft. Observed LOI\nvalues for these fuels appear to be slightly lower than initially\nexpected. Besides documenting both radiative extinction at\nhigher dilutions and diffusive extinctions at lower dilutions for\nboth fuels, the results exhibited disruptive extinctions and\nprovided information pertinent to soot production for heptane. The continuing experiments are providing additional data for\nthese two fuels, as well as droplet-combustion data for other\nfuels, and NASA intends to catalog these data in similar reports.",
+        "score": 0.00986,
+        "section_title": "Unknown section",
+        "investigation_ids": [
+          "FLEX"
         ]
       },
       {
@@ -500,29 +527,7 @@
         "source_id": "S-023",
         "page": 6,
         "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | IV. Results and Discussion]\nThis could be due to a malfunction in the sensor or\npoor placement within Cygnus, such as being\nobstructed by too much trash. Figure 8 gives the temperature at the FFD. A\nvery weak experimental response is shown, while\nthe model response is closest to RS1, RS2, and\nRS5 that are not directly in the flow path. Also\nshown in Figure 8 is the mass mean temperature of\nthe model, which analogous to the CO response, compares well with the FFD temperature. Figure 9\ngives the RS behavior for the SIBAL burn\ntemperature. Similar to the CO response, the model has a higher temperature response than the\nexperiment. This is most prevalent in RS1, for\nwhich the experimental response is slow and does\nFigure 6. Normalized CO response from FFD and mean not reach steady state. This could be due to the\nvehicle CO concentration during SIBAL burn event. nadir bulkhead, and other items in that section of\nCygnus that absorb heat. This would increase the\nFigure 7. Normalized CO RS responses during SIBAL burn event. International Conference on Environmental Systems",
-        "score": 0.01495,
-        "section_title": "IV. Results and Discussion",
-        "investigation_ids": [
-          "Saffire-IV"
-        ]
-      },
-      {
-        "chunk_id": "S-023_p008_c01",
-        "source_id": "S-023",
-        "page": 8,
-        "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | IV. Results and Discussion]\npump to suck CO at that location to the actual sensor, even if it is a small area, it is averaging\nconcentration around the probe area, which likely\nsmooths out the turbulent effects, whereas in the\nmodel, the RS is measuring one node in space and\nit is directly in the air flow and subject to the\nturbulent air flow. Another reason for the\nmeasured profile being smoother is in the details\nof how the remote sensors are attached to the\nbeams. While in the model, the beams are just\nsolid rectangular prisms, the real beams resemble\nI-beams, and have strap hooks to keep the cargo in\nplace. In the experiment, the RS are often behind\nthese strap hooks which also shields it from\nturbulence. Figure 10. Normalized CO response from FFD during The PMMA sample was preheated with the\nPMMA burn event. igniter at a lower current (1.0 amp for 600 s), and\nthen ignited at 4 amps for 20 s. All charts that\nFigure 11. Normalized CO RS responses during PMMA burn event. International Conference on Environmental Systems",
-        "score": 0.01238,
-        "section_title": "IV. Results and Discussion",
-        "investigation_ids": [
-          "Saffire-IV"
-        ]
-      },
-      {
-        "chunk_id": "S-023_p007_c01",
-        "source_id": "S-023",
-        "page": 7,
-        "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | IV. Results and Discussion]\nsurface temperature of cargo and the spacecraft,\ndecreasing the rate at which heat decreases from\nthe gas phase, as opposed to the constant\ntemperature boundary condition currently use\nwhich allows for the maximum heat loss. RS2\nseemed unresponsive to the burn event, likely due\nto the reasons given for the CO response of RS2. As expected, the largest temperature response is\ngiven by RS3 and RS6 since they are directly in\nthe flow path, whereas heat response is more a\nfunction of mixing and diffusion at the other\nlocations. A counter intuitive result shows that in many\ninstances, especially for the RS locations in the\ndirect flow path (RS3, RS6), that the data is more\nFigure 8. Normalized temperature response from FFD\nnoisy in the model results as opposed to the\nand mass mean vehicle temperature during SIBAL burn\nexperimental results. There are two possible\nevent. reasons for this phenomenon. Since the RS uses a\nFigure 9. Normalized temperature RS responses during SIBAL burn event. International Conference on Environmental Systems",
-        "score": 0.012,
+        "score": 0.0082,
         "section_title": "IV. Results and Discussion",
         "investigation_ids": [
           "Saffire-IV"
@@ -664,7 +669,7 @@
     },
     "versions": {
       "data": "v2",
-      "index": "4aa3c9230f",
+      "index": "f5785a04fe",
       "golden_table": "draft"
     },
     "test_scan": {
@@ -734,18 +739,50 @@
         "status": "downloaded"
       },
       {
-        "id": "S-037",
+        "id": "S-013",
         "found": true,
         "kind": "source",
-        "title": "PSI-69 investigation metadata (ISA-Tab)",
-        "authors": null,
-        "year": "2016",
+        "title": "Detailed Results From the Flame Extinguishment Experiment (FLEX), March 2009 to December 2011, NASA/TP-2015-216046",
+        "authors": "Dietrich D.L., Ferkul P.V., Bryg V.M., Nayagam M.V. vd.",
+        "year": "2015",
         "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-69",
-        "doi": "10.60555/mbq8-0451",
+        "doi": null,
         "investigation": "FLEX",
         "psi_id": "PSI-69",
-        "role": "metadata",
-        "file_type": "txt",
+        "role": "results",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-020",
+        "found": true,
+        "kind": "source",
+        "title": "Operation and Development Status of the Spacecraft Fire Experiments (Saffire)",
+        "authors": "Ruff G.A., Urban D.L.",
+        "year": "2016",
+        "url": "https://ntrs.nasa.gov/citations/20170000230",
+        "doi": null,
+        "investigation": "Saffire-I;Saffire-II;Saffire-III",
+        "psi_id": "PSI-98",
+        "role": "overview",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-026",
+        "found": true,
+        "kind": "source",
+        "title": "A Researcher's Guide to: Combustion Science (ISS mini-book, NP-2015-10-034-JSC)",
+        "authors": null,
+        "year": "2015",
+        "url": null,
+        "doi": null,
+        "investigation": "General",
+        "psi_id": null,
+        "role": "overview",
+        "file_type": "pdf",
         "in_corpus": true,
         "status": "downloaded"
       },
@@ -798,22 +835,6 @@
         "status": "downloaded"
       },
       {
-        "id": "S-026",
-        "found": true,
-        "kind": "source",
-        "title": "A Researcher's Guide to: Combustion Science (ISS mini-book, NP-2015-10-034-JSC)",
-        "authors": null,
-        "year": "2015",
-        "url": null,
-        "doi": null,
-        "investigation": "General",
-        "psi_id": null,
-        "role": "overview",
-        "file_type": "pdf",
-        "in_corpus": true,
-        "status": "downloaded"
-      },
-      {
         "id": "S-006",
         "found": true,
         "kind": "source",
@@ -847,5 +868,5 @@
       }
     ]
   },
-  "latency_ms": 0
+  "latency_ms": 36556
 }

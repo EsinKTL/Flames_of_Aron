@@ -1,35 +1,19 @@
 {
-  "text": "LLM answer not available - showing evidence summary.\n- To prevent decompression sickness ('the bends'), astronauts perform a pre-breathe protocol by inhaling 100% oxygen to purge dissolved nitrogen from body tissues. [F-003]\n- To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere. [F-004]\n- The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower. [F-005]\n- According to the challenge text, this represents more than a 40% increase in oxygen concentration compared to Earth's atmosphere, substantially increasing material flammability. [F-006]\n- In free fall, buoyancy-driven natural convection and buoyant rise of hot exhaust gases are absent, causing flames to behave dramatically differently from terrestrial flames; for example, a candle flame becomes a dim blue, spherical diffusion flame. [F-008]\n- Saffire-II test 2-1 (listed): O2 0.215, pressure unknown [PSI-99:test2-1]\n- Saffire-II test 2-2 (listed): O2 0.221, pressure unknown [PSI-99:test2-2]\n- Saffire-II test 2-3 (listed): O2 0.221, pressure unknown [PSI-99:test2-3]\n- Saffire-II test 2-4 (listed): O2 0.221, pressure unknown [PSI-99:test2-4]\n- Saffire-II test 2-5 (listed): O2 0.221, pressure unknown [PSI-99:test2-5]\n- Saffire-II test 2-6 (listed): O2 0.221, pressure unknown [PSI-99:test2-6]\n- Saffire-II test 2-7 (listed): O2 0.221, pressure unknown [PSI-99:test2-7]\n- Saffire-II test 2-8 (listed): O2 0.22-0.221, pressure unknown [PSI-99:test2-8]\n- Saffire-II test 2-9 (listed): O2 0.219-0.22, pressure unknown [PSI-99:test2-9]\n- Saffire-II (golden table, unverified draft): O2 0.219-0.221, pressure unknown-unknown psi, same-test lunar match: unknown\n- Passages retrieved: [S-022:3], [S-022:26], [S-022:20], [S-022:19], [S-021:2]",
-  "model": "none/evidence-summary",
+  "text": "In the Spacecraft Fire Experiment-II (Saffire-II), test 2-7 evaluated a PMMA-plus-Nomex composite sample [PSI-99:test2-7]. **The main outcome was that the Nomex material failed to ignite despite ignition of the PMMA pilot flame** [S-034 p.row 14], [S-041 p.web: last slide].\n\n### Experimental Test Conditions\nPursuant to reporting requirements for microgravity combustion findings, the specific experimental conditions for this sample were:\n* **Fuel Material:** PMMA & Nomex composite (utilizing PMMA hot-wire ignition) [S-020 p.4], [PSI-99:test2-7].\n* **Sample Geometry:** Flat strip measuring 50 mm × 290 mm, with a thickness of 0.85 mm PMMA + 0.37 mm Nomex [S-034 p.row 10].\n* **Oxygen Concentration:** $O_2$ mole fraction of 0.221 (22.1% $O_2$) [PSI-99:test2-7].\n* **Forced Flow Velocity:** 20.0 cm/s [PSI-99:test2-7].\n* **Ambient Pressure:** Unspecified (no numeric total pressure is recorded in the dataset) [S-062 p.web: p.6].\n* **Hardware & Facility:** Saffire flow unit sample card inside the Cygnus cargo resupply vehicle after unberthing from the International Space Station [S-020 p.4], [S-062 p.web: p.6].\n\n### Notice on Data Status & Gaps\n* **Golden Table Status:** The summary record for Saffire-II in the table repository is designated as an **unverified LLM draft** [S-034 p.row 14].\n* **Data Gaps:** The exact numeric total cabin pressure during the test run remains unknown/unspecified in the repository [S-062 p.web: p.6].",
+  "model": "gemini/gemini-3.6-flash",
   "answer_type": "answer",
   "citations": [
-    "F-003",
-    "F-004",
-    "F-005",
-    "F-006",
-    "F-008",
-    "PSI-99:test2-1",
-    "PSI-99:test2-2",
-    "PSI-99:test2-3",
-    "PSI-99:test2-4",
-    "PSI-99:test2-5",
-    "PSI-99:test2-6",
     "PSI-99:test2-7",
-    "PSI-99:test2-8",
-    "PSI-99:test2-9",
-    "S-022:3",
-    "S-022:26",
-    "S-022:20",
-    "S-022:19",
-    "S-021:2"
+    "S-034",
+    "S-041:web: last slide",
+    "S-020:4",
+    "S-062:web: p.6"
   ],
   "validation": {
-    "passed": false,
-    "errors": [
-      "no LLM configured"
-    ],
+    "passed": true,
+    "errors": [],
     "retried": false,
-    "fallback_used": true
+    "fallback_used": false
   },
   "bundle": {
     "schema_version": "1.0",
@@ -359,55 +343,27 @@
     ],
     "chunks": [
       {
-        "chunk_id": "S-022_p003_c01",
-        "source_id": "S-022",
+        "chunk_id": "S-020_p004_c03",
+        "source_id": "S-020",
+        "page": 4,
+        "text": "[Saffire-I, Saffire-II | S-020: Operation and Development Status of the Spacecraft Fire Experiments (Saffire) | B. Diagnostics]\ncomplicated the selection of sample materials because most materials relevant for spacecraft do not have normal-gravity flammability limits near 21% oxygen by volume.4-6 Camera images are the primary diagnostics for these\ntests as the intended result is primarily to determine whether the flame propagates or self-extinguishes. If it\npropagates, additional data such as flame spread rate will be obtained. a. Saffire-I and -III sample card. The b. Saffire-II sample card. Card\nsample is a composite fabric contains nine samples (5 cm x 29\n(75% cotton – 25% fiberglass by cm) of PMMA (flat and structured)\nmass) and is0.4 m wide x 0.95 m long. Silicone (3 thicknesses, different\nignition direction), composite\nfabric from Saffire-I, III, and\nNomex (with PMMA ignition)\nFigure 2. Sample cards for the Saffire-I, II, and III experiments. International Conference on Environmental Systems",
+        "score": 0.01626,
+        "section_title": "B. Diagnostics",
+        "investigation_ids": [
+          "Saffire-I",
+          "Saffire-II"
+        ]
+      },
+      {
+        "chunk_id": "S-021_p003_c01",
+        "source_id": "S-021",
         "page": 3,
-        "text": "[Saffire-I, Saffire-II, Saffire-III | S-022: Saffire: A Novel Approach to Study of Spacecraft Fire Safety (Saffire I-III Results) | Introduction]\nIntroduction\n• Despite millennia of experience with fire, over 3,000 people die from fires each\nyear in the U.S. • Fire is a catastrophic hazard for spacecraft\n• However, without any empirical results, it is impossible to be sure that our\npredictions of fire behavior in a spacecraft are realistic. • What will kill you first? • CO buildup? • Other toxic products? • Heat? • Smoke? • Pressure Rise? • How should the crew respond? All inhabited types of structure, vehicle, or even\nopen space on earth have been the subject of\nfull scale fire studies and/or training.",
-        "score": 0.01457,
-        "section_title": "Introduction",
+        "text": "[Saffire-I, Saffire-II | S-021: The Spacecraft Fire Experiment (Saffire) - Objectives, Development and Status | 2.1 Sample Materials]\nTable 1. Saffire-II Samples\nCygnus unberths from ISS. Drop tower testing has\ndemonstrated the MOC flammability limits of a material\ncan be different in low-g than in normal gravity [3-5]. Therefore, the objective of the Saffire-II tests is to\nquantify that affect in long-duration low-gravity using\nsamples of the same size as those used in the in NASA-STD-6001 Test 1 normal-gravity tests [3]. Some of\nthese samples are expected to burn while others may\nnot. Quantifying the difference in flammability limits for\nlarge samples is the objective of the Saffire-II\nexperiments. Table 2. Saffire-I, II, and III Diagnostics",
+        "score": 0.01576,
+        "section_title": "2.1 Sample Materials",
         "investigation_ids": [
           "Saffire-I",
-          "Saffire-II",
-          "Saffire-III"
-        ]
-      },
-      {
-        "chunk_id": "S-022_p026_c01",
-        "source_id": "S-022",
-        "page": 26,
-        "text": "[Saffire-I, Saffire-II, Saffire-III | S-022: Saffire: A Novel Approach to Study of Spacecraft Fire Safety (Saffire I-III Results) | Far Field Diagnostics]\nPlots of igniter current and thermocouple temperatures. X-distance along the sample for each\nthermocouple is shown on the diagram. Heights above the surface are indicated on the plot.",
-        "score": 0.01416,
-        "section_title": "Far Field Diagnostics",
-        "investigation_ids": [
-          "Saffire-I",
-          "Saffire-II",
-          "Saffire-III"
-        ]
-      },
-      {
-        "chunk_id": "S-022_p020_c01",
-        "source_id": "S-022",
-        "page": 20,
-        "text": "[Saffire-I, Saffire-II, Saffire-III | S-022: Saffire: A Novel Approach to Study of Spacecraft Fire Safety (Saffire I-III Results) | Far Field Diagnostics]\nForward Steps\n• The Saffire experiments were the first practical-scale spacecraft fire safety\ninvestigations. • In addition to pioneering a new research capability, they determined that\nconcurrent flames can achieve a steady spread rate and that overall the\nconcurrent spread rates are strongly influenced the the flow duct size. • The next Saffire series will examine larger fires of longer duration to\nexamine the impact of a fire on the vehicle habitability .",
-        "score": 0.0141,
-        "section_title": "Far Field Diagnostics",
-        "investigation_ids": [
-          "Saffire-I",
-          "Saffire-II",
-          "Saffire-III"
-        ]
-      },
-      {
-        "chunk_id": "S-022_p019_c01",
-        "source_id": "S-022",
-        "page": 19,
-        "text": "[Saffire-I, Saffire-II, Saffire-III | S-022: Saffire: A Novel Approach to Study of Spacecraft Fire Safety (Saffire I-III Results) | Objectives:]\nObjectives:\n♦ Demonstrate spacecraft fire monitoring and cleanup\ntechnologies in a realistic spacecraft fire scenario\n♦ Characterize fire growth in high O , low pressure atmospheres\n♦ Provide data to validate models of prediction of the\nimpact of a fire on vehicle habitability",
-        "score": 0.01364,
-        "section_title": "Objectives:",
-        "investigation_ids": [
-          "Saffire-I",
-          "Saffire-II",
-          "Saffire-III"
+          "Saffire-II"
         ]
       },
       {
@@ -415,12 +371,35 @@
         "source_id": "S-021",
         "page": 2,
         "text": "[Saffire-I, Saffire-II, Saffire-III | S-021: The Spacecraft Fire Experiment (Saffire) - Objectives, Development and Status | 2.1 Sample Materials]\n2.1 Sample Materials\nThe sample material for Saffire-I and III is a composite\nfabric consisting of cotton on a fiberglass substrate\n(75% cotton, 25% fiberglass by weight). It is called\nSIBAL cloth because it was developed for the Solid\nInflammability Boundary at Low-Speeds (SIBAL)\nspaceflight experiment and has been used in many space\nexperiments because it burns like cotton but maintains\nstructural integrity after the cotton is consumed. The\nobjective of the Saffire-I and III tests will be to\ndetermine how rapidly a large-scale fire grows in low-gravity and whether it reaches a steady-state spread rate. Saffire-I will be conducted at an air flow velocity of 20 Fans\nPower\nManagement\nSample card\n(flame sprea\nsample\nshown)\nCameras\nAvionics Bay Flow Duct\nSignal\nconditioning\ncard\nFlow\nstraightene\nFigure 1: Schematic of the Spacecraft Fire Safety\nDemonstration Experiment. The experiment module\nconsists of a flow duct containing the sample card\nand an avionics bay. All power, computer, and data\nacquisition modules are contained in the bay. The\nexperiment module is approximately 53- by 90- by\n133-cm. cm/s while Saffire-III will be run at a flow velocity of\n30 cm/s . Saffire-II has a sample card that contains 9 samples,\neach 5 cm x 29 cm. Table 1 lists the samples contained\non Saffire-II while Fig. 2 shows their locations on the\nsample card. These materials were selected because they\nhave normal gravity Maximum Oxygen Concentration\n(MOC) flammability limits that indicate they will burn\nin normal gravity just above and below 21% O by",
-        "score": 0.01349,
+        "score": 0.0154,
         "section_title": "2.1 Sample Materials",
         "investigation_ids": [
           "Saffire-I",
           "Saffire-II",
           "Saffire-III"
+        ]
+      },
+      {
+        "chunk_id": "S-020_p005_c04",
+        "source_id": "S-020",
+        "page": 5,
+        "text": "[Saffire-I, Saffire-II | S-020: Operation and Development Status of the Spacecraft Fire Experiments (Saffire) | E. Flight Status and Operations Summary]\nOn the morning of\nday 2, the Mission Support Team should have the initial images to review. Operations for days 2-8 will consist of\nidentifying the specific raw images (i.e., uncompressed) to be downlinked, preparing the commands to downlink this\ndata, and preparing and issuing commands to downlink data packets that were requested but not received. Of course,\nthe raw images have a higher resolution that the compressed images and will be used for the majority of the science\nanalysis. By contract, Cygnus will remain in orbit for up to 8 days to downlink data or until 20 Gbits (2.5 Gbytes) of\ndata are received. When data downlink is completed, the relays that power the Saffire avionics will be opened,\nofficially ending the Saffire-I experiment. Following the experiment, detailed analysis of the results will commence by researchers at NASA GRC and the\n“Fire Safety in Space” International Topical Team that has assisted in defining the Saffire experiments. Based on the\nthe current schedule, Saffire-II will be integrated into the OA-5 Cygnus PCM on May 12, 2016. The Saffire-II\nlaunch is planned for no earlier than July 6 with operations occurring in September 2016. International Conference on Environmental Systems",
+        "score": 0.01493,
+        "section_title": "E. Flight Status and Operations Summary",
+        "investigation_ids": [
+          "Saffire-I",
+          "Saffire-II"
+        ]
+      },
+      {
+        "chunk_id": "S-020_p004_c02",
+        "source_id": "S-020",
+        "page": 4,
+        "text": "[Saffire-II | S-020: Operation and Development Status of the Spacecraft Fire Experiments (Saffire) | B. Diagnostics]\nThis material will be expected to burn at the anticipated oxygen mole fraction of the\ncabin atmosphere (near 0.21 O mole fraction). A second redundant igniter is woven into the fabric at the downstream end of the sample in case of a failure of the upstream igniter or if the flame does not propagate the\nentire length of the sample. The objective of the tests to be conducted on Saffire-II is to investigate the low-gravity\nMaximum Oxygen Concentration (MOC) flammability limits in long-term low gravity.2 The configuration for these\nexperiments consists of nine samples of varying materials (denoted flammability samples) each having dimensions\nof approximately 5 cm wide by 29 cm long installed on the same panel in place of the single sample in Fig. 1. The\nSaffire-II sample card is shown in Fig. 2b. These samples emulate the configuration used in NASA-STD-6001 Test\n1.3 Each sample is ignited at the bottom using a hot wire. The oxygen concentration in the Cygnus vehicle will be\nnearly 21% by volume—the same as in the ISS when the hatch was closed. The materials have been selected to be\nnear their normal-gravity or hypothesized low-gravity maximum oxygen concentration in 21% O . This has complicated the selection of sample materials because most materials relevant for spacecraft do not have normal-gravity flammability limits near 21% oxygen by volume.4-6 Camera images are the primary diagnostics for these\ntests as the intended result is primarily to determine whether the flame propagates or self-extinguishes.",
+        "score": 0.01472,
+        "section_title": "B. Diagnostics",
+        "investigation_ids": [
+          "Saffire-II"
         ]
       }
     ],
@@ -481,7 +460,7 @@
     },
     "versions": {
       "data": "v2",
-      "index": "4aa3c9230f",
+      "index": "f5785a04fe",
       "golden_table": "draft"
     },
     "sources": [
@@ -537,17 +516,17 @@
         "status": "downloaded"
       },
       {
-        "id": "S-022",
+        "id": "S-020",
         "found": true,
         "kind": "source",
-        "title": "Saffire: A Novel Approach to Study of Spacecraft Fire Safety Using Un-manned Spacecraft",
-        "authors": "Urban D.L., Ferkul P., Olson S., Ruff G.A., Easton J.",
-        "year": "2017",
-        "url": "https://ntrs.nasa.gov/citations/20180005168",
+        "title": "Operation and Development Status of the Spacecraft Fire Experiments (Saffire)",
+        "authors": "Ruff G.A., Urban D.L.",
+        "year": "2016",
+        "url": "https://ntrs.nasa.gov/citations/20170000230",
         "doi": null,
         "investigation": "Saffire-I;Saffire-II;Saffire-III",
-        "psi_id": "PSI-99",
-        "role": "results",
+        "psi_id": "PSI-98",
+        "role": "overview",
         "file_type": "pdf",
         "in_corpus": true,
         "status": "downloaded"
@@ -564,6 +543,22 @@
         "investigation": "Saffire-I;Saffire-II;Saffire-III",
         "psi_id": "PSI-98",
         "role": "overview",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-022",
+        "found": true,
+        "kind": "source",
+        "title": "Saffire: A Novel Approach to Study of Spacecraft Fire Safety Using Un-manned Spacecraft",
+        "authors": "Urban D.L., Ferkul P., Olson S., Ruff G.A., Easton J.",
+        "year": "2017",
+        "url": "https://ntrs.nasa.gov/citations/20180005168",
+        "doi": null,
+        "investigation": "Saffire-I;Saffire-II;Saffire-III",
+        "psi_id": "PSI-99",
+        "role": "results",
         "file_type": "pdf",
         "in_corpus": true,
         "status": "downloaded"
@@ -599,24 +594,8 @@
         "file_type": "pdf",
         "in_corpus": false,
         "status": "not downloaded (web source cited in golden table)"
-      },
-      {
-        "id": "S-020",
-        "found": true,
-        "kind": "source",
-        "title": "Operation and Development Status of the Spacecraft Fire Experiments (Saffire)",
-        "authors": "Ruff G.A., Urban D.L.",
-        "year": "2016",
-        "url": "https://ntrs.nasa.gov/citations/20170000230",
-        "doi": null,
-        "investigation": "Saffire-I;Saffire-II;Saffire-III",
-        "psi_id": "PSI-98",
-        "role": "overview",
-        "file_type": "pdf",
-        "in_corpus": true,
-        "status": "downloaded"
       }
     ]
   },
-  "latency_ms": 0
+  "latency_ms": 12382
 }

@@ -1,26 +1,22 @@
 {
-  "text": "LLM answer not available - showing evidence summary.\n- Spacesuits are pressurized with 100% oxygen up to only 4.3 psi. [F-001]\n- To prevent decompression sickness ('the bends'), astronauts perform a pre-breathe protocol by inhaling 100% oxygen to purge dissolved nitrogen from body tissues. [F-003]\n- To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere. [F-004]\n- The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower. [F-005]\n- According to the challenge text, this represents more than a 40% increase in oxygen concentration compared to Earth's atmosphere, substantially increasing material flammability. [F-006]\n- Rank 1: FLEX (score 0.65, confidence 0.909)\n- Rank 2: ACME-BRE (score 0.55, confidence 0.909)\n- Rank 3: ACME-CFI-G (score 0.55, confidence 0.909)\n- Rank 4: BASS (score 0.364, confidence 1.0)\n- Rank 5: BASS-II (score 0.364, confidence 1.0)\n- Passages retrieved: [S-023:6], [S-022:20], [S-023:2], [S-023:5], [S-025:2]",
-  "model": "none/evidence-summary",
+  "text": "### 1. Lunar Habitat Atmospheric Context\nPressurized rovers and lunar habitats are anticipated to operate under an intermediate atmospheric environment to shorten astronaut pre-breathe protocol times (which otherwise require inhaling 100% $\\text{O}_2$ to prevent decompression sickness [F-003]) before extravehicular activities (EVAs) [F-004]. While spacesuits are pressurized with 100% $\\text{O}_2$ up to only 4.3 psi [F-001], the expected lunar habitat environment will feature:\n* Total pressure: $\\le 10.2\\text{ psi}$ [F-005]\n* Oxygen concentration: $\\ge 30\\%$ [F-005]\n\nCompared to Earth's sea-level atmosphere, this represents more than a 40% increase in oxygen concentration, substantially increasing material flammability [F-006].\n\n---\n\n### 2. General Lunar Gravity & Habitat Investigations\n* **FM2 Investigation**: Serves as the first-ever combustion experiment on another planetary body, burning four fuel samples at 1/6 lunar gravity inside a sealed chamber under atmospheric conditions planned for future lunar habitats or vehicles [S-025 p.2].\n* **SIBAL Fabric / Drop Tower Centrifuge Experiments**: Conducted observations of Solid Inflammability Boundary at Low-Speed (SIBAL) fabric (a cotton-fiberglass blend) burning in simulated 1/6 lunar gravity using a drop tower centrifuge [S-025 p.2].\n\n---\n\n### 3. Investigation Relevance Ranking\n\n> **Notice**: The ranking metrics and feature sets listed below originate from an **unverified LLM draft**.\n\nThe investigations ranked by relevance to lunar habitat operational conditions are:\n\n1. **FLEX** (Rank 1; Rank Key: 0.591, Score: 0.65)\n   * **Matching Features**: Oxygen concentration $\\ge 30\\%$ (1.0) and total pressure $\\le 10.2\\text{ psi}$ (1.0) [F-005].\n   * **Unknown Features**: Forced flow tested is `unknown`.\n\n2. **ACME-BRE** (Rank 2; Rank Key: 0.5, Score: 0.55) & **ACME-CFI-G** (Rank 3; Rank Key: 0.5, Score: 0.55)\n   * **Matching Features**: Oxygen concentration $\\ge 30\\%$ (1.0) and total pressure $\\le 10.2\\text{ psi}$ (1.0) [F-005].\n   * **Unknown Features**: Forced flow tested is `unknown`.\n\n3. **BASS** (Rank 4; Rank Key: 0.364, Score: 0.364), **BASS-II** (Rank 5; Rank Key: 0.364, Score: 0.364), and **Saffire-I** (Rank 6; Rank Key: 0.364, Score: 0.364)\n   * **Matching Features**: Evaluate cabin material fuels (1.0) and forced flow (1.0).\n   * **Non-Matching Features**: Do not feature oxygen $\\ge 30\\%$ (0.0) or total pressure $\\le 10.2\\text{ psi}$ (0.0).\n   * Saffire-I experiment data and diagnostics are documented in PSI records [S-017 p.1], [S-021 p.5].\n\n4. **Saffire-II** (Rank 7; Rank Key: 0.364, Score: 0.667) & **Saffire-III** (Rank 8; Rank Key: 0.364, Score: 0.667)\n   * **Matching Features**: Evaluate cabin material fuels (1.0) and forced flow (1.0). Saffire-III diagnostics and data are detailed in repository records [S-017 p.1], [S-021 p.5].\n   * **Unknown Features**: `same_test_lunar_atmosphere` and `pressure_at_or_below_10.2psi` are `unknown`.\n\n5. **SAME-R** (Rank 9; Rank Key: 0.273, Score: 0.75) & **DAFT** (Rank 10; Rank Key: 0.182, Score: 0.667)\n   * **Matching Features**: Cabin material fuel (1.0).\n   * **Unknown Features**: Parameters such as `same_test_lunar_atmosphere`, `o2_at_or_above_30pct`, `pressure_at_or_below_10.2psi`, and `forced_flow_tested` (for DAFT) are `unknown`.",
+  "model": "gemini/gemini-3.6-flash",
   "answer_type": "answer",
   "citations": [
-    "F-001",
     "F-003",
     "F-004",
+    "F-001",
     "F-005",
     "F-006",
-    "S-023:6",
-    "S-022:20",
-    "S-023:2",
-    "S-023:5",
-    "S-025:2"
+    "S-025:2",
+    "S-017:1",
+    "S-021:5"
   ],
   "validation": {
-    "passed": false,
-    "errors": [
-      "no LLM configured"
-    ],
+    "passed": true,
+    "errors": [],
     "retried": false,
-    "fallback_used": true
+    "fallback_used": false
   },
   "bundle": {
     "schema_version": "1.0",
@@ -64,60 +60,58 @@
     "tests": [],
     "chunks": [
       {
-        "chunk_id": "S-023_p006_c01",
-        "source_id": "S-023",
-        "page": 6,
-        "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | IV. Results and Discussion]\nThis could be due to a malfunction in the sensor or\npoor placement within Cygnus, such as being\nobstructed by too much trash. Figure 8 gives the temperature at the FFD. A\nvery weak experimental response is shown, while\nthe model response is closest to RS1, RS2, and\nRS5 that are not directly in the flow path. Also\nshown in Figure 8 is the mass mean temperature of\nthe model, which analogous to the CO response, compares well with the FFD temperature. Figure 9\ngives the RS behavior for the SIBAL burn\ntemperature. Similar to the CO response, the model has a higher temperature response than the\nexperiment. This is most prevalent in RS1, for\nwhich the experimental response is slow and does\nFigure 6. Normalized CO response from FFD and mean not reach steady state. This could be due to the\nvehicle CO concentration during SIBAL burn event. nadir bulkhead, and other items in that section of\nCygnus that absorb heat. This would increase the\nFigure 7. Normalized CO RS responses during SIBAL burn event. International Conference on Environmental Systems",
-        "score": 0.01278,
-        "section_title": "IV. Results and Discussion",
-        "investigation_ids": [
-          "Saffire-IV"
-        ]
-      },
-      {
-        "chunk_id": "S-022_p020_c01",
-        "source_id": "S-022",
-        "page": 20,
-        "text": "[Saffire-I, Saffire-II, Saffire-III | S-022: Saffire: A Novel Approach to Study of Spacecraft Fire Safety (Saffire I-III Results) | Far Field Diagnostics]\nForward Steps\n• The Saffire experiments were the first practical-scale spacecraft fire safety\ninvestigations. • In addition to pioneering a new research capability, they determined that\nconcurrent flames can achieve a steady spread rate and that overall the\nconcurrent spread rates are strongly influenced the the flow duct size. • The next Saffire series will examine larger fires of longer duration to\nexamine the impact of a fire on the vehicle habitability .",
-        "score": 0.01202,
-        "section_title": "Far Field Diagnostics",
-        "investigation_ids": [
-          "Saffire-I",
-          "Saffire-II",
-          "Saffire-III"
-        ]
-      },
-      {
-        "chunk_id": "S-023_p002_c02",
-        "source_id": "S-023",
-        "page": 2,
-        "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | I. Introduction]\nThe data collected by Saffire will\nhelp modelers develop tools to better predict the effect of a fire on a spacecraft. This work aims to develop a model\nthat can predict the burn events in Saffire IV. The model is a closed pressure chamber of the Cygnus vehicle filled\nwith trash and cargo after the resupply mission of NG-13 is completed. In the model, the Saffire unit inputs ambient\ntemperature cabin air and outputs hot air and species to imitate the effect of the combustion events. The heat addition\nrate (HAR) outputted by Saffire is derived using the difference between the experimentally captured inlet and outlet\ntemperature of Saffire. Downstream of Saffire, near the hatch of Cygnus (zenith) is the Far Field Diagnostic (FFD),\nwhere particle and combustion gas sensors are located. The model compares the experimental temperature and CO at the six RS locations throughout Cygnus and the FFD at the opposite end of Cygnus from Saffire. II. Saffire Experiment\nAll Saffire experiments have taken place on the NG Cygnus vehicle after a resupply mission to the ISS. The first\nthree Saffire missions focused on the large-scale flame spread in order to determine if tests conducted in 1-g and at\nsmaller scales are relevant to large-scale microgravity flame tests. The next three Saffire tests share that focus, while\nextending to the smoke plume transport and the fire’s effect on the vehicle. Figure 1 shows a schematic of a Cygnus vehicle with Saffire and the FFD but with the cargo hidden.",
-        "score": 0.01157,
-        "section_title": "I. Introduction",
-        "investigation_ids": [
-          "Saffire-IV"
-        ]
-      },
-      {
-        "chunk_id": "S-023_p005_c02",
-        "source_id": "S-023",
-        "page": 5,
-        "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | IV. Results and Discussion]\nIV. Results and Discussion\nIn Saffire-IV, the temperature and CO concentration of the RS measurements show\nvarying baseline values due to calibration\ndifferences10. Consequently, all RS and FFD\ntrends presented here are normalized by their preignition baseline, thereby scaling temperatures and\nconcentrations to initial cabin value. One example\nof non-normalized data is given for context by\nFigure 5, which shows the RS3 CO and temperature data for the SIBAL burn. The FFD\nresponse, shown in Figure 6, gives an excellent\nprediction. The model captures the upward trend\nin the FFD better than it does with most RS\nlocations, while also providing a better match of\nthe steady state value. The light blue line in Figure\nFigure 5. CO and Temperature response from RS3\n6 gives the mean CO for the vehicle and it 2 during SIBAL burn event. compares well with the data at the FFD. This is an\nindication the vehicle species concentration is well\nmixed in the section that contains the FFD. Figure 7 gives the RS responses to CO . Overall, there is a decent agreement between experimental and model values, with RS1 providing the best fit. The model rises earlier and overestimate the steady state CO value. RS3 rose the fastest and had the most overshoot of the steady state value since it was in the direct path of the Saffire outlet, with RS6 showing similar behavior for the same reason. The other four had\nto rely on mixing and diffusion before elevated CO was recorded. Experimentally, RS2 was by far the slowest to",
-        "score": 0.01153,
-        "section_title": "IV. Results and Discussion",
-        "investigation_ids": [
-          "Saffire-IV"
-        ]
-      },
-      {
         "chunk_id": "S-025_p002_c02",
         "source_id": "S-025",
         "page": 2,
         "text": "[General | S-025: NASA Microgravity Combustion Program Overview | Objectives]\nObjectives\nEdge view of Solid Inflammability Boundary at Low-Speed (SIBAL) fabric, a cotton-fiberglass blend,\nburning in air in lunar gravity (simulated in drop tower centrifuge). Edge view of Solid Inflammability Boundary at Low-Speed (SIBAL) fabric, a cotton-fiberglass blend,\nburning in air in lunar gravity (simulated in drop tower centrifuge). Left: downward burning, right: upward\nburning. Conduct the first-ever observations and measurements of flame spread on the Moon. Verify whether some materials burning in partial-gravity environments may be more flammable compared\nto 1g. Provide a bridge between the standard 1g material screening method\nand actual behavior in reduced gravity. Candle flame in microgravity, 1/6 gravity, and Earth gravity (left to right). Candle flame in microgravity, 1/6 gravity, and Earth gravity (left to right).",
-        "score": 0.0082,
+        "score": 0.01514,
         "section_title": "Objectives",
         "investigation_ids": [
           "General"
+        ]
+      },
+      {
+        "chunk_id": "S-017_p001_c02",
+        "source_id": "S-017",
+        "page": 1,
+        "text": "[Saffire-I | S-017: Saffire-I and Saffire-III Description of Data (DoD) & Operations | Data Description & Operations]\nThere are various documents and associated information located on the different tabs within the SAFFIRE Investigations records in PSI. A very useful document to review first is the “SAFFIRE Objectives, Development and Status.pdf” document located on the “Overview” tab in the Summary Document section. The experiment records are found on the “Data” tab in the SAFFIRE-II Investigations record. Table 1 contains list of experiment records in PSI and a short description of what each record contains. Table 1. Saffire-I/III Experiment Data in PSI Each Experiment Data record contains raw data and multiple image sets. Associated raw data documents and individual image sets are located on the “Scientific Data and Information” tab within the Experiment Data record. The raw data is captured from each experimental sensor and presented in excel files. The suite of experimental sensors used is summarized in Table 2. Table 2. Saffire, I, II and III Diagnostics Table 3 contains a description of the different SAFFIRE image sets loaded in PSI. Table 3. SAFFIRE Image Sets in PSI Some image sets are very large. They may contain over 10,000 images which makes it impractical to display as thumbnails in the Image Gallery which appears on the “Image Data and Information” tab of the Videos & Images record of the image set. In the case of very large image sets, all the images are provided in zip files labeled “Original Image Files” on the “Image Data and Information” tab. These files can be downloaded and viewed on the local machine.",
+        "score": 0.01488,
+        "section_title": "Data Description & Operations",
+        "investigation_ids": [
+          "Saffire-I"
+        ]
+      },
+      {
+        "chunk_id": "S-025_p002_c01",
+        "source_id": "S-025",
+        "page": 2,
+        "text": "[General | S-025: NASA Microgravity Combustion Program Overview | Background]\nBackground\nFM2 is the first-ever combustion experiment to be performed on another planetary body. Building on the\nsuccess of the decades-long combustion science ground (1g) program and International Space Station\n(ISS) microgravity (~0g) combustion experiment campaigns, FM2 investigates burning materials on the\nMoon at its 1/6 reduced gravity level. Previous computational modeling, bolstered by experiments aboard\nparabolicflight aircraft and the ISS, suggest that materials may burn at lower oxygen concentrations in\nlunar gravity compared to Earth. This means that some things that are not flammable on Earth, may be\nflammable in potential habitats on the Moon and other places with reduced gravity. Since fire can be a\ncatastrophic hazard for spaceflight and extreme human exploration, FM2 is a critical step in determining\nmaterial flammability and safety for future missions.",
+        "score": 0.01472,
+        "section_title": "Background",
+        "investigation_ids": [
+          "General"
+        ]
+      },
+      {
+        "chunk_id": "S-025_p002_c03",
+        "source_id": "S-025",
+        "page": 2,
+        "text": "[General | S-025: NASA Microgravity Combustion Program Overview | Approach and Hardware]\nApproach and Hardware\nExternal view of FM2 engineering hardware. External view of FM2 engineering hardware. The experiment burns four fuel samples individually in atmospheric conditions planned for future lunar\nhabitats or vehicles. The experiment is housed inside a sealed chamber and operates autonomously\nthrough software. Cameras record flame characteristics including size, intensity, color, and spread rate. Onboard sensors measure flame and fuel temperatures, oxygen concentration, and carbon-dioxide\nconcentrations. Images of FM2 engineering hardware that is 28.5 by 28.5 by 38.5 cm tall. Weight is 25 kg. Internal view of\nFM2 engineering hardware. Internal view of FM2 engineering hardware.",
+        "score": 0.01291,
+        "section_title": "Approach and Hardware",
+        "investigation_ids": [
+          "General"
+        ]
+      },
+      {
+        "chunk_id": "S-021_p005_c02",
+        "source_id": "S-021",
+        "page": 5,
+        "text": "[Saffire-I | S-021: The Spacecraft Fire Experiment (Saffire) - Objectives, Development and Status | 2.2 Diagnostics]\nBecause of the\nimportance of addressing these remaining needs to crew\nsafety in exploration missions, AES management\nauthorized the SFS Demo project to plan for three more\nSaffire experiments, Saffire-IV, V, and VI, that will\naddress objectives not achieved in Saffire-I-III. Of\nparticular note is that many of these objectives require\nsupporting ground-based experimentation to perform\nthe parametric investigations that are required to fully\nunderstand the phenomena in question. The objective of\nthe flight experiment is to anchor the ground-based\nexperiments with flight data. While the planning for the follow-on experiments is\nunderway, the development process is intended to\nmirror the processes executed with Saffire-I-III. The\nMission Concept Review/System Requirements Review is planned for June 2016 with a design review planned\nfor December 2016.",
+        "score": 0.01285,
+        "section_title": "2.2 Diagnostics",
+        "investigation_ids": [
+          "Saffire-I"
         ]
       }
     ],
@@ -174,7 +168,7 @@
     },
     "versions": {
       "data": "v2",
-      "index": "4aa3c9230f",
+      "index": "f5785a04fe",
       "golden_table": "draft"
     },
     "ranking": [
@@ -588,38 +582,6 @@
         "source": "Challenge text, 'Spacesuits and oxygen concentration'"
       },
       {
-        "id": "S-023",
-        "found": true,
-        "kind": "source",
-        "title": "Model Development of Large-Scale Spacecraft Fires during the Saffire-IV Experiments (ICES-2022-278)",
-        "authors": "Brooker J., Niehaus J.",
-        "year": "2022",
-        "url": "https://ntrs.nasa.gov/citations/20220002714",
-        "doi": null,
-        "investigation": "Saffire-IV",
-        "psi_id": null,
-        "role": "results",
-        "file_type": "pdf",
-        "in_corpus": true,
-        "status": "downloaded"
-      },
-      {
-        "id": "S-022",
-        "found": true,
-        "kind": "source",
-        "title": "Saffire: A Novel Approach to Study of Spacecraft Fire Safety Using Un-manned Spacecraft",
-        "authors": "Urban D.L., Ferkul P., Olson S., Ruff G.A., Easton J.",
-        "year": "2017",
-        "url": "https://ntrs.nasa.gov/citations/20180005168",
-        "doi": null,
-        "investigation": "Saffire-I;Saffire-II;Saffire-III",
-        "psi_id": "PSI-99",
-        "role": "results",
-        "file_type": "pdf",
-        "in_corpus": true,
-        "status": "downloaded"
-      },
-      {
         "id": "S-025",
         "found": true,
         "kind": "source",
@@ -634,8 +596,40 @@
         "file_type": "pdf",
         "in_corpus": true,
         "status": "downloaded"
+      },
+      {
+        "id": "S-017",
+        "found": true,
+        "kind": "source",
+        "title": "SAFFIRE-I and SAFFIRE-III Description of Data",
+        "authors": null,
+        "year": "2018",
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-98",
+        "doi": null,
+        "investigation": "Saffire-I;Saffire-III",
+        "psi_id": "PSI-98",
+        "role": "overview",
+        "file_type": "docx",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-021",
+        "found": true,
+        "kind": "source",
+        "title": "The Spacecraft Fire Experiment (Saffire) Objectives, Development and Status",
+        "authors": "Schoren W., Ruff G.A., Urban D.L.",
+        "year": "2016",
+        "url": "https://ntrs.nasa.gov/citations/20170001636",
+        "doi": null,
+        "investigation": "Saffire-I;Saffire-II;Saffire-III",
+        "psi_id": "PSI-98",
+        "role": "overview",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
       }
     ]
   },
-  "latency_ms": 0
+  "latency_ms": 16062
 }

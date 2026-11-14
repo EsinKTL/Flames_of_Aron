@@ -1,26 +1,19 @@
 {
-  "text": "LLM answer not available - showing evidence summary.\n- Spacesuits are pressurized with 100% oxygen up to only 4.3 psi. [F-001]\n- At sea level on Earth, atmospheric pressure is 14.7 psi. [F-002]\n- To prevent decompression sickness ('the bends'), astronauts perform a pre-breathe protocol by inhaling 100% oxygen to purge dissolved nitrogen from body tissues. [F-003]\n- To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere. [F-004]\n- The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower. [F-005]\n- po2: 0.3 * 10.2 = 3.06 psi\n- po2_ratio_vs_earth: (0.3 * 10.2) / (0.209 * 14.7) = 0.996 x sea-level pO2\n- Earth sea level [F-002]: 0.209 * 14.7 = 3.072 psi\n- EVA spacesuit [F-001]: 1 * 4.3 = 4.3 psi\n- lunar habitat O2 vs. air [F-006]: 0.3 / 0.209 = 1.435 x air\n- Passages retrieved: [S-038:1], [S-039:1], [S-030:1], [S-036:1], [S-037:1]",
-  "model": "none/evidence-summary",
+  "text": "### Oxygen Partial Pressure Calculation\n\nAt an oxygen concentration of 30% ($0.30$) and a total atmospheric pressure of 10.2 psi, the oxygen partial pressure ($P_{\\text{O}_2}$) is calculated as follows:\n\n$$P_{\\text{O}_2} = 0.30 \\times 10.2 \\text{ psi} = 3.06 \\text{ psi} \\quad [\\text{C-001}]$$\n\nThis pressure regime represents the anticipated intermediate atmosphere for lunar operations ( l.e., $\\text{O}_2 \\ge 30\\%$ at a total pressure $P \\le 10.2 \\text{ psi}$) [F-005].\n\n---\n\n### Comparison with Earth Sea-Level Air\n\n1. **Earth Sea-Level Oxygen Partial Pressure**:\n   At Earth's sea level, total atmospheric pressure is 14.7 psi [F-002]. Assuming standard air with an $\\text{O}_2$ fraction of 20.9% ($0.209$), the oxygen partial pressure is:\n   $$P_{\\text{O}_2, \\text{sea level}} = 0.209 \\times 14.7 \\text{ psi} = 3.072 \\text{ psi} \\quad [\\text{C-002}]$$\n\n2. **Ratio of Partial Pressures**:\n   Comparing the 10.2 psi / 30% $\\text{O}_2$ atmosphere to Earth sea-level air yields:\n   $$\\frac{3.06 \\text{ psi}}{3.072 \\text{ psi}} \\approx 0.996 \\text{ (or } 99.6\\% \\text{ of sea-level } P_{\\text{O}_2}\\text{)}$$\n   Thus, the absolute oxygen partial pressure at 30% $\\text{O}_2$ and 10.2 psi (3.06 psi) [C-001] is virtually equivalent to Earth sea-level air (3.072 psi) [C-002].\n\n3. **Oxygen Concentration Difference**:\n   While $P_{\\text{O}_2}$ remains equivalent, the oxygen mole fraction increases from 20.9% to 30.0%, representing a relative concentration increase of approximately 43.5% over ambient air [C-004].\n\n---\n\n### Flammability Assessment Considerations\n\nWhen assessing material flammability and spacecraft fire safety under these conditions, fire risk must not be evaluated based on oxygen percentage or partial pressure alone. Total atmospheric pressure, inert diluent gas composition (e.g., $\\text{N}_2$), and ambient ventilation flow velocity must all be evaluated simultaneously to accurately characterize flammability risks.",
+  "model": "gemini/gemini-3.6-flash",
   "answer_type": "answer",
   "citations": [
-    "F-001",
-    "F-002",
-    "F-003",
-    "F-004",
     "F-005",
-    "S-038:1",
-    "S-039:1",
-    "S-030:1",
-    "S-036:1",
-    "S-037:1"
+    "F-002",
+    "C-001",
+    "C-002",
+    "C-004"
   ],
   "validation": {
-    "passed": false,
-    "errors": [
-      "no LLM configured"
-    ],
+    "passed": true,
+    "errors": [],
     "retried": false,
-    "fallback_used": true
+    "fallback_used": false
   },
   "bundle": {
     "schema_version": "1.0",
@@ -64,56 +57,56 @@
     "tests": [],
     "chunks": [
       {
-        "chunk_id": "S-038_meta_c01",
-        "source_id": "S-038",
-        "page": 1,
-        "text": "[Saffire-I | S-038: Official PSI Metadata | Study Approach, Objective & Hardware]\nStudy Identifier: PSI-98\nStudy Title: Spacecraft Fire Safety Experiment-I\nComment[Approach]: The Saffire-1 experiments was performed on the Orbital Science’s Cygnus resupply vehicle after it deberthed from the ISS. The sample material for Saffire-I is a composite fabric called Sibal consisting of cotton on a fiberglass substrate (75% cotton, 25% fiberglass by weight). It has been used in many space experiments because it burns like cotton but maintains structural integrity after the cotton is consumed. The sample was approximately 0.94 meters long and 0.4 meters wide, simulating a large piece of flammable fabric. The Saffire-1 flight unit had a sample card installed in the middle of a large flow duct. Air is drawn through the flow duct by fans located at the top of the duct with flow straighteners at the bottom of the experiment module. Saffire-I was conducted at an air flow velocity of 20 cm/s. Once the sample was ignited flame images were captured using two cameras. In addition, thermocouples provided flow, flame, and plume temperatures, two radiometers recorded flame radiation, solid state sensors were used to measure pressure, CO2 and O2 mole faction, and two anemometer tracked flow velocity. All data was compressed, and subsequently downlinked.\nComment[Experiment Hardware]: Saffire 1 enclosure in Cygnus\nComment[Hypothesis]: This investigation hypothesizes that due to large differences between fire behavior in normal and reduced gravity, the use of terrestrial fires and fire standards to design spacecraft fire safety systems presents an inherent risk to the vehicle because of the significant level of uncertainty. While this approach has been successful thus far, the uncertainty and risk will increase as exploration missions venture further from earth with considerably longer transit times for a safe return. There is a significant lack of microgravity data available for spacecraft designers on which to base their fire safety designs and procedures. To address this knowledge gap, this investigation proposed to conduct large-scale fire safety experiments in an expendable spacecraft without risk to a crew.\nComment[Objective]: \"The objectives of this investigation were to:\nComment[Research Impacts]: The Saffire-I experiment provides a new way to study a realistic fire on an exploration vehicle, which has not been possible in the past because the risks are too high. Instruments on an unmanned cargo vessel measure oxygen, carbon dioxide, heat, pressure and flame growth, and two video cameras provide views of the flame. Results determine microgravity flammability limits for several spacecraft materials, help to validate NASA’s material selection criteria, and how microgravity and limited oxygen affect flame size. The investigation is crucial for the safety of current and future space missions. Studying fire in small, sealed environments such as the Cygnus cargo supply vehicle benefits fire safety and prevention efforts on Earth, including inside mines, airplanes, or submarines.\nStudy Design Type: Cygnus: Fire: SAFFIRE: Oxidizer flux: Flame Spread: Solid burning rate: Surface Combustion: Smoldering: Fire Safety\nStudy Design Type Term Accession Number: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/\nStudy Design Type Term Source REF: PSI: PSI: PSI: PSI: PSI: PSI: PSI: PSI: PSI",
-        "score": 0.01613,
-        "section_title": "Official PSI Metadata Summary",
+        "chunk_id": "S-015_p002_c03",
+        "source_id": "S-015",
+        "page": 2,
+        "text": "[FLEX | S-015: Multi-User Droplet Combustion Apparatus - FLEX Hardware | Research Summary:]\nThe suppressants are carbon dioxide and helium. The expected concentrations range from 0.00 mole\nfraction to the limit where no flame can exist (0.70 expected for the least active suppressant). Pressure: Ambient pressure does not significantly influence the droplet burning rate, but does influence\nchemistry at sufficiently low values. In addition, one strategy for extinguishing a fire is to isolate the\nhabitat where it exists and vent the cabin to space. It is therefore beneficial to have verified suppressant\ndata at low pressures. The pressure for the tests will range from 0.5 to 1.0 atm (standard atmosphere). As\nwith the oxygen mole fraction, it is important that the test chamber be sufficiently large so that the\npressure is essentially constant during an experiment (i.e. the droplet burns in a constant pressure\nambient). Fuel Type: The advantage of the droplet geometry is that the fuel is relatively simple and better\ncharacterized than typical fuels in fire safety studies (e.g. PMMA or paper). This is also a disadvantage\nsince it does not represent a practical fuel. The study will use two typical hydrocarbon fuels, an alcohol,\nmethanol (CH3OH ) and an alkane, heptane (C7H16 ). There is a relatively large experience base with\nthese fuels. Methanol has a fuel-bound oxygen atom, and burns with a very dim blue flame (not much\nsoot production) with a small standoff distance, so it has widely different radiative characteristics than\nheptane.",
+        "score": 0.01422,
+        "section_title": "Research Summary:",
         "investigation_ids": [
-          "Saffire-I"
+          "FLEX"
         ]
       },
       {
-        "chunk_id": "S-039_meta_c01",
-        "source_id": "S-039",
-        "page": 1,
-        "text": "[Saffire-III | S-039: Official PSI Metadata | Study Approach, Objective & Hardware]\nStudy Identifier: PSI-100\nStudy Title: Spacecraft Fire Experiment-III\nComment[Approach]: The Saffire-III experiments were performed on the Orbital Science’s Cygnus resupply vehicle after it deberthed from the ISS. As a follow on to the Saffire 1 investigation, the Saffire III investigation also used SIBAL as the sample material. However, the experiments were conducted at a flow velocity of 30 cm/s compared to 20 cm/s during Saffire I. The flow was either concurrent or opposed. Once the sample was ignited flame images were captured using two cameras. In addition, thermocouples provided flow, flame, and plume temperatures, two radiometers recorded flame radiation, solid state sensors were used to measure pressure, CO2 and O2 mole faction, and two anemometer tracked flow velocity. All data was compressed, and subsequently downlinked. Details related to samples and experimental parameters are provided in the Experimental Details file in the Science document folder.\nComment[Experiment Hardware]: Saffire III enclosure in Cygnus\nComment[Hypothesis]: This investigation hypothesizes that due to large differences between fire behavior in normal and reduced gravity, the use of terrestrial fires and fire standards to design spacecraft fire safety systems presents an inherent risk to the vehicle because of the significant level of uncertainty. While this approach has been successful thus far, the uncertainty and risk will increase as exploration missions venture further from earth with considerably longer transit times for a safe return. There is a significant lack of microgravity data available for spacecraft designers on which to base their fire safety designs and procedures. To address this knowledge gap, this investigation proposed to conduct large-scale fire safety experiments in an expendable spacecraft without risk to a crew.\nComment[Objective]: \"The objectives of this investigation were to:\nComment[Research Impacts]: The Saffire-I experiment provides a new way to study a realistic fire on an exploration vehicle, which has not been possible in the past because the risks are too high. Instruments on an unmanned cargo vessel measure oxygen, carbon dioxide, heat, pressure and flame growth, and two video cameras provide views of the flame. Results determine microgravity flammability limits for several spacecraft materials, help to validate NASA’s material selection criteria, and how microgravity and limited oxygen affect flame size. The investigation is crucial for the safety of current and future space missions. Studying fire in small, sealed environments such as the Cygnus cargo supply vehicle benefits fire safety and prevention efforts on Earth, including inside mines, airplanes, or submarines.\nStudy Design Type: SAFFIRE: Flame Spread: Fire Safety: low-gravity fire testing: Surface Combustion: flammability: Smoldering\nStudy Design Type Term Accession Number: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/\nStudy Design Type Term Source REF: PSI: PSI: PSI: PSI: PSI: PSI: PSI",
-        "score": 0.01601,
-        "section_title": "Official PSI Metadata Summary",
+        "chunk_id": "S-016_p005_c03",
+        "source_id": "S-016",
+        "page": 5,
+        "text": "[FLEX | S-016: Methanol Droplet Combustion in Oxygen-Inert Environments (FLEX) | 3 Results]\nTheslopeoftheD2 versustime\n2 2\ncurve is fairly linear through most of the burning period except toward the end where the slope\ndecreases slightly prior to flame extinction, which occurs at a droplet diameter of 1.10 mm, called\ntheextinctiondiameterD . Run#110correspondstoadropletwithaninitialdiameterof2.83mm\ne\nburningin21%O and30%CO environmentwhereasrun#263hadaninitialdiameterof2.67mm\n2 2\nand an atmosphere consisting of 21% O and 30% He with the remaining diluent being nitrogen in both cases. The ambient pressure for both of these cases was 0.7 atm. It can be seen from\nthe slopes of the D2 versus time curves in figure 2 that substituting carbon dioxide with helium\nleads to a higher burning rate due to the increased thermal conductivity of He compared to CO and consequently a smaller burning time for droplets of similar size. The extinction diameters D\ne\nfor run #110 and #263 were 1.57 mm and 1.42 mm, respectively. For these two cases the droplet\nremains in the field of view after flame extinction and the continued evaporation at a much slower\nrate in the hot atmosphere can be seen in the D2-versus-time curves. It is also interesting to note\nthatforallthreecasestheflamediameterinitiallyincreasesandthendecreasestoasmallervalueat\nextinction,showingthattheextinctioniscausedbyinsufficientresidencetimeratherthanradiative\nheatlossfromtheflame.",
+        "score": 0.00986,
+        "section_title": "3 Results",
         "investigation_ids": [
-          "Saffire-III"
+          "FLEX"
         ]
       },
       {
-        "chunk_id": "S-030_meta_c01",
-        "source_id": "S-030",
-        "page": 1,
-        "text": "[BASS-II | S-030: Official PSI Metadata | Study Approach, Objective & Hardware]\nStudy Identifier: PSI-25\nStudy Title: Burning and Suppression of Solids - II\nComment[Approach]: To summarize, BASS-II's approach, microgravity combustion tests were performed aboard the International Space Station. Active crew support for real-time “lab partner” operations. The wind tunnel was installed in the Microgravity Science Glovebox which supplied power, imaging, and a level of containment. Fuel samples were mounted inside a small wind tunnel which could impose airflow speeds up to 40 cm/s. Main variables are airflow speed and oxygen concentration (oxygen varied below 21% by adding nitrogen). Flame appearance, flame growth, and spread rates were determined in both the opposed and concurrent flow.\nComment[Experiment Hardware]: Microgravity Science Glovebox (MSG)\nComment[Hypothesis]: \"BASS–II tests the hypothesis that materials in microgravity, with adequate ventilation, burn as well if not better than the same material in normal gravity with other conditions being identical (pressure, O2\nComment[Objective]: \"BASS-II results contribute to the combustion computational models used in the design of fire detection and suppression systems in microgravity and on Earth.\nComment[Research Impacts]: A primary goal of BASS-II is improved spacecraft fire safety, improved understanding of combustion in space and how to avoid it. If you’re on a mission far from Earth, a fire can be catastrophic. BASS-II helps engineers select the safest materials and improve firefighting methods on future space missions. In outer space, fuels burn as oval balls rather than with an upward pointed cone flame as they do on Earth. This simpler combustion process enables researchers to evaluate computer models of fuel burning. These models can then be used to more accurately study flames on Earth, such as in wildfires, building fires, energy recapture from waste recycling, and other combustion problems.\nStudy Design Type: Flame Spread: Solid Fuels: extinction limits: Forced Flow Velocity: MSG: BASS: Fire Suppression: Fire Safety\nStudy Design Type Term Accession Number: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/\nStudy Design Type Term Source REF: PSI: PSI: PSI: PSI: PSI: PSI: PSI: PSI",
-        "score": 0.0155,
-        "section_title": "Official PSI Metadata Summary",
+        "chunk_id": "S-016_p009_c02",
+        "source_id": "S-016",
+        "page": 9,
+        "text": "[FLEX | S-016: Methanol Droplet Combustion in Oxygen-Inert Environments (FLEX) | 3 Results]\nAtsmallerdroplet\nsizes, the data fall approximately along a straight line, irrespective of the diluent concentrations. Thedashedlineprovidesanapproximatecorrelationofthesediffusive-extinctionresultsinFig. 5. It is worthwhile to compare the experimentally determined extinction diameters with simplified\ntheoretical predictions. Figure 6 shows such a comparison for air at one atmosphere. The predictionsofrate-ratioasymptotics(RRA)[11],oftherecentlydevelopedactivation-energyasymptotics\n(AEA) [15], and of numerical simulation using detailed chemical kinetics [14] are also shown in\nthefigure(seethelowercurves). Incontrasttoselectingtheproductofdensityanddiffusioncoefficient,(cid:26)D,tomatchtheexperimentalburningrateandfittingoneparticularexperimentalextinction",
+        "score": 0.00981,
+        "section_title": "3 Results",
+        "investigation_ids": [
+          "FLEX"
+        ]
+      },
+      {
+        "chunk_id": "S-011_p009_c02",
+        "source_id": "S-011",
+        "page": 9,
+        "text": "[BASS-II | S-011: Science Requirements Document (SRD) for BASS-II | Objectives:]\nObjectives:\n• To identify what is the worst case for material flammability in spacecraft\nenvironments, and how does that compare to the terrestrial upward burning used to\nscreen the materials for safe use aboard spacecraft. • To determine how quickly a fire in space can grow and if the flames reach a finite size\nor continue to grow. This has implications for firefighting strategies in spacecraft. Primary variables: The main variables to be tested are the effects of ambient oxygen\nconcentration, ventilation flow velocity, and fuel type, thickness, and geometry.",
+        "score": 0.0082,
+        "section_title": "Objectives:",
         "investigation_ids": [
           "BASS-II"
         ]
       },
       {
-        "chunk_id": "S-036_meta_c01",
-        "source_id": "S-036",
-        "page": 1,
-        "text": "[BASS | S-036: Official PSI Metadata | Study Approach, Objective & Hardware]\nStudy Identifier: PSI-26\nStudy Title: Burning and Suppression of Solids\nComment[Approach]: \"The experiment was conducted aboard the International Space Station (ISS) inside the Microgravity Glove Box (MSG). Custom-made fabric samples consisting of 75% cotton and 25% fiberglass (by mass) measuring were used as a fuel source as well as Nomex fabric and Ultem. A Kanthal wire (29-gage)igniter was used to initiate combustion at one end of the fabric. Airflow was controlled using a variable speed fan, with airflow speeds reaching as high as 40 cm/s. The airflow was directed along the fuel surface in either the opposed or concurrent direction.\nComment[Experiment Hardware]: Microgravity Science Glovebox\nComment[Hypothesis]: BASS experiments were based on the hypothesis that materials in microgravity, with adequate ventilation, burn as well if not better than the same material in normal gravity with other conditions being identical (pressure, oxygen concentration, temperature, etc.) To test this hypothesis with any but the thinnest materials requires extended microgravity time – longer than available in drop towers or parabolic aircraft.\nComment[Objective]: \"The two main objectives for BASS are to:\nComment[Research Impacts]: \"Current NASA spacecraft materials selection is based on a standard test method (NASA–STD–6001 Test 1) that segregates material based on 1-g behavior without consideration of low gravity effects. A critical element of this understanding is the radiative heat emission from the flame. These results are used in first order models and predictions of heat release in spacecraft fires and as a means to extend heat release data from tests like the NASA cone calorimeter test (NASA–STD–6001 Test 2) to a performance-based material selection process. Using nitrogen as a flame suppressant in microgravity provides a direct link to current and planned extinguishment techniques.\nStudy Design Type: Flame Spread: Fire safety: Fire suppression system: Forced Flow Flame: Damkohler number: Kinetic regime: Boundary layer\nStudy Design Type Term Accession Number: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/\nStudy Design Type Term Source REF: PSI: PSI: PSI: PSI: PSI: PSI: PSI",
-        "score": 0.01473,
-        "section_title": "Official PSI Metadata Summary",
-        "investigation_ids": [
-          "BASS"
-        ]
-      },
-      {
-        "chunk_id": "S-037_meta_c01",
-        "source_id": "S-037",
-        "page": 1,
-        "text": "[FLEX | S-037: Official PSI Metadata | Study Approach, Objective & Hardware]\nStudy Identifier: PSI-69\nStudy Title: Flame Extinguishment Experiment\nComment[Approach]: \"The FLEX experiments involve igniting and observing the burning behavior of relatively large droplets. A primary objective of the experiments is to determine the Limiting Oxygen Index (LOI) as a function of ambient pressure and determine how the presence of a suppressant influences the LOI .\nComment[Experiment Hardware]: Combustion Integrated Rack (CIR)-Fluids and Combustion Facility (FCF), Multi-user Droplet Combustion Appartatus (MDCA)\nComment[Hypothesis]: The primary hypothesis of the FLEX mission is that microgravity conditions fundamentally alter the combustion and extinction characteristics of liquid fuel droplets due to changes in species and energy transport dynamics, radiative heat loss, and chemical kinetics. Specifically, the hypothesis posits that the lack of buoyant convection in microgravity will lead to significant differences in the flammability limits and suppression efficacy of various fire suppressant agents compared to normal gravity conditions. This hypothesis underpins the design of the FLEX experiments, which aim to map flammability boundaries, quantify suppressant efficacy, and develop predictive models to improve fire safety in space environments.\nComment[Objective]: The FLEX (Flame Extinguishment Experiment) investigation aims to map the flammability limits of liquid fuels in microgravity environments, measure the effectiveness of various gaseous fire suppressants such as CO2, He, and SF6, and develop reliable predictive models for combustion limits under reduced gravity conditions. The mission seeks to validate and improve simplified models by incorporating detailed chemical reactions, heat transfer, and material movement, using both space-based data and extensive ground-based tests. Key flight experiment goals include obtaining high-resolution measurements of droplet burning rates, flame extinction behavior, heat radiation, soot levels, and temperature profiles, while systematically analyzing the effects of different ambient conditions and suppressant concentrations. These investigations are essential for advancing the fundamental understanding of combustion processes in microgravity and enhancing fire safety protocols for future space missions.\nComment[Research Impacts]: The research impacts and Earth benefits of the FLEX mission are significant and multifaceted. By enhancing our understanding of microgravity combustion, the mission directly contributes to improved fire safety protocols for future space missions, ensuring the safety of crew members in environments where traditional fire suppression methods may be ineffective. On Earth, the insights gained from these experiments have the potential to advance fire safety in confined and reduced-gravity environments, such as submarines or high-altitude aircraft. The mission's findings on the effectiveness of various fire suppressants, including CO2, He, and SF6, in microgravity can lead to the development of more efficient and less harmful fire suppression systems, reducing the risk of toxic byproducts during fire events. Additionally, the study of ''cool flames'' and low-temperature combustion processes observed in microgravity can inform the design of advanced combustion engines, leading to improved fuel efficiency and reduced emissions in automotive and industrial applications. Overall, the FLEX mission's contributions to combustion science have the potential to enhance both space exploration safety and terrestrial fire safety technologies.\nStudy Design Type: FLEX: Fuel Sooting: Droplet: Spacecraft Fire Safety: Diffusion Flames: Flames\nStudy Design Type Term Accession Number: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/\nStudy Design Type Term Source REF: PSI: PSI: PSI: PSI: PSI: PSI",
-        "score": 0.01452,
-        "section_title": "Official PSI Metadata Summary",
+        "chunk_id": "S-013_p017_c02",
+        "source_id": "S-013",
+        "page": 17,
+        "text": "[FLEX | S-013: NASA/TP-2015-216046 Detailed Results from FLEX | 4.0 Experimental Results]\nThe tests in\nthe lower oxygen mole fraction ambient environments started\nat the maximum ambient oxygen mole fraction, 0.21 (at 1-atm\npressure). Testing proceeded as the ambient gas in the chamber P, of oxygen of nitrogen\natm\nNo 0.71 0.400 0.600\nNo .71 .400 .600\nNo .71 .400 .600\nNo .71 .400 .600\nNo .71 .400 .600\nNo .71 .400 .600\nNo .71 .300 .700\nNo .71 .300 .700\nNo .71 .300 .700\nNo .71 .300 .700\nNo 1.01 .300 .700\nNo 1.01 .300 .700\nNo 1.01 .300 .700\nNo 1.01 .300 .700\nYes .70 .337 .662\nYes .70 .337 .661\nYes .70 .336 .661\nYes .70 .297 .699\nYes .70 .297 .699\nYes .70 .298 .700\nYes .70 .298 .700\nYes 1.01 .298 .697\nYes 1.01 .298 .697\nYes 1.01 .297 .697\nwas gradually diluted with increasing amounts of nitrogen until\nthe limit where quasi-steady burning was not observed. This\nlimit represented the limiting oxygen index (LOI), identification of which was one of the primary objectives of the\nFLEX experiments. Typically in a given ambient environment,\ntests were conducted with both fuels (on different test days)\nover a small range of droplet sizes (typically 3 to 4 mm). In\nmany cases, tests with fiber-supported droplets and a brief\ntranslation of the fiber were conducted in addition to the\nquiescent, free-floating droplet tests.",
+        "score": 0.0082,
+        "section_title": "4.0 Experimental Results",
         "investigation_ids": [
           "FLEX"
         ]
@@ -252,7 +245,7 @@
     },
     "versions": {
       "data": "v2",
-      "index": "4aa3c9230f",
+      "index": "f5785a04fe",
       "golden_table": "draft"
     },
     "sources": [
@@ -292,86 +285,70 @@
         "source": "Challenge text, 'Spacesuits and oxygen concentration'"
       },
       {
-        "id": "S-038",
+        "id": "S-015",
         "found": true,
         "kind": "source",
-        "title": "PSI-98 investigation metadata (ISA-Tab)",
-        "authors": null,
-        "year": "2024",
-        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-98",
-        "doi": "10.60555/0t15-1z43",
-        "investigation": "Saffire-I",
-        "psi_id": "PSI-98",
-        "role": "metadata",
-        "file_type": "txt",
-        "in_corpus": true,
-        "status": "downloaded"
-      },
-      {
-        "id": "S-039",
-        "found": true,
-        "kind": "source",
-        "title": "PSI-100 investigation metadata (ISA-Tab)",
-        "authors": null,
-        "year": "2024",
-        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-100",
+        "title": "Multi-User Droplet Combustion Apparatus - Flame Extinguishment Experiment (MDCA-FLEX)",
+        "authors": "Williams F.A. (PI)",
+        "year": null,
+        "url": "https://ntrs.nasa.gov/citations/20090014812",
         "doi": null,
-        "investigation": "Saffire-III",
-        "psi_id": "PSI-100",
-        "role": "metadata",
-        "file_type": "txt",
-        "in_corpus": true,
-        "status": "downloaded"
-      },
-      {
-        "id": "S-030",
-        "found": true,
-        "kind": "source",
-        "title": "PSI-25 investigation metadata (ISA-Tab)",
-        "authors": null,
-        "year": "2022",
-        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
-        "doi": "10.60555/4qc4-de67",
-        "investigation": "BASS-II",
-        "psi_id": "PSI-25",
-        "role": "metadata",
-        "file_type": "txt",
-        "in_corpus": true,
-        "status": "downloaded"
-      },
-      {
-        "id": "S-036",
-        "found": true,
-        "kind": "source",
-        "title": "PSI-26 investigation metadata (ISA-Tab)",
-        "authors": null,
-        "year": "2013",
-        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-26",
-        "doi": "10.60555/58h4-dy80",
-        "investigation": "BASS",
-        "psi_id": "PSI-26",
-        "role": "metadata",
-        "file_type": "txt",
-        "in_corpus": true,
-        "status": "downloaded"
-      },
-      {
-        "id": "S-037",
-        "found": true,
-        "kind": "source",
-        "title": "PSI-69 investigation metadata (ISA-Tab)",
-        "authors": null,
-        "year": "2016",
-        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-69",
-        "doi": "10.60555/mbq8-0451",
         "investigation": "FLEX",
         "psi_id": "PSI-69",
-        "role": "metadata",
-        "file_type": "txt",
+        "role": "overview",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-016",
+        "found": true,
+        "kind": "source",
+        "title": "Methanol Droplet Combustion in Oxygen-Inert Environments in Microgravity",
+        "authors": "Nayagam V., Dietrich D.L., Hicks M.C., Williams F.A.",
+        "year": "2013",
+        "url": "https://ntrs.nasa.gov/citations/20130014061",
+        "doi": null,
+        "investigation": "FLEX",
+        "psi_id": "PSI-69",
+        "role": "results",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-011",
+        "found": true,
+        "kind": "source",
+        "title": "BASS-II Science Requirements",
+        "authors": null,
+        "year": null,
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+        "doi": null,
+        "investigation": "BASS-II;SPICE",
+        "psi_id": "PSI-25",
+        "role": "design",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-013",
+        "found": true,
+        "kind": "source",
+        "title": "Detailed Results From the Flame Extinguishment Experiment (FLEX), March 2009 to December 2011, NASA/TP-2015-216046",
+        "authors": "Dietrich D.L., Ferkul P.V., Bryg V.M., Nayagam M.V. vd.",
+        "year": "2015",
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-69",
+        "doi": null,
+        "investigation": "FLEX",
+        "psi_id": "PSI-69",
+        "role": "results",
+        "file_type": "pdf",
         "in_corpus": true,
         "status": "downloaded"
       }
     ]
   },
-  "latency_ms": 0
+  "latency_ms": 8395
 }
