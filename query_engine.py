@@ -222,7 +222,6 @@ class CombustionQueryEngine:
         Retrieves relevant ground truth facts and physical calculation rules from facts.yaml.
         """
         facts = self.facts_data.get("facts", [])
-        rules = self.facts_data.get("rules", [])
         calcs = self.facts_data.get("calculations", [])
         
         q_tokens = set(tokenize(query))
