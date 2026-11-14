@@ -5,15 +5,12 @@
 # (python -m pytest -q tests) and the pipeline scripts were last run with (Python 3.13).
 
 # --- Text extraction and chunking (build_chunks.py) ---
-# NOTE: extracted PDF text depends on the pdfplumber / pdfminer.six / pypdf versions.
-# With the versions below, rebuilding changes the text of 264 chunks of S-013 (FLEX report)
-# compared with the committed processed/chunks.jsonl (e.g. "FLEX–001" -> "FLEX –001").
-# Before the next rebuild, replace these three lines with exact pins (==) taken from the
-# machine that builds chunks.jsonl and indexes/:  pip freeze
-pdfplumber>=0.11        # tested: 0.11.10
-pdfminer.six            # installed with pdfplumber; tested: 20260107
-pypdf>=4.0              # tested: 6.17.0
-python-docx>=1.1        # tested: 1.2.0
+# Exact pins (==) from the machine that built processed/chunks.jsonl and indexes/
+# so running build_chunks.py produces an identical chunks.jsonl (zero git diff).
+pdfplumber==0.11.10
+pdfminer.six==20260107
+pypdf==7.0.1
+python-docx==1.2.0
 
 # --- Index and search (build_index.py, query_engine.py, evaluation/) ---
 rank_bm25>=0.2.2

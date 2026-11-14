@@ -24,6 +24,7 @@ def main():
     ap.add_argument("--split", default="train")
     ap.add_argument("--k", type=int, default=5)
     ap.add_argument("--stub", action="store_true")
+    ap.add_argument("--out", default=None, help="optional path to write JSON evaluation summary and per-question details")
     a = ap.parse_args()
 
     if a.stub:
@@ -44,8 +45,15 @@ def main():
         "search_hybrid (no filter)": lambda q: eng.search_hybrid(q, top_k=a.k),
         "build_rag_context": lambda q: eng.build_rag_context(q, top_k=a.k)["search_results"],
     }
+    report = {
+        "split": a.split,
+        "k": a.k,
+        "encoder": "stub (zero vectors)" if a.stub else query_engine.MODEL_NAME,
+        "n_questions": len(rows),
+        "systems": {},
+    }
     for name, fn in systems.items():
-        hits, rr, misses = 0, 0.0, []
+        hits, rr, misses, details = 0, 0.0, [], []
         for r in rows:
             srcs = [x["source_id"] for x in fn(r["question"])]
             exp = set(r["expected_source_ids"])
@@ -55,8 +63,30 @@ def main():
             rr += 1 / first if first else 0
             if not hit:
                 misses.append(r["id"])
+            details.append({
+                "id": r["id"],
+                "type": r.get("type"),
+                "hit": bool(hit),
+                "first_rank": first,
+                "expected_source_ids": sorted(exp),
+                "retrieved_source_ids": srcs,
+            })
         n = len(rows)
+        recall_k = round(hits / n, 4)
+        mrr = round(rr / n, 4)
         print(f"{name:28} split={a.split} n={n} Recall@{a.k}={hits / n:.2f} MRR={rr / n:.2f} misses={' '.join(misses)}")
+        report["systems"][name] = {
+            "hits": int(hits),
+            "recall_at_k": recall_k,
+            "mrr": mrr,
+            "misses": misses,
+            "questions": details,
+        }
+
+    if a.out:
+        out_path = Path(a.out)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":

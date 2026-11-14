@@ -369,11 +369,13 @@ class CombustionQueryEngine:
                                  "(po2 values are products of range end points, not single tests).")
             context_parts.append("| id | O2 min-max | P psi min-max | O2 flag | P flag | joint | evidence | lunar note | citations |")
             for m in screening_rows:
+                joint = fmt(m.get("lunar_joint_flag"))
+                lnote = fmt(m.get("lunar_note")) if joint in ("yes", "partial") else "-"
                 context_parts.append(
                     f"| {fmt(m.get('id'))} | {fmt(m.get('o2_min'))}-{fmt(m.get('o2_max'))} | "
                     f"{fmt(m.get('pressure_psi_min'))}-{fmt(m.get('pressure_psi_max'))} | {fmt(m.get('lunar_o2_flag'))} | "
-                    f"{fmt(m.get('lunar_pressure_flag'))} | {fmt(m.get('lunar_joint_flag'))} | {fmt(m.get('evidence_level'))} | "
-                    f"{fmt(m.get('lunar_note'))} | {fmt(m.get('pages'))} |")
+                    f"{fmt(m.get('lunar_pressure_flag'))} | {joint} | {fmt(m.get('evidence_level'))} | "
+                    f"{lnote} | {fmt(m.get('pages'))} |")
             context_parts.append("")
 
         # 2b. Documented Source Conflicts

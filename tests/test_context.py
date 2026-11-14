@@ -196,3 +196,35 @@ def test_unknown_source_title_is_an_error():
     row = {"id": "QX", "answerable": True, "expected_sources": ["Some New Paper (2025)"]}
     with pytest.raises(ValueError):
         annotate([row], indexed=set(), manifest=set())
+
+
+# --- 7. screening table lunar_note compactness & dense search path -----------
+
+def test_screening_table_omits_redundant_lunar_notes(engine):
+    r = engine.build_rag_context(Q01)
+    ctx = r["assembled_context"]
+    # partial rows keep their detailed lunar_note
+    assert "220R001" in ctx
+    # no / unknown rows use '-' instead of repeating bounds
+    assert "O2 upper bound 0.217 < 0.30" not in ctx
+    assert "O2 upper bound and/or pressure lower bound unknown" not in ctx
+
+
+def test_dense_search_path_contributes_to_ranking(engine, monkeypatch):
+    target_idx = 42
+    target_chunk_id = engine.chunks[target_idx]["chunk_id"]
+
+    # With zero vectors (_StubEncoder), target_idx=42 is absent and all dense scores are 0
+    baseline = engine.search_hybrid("zzzz_nonexistent_token_xyz", top_k=5)
+    assert all(r["dense_score"] == 0.0 for r in baseline)
+    assert target_chunk_id not in [r["chunk_id"] for r in baseline]
+
+    # When dense encoder returns target_idx's unit vector, dense_score is ~1.0 and pulls it into top-5
+    target_vec = engine.embeddings[target_idx : target_idx + 1].astype("float32")
+    monkeypatch.setattr(engine.encoder, "encode", lambda texts, normalize_embeddings=True: target_vec)
+
+    res = engine.search_hybrid("zzzz_nonexistent_token_xyz", top_k=5)
+    matched = [r for r in res if r["chunk_id"] == target_chunk_id]
+    assert matched, "expected dense rank #1 chunk to appear in top-5 hybrid results"
+    assert matched[0]["dense_score"] == pytest.approx(1.0, abs=1e-4)
+

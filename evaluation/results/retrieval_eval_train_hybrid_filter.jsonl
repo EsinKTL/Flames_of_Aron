@@ -1,0 +1,23 @@
+{"id": "Q06", "type": "synthesis", "hit": true, "first_rank": 4, "expected": ["S-025", "S-026", "S-030", "S-036", "S-038"], "top": ["S-003", "S-012", "S-012", "S-026", "S-007"], "filter": []}
+{"id": "Q10", "type": "comparison", "hit": false, "first_rank": 7, "expected": ["S-022", "S-034"], "top": ["S-020", "S-021", "S-021", "S-020", "S-021"], "filter": ["Saffire-II"]}
+{"id": "Q11", "type": "comparison", "hit": false, "first_rank": 7, "expected": ["S-022", "S-033"], "top": ["S-026", "S-004", "S-011", "S-006", "S-007"], "filter": []}
+{"id": "Q16", "type": "fact", "hit": true, "first_rank": 1, "expected": ["S-026", "S-037"], "top": ["S-026", "S-013", "S-015", "S-014", "S-016"], "filter": ["FLEX"]}
+{"id": "Q17", "type": "synthesis", "hit": true, "first_rank": 3, "expected": ["S-025", "S-026", "S-040"], "top": ["S-020", "S-020", "S-026", "S-026", "S-021"], "filter": []}
+{"id": "Q23", "type": "conflict", "hit": true, "first_rank": 1, "expected": ["S-013", "S-032", "S-037"], "top": ["S-013", "S-013", "S-015", "S-016", "S-013"], "filter": ["FLEX"]}
+{"id": "Q27", "type": "fact", "hit": true, "first_rank": 3, "expected": ["S-022"], "top": ["S-021", "S-017", "S-022", "S-018", "S-020"], "filter": ["Saffire-I", "Saffire-III"]}
+{"id": "Q32", "type": "fact", "hit": true, "first_rank": 1, "expected": ["S-026"], "top": ["S-026", "S-026", "S-025", "S-007", "S-006"], "filter": []}
+{"id": "Q33", "type": "fact", "hit": true, "first_rank": 1, "expected": ["S-007"], "top": ["S-007", "S-004", "S-007", "S-007", "S-011"], "filter": ["BASS-II"]}
+{"id": "Q34", "type": "fact", "hit": true, "first_rank": 1, "expected": ["S-007"], "top": ["S-007", "S-007", "S-011", "S-007", "S-007"], "filter": ["BASS-II"]}
+{"id": "Q35", "type": "fact", "hit": true, "first_rank": 1, "expected": ["S-007"], "top": ["S-007", "S-006", "S-006", "S-006", "S-011"], "filter": ["BASS-II"]}
+{"id": "Q36", "type": "fact", "hit": true, "first_rank": 5, "expected": ["S-007"], "top": ["S-012", "S-026", "S-003", "S-006", "S-007"], "filter": []}
+{"id": "Q39", "type": "conflict", "hit": true, "first_rank": 1, "expected": ["S-007", "S-030"], "top": ["S-007", "S-007", "S-003", "S-007", "S-007"], "filter": ["BASS-II"]}
+{"id": "Q40", "type": "comparison", "hit": true, "first_rank": 4, "expected": ["S-007", "S-022"], "top": ["S-020", "S-021", "S-021", "S-022", "S-020"], "filter": ["Saffire-I", "BASS-II"]}
+{"id": "Q41", "type": "synthesis", "hit": true, "first_rank": 1, "expected": ["S-022"], "top": ["S-022", "S-022", "S-022", "S-020", "S-020"], "filter": ["Saffire-I", "Saffire-II", "Saffire-III"]}
+{"id": "Q42", "type": "fact", "hit": true, "first_rank": 3, "expected": ["S-020"], "top": ["S-022", "S-021", "S-020", "S-039", "S-020"], "filter": ["Saffire-I", "Saffire-II", "Saffire-III"]}
+{"id": "Q43", "type": "conflict", "hit": true, "first_rank": 1, "expected": ["S-022", "S-033"], "top": ["S-022", "S-022", "S-022", "S-021", "S-022"], "filter": ["Saffire-I", "Saffire-III"]}
+{"id": "Q44", "type": "fact", "hit": false, "first_rank": 12, "expected": ["S-022", "S-034"], "top": ["S-020", "S-021", "S-021", "S-020", "S-020"], "filter": ["Saffire-II"]}
+{"id": "Q45", "type": "synthesis", "hit": true, "first_rank": 1, "expected": ["S-020"], "top": ["S-020", "S-021", "S-021", "S-020", "S-020"], "filter": ["Saffire-II"]}
+{"id": "Q46", "type": "fact", "hit": true, "first_rank": 1, "expected": ["S-020", "S-022"], "top": ["S-020", "S-026", "S-021", "S-020", "S-021"], "filter": []}
+{"id": "Q47", "type": "fact", "hit": true, "first_rank": 1, "expected": ["S-013"], "top": ["S-013", "S-013", "S-013", "S-013", "S-013"], "filter": ["FLEX"]}
+{"id": "Q49", "type": "fact", "hit": true, "first_rank": 1, "expected": ["S-013"], "top": ["S-013", "S-013", "S-013", "S-037", "S-013"], "filter": ["FLEX"]}
+{"id": "Q50", "type": "synthesis", "hit": true, "first_rank": 2, "expected": ["S-020"], "top": ["S-024", "S-020", "S-020", "S-011", "S-025"], "filter": []}
