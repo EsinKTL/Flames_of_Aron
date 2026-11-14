@@ -21,6 +21,6 @@ gaps:
 
   - id: G-002
     topic: Artemis II smoke alarm
-    pattern: "artemis[^.?!]*(?:alarm|smoke|fire)|(?:alarm|smoke)[^.?!]*artemis"
+    pattern: "(?:trigger|caus|\\bwhy\\b)[^.?!]*artemis|artemis[^.?!]*(?:trigger|caus|\\bwhy\\b|(?:actual|real) fire|was there a fire|what happened)"
     statement: "Artemis II smoke alarm: the corpus only mentions that a smoke alarm event occurred during Artemis II testing [F-024]; it gives no cause and does not say whether there was a fire."
-    checked: "2026-11-14: 'Artemis' occurs in facts.yaml F-024 only; it occurs in no indexed chunk."
+    checked: "2026-11-14: 'Artemis' occurs in facts.yaml F-024 only; it occurs in no indexed chunk. The pattern covers questions about the cause or about a fire; whether the event happened is answered by F-024."

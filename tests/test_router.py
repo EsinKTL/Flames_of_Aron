@@ -54,7 +54,8 @@ def test_llm_is_asked_only_when_rules_are_unsure():
 def test_scope_patterns_match_query_engine(stub_engine):
     qe = sys.modules[type(stub_engine).__module__]
     assert router.PROPULSION_RE.pattern == qe.OUT_OF_SCOPE_RE.pattern
-    assert router.PARTIAL_GRAVITY_RE.pattern == qe.PARTIAL_GRAVITY_RE.pattern
+    # same triggers, except "reduced gravity" (= microgravity in NASA usage) must not cause a refusal
+    assert router.PARTIAL_GRAVITY_RE.pattern == qe.PARTIAL_GRAVITY_RE.pattern.replace("reduced gravity|", "")
 
 
 # --- answer type -----------------------------------------------------------------
@@ -67,6 +68,7 @@ def test_scope_patterns_match_query_engine(stub_engine):
     ("What particle sizes did SAME-R measure?", "no_data", "SAME-R: no results document"),
     ("What total pressure did Saffire-II run at?", "no_data", "Saffire-II: pressure unknown"),
     ("How do lithium-ion battery fires spread in microgravity?", "no_data", "G-001"),
+    ("What triggered the smoke alarm on Artemis II?", "no_data", "G-002"),
 ])
 def test_refusals(question, answer_type, gap_part):
     got, gaps = evidence.assess(question)
@@ -82,6 +84,10 @@ def test_refusals(question, answer_type, gap_part):
     "What does E-FIELD tell us about partial gravity?",               # names an investigation
     "Compare the oxygen range of FLEX and DAFT-2",                    # one of two investigations is covered
     "The battery powered CO monitor in BASS-II: what did it measure?",
+    "What does the Researcher's Guide say about combustion in reduced gravity?",   # reduced gravity = microgravity
+    "Can 0-g and 1-g results bound flame behaviour at lunar gravity?",             # answered by F-021
+    "Which planned experiments will provide lunar gravity combustion data?",       # answered by F-019
+    "Was there a smoke alarm event during Artemis II?",                            # answered by F-024
 ])
 def test_answerable_questions_are_not_refused(question):
     assert evidence.assess(question)[0] == "answer"

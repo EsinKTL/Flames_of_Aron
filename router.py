@@ -16,9 +16,12 @@ INTENTS = ("out_of_scope", "partial_gravity", "calculation", "lunar_check", "con
            "comparison", "ranking", "general")
 HARD_INTENTS = ("out_of_scope", "partial_gravity")
 
-# Kept identical to query_engine.OUT_OF_SCOPE_RE / PARTIAL_GRAVITY_RE (tests/test_router.py checks this).
+# Kept in step with query_engine.OUT_OF_SCOPE_RE / PARTIAL_GRAVITY_RE (tests/test_router.py checks this).
+# One deliberate difference: "reduced gravity" is NOT a partial-gravity trigger here. NASA uses it for
+# microgravity ("reduced-gravity combustion experiments (e.g., aboard the ISS)" [F-023]), and in the
+# router a match leads to a refusal, so such questions must stay answerable.
 PROPULSION_RE = re.compile(r"rocket|thruster|propellant|engine fire|re-?entry|heat shield", re.I)
-PARTIAL_GRAVITY_RE = re.compile(r"lunar gravity|moon gravity|mars gravity|martian gravity|partial[- ]gravity|reduced gravity|\b\d/\d+\s*-?g\b", re.I)
+PARTIAL_GRAVITY_RE = re.compile(r"lunar gravity|moon gravity|mars gravity|martian gravity|partial[- ]gravity|\b\d/\d+\s*-?g\b", re.I)
 MEDICAL_RE = re.compile(r"medical (?:treatment|protocol|care|advice|guidance)|treatment protocol|first[- ]aid|"
                         r"\bmedication|\bdiagnos|\btherapy\b|\bclinical\b", re.I)
 

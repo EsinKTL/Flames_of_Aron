@@ -50,6 +50,10 @@ RESULTS_RE = re.compile(r"\bmeasure[ds]?\b|measurement|\bresults?\b|\bdata\b|\bv
 AVAILABILITY_RE = re.compile(r"\b(?:our|the|your) corpus\b|pull (?:its|the|their|that) data|do we have|"
                              r"is there (?:any )?(?:measured |test |flight )?data|data available|"
                              r"available in (?:the |our )?(?:repo|repository|corpus)", re.I)
+# Partial-gravity questions that facts F-019 .. F-021 answer directly: bounding by 0-g / 1-g results,
+# the E-FIELD simulation, and the planned experiments (LUCI, FM2). These are not refused.
+PARTIAL_GRAVITY_ANSWERABLE_RE = re.compile(r"\bbound|bracket|simulat|\bplanned\b|\bfuture\b|upcoming|slated|"
+                                           r"\bLUCI\b|\bFM2\b", re.I)
 HIGHEST_O2_RE = re.compile(r"(?:highest|maximum|most)[^.?!]*(?:\bo2\b|oxygen)", re.I)
 O2_PERCENT_RE = re.compile(r"(\d+(?:\.\d+)?)\s*%\s*(?:o2|oxygen)", re.I)
 PSI_RE = re.compile(r"(\d+(?:\.\d+)?)\s*psi", re.I)
@@ -103,7 +107,8 @@ def assess(query, route=None):
     """Decide answer_type and list the gaps. Returns (answer_type, gaps).
 
     out_of_scope  propulsion [F-022, R-004] or medical guidance
-    no_data       partial-gravity question naming no investigation [F-019, R-002]; a known topic gap;
+    no_data       partial-gravity question naming no investigation [F-019, R-002], unless it asks about
+                  bounding, simulation or planned experiments, which the facts answer; a known topic gap;
                   or every investigation the question is about has no source, no results in the local
                   corpus (for a results / availability question), or the asked condition is unknown
     answer        otherwise; gaps may still list what is missing
@@ -122,7 +127,7 @@ def assess(query, route=None):
     if route["intent"] == "partial_gravity":
         gaps.append("Partial gravity: NASA PSI contains no partial-gravity combustion test data [F-019]; "
                     "0-g and 1-g results only bound intermediate gravity levels [F-021].")
-        blocking = blocking or not named
+        blocking = blocking or (not named and not PARTIAL_GRAVITY_ANSWERABLE_RE.search(query))
 
     for entry, pattern in known_gaps():
         if pattern.search(query):
