@@ -38,6 +38,54 @@ MANIFEST_PATH = os.path.join(REFERENCE_DIR, "manifest.csv")
 
 MODEL_NAME = "all-MiniLM-L6-v2"
 
+# --- Conflict matching -------------------------------------------------------
+# Question wording -> field family
+QUERY_FIELD_FAMILIES = {
+    "flow":             r"flow|speed|velocity|cm/s",
+    "o2":               r"\bo2\b|oxygen",
+    "pressure":         r"pressure|\bpsi\b|\bkpa\b|\batm\b|mmhg",
+    "test_count":       r"how many|number of (?:tests|samples|runs)|test count|tests? (?:were )?(?:run|conducted|performed)",
+    "operation_period": r"\bwhen\b|\bdates?\b|launch|\byears?\b|\bflew\b|flight period|operation",
+    "measurements":     r"radiometer|sensor|measur",
+    "burn_time":        r"burn time|duration|how long",
+    "fuel_shape_size":  r"thickness|width|length|\bsize\b|dimension",
+    "ignition":         r"ignit",
+    "name":             r"\bname\b|called",
+}
+# Conflict-table `field` value -> field family
+CONFLICT_FIELD_FAMILIES = {
+    "flow":             r"flow",
+    "o2":               r"\bo2\b",
+    "pressure":         r"pressure",
+    "test_count":       r"test_count",
+    "operation_period": r"operation_period",
+    "measurements":     r"measurements",
+    "burn_time":        r"burn time",
+    "fuel_shape_size":  r"fuel_shape_size",
+    "ignition":         r"ignition",
+    "name":             r"^name$",
+}
+CONFLICT_WORDS_RE = re.compile(r"conflict|disagree|discrepan|inconsisten|different values|which (?:value|one) is (?:right|correct)|sources? (?:differ|say)", re.I)
+
+# --- Atmosphere screening (questions that name no investigation) ------------
+SCREENING_RE = re.compile(
+    r"\b(?:lunar|moon|habitat|partial pressure|po2|oxygen[- ]enriched|enriched[- ]oxygen|closest|highest|lowest|"
+    r"maximum|minimum|which (?:microgravity )?(?:experiments?|tests?|investigations?))\b"
+    r"|\d+(?:\.\d+)?\s*%\s*o2|\d+(?:\.\d+)?\s*psi", re.I)
+PARTIAL_GRAVITY_RE = re.compile(r"lunar gravity|moon gravity|mars gravity|martian gravity|partial[- ]gravity|reduced gravity|\b\d/\d+\s*-?g\b", re.I)
+OUT_OF_SCOPE_RE = re.compile(r"rocket|thruster|propellant|engine fire|re-?entry|heat shield", re.I)
+JOINT_FLAG_ORDER = {"yes": 0, "partial": 1, "no": 2, "unknown": 3}
+
+
+def fmt(value) -> str:
+    """Render a golden-table cell; empty / NaN cells become 'unknown' (never 0)."""
+    if value is None:
+        return "unknown"
+    if isinstance(value, float) and np.isnan(value):
+        return "unknown"
+    text = str(value).strip()
+    return text if text and text.lower() != "nan" else "unknown"
+
 def tokenize(text: str):
     """Tokenization matching the indexing pipeline."""
     return re.findall(r"\b[A-Za-z0-9_/%.-]+\b", text.lower())
@@ -174,7 +222,6 @@ class CombustionQueryEngine:
         Retrieves relevant ground truth facts and physical calculation rules from facts.yaml.
         """
         facts = self.facts_data.get("facts", [])
-        rules = self.facts_data.get("rules", [])
         calcs = self.facts_data.get("calculations", [])
         
         q_tokens = set(tokenize(query))
@@ -190,72 +237,157 @@ class CombustionQueryEngine:
                 
         return matching_facts[:5]
 
-    def get_conflicts(self, query: str, matched_exp_ids: list = None):
+    def get_conflicts(self, query: str, matched_exp_ids: list = None, limit: int = 5):
         """
-        Retrieves documented cross-source discrepancies from golden_table_conflicts.csv.
+        Returns documented cross-source conflicts for the investigations named in the query.
+
+        - Investigation match is EXACT (canonical IDs from investigations.detect_investigations
+          plus matched_exp_ids); "Saffire-III" never returns Saffire-II rows, "BASS-II" never BASS rows.
+        - Rows are ranked by how well their `field` matches what the question asks about
+          (flow, O2, pressure, test count, dates ...). Rows with no field match are dropped,
+          unless the question explicitly asks about conflicts/discrepancies.
         """
         if self.conflicts_df.empty:
             return []
+        ids = set(detect_investigations(query)) | set(matched_exp_ids or [])
+        if not ids:
+            return []
 
-        q_lower = query.lower()
-        q_tokens = set(tokenize(query))
-        exp_set = {str(e).lower() for e in (matched_exp_ids or [])}
-        matches = []
+        asked = {fam for fam, pat in QUERY_FIELD_FAMILIES.items() if re.search(pat, query, re.I)}
+        wants_all = bool(CONFLICT_WORDS_RE.search(query))
 
-        for _, row in self.conflicts_df.iterrows():
-            inv_id = str(row.get("investigation_id", "")).lower()
-            field = str(row.get("field", "")).lower()
-            rationale = str(row.get("rationale", "")).lower()
-            row_tokens = set(tokenize(f"{inv_id} {field} {rationale}"))
-            if (inv_id in exp_set or inv_id in q_lower) and len(q_tokens.intersection(row_tokens)) >= 1:
-                matches.append(row.to_dict())
+        scored = []
+        for order, (_, row) in enumerate(self.conflicts_df.iterrows()):
+            if str(row.get("investigation_id", "")) not in ids:
+                continue
+            field = str(row.get("field", ""))
+            row_fams = {fam for fam, pat in CONFLICT_FIELD_FAMILIES.items() if re.search(pat, field, re.I)}
+            score = len(row_fams & asked)
+            if score > 0 or wants_all:
+                scored.append((-score, order, row.to_dict()))
+        scored.sort(key=lambda x: (x[0], x[1]))
+        return [r for _, _, r in scored[:limit]]
 
-        return matches[:5]
+    def get_rules(self):
+        """All agent behaviour rules (R-001 ... R-008). Always included in the context."""
+        return list(self.facts_data.get("rules", []))
+
+    def get_screening_rows(self, query: str):
+        """
+        Compact atmosphere-screening table (all golden-table rows) for questions that ask about
+        conditions (lunar habitat, highest O2, 30% O2 / 10.2 psi ...) but name no investigation.
+        Not used for partial-gravity or out-of-scope questions.
+        Sorted by lunar_joint_flag (yes, partial, no, unknown), then by o2_max descending.
+        """
+        if self.golden_df.empty or detect_investigations(query):
+            return []
+        if not SCREENING_RE.search(query) or PARTIAL_GRAVITY_RE.search(query) or OUT_OF_SCOPE_RE.search(query):
+            return []
+        rows = [r.to_dict() for _, r in self.golden_df.iterrows()]
+
+        def o2max(r):
+            try:
+                return -float(r.get("o2_max"))
+            except (TypeError, ValueError):
+                return 1.0  # unknown last within its flag group
+        rows.sort(key=lambda r: (JOINT_FLAG_ORDER.get(fmt(r.get("lunar_joint_flag")), 3), o2max(r)))
+        return rows
 
     def build_rag_context(self, query: str, top_k: int = 5):
         """
         Assembles all retrieved evidence into an organized, citation-ready context block.
         """
-        search_results = self.search_hybrid(query, top_k=top_k)
+        inv_ids = detect_investigations(query)
+
+        # 1) Retrieval: investigation filter first, unfiltered fill-up, one chunk per named investigation
+        if inv_ids:
+            search_results = self.search_hybrid(query, top_k=top_k, experiment_filter=inv_ids)
+            seen = {r["chunk_id"] for r in search_results}
+            if len(search_results) < top_k:
+                for r in self.search_hybrid(query, top_k=top_k * 3):
+                    if len(search_results) >= top_k:
+                        break
+                    if r["chunk_id"] not in seen:
+                        search_results.append(r)
+                        seen.add(r["chunk_id"])
+            for inv in inv_ids:
+                if not any(inv in r.get("investigation_ids", []) for r in search_results):
+                    for r in self.search_hybrid(query, top_k=1, experiment_filter=inv):
+                        if r["chunk_id"] not in seen:
+                            search_results.append(r)
+                            seen.add(r["chunk_id"])
+            filter_applied = list(inv_ids)
+        else:
+            search_results = self.search_hybrid(query, top_k=top_k)
+            filter_applied = []
+
         golden_matches = self.get_golden_facts(query)
+        screening_rows = self.get_screening_rows(query)
         guardrails = self.get_guardrail_facts(query)
+        rules = self.get_rules()
         matched_exp_ids = [m.get("id") for m in golden_matches if m.get("id")]
         conflicts = self.get_conflicts(query, matched_exp_ids=matched_exp_ids)
-        
+
         context_parts = []
-        
+
+        # 0. Agent rules (always)
+        if rules:
+            context_parts.append("### AGENT RULES (MUST FOLLOW):")
+            for r in rules:
+                context_parts.append(f"- [{r.get('id')}] {r.get('rule')}")
+            context_parts.append("")
+
         # 1. Guardrail Facts
         if guardrails:
             context_parts.append("### AUTHORITATIVE NASA BASELINE FACTS & PHYSICAL CONSTANTS:")
             for g in guardrails:
                 context_parts.append(f"- [{g.get('id', 'F')}] ({g.get('topic')}) {g.get('claim')} [Source: {g.get('source')}]")
             context_parts.append("")
-            
-        # 2. Golden Table Parameters
+
+        # 2. Golden Table Parameters (investigations named in the question)
         if golden_matches:
-            context_parts.append("### GOLDEN TABLE EXPERIMENT SPECIFICATIONS:")
+            context_parts.append("### GOLDEN TABLE EXPERIMENT SPECIFICATIONS (unverified LLM draft unless 'verified: yes'):")
             for m in golden_matches:
-                context_parts.append(f"**Experiment: {m.get('name')} (ID: {m.get('id')})**")
-                context_parts.append(f"- Category: {m.get('category')} | Fuel: {m.get('fuel_type')} ({m.get('fuel_material', m.get('fuel_shape_size'))})")
-                context_parts.append(f"- Oxygen Range: {m.get('o2_min')} - {m.get('o2_max')} ({m.get('o2_raw', '')})")
-                context_parts.append(f"- Pressure Range: {m.get('pressure_psi_min')} - {m.get('pressure_psi_max')} psi ({m.get('pressure_raw', '')})")
-                context_parts.append(f"- Flow Speed: {m.get('flow_cm_s_min')} - {m.get('flow_cm_s_max')} cm/s ({m.get('flow_raw', '')})")
-                context_parts.append(f"- Key Finding: {m.get('main_finding')}")
-                context_parts.append(f"- Citations: {m.get('pages')}")
+                context_parts.append(f"**Experiment: {fmt(m.get('name'))} (ID: {fmt(m.get('id'))})**")
+                context_parts.append(f"- Category: {fmt(m.get('category'))} | Fuel: {fmt(m.get('fuel_type'))} ({fmt(m.get('fuel_material'))}; {fmt(m.get('fuel_shape_size'))})")
+                context_parts.append(f"- Oxygen (mole fraction): {fmt(m.get('o2_min'))} - {fmt(m.get('o2_max'))} | raw: {fmt(m.get('o2_raw'))} | note: {fmt(m.get('o2_note'))}")
+                context_parts.append(f"- Total pressure (psi): {fmt(m.get('pressure_psi_min'))} - {fmt(m.get('pressure_psi_max'))} | raw: {fmt(m.get('pressure_raw'))} | note: {fmt(m.get('pressure_note'))}")
+                context_parts.append(f"- Flow (cm/s): {fmt(m.get('flow_cm_s_min'))} - {fmt(m.get('flow_cm_s_max'))} | raw: {fmt(m.get('flow_raw'))} | note: {fmt(m.get('flow_note'))}")
+                context_parts.append(f"- Gravity regime: {fmt(m.get('gravity_regime'))} | Hardware: {fmt(m.get('hardware'))}")
+                context_parts.append(f"- Lunar flags: O2>=0.30: {fmt(m.get('lunar_o2_flag'))} | P<=10.2 psi: {fmt(m.get('lunar_pressure_flag'))} | same test (joint): {fmt(m.get('lunar_joint_flag'))}")
+                context_parts.append(f"- Lunar note: {fmt(m.get('lunar_note'))}")
+                context_parts.append(f"- Key Finding: {fmt(m.get('main_finding'))}")
+                context_parts.append(f"- Evidence level: {fmt(m.get('evidence_level'))} | verified: {fmt(m.get('verified'))} | conflicts on record: {fmt(m.get('has_conflict'))}")
+                context_parts.append(f"- Citations: {fmt(m.get('pages'))}")
                 context_parts.append("")
+
+        # 2a. Atmosphere screening table (condition questions that name no investigation)
+        if screening_rows:
+            context_parts.append("### ATMOSPHERE SCREENING TABLE (all core investigations; unverified LLM draft):")
+            context_parts.append("Lunar target: O2 >= 0.30 AND total pressure <= 10.2 psi IN THE SAME TEST [F-005]. "
+                                 "Use lunar_joint_flag and lunar_note; never infer a match from range end points "
+                                 "(po2 values are products of range end points, not single tests).")
+            context_parts.append("| id | O2 min-max | P psi min-max | O2 flag | P flag | joint | evidence | lunar note | citations |")
+            for m in screening_rows:
+                context_parts.append(
+                    f"| {fmt(m.get('id'))} | {fmt(m.get('o2_min'))}-{fmt(m.get('o2_max'))} | "
+                    f"{fmt(m.get('pressure_psi_min'))}-{fmt(m.get('pressure_psi_max'))} | {fmt(m.get('lunar_o2_flag'))} | "
+                    f"{fmt(m.get('lunar_pressure_flag'))} | {fmt(m.get('lunar_joint_flag'))} | {fmt(m.get('evidence_level'))} | "
+                    f"{fmt(m.get('lunar_note'))} | {fmt(m.get('pages'))} |")
+            context_parts.append("")
 
         # 2b. Documented Source Conflicts
         if conflicts:
-            context_parts.append("### DOCUMENTED CROSS-SOURCE CONFLICTS & RECONCILIATION:")
+            context_parts.append("### DOCUMENTED CROSS-SOURCE CONFLICTS (present BOTH values, rule R-007):")
             for c in conflicts:
                 context_parts.append(
                     f"- [{c.get('investigation_id')} | {c.get('field')}] "
                     f"Value 1: {c.get('value_1')} ({c.get('source_1')}) vs "
                     f"Value 2: {c.get('value_2')} ({c.get('source_2')}) -> "
-                    f"Chosen: {c.get('chosen')} ({c.get('rationale')})"
+                    f"Chosen in table: {c.get('chosen')} ({c.get('rationale')})"
                 )
             context_parts.append("")
-                
+
         # 3. Microgravity Literature Chunks
         context_parts.append("### RETRIEVED RESEARCH PASSAGES & EXPERIMENT TABLES:")
         for idx, res in enumerate(search_results, start=1):
@@ -263,14 +395,18 @@ class CombustionQueryEngine:
             context_parts.append(f"--- [Passage {idx} | Source: {source_tag} | Score: {res['rrf_score']:.4f}] ---")
             context_parts.append(res["text"])
             context_parts.append("")
-            
+
         return {
             "query": query,
             "assembled_context": "\n".join(context_parts),
+            "investigation_ids": inv_ids,
+            "filter_applied": filter_applied,
             "search_results": search_results,
             "golden_matches": golden_matches,
+            "screening_rows": screening_rows,
             "conflicts": conflicts,
-            "guardrails": guardrails
+            "guardrails": guardrails,
+            "rules": rules,
         }
 
 if __name__ == "__main__":
