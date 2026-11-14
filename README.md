@@ -16,6 +16,7 @@ indexes/           BM25 + dense embeddings (written by build_index.py)
 evaluation/        questions (master), train/test split, evaluation scripts
 scripts/           maintenance scripts (check_evidence.py)
 tests/             pytest tests (no model download needed)
+requirements.txt   Python dependencies
 investigations.py  investigation name detection (BASS vs BASS-II, FLEX vs FLEX-2, CFI vs CFI-G ...)
 query_engine.py    hybrid search + golden table + conflicts + facts/rules context builder
 ```
@@ -27,7 +28,7 @@ rebuilt from the current `processed/chunks.jsonl`. `build_chunks.py` also refres
 `chunk_count` in `reference/manifest.csv`.
 
 ```bash
-pip install pdfplumber pypdf python-docx rank_bm25 sentence-transformers numpy pandas pyyaml openpyxl pytest
+pip install -r requirements.txt
 python build_chunks.py                                  # raw/ -> interim/pages.jsonl, processed/chunks.jsonl, manifest chunk_count
 python build_index.py                                   # processed/chunks.jsonl -> indexes/
 python scripts/check_evidence.py                        # golden table evidence check

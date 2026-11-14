@@ -1,0 +1,27 @@
+# Flames_of_Aron - Python dependencies
+# Install:  pip install -r requirements.txt
+#
+# Lower bounds, not exact pins. The version after "tested:" is the one the test suite
+# (python -m pytest -q tests) and the pipeline scripts were last run with (Python 3.13).
+
+# --- Text extraction and chunking (build_chunks.py) ---
+# NOTE: extracted PDF text depends on the pdfplumber / pdfminer.six / pypdf versions.
+# With the versions below, rebuilding changes the text of 264 chunks of S-013 (FLEX report)
+# compared with the committed processed/chunks.jsonl (e.g. "FLEX–001" -> "FLEX –001").
+# Before the next rebuild, replace these three lines with exact pins (==) taken from the
+# machine that builds chunks.jsonl and indexes/:  pip freeze
+pdfplumber>=0.11        # tested: 0.11.10
+pdfminer.six            # installed with pdfplumber; tested: 20260107
+pypdf>=4.0              # tested: 6.17.0
+python-docx>=1.1        # tested: 1.2.0
+
+# --- Index and search (build_index.py, query_engine.py, evaluation/) ---
+rank_bm25>=0.2.2
+sentence-transformers>=2.2   # downloads all-MiniLM-L6-v2 on first use
+numpy>=1.26             # tested: 2.5.3
+pandas>=2.0             # tested: 3.0.5
+pyyaml>=6.0             # tested: 6.0.3
+
+# --- Maintenance scripts and tests ---
+openpyxl>=3.1           # scripts/check_evidence.py reads .xlsx tables; tested: 3.1.5
+pytest>=8.0             # tested: 9.1.1
