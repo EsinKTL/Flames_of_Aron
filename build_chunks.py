@@ -15,6 +15,7 @@ INTERIM_DIR = os.path.join(BASE_DIR, "interim")
 PROCESSED_DIR = os.path.join(BASE_DIR, "processed")
 LOGS_DIR = os.path.join(BASE_DIR, "logs")
 EVAL_DIR = os.path.join(BASE_DIR, "evaluation")
+MANIFEST_PATH = os.path.join(BASE_DIR, "reference", "manifest.csv")
 
 for d in [INTERIM_DIR, PROCESSED_DIR, LOGS_DIR, EVAL_DIR]:
     os.makedirs(d, exist_ok=True)
@@ -619,6 +620,38 @@ def refine_investigation_ids(doc_investigations: list, text: str, section_title:
 
     return doc_investigations
 
+def update_manifest_chunk_counts(all_chunks, manifest_path=MANIFEST_PATH):
+    """Write the number of chunks per source into manifest.csv `chunk_count`.
+
+    Only the chunk_count column changes. Encoding (UTF-8 with BOM), CRLF line endings and
+    column order are preserved. Sources without chunks get "" (not 0), so "not chunked"
+    is never confused with "chunked to nothing". Returns the number of changed rows.
+    """
+    import csv
+    from collections import Counter
+    counts = Counter(c["source_id"] for c in all_chunks)
+    with open(manifest_path, "rb") as fb:
+        raw = fb.read()
+    newline = "\r\n" if b"\r\n" in raw else "\n"
+    with open(manifest_path, "r", encoding="utf-8-sig", newline="") as f:
+        reader = csv.DictReader(f)
+        fields = reader.fieldnames
+        rows = list(reader)
+    changed = 0
+    for r in rows:
+        new = str(counts[r["source_id"]]) if counts.get(r["source_id"]) else ""
+        if r.get("chunk_count", "") != new:
+            r["chunk_count"] = new
+            changed += 1
+    unknown = set(counts) - {r["source_id"] for r in rows}
+    if unknown:
+        raise ValueError(f"chunks reference source_ids missing from manifest: {sorted(unknown)}")
+    with open(manifest_path, "w", encoding="utf-8-sig", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=fields, lineterminator=newline)
+        w.writeheader()
+        w.writerows(rows)
+    return changed
+
 def main():
     interim_pages_path = os.path.join(INTERIM_DIR, "pages.jsonl")
     chunks_output_path = os.path.join(PROCESSED_DIR, "chunks.jsonl")
@@ -1004,6 +1037,9 @@ def main():
     with open(chunks_output_path, "w", encoding="utf-8") as f:
         for ch in all_chunks:
             f.write(json.dumps(ch, ensure_ascii=False) + "\n")
+
+    n_manifest = update_manifest_chunk_counts(all_chunks)
+    print(f" manifest.csv chunk_count güncellendi: {n_manifest} satır değişti")
 
     active_chunks = [c for c in all_chunks if not c["exclude_from_default_search"]]
     print("\n" + "=" * 65)
