@@ -1,0 +1,67 @@
+﻿investigation_id,field,value_1,source_1,value_2,source_2,chosen,rationale
+Saffire-I,fuel_shape_size (width/length),"Length 40.6 cm, Width 94 cm",S-033 row 2,"Width 40.6 cm, Length 94 cm",S-022 p.30,value_2,"S-020 p.2 (0.94 m long, 0.4 m wide) also agrees with value_2; the PSI CSV columns appear to be swapped"
+Saffire-I,fuel_shape_size (thickness),0.37 (in the 'Sample Thickness (cm)' column = 3.7 mm),S-033 row 2,0.37 mm,S-022 p.30,value_2,likely a CSV unit error; the presentation table gives mm
+Saffire-I,ignition power,182 W,S-033 row 2; S-022 p.31,165 W,S-022 p.23,value_1,the PSI table and the presentation results table give the same value; does not affect normalized columns
+Saffire-I,burn time (concurrent),420 s,S-033 row 2; S-022 p.31,400 s,S-022 p.16,value_1,table value; p.16 may be a rounded summary statement
+Saffire-I,measurements (number of radiometers),4,S-020 p.4; S-035 SaffireData row 1,2,S-038 row 40,value_1,the design document and telemetry headers show 4 radiometers
+Saffire-I,operation_period (operation date),2 June 2016 (planned),S-021 p.4,14 June 2016,S-022 p.15; S-035,value_2,the post-flight source and telemetry timestamps show the actual date
+Saffire-I,operation_period (PSI metadata dates),2001-03-02 – 2008-02-28,S-038 rows 51-52,2016,S-022 p.15,value_2,the PSI metadata date and proposal fields appear copied from another record
+Saffire-I,name,Spacecraft Fire Safety Experiment-I,S-038 row 34,Spacecraft Fire Experiment-III (series name),S-039 row 34,value_2,Saffire = Spacecraft Fire Experiment; 'Safety' in the PSI-98 title kept in the note
+Saffire-II,flow_cm_s_max (sample 2-6),25 cm/s,S-022 p.23 and p.30,20 cm/s,S-034 row 7,value_1,the post-flight results presentation says 25 on two separate slides; S-041 (web) also reports 25 for 2-6
+Saffire-II,flow (plan vs flight),30 cm/s for S6 and S9 (plan),S-021 p.3,2-6: 25 cm/s; 2-9: 20 cm/s (flight),S-022 p.30,value_2,actual (post-flight) values preferred
+Saffire-II,o2 (sample 2-1),~ 21.5,S-034 row 2,~ 22.1,S-022 p.30,value_2,S-041 gives the initial O2 as 22.1%; the CSV value may be copied from Saffire-I — excluded from the o2_min calculation
+Saffire-II,fuel_shape_size (silicone thicknesses),0.27 / 0.61 / 1.03 / 0.37 mm (post-flight),S-034 rows 2-5; S-022 p.30,0.25 / 0.61 / 1.02 / 0.36 mm (pre-flight),S-021 p.3,value_1,post-flight measurements preferred
+Saffire-II,fuel_shape_size (typo),037 mm,S-034 rows 5-7,0.37 mm,S-022 p.30,value_2,CSV typo
+Saffire-II,operation_period (operation),19 September 2016 (planned),S-021 p.4,21 November 2016,S-022 p.15; S-042,value_2,actual date
+Saffire-III,flow_cm_s_min / flow_cm_s_max,25 cm/s,"S-022 p.16 and p.30 (post-flight presentation, 2017)",30 cm/s,"S-039 row 40 (PSI-100, 2024); S-017 paragraph 2; S-021 p.2 (pre-flight, 2016)",value_1,"Team decision: post-flight value. S-017 is written in the future tense (derived from pre-flight text); Saffire-II sample 6 also flew at 25 cm/s instead of the planned 30. FOR A FINAL DECISION, check S-043 (Urban et al. 2019, Table 1) by hand"
+Saffire-III,burn time (concurrent),300 s,S-022 p.31,320 s,S-022 p.16,value_1,results table value
+Saffire-III,operation_period (launch),27 March 2017,S-022 p.15,Investigation Start Date 2017-04-18,S-039 row 52,both noted,launch and PSI start date may be different concepts; operation on 4 June 2017 is consistent on both sides
+Saffire-III,measurements (number of radiometers),2,S-039 row 40,4 (Saffire design),S-020 p.4,value_2,design document; no Saffire-III telemetry in the repo — check by hand
+BASS,test_count,"41 samples, 115 burns",S-002 p.8,"121 burn rows (As Run Test # 1-116, some numbers repeated)",S-029 (computed; row 67 excluded),both noted,"the presentation may have been prepared mid-2013; the table count is primary, the stated count is in the note"
+BASS,test_count (plan),60 flames (full success criterion),S-012 p.11,115+ burns (actual),S-002 p.8,value_2,plan vs actual
+BASS,flow_cm_s_max,5-50 cm/s (design),S-012 p.4,up to 40 cm/s (flight),S-002 p.2; S-036 row 40,value_2,flight results
+BASS,o2_min,≥ 21% O2 (design constraint),S-012 p.8,down to 17% O2 (flight),S-002 p.2; S-026 p.19,value_2,two independent post-flight sources report the 17% tests
+BASS,o2 (N2 dilution),BASS-II used MSG N2 dilution on the ISS 'for the first time',S-007 p.9,BASS tests with N2 down to 17% O2,"S-002 p.2, p.47; S-026 p.19",value_2,BASS results clearly show a 17% O2/N2 atmosphere; the TM wording may refer to a difference in method (work-volume dilution)
+BASS,hardware (duct height),7.6 cm (76 × 76 mm),S-036 row 40; S-007 p.12,7.8 cm,S-006 p.1,value_1,two sources; S-006 may describe a later modified duct
+BASS,operation_period (date typo),5/15/2103,S-029 row 111,2013,S-029 neighbouring rows,value_2,typo
+BASS-II,test_count,126 tests,S-007 p.11,129 table rows,S-031 (rows 2-130),value_2,the difference is tests O20-O22 dated 2016-02-26 (S-031 rows 72-74; S-028 Olson sheet)
+BASS-II,flow_cm_s_max,up to 40 cm/s,S-030 row 40,"53 cm/s (Air display, T17) | ~55 cm/s hardware",S-031 row 117; S-007 p.12; S-005 p.7; S-004 p.3,53,"highest measured value in the table (T17 cell reads '6   53', likely a 6→53 ramp; all other rows ≤ 15 cm/s); 40 appears copied from the BASS-I text — verify T17 by hand"
+BASS-II,o2 (final O2 column),1.6 / 0.6 / 39.1 / 0.9 / 40.4,"S-031 rows (B2, P22a, P22b, T28a, T28b; e.g. row 129)",physical range 13.5-22.2,S-031,excluded,team decision: impossible values excluded; the calibrated initial O2 column was used for O2
+BASS-II,operation_period (date),"6/24/2018 (T9, T18)","S-031 rows 109, 118",2014 (GMT 175),S-028 Olson sheet; S-031 neighbouring rows,value_2,typo
+BASS-II,pressure,1 atm (nominal),S-004 p.3,99.2-99.5 kPa (measured),S-007 p.46,both,"min taken from the measured value, max from the nominal value; explained in the README"
+BASS-II,fuel_shape_size (thinnest sheet),0.125 mm,S-007 p.13,0.1 mm,S-005 p.12; S-011,both noted,the TM summary and the manifest differ
+SAME,main_finding (particle size),a substantial portion of particles below 500 nm (number-weighted),S-044 p.1,a substantial portion of aerosol mass above 1 µm (mass-weighted),S-045,both,"different moments (number vs mass); not a true conflict, but the agent should show both"
+SAME,fuel (was there combustion),brief controlled fires (news),S-067,overheating below ignition (no flaming),S-044 p.4,value_2,peer-reviewed/NASA source preferred
+SAME-R,name,SAME-R / Reflight,S-045; S-047,SAME-2,S-046,both,same experiment; should be mapped in query expansion
+SAME-R,main_finding (growth at zero flow),mean mass diameter 30-40% larger,S-046 p.11,2-3 times larger (Conclusions section),S-046 p.12 (no snippet — check by hand),value_1,inconsistency within the same paper; no number given in main_finding
+DAFT,name,Dust Aerosol measurement Feasibility Test,S-026 p.26,Dust and Aerosol Measurement Feasibility Test,S-048; S-068,value_2,NASA photo and press text
+DAFT,operation_period (month),August 2006,S-068; S-067,September (operated),S-048,both,photo dated 21 August 2006; press text says September — the year 2006 is certain
+DAFT,hardware,P-Trak only,S-048,P-Trak + ionization detector + DustTrak,S-067 (no snippet — check by hand),value_1,primary NASA text; the additional instruments should be verified
+DAFT-2,identity,"DAFT-2 is a separate experiment (challenge text, S-040 F-013)",S-040 F-013,no source under the name 'DAFT-2'; DAFT sessions in Exp 10 and Exp 13 are possible,S-044 p.6; S-067,no source found,row left empty; check NTRS 20070031686 and the NASA ISS Research Explorer by hand
+FLEX,test_count,274 (CSV),S-032,"284 (TP text) | 196 (plan) | >300 (2014, including new fuels)",S-013 p.7; S-015 p.3; S-064,value_1,PSI table; the highest number in TP Table IX is FLEX-280
+FLEX,o2_max,0.34,S-032 row 20; S-013 p.26 (Table IX),0.400,S-013 p.17 (Table III),value_1,the CSV and Table IX of the same TP give 0.34
+FLEX,pressure_psi_min,0.0 mmHg (C11M201),S-032 row 115; S-013 p.29,~535 mmHg (neighbouring tests in the same series),S-032,excluded,"team decision: physically impossible, excluded; not filled with an estimate"
+FLEX,pressure range (design vs actual),0.5-1.5 atm (PSI metadata) | 0.5-3.0 atm (plan),S-037 row 42; S-015 p.3,0.70-3.05 atm (TP); 526.3-2319.9 mmHg (CSV),S-013 p.8; S-032,value_2,actual test data
+FLEX,fuel_shape_size (D0),1.10-4.67 mm,S-032 rows 70-71,2-5 mm,S-013 p.8,value_1,per-test CSV value; the TP text is rounded
+FLEX,"fuel_shape_size (D0, FLEX-001)",1.80 mm (Table I),S-013 p.16,1.69 mm (Table IX = CSV),S-013 p.26; S-032 row 2,value_2,table consistent with the CSV
+FLEX,diluents,"N2, CO2, He or xenon",S-026 p.12,"N2, CO2, He (no xenon in the CSV)",S-032,value_2,the CSV has no Xe column
+FLEX,operation_period,'installed late in 2009',S-013 p.7,first test 2009-03-05,S-032 row 2,value_2,test dates
+FLEX,o2 (methanol upper limit),30% (methanol paper),S-016 p.1,0.34 (methanol tests included in the CSV),S-032,both noted,the paper may report a subset
+FLEX-2,identity (FLEX vs FLEX-2),n-octane/n-decane tests reported under 'FLEX',S-064,FLEX-2 mixture/surrogate fuels,S-050; S-026 p.13,unclear,"publications continue test numbers in the FLEX series ('FLEX 1268', S-065); the data sets could not be separated"
+CFI,identity (CFI vs CFI-G),CFI: MDCA droplet experiment,S-051; S-026 p.41-42,CFI-G: ACME gaseous fuel experiment,S-052; S-054,separate rows,two different experiments; must not be confused
+CFI,o2/pressure (candidate test),"FLEX 1268: n-dodecane, 21% O2, 29% He, 2.75 atm",S-065 p.8 (web),no CFI-labelled source,no source found (no source found),unknown,attribution of the candidate test to CFI is not verified; normalized columns left empty
+ACME-CFI-G,fuel_shape_size (burner diameter),6.4 mm,S-052 journal p.1648,6.35 mm,S-053 slide 6,value_1,peer-reviewed paper; the difference is rounding of 1/4 inch
+ACME-CFI-G,o2_max (meaning of 0.85),O2 in the burner oxidizer stream (inverse flame),S-052 journal p.1647 (interpretation),ambient O2,challenge text F-018,value_1 (interpretation),in inverse flames the oxidizer flows from the burner; the chamber atmosphere composition should be verified by hand. Not ambient O2 for the lunar filter
+ACME-CFI-G,fuel,e.g. propane (challenge text),S-040 F-018,"ethane, propane, n-butane",S-052 journal p.1649,value_2,primary source
+ACME-BRE,pressure_psi_min,0.56 bar (Table 2.1),S-055 printed p.27,~0.4 bar,S-055 printed p.28,value_1,"table value; if 0.4 bar = 5.80 psi were chosen, lunar_pressure_flag would not change (yes)"
+ACME-BRE,extinction time,within 40 s at 21% O2,S-055 abstract,large flames within 1.5 min; methane within 1 min,S-056 p.7,both,different subsets
+ACME-BRE,test_count,149 successful ignitions,S-055 printed p.26,122 ethylene flames / 59 analyzed tests,S-055 (no snippet),value_1,subsets; the NASA source gives no total
+ACME-E-FIELD,gravity_regime,partial gravity simulated with an electric field (challenge text),S-040 F-020,microgravity tests only; no mention of simulation,S-053; S-056; S-058; S-057,value_2 (unverified),primary ISS sources do not support the simulation claim; Chien et al. 2022 should be checked by hand
+ACME-E-FIELD,fuel_shape_size,coflow flame or perhaps a simple gas jet (plan),S-026 p.16,both gas-jet and coflow configurations,S-056 p.7,value_2,actual
+SPICE,name,Smoke Point In Coflow Experiment,S-026 p.13,Soot Processes In Coflow Experiment,S-060 Table 1,value_1,challenge text and mini-book
+SPICE,flow_cm_s_max,5-50 cm/s (design),S-012 p.7,5.4-65 cm/s (flight result),S-059 journal p.550,value_2,flight results
+SPICE,fuel_shape_size (nozzle),0.4 / 0.8 / 1.6 mm (design),S-012 p.7,0.41 / 0.76 / 1.6 mm (flight),S-059 journal p.550,value_2,measured inner diameters
+SPICE,o2,20-23% (estimated),S-059 journal p.552,~21%,S-060 p.2,value_1,the range is more conservative; both are uncontrolled cabin air
+SPICE,operation_period,2009,S-026 p.13,2009 and 2012 (SPICE-R),S-060; S-069,value_2,reflight included
+SLICE,operation_period,2012,S-026 p.14; S-061,"2009 (exploratory tests, as part of SPICE)",S-026 p.15,value_1,the 2009 tests were part of the SPICE campaign
+SLICE,fuel_shape_size (nozzle),0.41 / 0.77 / 1.59 / 2.14 / 3.23 mm,S-061 p.6,"0.76 / 1.6 / 2.1 / 3.2 mm (same hardware, SPICE-R)",S-069 p.20,value_1,more precise values
