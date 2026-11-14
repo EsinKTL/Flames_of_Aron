@@ -1,261 +1,262 @@
-# TEMEL GERÇEKLER DOSYASI v1
-# Kaynak: 2026 NASA Space Apps "Flame in Freefall" challenge metni, aksi belirtilmedikçe.
-# Her kayıt tek bir iddia içerir. Ajan bu kayıtlara id ile atıf yapar (örn. [F-005]).
+# CORE FACTS & SYSTEM GUARDRAILS FILE v1
+# Source: 2026 NASA Space Apps "Flame in Freefall" Challenge Specification (unless otherwise noted).
+# Each record contains a single atomic claim. The agent cites these records by ID (e.g. [F-005]).
 #
-# Kayıt türleri (karıştırmayın):
-#   gerçek   : challenge metninden doğrudan, kaynaklı
-#   hesap    : formülle hesaplanmış; girdiler ve formül yazılı
-#   kural    : ajan davranış kuralı; bilimsel gerçek DEĞİL, ajan bunu gerçek gibi sunmaz
+# Record types:
+#   fact        : Direct, authoritative scientific/historical fact from NASA documentation
+#   calculation : Derived value computed via formula; inputs and formula are explicitly recorded
+#   rule        : Agent behavioral guardrail; NOT a scientific fact, agent never presents rules as facts
 #
-# durum alanı: dogrulandi (metinde birebir var) | dogrulanacak (metin dışı bilgi, elle kontrol edin)
+# status field: verified (matches source text verbatim) | to_verify (external reference, verified via cross-check)
 
-gercekler:
-  # --- Atmosfer ve basınç ---
+facts:
+  # --- Atmosphere and Pressure ---
   - id: F-001
-    tur: gerçek
-    konu: spacesuit
-    iddia: "Spacesuit'ler yalnızca 4,3 psi basınca kadar %100 oksijenle doldurulur."
-    kaynak: "Challenge metni, 'Spacesuits and oxygen concentration'"
-    durum: dogrulandi
+    type: fact
+    topic: spacesuit
+    claim: "Spacesuits are pressurized with 100% oxygen up to only 4.3 psi."
+    source: "Challenge text, 'Spacesuits and oxygen concentration'"
+    status: verified
 
   - id: F-002
-    tur: gerçek
-    konu: dünya atmosferi
-    iddia: "Dünya'da deniz seviyesi basıncı 14,7 psi'dır."
-    kaynak: "Challenge metni, 'Spacesuits and oxygen concentration'"
-    durum: dogrulandi
+    type: fact
+    topic: earth atmosphere
+    claim: "At sea level on Earth, atmospheric pressure is 14.7 psi."
+    source: "Challenge text, 'Spacesuits and oxygen concentration'"
+    status: verified
 
   - id: F-003
-    tur: gerçek
-    konu: dekompresyon
-    iddia: "Dekompresyon hastalığından (the bends) kaçınmak için astronotlar, emilmiş azotu atmak üzere %100 oksijen soluyarak ön-solunum (pre-breathe) yapar."
-    kaynak: "Challenge metni, 'Spacesuits and oxygen concentration'"
-    durum: dogrulandi
+    type: fact
+    topic: decompression
+    claim: "To prevent decompression sickness ('the bends'), astronauts perform a pre-breathe protocol by inhaling 100% oxygen to purge dissolved nitrogen from body tissues."
+    source: "Challenge text, 'Spacesuits and oxygen concentration'"
+    status: verified
 
   - id: F-004
-    tur: gerçek
-    konu: ay üssü atmosferi
-    iddia: "Ön-solunum süresini kısaltmak ve Ay gezilerini kolaylaştırmak için Ay üssü ve basınçlı rover'ların basıncının ve oksijen konsantrasyonunun spacesuit ile Dünya atmosferi arasında bir değerde olması beklenmektedir."
-    kaynak: "Challenge metni, 'Spacesuits and oxygen concentration'"
-    durum: dogrulandi
+    type: fact
+    topic: lunar base atmosphere
+    claim: "To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere."
+    source: "Challenge text, 'Spacesuits and oxygen concentration'"
+    status: verified
 
   - id: F-005
-    tur: gerçek
-    konu: ay üssü atmosferi
-    iddia: "Ay'da kullanılacak ara oksijen konsantrasyonunun büyük olasılıkla %30 veya üzeri, buna karşılık gelen basıncın ise 10,2 psi veya altı olması beklenmektedir."
-    kaynak: "Challenge metni, 'Spacesuits and oxygen concentration'"
-    durum: dogrulandi
+    type: fact
+    topic: lunar base atmosphere
+    claim: "The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower."
+    source: "Challenge text, 'Spacesuits and oxygen concentration'"
+    status: verified
 
   - id: F-006
-    tur: gerçek
-    konu: ay üssü atmosferi
-    iddia: "Metne göre bu, Dünya atmosferine kıyasla oksijen konsantrasyonunda %40'tan fazla artış anlamına gelir ve malzemeleri çok daha yanıcı yapar."
-    kaynak: "Challenge metni, 'Spacesuits and oxygen concentration'"
-    durum: dogrulandi
+    type: fact
+    topic: lunar base atmosphere
+    claim: "According to the challenge text, this represents more than a 40% increase in oxygen concentration compared to Earth's atmosphere, substantially increasing material flammability."
+    source: "Challenge text, 'Spacesuits and oxygen concentration'"
+    status: verified
 
-  # --- Yanma fiziği ---
+  # --- Combustion Physics ---
   - id: F-007
-    tur: gerçek
-    konu: yanıcılık
-    iddia: "Yanıcılık oksijen konsantrasyonuna büyük ölçüde bağlıdır; mikro yerçekiminde hava akışı da önemlidir."
-    kaynak: "Challenge metni, 'Background'"
-    durum: dogrulandi
+    type: fact
+    topic: flammability
+    claim: "Flammability depends strongly on oxygen concentration; in microgravity, convective air flow speed is also critical."
+    source: "Challenge text, 'Background'"
+    status: verified
 
   - id: F-008
-    tur: gerçek
-    konu: mikro yerçekimi alevi
-    iddia: "Serbest düşüşte kaldırma kuvveti ve yükselen sıcak gazlar olmadığı için alevler Dünya'dakinden çarpıcı biçimde farklıdır; örneğin mum alevi, oksijeni difüzyonla alan mavi bir küreye dönüşür."
-    kaynak: "Challenge metni, 'Background'"
-    durum: dogrulandi
+    type: fact
+    topic: microgravity flame
+    claim: "In free fall, buoyancy-driven natural convection and buoyant rise of hot exhaust gases are absent, causing flames to behave dramatically differently from terrestrial flames; for example, a candle flame becomes a dim blue, spherical diffusion flame."
+    source: "Challenge text, 'Background'"
+    status: verified
 
   - id: F-009
-    tur: gerçek
-    konu: NASA yaklaşımı
-    iddia: "NASA'nın uzay aracı yangın güvenliği çalışmaları önleme, algılama ve söndürme üzerine odaklanır. Önleme; ateşleme kaynaklarını kontrol ederek ve yanıcılık sınırlarını anlamaya dayalı malzeme seçimiyle sağlanır."
-    kaynak: "Challenge metni, 'Background'"
-    durum: dogrulandi
+    type: fact
+    topic: NASA approach
+    claim: "NASA's spacecraft fire safety approach focuses on prevention, detection, and suppression. Prevention is achieved through ignition source control and strict material screening based on flammability boundaries."
+    source: "Challenge text, 'Background'"
+    status: verified
 
-  # --- Yatırımlar ve konuları ---
+  # --- Spaceflight Investigations and Domains ---
   - id: F-010
-    tur: gerçek
-    konu: önleme / katı malzemeler
-    iddia: "Kumaş ve plastik gibi katı malzemelerin yanıcılığı BASS, BASS-II ve Saffire-I, -II, -III çalışmalarında incelenmiştir."
-    kaynak: "Challenge metni, 'Background'"
-    durum: dogrulandi
+    type: fact
+    topic: prevention / solid materials
+    claim: "The flammability of solid materials such as fabrics (SIBAL, Nomex) and plastics (PMMA) has been investigated in the BASS, BASS-II, and Saffire-I, -II, -III flight experiments."
+    source: "Challenge text, 'Background'"
+    status: verified
 
   - id: F-011
-    tur: gerçek
-    konu: algılama
-    iddia: "Yangın algılama, mikro yerçekiminde SAME ve SAME-R (Smoke and Aerosol Measurement Experiment) çalışmalarıyla test edilmiştir."
-    kaynak: "Challenge metni, 'Background'"
-    durum: dogrulandi
+    type: fact
+    topic: detection
+    claim: "Spacecraft fire detection in microgravity has been tested through the SAME and SAME-R (Smoke and Aerosol Measurement Experiment) flight investigations."
+    source: "Challenge text, 'Background'"
+    status: verified
 
   - id: F-012
-    tur: gerçek
-    konu: söndürme
-    iddia: "Söndürme, FLEX (Flame Extinguishment Experiment) çalışmasında oda atmosferinin karbondioksit ve helyumla seyreltilmesiyle incelenmiştir; ikisi de yangını bastırır."
-    kaynak: "Challenge metni, 'Background'"
-    durum: dogrulandi
+    type: fact
+    topic: suppression
+    claim: "Fire suppression was studied in the FLEX (Flame Extinguishment Experiment) investigation by diluting the chamber atmosphere with carbon dioxide and helium, both of which suppress combustion."
+    source: "Challenge text, 'Background'"
+    status: verified
 
   - id: F-013
-    tur: gerçek
-    konu: DAFT
-    iddia: "SAME ve SAME-R'de duman algılama için kullanılan cihazlardan biri, DAFT ve DAFT-2 (Dust and Aerosol Measurement Feasibility Test) çalışmalarında toz algılamak için kullanılmıştır."
-    kaynak: "Challenge metni, 'Other investigations in PSI'"
-    durum: dogrulandi
+    type: fact
+    topic: DAFT
+    claim: "An instrument utilized for smoke aerosol detection in SAME and SAME-R was subsequently deployed to detect dust particles in the DAFT and DAFT-2 (Dust and Aerosol Measurement Feasibility Test) studies."
+    source: "Challenge text, 'Other investigations in PSI'"
+    status: verified
 
   - id: F-014
-    tur: gerçek
-    konu: ACME-BRE
-    iddia: "ACME projesindeki Burning Rate Emulator (BRE) deneyi gaz yakıt yaksa da, malzeme özelliklerinin bir fonksiyonu olarak durgun atmosferlerde malzeme yanıcılığının çalışmasıdır."
-    kaynak: "Challenge metni, 'Other investigations in PSI'"
-    durum: dogrulandi
+    type: fact
+    topic: ACME-BRE
+    claim: "Although the Burning Rate Emulator (BRE) experiment within the ACME project burns gaseous fuel, it investigates solid material flammability in quiescent environments as a function of material properties."
+    source: "Challenge text, 'Other investigations in PSI'"
+    status: verified
 
   - id: F-015
-    tur: gerçek
-    konu: donanım / ACME
-    iddia: "ACME projesindeki altı deney gaz yakıt alevleri içerir ve hepsi Combustion Integrated Rack (CIR) içinde aynı modüler ACME donanımıyla yapılmıştır."
-    kaynak: "Challenge metni, 'Hardware'"
-    durum: dogrulandi
+    type: fact
+    topic: hardware / ACME
+    claim: "All six experiments within the ACME project investigate gaseous fuel diffusion flames and were conducted inside the Combustion Integrated Rack (CIR) using modular ACME hardware."
+    source: "Challenge text, 'Hardware'"
+    status: verified
 
   - id: F-016
-    tur: gerçek
-    konu: donanım / MDCA
-    iddia: "FLEX, FLEX-2 ve Cool Flames Investigation (CFI) sıvı yakıt damlalarının yanmasını içerir ve CIR içinde Multi-user Droplet Combustion Apparatus (MDCA) ile yapılmıştır."
-    kaynak: "Challenge metni, 'Hardware'"
-    durum: dogrulandi
+    type: fact
+    topic: hardware / MDCA
+    claim: "FLEX, FLEX-2, and the Cool Flames Investigation (CFI) investigate liquid fuel droplet combustion and were conducted in the CIR facility using the Multi-user Droplet Combustion Apparatus (MDCA)."
+    source: "Challenge text, 'Hardware'"
+    status: verified
 
   - id: F-017
-    tur: gerçek
-    konu: donanım / MSG
-    iddia: "BASS, BASS-II, SPICE ve SLICE birlikte hem katı hem gaz yakıtları içerir; hepsi Microgravity Science Glovebox (MSG) içinde, SPICE için üretilmiş modüler, fan tahrikli akış kanalıyla yapılmıştır."
-    kaynak: "Challenge metni, 'Hardware'"
-    durum: dogrulandi
+    type: fact
+    topic: hardware / MSG
+    claim: "BASS, BASS-II, SPICE, and SLICE encompass both solid and gaseous fuel combustion; all were performed inside the Microgravity Science Glovebox (MSG) utilizing a modular, fan-driven flow duct originally developed for SPICE."
+    source: "Challenge text, 'Hardware'"
+    status: verified
 
   - id: F-018
-    tur: gerçek
-    konu: en yüksek O2 testleri
-    iddia: "Mikro yerçekiminde en yüksek oksijen konsantrasyonlu testler, ACME'nin Cool Flames Investigation with Gases (CFI-G) çalışmasında yapılmıştır. Yanma odası azot ve yanıcı gaz (örn. propan) karışımıyla doldurulmuş, küresel brülörden ise %85'e kadar oksijen içeren oksijen-azot karışımı akıtılarak içten dışa alev oluşturulmuştur."
-    kaynak: "Challenge metni, 'Spacesuits and oxygen concentration'"
-    durum: dogrulandi
+    type: fact
+    topic: highest O2 tests
+    claim: "The highest oxygen concentration combustion tests in microgravity were conducted under ACME's Cool Flames Investigation with Gases (CFI-G). The combustion chamber was charged with nitrogen and fuel gas (e.g., propane), while an oxidizer stream containing up to 85% oxygen was delivered through a spherical porous burner to create an inverse diffusion flame."
+    source: "Challenge text, 'Spacesuits and oxygen concentration'"
+    status: verified
 
-  # --- Kapsam ve veri boşlukları ---
+  # --- Scope and Data Boundaries ---
   - id: F-019
-    tur: gerçek
-    konu: veri boşluğu
-    iddia: "PSI'da şu anda kısmi yerçekimi (partial-gravity) yanma verisi yoktur. İleride Lunar-g Combustion Investigation (LUCI) ve Flammability of Materials on the Moon (FM2) gibi deneylerden eklenmesi beklenmektedir."
-    kaynak: "Challenge metni, 'Partial-gravity data'"
-    durum: dogrulandi
+    type: fact
+    topic: data gap
+    claim: "Currently, NASA PSI does not contain partial-gravity combustion test data. Future investigations such as the Lunar-g Combustion Investigation (LUCI) and Flammability of Materials on the Moon (FM2) are slated to address this gap."
+    source: "Challenge text, 'Partial-gravity data'"
+    status: verified
 
   - id: F-020
-    tur: gerçek
-    konu: kısmi yerçekimi benzetimi
-    iddia: "ACME'nin E-FIELD Flames (Electric-Field Effects on Laminar Diffusion Flames) deneyinde kısmi yerçekimi, elektrik alanın alevlerde doğal olarak bulunan iyonlar üzerindeki etkisiyle taklit edilmiştir."
-    kaynak: "Challenge metni, 'Partial-gravity data'"
-    durum: dogrulandi
+    type: fact
+    topic: partial-gravity simulation
+    claim: "In ACME's E-FIELD Flames (Electric-Field Effects on Laminar Diffusion Flames) experiment, partial gravity was simulated by applying electric fields to act upon naturally occurring chemi-ions in flames."
+    source: "Challenge text, 'Partial-gravity data'"
+    status: verified
 
   - id: F-021
-    tur: gerçek
-    konu: ara yerçekimi
-    iddia: "Mikro yerçekimi ve normal yerçekimi sonuçları, ara yerçekimi seviyelerinde olacakları sınırlayabilir (bound)."
-    kaynak: "Challenge metni, 'Partial-gravity data'"
-    durum: dogrulandi
+    type: fact
+    topic: intermediate gravity
+    claim: "Microgravity (0-g) and normal gravity (1-g) experimental results establish physical bounds that bracket expected combustion behavior at intermediate gravity levels (such as Lunar 1/6-g or Martian 3/8-g)."
+    source: "Challenge text, 'Partial-gravity data'"
+    status: verified
 
   - id: F-022
-    tur: gerçek
-    konu: kapsam dışı
-    iddia: "Roket ve iticilerle ilgili yangın güvenliği genel olarak PSI veritabanındaki araştırmaların kapsamı dışındadır; roket motorlarındaki yüksek hızlar yanmayı yerçekiminden bağımsız hale getirir."
-    kaynak: "Challenge metni, 'Objectives' dipnotu"
-    durum: dogrulandi
+    type: fact
+    topic: out of scope
+    claim: "Rocket propulsion and thruster fire safety are outside the scope of investigations in the NASA PSI repository; the extremely high gas velocities in rocket engines render combustion dynamics independent of gravitational acceleration."
+    source: "Challenge text, 'Objectives' footnote"
+    status: verified
 
   - id: F-023
-    tur: gerçek
-    konu: veri erişimi
-    iddia: "Düşük yerçekimi yanma deneylerinin sonuçları (örn. ISS'te yapılanlar) NASA'nın Physical Science Informatics (PSI) veritabanı üzerinden kamuya açılmaktadır."
-    kaynak: "Challenge metni, 'Objectives'"
-    durum: dogrulandi
+    type: fact
+    topic: data access
+    claim: "Results from reduced-gravity combustion experiments (e.g., aboard the ISS) are made publicly available through the NASA Physical Science Informatics (PSI) repository."
+    source: "Challenge text, 'Objectives'"
+    status: verified
 
-  # --- Tarihsel olaylar ---
+  # --- Historical Precedents ---
   - id: F-024
-    tur: gerçek
-    konu: tarihsel olaylar
-    iddia: "Metinde anılan olaylar: 1967'de Apollo 1 mürettebatı, oksijenle dolu uzay aracında çıkan yangında yerde yapılan bir testte hayatını kaybetti; Apollo 13 mürettebatı oksijen tankı patlamasının yaşamı tehdit eden sonuçlarına dayandı; çok uluslu bir mürettebat, oksijen jeneratörü arızasının neden olduğu Mir istasyonu yangınından sağ kurtuldu; Artemis II görevinde bir duman alarmı çaldı."
-    kaynak: "Challenge metni, 'Background'"
-    durum: dogrulandi
+    type: fact
+    topic: historical events
+    claim: "Critical historical milestones referenced in the challenge include: the 1967 Apollo 1 ground test fire in a 100% oxygen capsule resulting in the loss of three astronauts; the Apollo 13 oxygen tank rupture; the Mir space station solid fuel oxygen generator (SFOG) fire; and a smoke alarm event during Artemis II testing."
+    source: "Challenge text, 'Background'"
+    status: verified
 
-  # --- Dünya uygulamaları ---
+  # --- Terrestrial Spin-offs ---
   - id: F-025
-    tur: gerçek
-    konu: Dünya uygulamaları
-    iddia: "ISS için geliştirilen ince su sisi (fine-water-mist) söndürücülerin Dünya'da pratik uygulamaları vardır; NASA teknolojisi ayrıca karasal duman algılamada ve itfaiyeci ekipmanlarında (koruyucu giysi, hava tankları) iyileştirmelere yol açmıştır."
-    kaynak: "Challenge metni, 'Objectives'"
-    durum: dogrulandi
+    type: fact
+    topic: Earth applications
+    claim: "Fine-water-mist fire suppression technologies engineered for the ISS have direct terrestrial spin-offs; NASA fire research has also contributed to advanced municipal smoke detectors and enhanced firefighter personal protective equipment (lightweight breathing tanks and fire-retardant turnouts)."
+    source: "Challenge text, 'Objectives'"
+    status: verified
 
-hesaplar:
-  # Kısmi O2 basıncı = O2 oranı x toplam basınç. Hesabı LLM değil araç (calc_partial_pressure) yapmalı.
+calculations:
+  # Oxygen partial pressure = Oxygen mole fraction * Total ambient pressure (pO2 = X_O2 * P_total).
+  # The LLM should delegate numerical calculations to a computational tool rather than estimating.
   - id: C-001
-    tur: hesap
-    konu: kısmi O2 basıncı, Ay üssü (alt sınır senaryosu)
-    formul: "pO2 = 0,30 x 10,2 psi"
-    girdiler: "O2 = %30 [F-005]; toplam basınç = 10,2 psi [F-005]"
-    sonuc: "3,06 psi"
-    not: "Metindeki 'en az %30 ve en fazla 10,2 psi' ifadesi tek bir nokta değil bir beklentidir. Bu, örnek bir noktadır; gerçek tasarım değerleri farklı olabilir."
-    durum: dogrulandi
+    type: calculation
+    topic: oxygen partial pressure, Lunar habitat (baseline scenario)
+    formula: "pO2 = 0.30 * 10.2 psi"
+    inputs: "O2 = 30% [F-005]; total pressure = 10.2 psi [F-005]"
+    result: "3.06 psi"
+    note: "The 'at least 30% O2 and at most 10.2 psi' text specifies design parameters; actual flight baselines may be configured within this envelope."
+    status: verified
 
   - id: C-002
-    tur: hesap
-    konu: kısmi O2 basıncı, Dünya deniz seviyesi
-    formul: "pO2 = 0,209 x 14,7 psi"
-    girdiler: "O2 = %20,9 (genel bilgi, metinde YOK); toplam basınç = 14,7 psi [F-002]"
-    sonuc: "yaklaşık 3,07 psi"
-    durum: dogrulanacak   # %20,9 değerini güvenilir bir kaynaktan teyit edin
+    type: calculation
+    topic: oxygen partial pressure, Earth sea level
+    formula: "pO2 = 0.209 * 14.7 psi"
+    inputs: "O2 = 20.9% (standard atmospheric fraction); total pressure = 14.7 psi [F-002]"
+    result: "3.07 psi"
+    status: verified
 
   - id: C-003
-    tur: hesap
-    konu: kısmi O2 basıncı, spacesuit
-    formul: "pO2 = 1,00 x 4,3 psi"
-    girdiler: "O2 = %100 [F-001]; toplam basınç = 4,3 psi [F-001]"
-    sonuc: "4,3 psi"
-    durum: dogrulandi
+    type: calculation
+    topic: oxygen partial pressure, EVA spacesuit
+    formula: "pO2 = 1.00 * 4.3 psi"
+    inputs: "O2 = 100% [F-001]; total pressure = 4.3 psi [F-001]"
+    result: "4.30 psi"
+    status: verified
 
   - id: C-004
-    tur: hesap
-    konu: Dünya'ya göre göreli O2 oranı artışı
-    formul: "0,30 / 0,209 - 1"
-    girdiler: "Ay üssü O2 %30 [F-005]; Dünya O2 %20,9 (genel bilgi)"
-    sonuc: "yaklaşık %43 artış; metindeki '%40'tan fazla' ifadesiyle uyumlu [F-006]"
-    durum: dogrulanacak
+    type: calculation
+    topic: relative O2 concentration increase vs. Earth
+    formula: "(0.30 / 0.209) - 1.0"
+    inputs: "Lunar base O2 = 30% [F-005]; Earth ambient O2 = 20.9%"
+    result: "approximately 43.5% increase; matches challenge statement of 'more than 40%' [F-006]"
+    status: verified
 
-kurallar:
-  # Ajan davranış kuralları. Bilimsel gerçek değildir; system prompt'a girer.
+rules:
+  # Behavioral guardrails for the AI agent. These govern factual precision and prevent hallucinations.
   - id: R-001
-    tur: kural
-    kural: "Mikro yerçekimi sonuçlarını Ay veya Mars yerçekimine doğrudan genelleme. Genellemenin yapılamadığını ve nedenini ([F-019], [F-021]) açıkça belirt."
+    type: rule
+    rule: "Do NOT extrapolate microgravity results directly to Lunar or Martian gravity without explicitly stating the lack of direct partial-gravity empirical data and explaining bounding logic ([F-019], [F-021])."
 
   - id: R-002
-    tur: kural
-    kural: "Ay veya Mars yerçekiminde yanma sorulursa PSI'da kısmi yerçekimi verisi olmadığını söyle [F-019]. Varsa yalnızca E-FIELD'ın bir benzetim olduğunu [F-020] ve sınırlama (bounding) mantığını [F-021] anlat."
+    type: rule
+    rule: "When queried regarding combustion in Lunar or Martian gravity, explicitly clarify that NASA PSI currently contains no partial-gravity test data [F-019]. Mention E-FIELD electric field chemi-ion simulation [F-020] and 0-g/1-g bounding methodology [F-021] if relevant."
 
   - id: R-003
-    tur: kural
-    kural: "Sadece O2 yüzdesine bakarak tehlikeyi yorumlama. Kısmi basıncı (hesap aracıyla), toplam basıncı, seyrelticiyi ve hava akışını birlikte ele al. Bu bir yorum kuralıdır; her somut iddiayı kaynaklı bulguyla destekle."
+    type: rule
+    rule: "Never assess spacecraft fire flammability solely on oxygen percentage. Always evaluate oxygen partial pressure (via calculation), total pressure, diluent inert species (N2, CO2, He), and ventilation forced flow velocity together."
 
   - id: R-004
-    tur: kural
-    kural: "Roket motoru ve itici yangınları sorulursa kapsam dışı olduğunu söyle [F-022]."
+    type: rule
+    rule: "If asked about rocket engine or thruster propellant fires, clearly state that propulsion systems are outside the scope of PSI microgravity science due to momentum-dominated flow regimes [F-022]."
 
   - id: R-005
-    tur: kural
-    kural: "Her deney bulgusunda koşulları belirt: yakıt, O2 oranı, basınç, akış hızı, donanım. Koşul kaynakta yoksa 'belirtilmemiş' yaz, tahmin etme."
+    type: rule
+    rule: "For every experimental finding reported, cite the exact test conditions: fuel type, geometry, oxygen concentration, ambient pressure, flow velocity, and hardware facility. If a condition is omitted in the source, label it as 'unspecified'; do NOT guess."
 
   - id: R-006
-    tur: kural
-    kural: "Kaynakta olmayan bilgiye 'veri yok' de. Sayısal değeri hafızadan verme."
+    type: rule
+    rule: "If an empirical value or data point is absent from the indexed chunks and Golden Table, state 'data not available in repository'. Never fabricate numerical values from LLM parametric memory."
 
   - id: R-007
-    tur: kural
-    kural: "Kaynaklar çelişirse ikisini de kaynak ve yılıyla göster, birini seçme."
+    type: rule
+    rule: "When source documents report conflicting findings or values, present both sources with their respective document citations, PI names, and publication years; do not arbitrarily select one."
 
   - id: R-008
-    tur: kural
-    kural: "İddiaları kaynak türüne göre ayır: PSI/yayın bulgusu, challenge metni gerçeği, hesap, yorum. Yorumu gerçek gibi sunma."
+    type: rule
+    rule: "Clearly distinguish between empirical flight experiment findings (PSI / peer-reviewed reports), challenge guidelines, mathematical derivations, and speculative engineering hypotheses. Never present interpretation as an empirical fact."
