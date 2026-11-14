@@ -19,7 +19,29 @@ tests/             pytest tests (no model download needed)
 requirements.txt   Python dependencies
 investigations.py  investigation name detection (BASS vs BASS-II, FLEX vs FLEX-2, CFI vs CFI-G ...)
 query_engine.py    hybrid search + golden table + conflicts + facts/rules context builder
+tools.py           tools without index or model: query_psi_tests, lunar_check, calculate, rank_investigations, get_sources, get_facts
+router.py          rule-based intent router (optional LLM classifier hook)
+evidence.py        answer type (answer / no_data / out_of_scope), gaps and the evidence bundle
+contracts.py       EvidenceBundle and Answer schemas + validators (writes reference/schemas/)
 ```
+
+## Agent layer
+
+```python
+import query_engine, evidence
+engine = query_engine.CombustionQueryEngine()
+bundle = evidence.build_evidence_bundle("Which experiments are closest to lunar-base conditions?", engine)
+answer = evidence.fallback_answer(bundle)      # templated evidence summary until the LLM writer exists
+```
+
+* `bundle` follows `reference/schemas/evidence_bundle.schema.json`; `answer` follows
+  `reference/schemas/answer.schema.json`. Example answers for every answer type are in
+  `reference/examples/` (the interface can be built against them without the agent).
+* `answer_type` is decided by rules and tools, never by the LLM: out-of-scope patterns, partial gravity
+  [F-019], investigations without a source or without results in the local corpus, conditions that are
+  `unknown` in the golden table, and the topic gaps listed in `reference/known_gaps.yaml`.
+* `tools.py`, `router.py` and `evidence.assess()` need no index and no model, so the table pages of the
+  interface can use them directly.
 
 ## Rebuild order
 
@@ -35,6 +57,9 @@ python scripts/check_evidence.py                        # golden table evidence 
 python evaluation/add_source_ids.py                     # expected_sources -> manifest IDs (questions, train, test)
 python evaluation/split_dataset.py evaluation/questions.jsonl --out evaluation   # only if questions changed
 python evaluation/run_retrieval_eval.py --split train --mode hybrid --filter
+python evaluation/run_router_eval.py --split train        # correct refusal (no_data / out_of_scope); no model needed
+python contracts.py                                     # only if a schema changed -> reference/schemas/
+python scripts/make_examples.py                         # only if the bundle changed -> reference/examples/
 python -m pytest -q tests
 ```
 
