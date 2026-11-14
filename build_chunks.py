@@ -17,214 +17,223 @@ EVAL_DIR = os.path.join(BASE_DIR, "eval")
 for d in [INTERIM_DIR, PROCESSED_DIR, LOGS_DIR, EVAL_DIR]:
     os.makedirs(d, exist_ok=True)
 
-# Belge Kayıt ve Metadata Haritası (Taslak Rapor Bölüm 6.1 Şeması)
+# Belge Kayıt ve Metadata Haritası (Taslak Rapor Bölüm 6.1 Şeması - Tam İngilizce Alan Değerleri)
 DOC_REGISTRY = {
     "Detailed Results BAS-2.pdf": {
         "source_id": "S-013",
         "doc_title": "NASA/TM-20210011385 BASS-II Summary Report",
         "investigation_ids": ["BASS-II", "BASS"],
-        "doc_type": "sonuç",
+        "doc_type": "results",
         "year": 2021,
         "hardware": "MSG",
-        "fuel_phase": "katı"
+        "fuel_phase": "solid"
     },
     "BASS_20160000593.pdf": {
         "source_id": "S-013b",
         "doc_title": "Combustion of Solids in Microgravity: Results from BASS-II",
         "investigation_ids": ["BASS-II"],
-        "doc_type": "sonuç",
+        "doc_type": "results",
         "year": 2016,
         "hardware": "MSG",
-        "fuel_phase": "katı"
+        "fuel_phase": "solid"
     },
     "BASS_20205004657.pdf": {
         "source_id": "S-013c",
         "doc_title": "Effects of Confinement on Flame Spread in Microgravity",
         "investigation_ids": ["BASS-II"],
-        "doc_type": "sonuç",
+        "doc_type": "results",
         "year": 2020,
         "hardware": "MSG",
-        "fuel_phase": "katı"
+        "fuel_phase": "solid"
     },
     "BASS_20140011099.pdf": {
         "source_id": "S-010",
         "doc_title": "Thickness and Fuel Preheating Effects on Material Flammability (BASS)",
         "investigation_ids": ["BASS"],
-        "doc_type": "sonuç",
+        "doc_type": "results",
         "year": 2014,
         "hardware": "MSG",
-        "fuel_phase": "katı"
+        "fuel_phase": "solid"
     },
     "BASS_20150008961.pdf": {
         "source_id": "S-010b",
         "doc_title": "Microgravity Flammability of PMMA Rods in Concurrent Flow",
         "investigation_ids": ["BASS", "BASS-II"],
-        "doc_type": "sonuç",
+        "doc_type": "results",
         "year": 2015,
         "hardware": "MSG",
-        "fuel_phase": "katı"
+        "fuel_phase": "solid"
     },
     "BASS_20150008962.pdf": {
         "source_id": "S-010c",
         "doc_title": "Concurrent Flame Growth, Spread and Extinction over Composite Fabric (BASS)",
         "investigation_ids": ["BASS", "BASS-II"],
-        "doc_type": "sonuç",
+        "doc_type": "results",
         "year": 2015,
         "hardware": "MSG",
-        "fuel_phase": "katı"
+        "fuel_phase": "solid"
     },
     "BASS_SRD.pdf": {
         "source_id": "S-011",
         "doc_title": "Science Requirements Document (SRD) for BASS",
         "investigation_ids": ["BASS"],
-        "doc_type": "tasarım",
+        "doc_type": "design",
         "year": 2010,
         "hardware": "MSG",
-        "fuel_phase": "katı"
+        "fuel_phase": "solid"
     },
     "BASS-II_SRD.pdf": {
         "source_id": "S-014",
         "doc_title": "Science Requirements Document (SRD) for BASS-II",
         "investigation_ids": ["BASS-II"],
-        "doc_type": "tasarım",
+        "doc_type": "design",
         "year": 2013,
         "hardware": "MSG",
-        "fuel_phase": "katı"
+        "fuel_phase": "solid"
     },
     "BASS-II data FAQ.docx": {
         "source_id": "S-015",
         "doc_title": "BASS-II Data FAQ and PI Test Matrix Guide",
         "investigation_ids": ["BASS-II", "BASS"],
-        "doc_type": "genel bakış",
+        "doc_type": "overview",
         "year": 2017,
         "hardware": "MSG",
-        "fuel_phase": "katı"
+        "fuel_phase": "solid"
+    },
+    "BASS-II Procedure.docx": {
+        "source_id": "S-016",
+        "doc_title": "BASS-II Astronaut Operations Procedure & Checklist",
+        "investigation_ids": ["BASS-II"],
+        "doc_type": "methodology",
+        "year": 2014,
+        "hardware": "MSG",
+        "fuel_phase": "solid"
     },
     "Detailed Results FLEX.pdf": {
         "source_id": "S-028",
         "doc_title": "NASA/TP-2015-216046 Detailed Results from FLEX",
         "investigation_ids": ["FLEX"],
-        "doc_type": "sonuç",
+        "doc_type": "results",
         "year": 2015,
         "hardware": "CIR (MDCA)",
-        "fuel_phase": "sıvı"
+        "fuel_phase": "liquid"
     },
     "FLEX_20090014812.pdf": {
         "source_id": "S-029",
         "doc_title": "Multi-User Droplet Combustion Apparatus - FLEX Hardware",
         "investigation_ids": ["FLEX", "FLEX-2"],
-        "doc_type": "tasarım",
+        "doc_type": "design",
         "year": 2009,
         "hardware": "CIR (MDCA)",
-        "fuel_phase": "sıvı"
+        "fuel_phase": "liquid"
     },
     "FLEX_20130014061.pdf": {
         "source_id": "S-028b",
         "doc_title": "Methanol Droplet Combustion in Oxygen-Inert Environments (FLEX)",
         "investigation_ids": ["FLEX"],
-        "doc_type": "sonuç",
+        "doc_type": "results",
         "year": 2013,
         "hardware": "CIR (MDCA)",
-        "fuel_phase": "sıvı"
+        "fuel_phase": "liquid"
     },
     "20150018397.pdf": {
         "source_id": "S-034",
         "doc_title": "Combustion Characteristics in Cool-Flame Regime of n-Heptane (CFI / FLEX)",
         "investigation_ids": ["CFI", "FLEX", "FLEX-2"],
-        "doc_type": "sonuç",
+        "doc_type": "results",
         "year": 2015,
         "hardware": "CIR (MDCA)",
-        "fuel_phase": "sıvı"
+        "fuel_phase": "liquid"
     },
     "Saffire_20180005168.pdf": {
         "source_id": "S-001",
         "doc_title": "Saffire: A Novel Approach to Study of Spacecraft Fire Safety (Saffire I-III Results)",
         "investigation_ids": ["Saffire-I", "Saffire-II", "Saffire-III"],
-        "doc_type": "sonuç",
+        "doc_type": "results",
         "year": 2018,
         "hardware": "Cygnus",
-        "fuel_phase": "katı"
+        "fuel_phase": "solid"
     },
     "Saffire_20170000230.pdf": {
         "source_id": "S-003",
         "doc_title": "Operation and Development Status of the Spacecraft Fire Experiments (Saffire)",
         "investigation_ids": ["Saffire-I", "Saffire-II", "Saffire-III"],
-        "doc_type": "genel bakış",
+        "doc_type": "overview",
         "year": 2017,
         "hardware": "Cygnus",
-        "fuel_phase": "katı"
+        "fuel_phase": "solid"
     },
     "Saffire_20170001636.pdf": {
         "source_id": "S-002",
         "doc_title": "The Spacecraft Fire Experiment (Saffire) - Objectives, Development and Status",
         "investigation_ids": ["Saffire-I", "Saffire-II", "Saffire-III"],
-        "doc_type": "tasarım",
+        "doc_type": "design",
         "year": 2017,
         "hardware": "Cygnus",
-        "fuel_phase": "katı"
+        "fuel_phase": "solid"
     },
     "SAFFIRE_Offgassing_Testing_Strategy.pdf": {
         "source_id": "S-002b",
         "doc_title": "SAFFIRE Offgassing Testing Strategy",
         "investigation_ids": ["Saffire-I", "Saffire-II", "Saffire-III"],
-        "doc_type": "tasarım",
+        "doc_type": "design",
         "year": 2016,
         "hardware": "Cygnus",
-        "fuel_phase": "katı"
+        "fuel_phase": "solid"
     },
     "SFSDP-VIS-0295_Saffire 1 and 3_Thermocouple Placement.pdf": {
         "source_id": "S-008",
         "doc_title": "Saffire-I and Saffire-III Thermocouple Placement and Sensor Layout",
         "investigation_ids": ["Saffire-I", "Saffire-III"],
-        "doc_type": "tasarım",
+        "doc_type": "design",
         "year": 2016,
         "hardware": "Cygnus",
-        "fuel_phase": "katı"
+        "fuel_phase": "solid"
     },
     "SAFFIRE-I and SAFFIRE-III DoD.docx": {
         "source_id": "S-007",
         "doc_title": "Saffire-I and Saffire-III Description of Data (DoD) & Operations",
         "investigation_ids": ["Saffire-I", "Saffire-III"],
-        "doc_type": "tasarım",
+        "doc_type": "design",
         "year": 2017,
         "hardware": "Cygnus",
-        "fuel_phase": "katı"
+        "fuel_phase": "solid"
     },
     "Saffire_20220002714.pdf": {
         "source_id": "S-004",
         "doc_title": "Model Development of Large-Scale Spacecraft Fires During Saffire Experiments",
         "investigation_ids": ["Saffire-I", "Saffire-II", "Saffire-III"],
-        "doc_type": "sonuç",
+        "doc_type": "results",
         "year": 2022,
         "hardware": "Cygnus",
-        "fuel_phase": "katı"
+        "fuel_phase": "solid"
     },
     "np-2015-10-034-jsc_combustion_in_reduced_gravity-iss-mini-book-011116-508.pdf": {
         "source_id": "S-012",
         "doc_title": "NASA ISS Research Mini-Book: Combustion in Reduced Gravity",
         "investigation_ids": ["BASS", "BASS-II", "FLEX", "FLEX-2", "SLICE", "SPICE", "SAME", "Saffire-I"],
-        "doc_type": "genel bakış",
+        "doc_type": "overview",
         "year": 2016,
         "hardware": "MSG / CIR",
-        "fuel_phase": "çoklu"
+        "fuel_phase": "multi-phase"
     },
     "20030002834.pdf": {
         "source_id": "S-052a",
         "doc_title": "Microgravity Combustion Science and Spacecraft Fire Safety Overview",
         "investigation_ids": ["BASS", "FLEX", "SAME"],
-        "doc_type": "genel bakış",
+        "doc_type": "overview",
         "year": 2003,
         "hardware": "MSG / CIR",
-        "fuel_phase": "çoklu"
+        "fuel_phase": "multi-phase"
     },
     "nasa.pdf": {
         "source_id": "S-052b",
         "doc_title": "NASA Microgravity Combustion Program Overview",
         "investigation_ids": ["BASS", "FLEX", "ACME-CFI-G"],
-        "doc_type": "genel bakış",
+        "doc_type": "overview",
         "year": 2015,
         "hardware": "MSG / CIR",
-        "fuel_phase": "çoklu"
+        "fuel_phase": "multi-phase"
     }
 }
 
@@ -248,12 +257,12 @@ HEADER_NOISE_PATTERNS = [
 ]
 
 SECTION_PATTERNS = [
-    (re.compile(r"\b(?:abstract|executive\s+summary|summary)\b", re.I), "amaç"),
-    (re.compile(r"\b(?:introduction|background|objective|objectives|motivation)\b", re.I), "amaç"),
-    (re.compile(r"\b(?:experimental\s+setup|hardware|apparatus|procedure|procedures|methodology|approach|experiment\s+description|diagnostics)\b", re.I), "yöntem"),
-    (re.compile(r"\b(?:test\s+matrix|test\s+conditions|experimental\s+matrix|operating\s+conditions)\b", re.I), "koşullar"),
-    (re.compile(r"\b(?:results|observations|discussion|data\s+analysis|findings|combustion\s+products|flammability\s+boundary)\b", re.I), "sonuç"),
-    (re.compile(r"\b(?:conclusions|concluding\s+remarks|summary\s+of\s+results)\b", re.I), "sonuç"),
+    (re.compile(r"\b(?:abstract|executive\s+summary|summary)\b", re.I), "objective"),
+    (re.compile(r"\b(?:introduction|background|objective|objectives|motivation)\b", re.I), "objective"),
+    (re.compile(r"\b(?:experimental\s+setup|hardware|apparatus|procedure|procedures|methodology|approach|experiment\s+description|diagnostics)\b", re.I), "methodology"),
+    (re.compile(r"\b(?:test\s+matrix|test\s+conditions|experimental\s+matrix|operating\s+conditions)\b", re.I), "conditions"),
+    (re.compile(r"\b(?:results|observations|discussion|data\s+analysis|findings|combustion\s+products|flammability\s+boundary)\b", re.I), "results"),
+    (re.compile(r"\b(?:conclusions|concluding\s+remarks|summary\s+of\s+results)\b", re.I), "results"),
     (re.compile(r"\b(?:references|bibliography|publications\s+resulting|papers\s+and\s+presentations)\b", re.I), "references"),
 ]
 
@@ -442,11 +451,11 @@ def main():
         meta = DOC_REGISTRY.get(fname, {
             "source_id": "S-999",
             "doc_title": fname,
-            "investigation_ids": ["Genel"],
-            "doc_type": "genel bakış",
+            "investigation_ids": ["General"],
+            "doc_type": "overview",
             "year": 2020,
             "hardware": "MSG / CIR",
-            "fuel_phase": "katı"
+            "fuel_phase": "solid"
         })
 
         source_id = meta["source_id"]
@@ -466,17 +475,24 @@ def main():
                 main_part = ref_split[0].strip()
                 ref_part = ref_split[1].strip() if len(ref_split) > 1 else ""
 
+                sec_title = "Overview & Guide"
+                if "procedure" in fname.lower():
+                    sec_title = "Operations & Checklist"
+                elif "dod" in fname.lower():
+                    sec_title = "Data Description & Operations"
+
                 all_pages_records.append({
                     "source_id": source_id,
                     "filename": fname,
                     "page": 1,
-                    "section_type": "yöntem",
+                    "section_type": "methodology",
+                    "section_title": sec_title,
                     "text": main_part
                 })
 
                 raw_chunks = split_into_chunks(main_part, target_tokens=380, overlap_tokens=55)
                 for idx, ch_txt in enumerate(raw_chunks, 1):
-                    prefix = f"[{inv_str} | {source_id}: {doc_title} | Overview & Guide]\n"
+                    prefix = f"[{inv_str} | {source_id}: {doc_title} | {sec_title}]\n"
                     final_txt = prefix + ch_txt
                     all_chunks.append({
                         "chunk_id": f"{source_id}_p001_c{idx:02d}",
@@ -485,8 +501,8 @@ def main():
                         "doc_type": meta["doc_type"],
                         "year": meta["year"],
                         "page": 1,
-                        "section_type": "yöntem",
-                        "section_title": "Overview & Guide",
+                        "section_type": "methodology",
+                        "section_title": sec_title,
                         "has_table": False,
                         "has_numeric_conditions": bool(NUMERIC_COND_REGEX.search(ch_txt)),
                         "hardware": meta["hardware"],
@@ -508,7 +524,7 @@ def main():
                             "chunk_id": f"{source_id}_p001_ref{r_idx:02d}",
                             "source_id": source_id,
                             "investigation_ids": meta["investigation_ids"],
-                            "doc_type": "kaynakça",
+                            "doc_type": "bibliography",
                             "year": meta["year"],
                             "page": 1,
                             "section_type": "references",
@@ -532,7 +548,7 @@ def main():
         try:
             fast_reader = pypdf.PdfReader(fpath) if fname == "Detailed Results FLEX.pdf" else None
             with pdfplumber.open(fpath) as pdf:
-                curr_sec_type = "amaç"
+                curr_sec_type = "objective"
                 curr_sec_title = "Introduction & Overview"
 
                 for p_idx, page in enumerate(pdf.pages, start=1):
@@ -543,7 +559,7 @@ def main():
                         if p_idx <= 8:
                             continue
                         elif 111 <= p_idx <= 122:
-                            curr_sec_type = "koşullar"
+                            curr_sec_type = "conditions"
                             curr_sec_title = "Appendix A - BASS-II Test Matrices"
                         elif 137 <= p_idx <= 144:
                             curr_sec_type = "references"
@@ -554,7 +570,7 @@ def main():
                         if p_idx <= 6:
                             continue
                         elif 25 <= p_idx <= 34:
-                            curr_sec_type = "koşullar"
+                            curr_sec_type = "conditions"
                             curr_sec_title = "Appendix A - FLEX Summary Data Tables"
                         elif 35 <= p_idx <= 310:
                             curr_sec_type = "figure_caption"
@@ -587,7 +603,7 @@ def main():
                                             "doc_type": meta["doc_type"],
                                             "year": meta["year"],
                                             "page": p_idx,
-                                            "section_type": "koşullar" if not is_excl_tbl else "references",
+                                            "section_type": "conditions" if not is_excl_tbl else "references",
                                             "section_title": curr_sec_title,
                                             "has_table": True,
                                             "has_numeric_conditions": True,
@@ -664,11 +680,11 @@ def main():
 
     # 3. PSI Metadata (.txt) Dosyalarını da K1/K2 Bağlam Parçası Olarak Ekle
     psi_meta_map = {
-        "bass_metadata.txt": ("PSI-26", ["BASS"], "MSG", "katı", 2013),
-        "Bass-2_metadata.txt": ("PSI-25", ["BASS-II"], "MSG", "katı", 2022),
-        "flex_metadata.txt": ("PSI-69", ["FLEX"], "CIR (MDCA)", "sıvı", 2016),
-        "saffire-1_metadata.txt": ("PSI-98", ["Saffire-I"], "Cygnus", "katı", 2024),
-        "safire-3_metadata.txt": ("PSI-100", ["Saffire-III"], "Cygnus", "katı", 2024),
+        "bass_metadata.txt": ("PSI-26", ["BASS"], "MSG", "solid", 2013),
+        "Bass-2_metadata.txt": ("PSI-25", ["BASS-II"], "MSG", "solid", 2022),
+        "flex_metadata.txt": ("PSI-69", ["FLEX"], "CIR (MDCA)", "liquid", 2016),
+        "saffire-1_metadata.txt": ("PSI-98", ["Saffire-I"], "Cygnus", "solid", 2024),
+        "safire-3_metadata.txt": ("PSI-100", ["Saffire-III"], "Cygnus", "solid", 2024),
     }
     for mfile, (psi_id, inv_list, hw, fphase, yr) in psi_meta_map.items():
         mpath = os.path.join(RAW_PSI_DIR, mfile)
@@ -686,10 +702,10 @@ def main():
                 "chunk_id": f"{psi_id}_meta_c01",
                 "source_id": psi_id,
                 "investigation_ids": inv_list,
-                "doc_type": "genel bakış",
+                "doc_type": "overview",
                 "year": yr,
                 "page": 1,
-                "section_type": "amaç",
+                "section_type": "objective",
                 "section_title": "Official PSI Metadata Summary",
                 "has_table": False,
                 "has_numeric_conditions": True,
