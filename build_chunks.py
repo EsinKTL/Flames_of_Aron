@@ -1,6 +1,8 @@
 import os
 import re
 import json
+import zipfile
+import xml.etree.ElementTree as ET
 import unicodedata
 import pdfplumber
 import pypdf
@@ -23,9 +25,18 @@ DOC_REGISTRY = {
     "Detailed Results BAS-2.pdf": {
         "source_id": "S-007",
         "doc_title": "NASA/TM-20210011385 BASS-II Summary Report",
-        "investigation_ids": ["BASS-II", "BASS"],
+        "investigation_ids": ["BASS-II"],
         "doc_type": "results",
         "year": 2021,
+        "hardware": "MSG",
+        "fuel_phase": "solid"
+    },
+    "BASS-2 Engineering Requirements.pptx": {
+        "source_id": "S-008",
+        "doc_title": "BASS-2 Engineering Requirements",
+        "investigation_ids": ["BASS-II"],
+        "doc_type": "design",
+        "year": 2010,
         "hardware": "MSG",
         "fuel_phase": "solid"
     },
@@ -41,7 +52,7 @@ DOC_REGISTRY = {
     "BASS_20150008961.pdf": {
         "source_id": "S-003",
         "doc_title": "Microgravity Flammability of PMMA Rods in Concurrent Flow",
-        "investigation_ids": ["BASS", "BASS-II"],
+        "investigation_ids": ["BASS-II"],
         "doc_type": "results",
         "year": 2015,
         "hardware": "MSG",
@@ -78,7 +89,7 @@ DOC_REGISTRY = {
         "source_id": "S-009",
         "doc_title": "BASS Ops with Reduced O2 Partial Pressure & Procedure",
         "investigation_ids": ["BASS-II"],
-        "doc_type": "methodology",
+        "doc_type": "design",
         "year": 2014,
         "hardware": "MSG",
         "fuel_phase": "solid"
@@ -86,7 +97,7 @@ DOC_REGISTRY = {
     "BASS-II data FAQ.docx": {
         "source_id": "S-010",
         "doc_title": "BASS-II Data FAQ and PI Test Matrix Guide",
-        "investigation_ids": ["BASS-II", "BASS"],
+        "investigation_ids": ["BASS-II"],
         "doc_type": "overview",
         "year": 2017,
         "hardware": "MSG",
@@ -95,7 +106,7 @@ DOC_REGISTRY = {
     "BASS-II_SRD.pdf": {
         "source_id": "S-011",
         "doc_title": "Science Requirements Document (SRD) for BASS-II",
-        "investigation_ids": ["BASS-II"],
+        "investigation_ids": ["BASS-II", "SPICE"],
         "doc_type": "design",
         "year": 2013,
         "hardware": "MSG",
@@ -104,7 +115,7 @@ DOC_REGISTRY = {
     "BASS_SRD.pdf": {
         "source_id": "S-012",
         "doc_title": "Science Requirements Document (SRD) for BASS",
-        "investigation_ids": ["BASS"],
+        "investigation_ids": ["BASS", "SPICE"],
         "doc_type": "design",
         "year": 2010,
         "hardware": "MSG",
@@ -124,7 +135,7 @@ DOC_REGISTRY = {
     "20150018397.pdf": {
         "source_id": "S-014",
         "doc_title": "Combustion Characteristics in Cool-Flame Regime of n-Heptane (CFI / FLEX)",
-        "investigation_ids": ["CFI", "FLEX", "FLEX-2"],
+        "investigation_ids": ["FLEX", "CFI"],
         "doc_type": "results",
         "year": 2015,
         "hardware": "CIR (MDCA)",
@@ -133,8 +144,8 @@ DOC_REGISTRY = {
     "FLEX_20090014812.pdf": {
         "source_id": "S-015",
         "doc_title": "Multi-User Droplet Combustion Apparatus - FLEX Hardware",
-        "investigation_ids": ["FLEX", "FLEX-2"],
-        "doc_type": "design",
+        "investigation_ids": ["FLEX"],
+        "doc_type": "overview",
         "year": 2009,
         "hardware": "CIR (MDCA)",
         "fuel_phase": "liquid"
@@ -162,7 +173,7 @@ DOC_REGISTRY = {
     "SAFFIRE_Offgassing_Testing_Strategy.pdf": {
         "source_id": "S-018",
         "doc_title": "SAFFIRE Offgassing Testing Strategy",
-        "investigation_ids": ["Saffire-I", "Saffire-II", "Saffire-III"],
+        "investigation_ids": ["Saffire-I"],
         "doc_type": "design",
         "year": 2015,
         "hardware": "Cygnus",
@@ -430,62 +441,14 @@ def split_into_chunks(text: str, target_tokens: int = 400, overlap_tokens: int =
 def refine_investigation_ids(doc_investigations: list, text: str, section_title: str, source_id: str) -> list:
     """
     Refines document-level experiment tags down to chunk-level specific tags using regex.
-    Prevents noisy cross-tagging (e.g. BASS vs BASS-II) and extracts specific experiments from
-    overview documents like the NASA mini-book (S-026).
+    - Single-experiment documents keep their single tag cleanly (no cross-pollution).
+    - Multi-experiment documents narrow down to the subset of doc_investigations mentioned in the chunk.
+    - Overview documents (General, e.g. S-025, S-026) map to specific experiments discussed in the chunk.
     """
     full_ctx = (section_title + " " + text).lower()
 
-    # Rule 1: BASS vs BASS-II Disambiguation
-    if any("BASS" in inv for inv in doc_investigations):
-        has_b2 = bool(re.search(r'\bbass[- ]?ii\b|\bbass[- ]?2\b|\bbass 2\b', full_ctx))
-        has_b1 = bool(re.search(r'\bbass[- ]?i\b|\bbass[- ]?1\b|\bbass 1\b', full_ctx))
-        
-        # If in S-003..S-007, S-009..S-011 (BASS-II primary papers & summary reports)
-        if source_id in ("S-003", "S-004", "S-005", "S-006", "S-007", "S-009", "S-010", "S-011"):
-            if has_b1 and not has_b2:
-                return ["BASS"]
-            elif has_b1 and has_b2:
-                return ["BASS", "BASS-II"]
-            else:
-                return ["BASS-II"]
-        # If in S-002, S-012, S-036 (BASS-I primary papers & requirements)
-        elif source_id in ("S-002", "S-012", "S-036"):
-            if has_b2 and not has_b1:
-                return ["BASS-II"]
-            elif has_b2 and has_b1:
-                return ["BASS", "BASS-II"]
-            else:
-                return ["BASS"]
-
-    # Rule 2: Saffire
-    if any("Saffire" in inv for inv in doc_investigations):
-        s_matches = []
-        if re.search(r'\bsaffire[- ]?i\b|\bsaffire[- ]?1\b|\bsaffire 1\b', full_ctx):
-            s_matches.append("Saffire-I")
-        if re.search(r'\bsaffire[- ]?ii\b|\bsaffire[- ]?2\b|\bsaffire 2\b', full_ctx):
-            s_matches.append("Saffire-II")
-        if re.search(r'\bsaffire[- ]?iii\b|\bsaffire[- ]?3\b|\bsaffire 3\b', full_ctx):
-            s_matches.append("Saffire-III")
-        if re.search(r'\bsaffire[- ]?iv\b|\bsaffire[- ]?4\b|\bsaffire 4\b', full_ctx):
-            s_matches.append("Saffire-IV")
-        if s_matches:
-            return s_matches
-        return doc_investigations
-
-    # Rule 3: FLEX vs FLEX-2 vs CFI
-    if any(inv in ("FLEX", "FLEX-2", "CFI") for inv in doc_investigations):
-        f_matches = []
-        if re.search(r'\bcfi\b|cool flame', full_ctx):
-            f_matches.append("CFI")
-        if re.search(r'\bflex[- ]?2\b|\bflex[- ]?ii\b', full_ctx):
-            f_matches.append("FLEX-2")
-        if re.search(r'\bflex\b', full_ctx) and not re.search(r'\bflex[- ]?2\b|\bflex[- ]?ii\b', full_ctx):
-            f_matches.append("FLEX")
-        if f_matches:
-            return list(dict.fromkeys(f_matches))
-
-    # Rule 4: Overview documents (S-025, S-026 Mini-book, S-024)
-    if source_id in ("S-025", "S-026", "S-024") or doc_investigations == ["General"]:
+    # Case 1: Overview documents (General -> S-025, S-026 Mini-book)
+    if doc_investigations == ["General"]:
         detected = []
         if re.search(r'\bbass[- ]?ii\b|\bbass[- ]?2\b', full_ctx):
             detected.append("BASS-II")
@@ -505,8 +468,12 @@ def refine_investigation_ids(doc_investigations: list, text: str, section_title:
         if re.search(r'\bdaft\b|\bdust aerosol\b', full_ctx):
             detected.append("DAFT")
             
-        if re.search(r'\bsaffire\b', full_ctx):
-            detected.append("Saffire")
+        if re.search(r'\bsaffire[- ]?iii\b|\bsaffire[- ]?3\b', full_ctx):
+            detected.append("Saffire-III")
+        elif re.search(r'\bsaffire[- ]?ii\b|\bsaffire[- ]?2\b', full_ctx):
+            detected.append("Saffire-II")
+        elif re.search(r'\bsaffire\b', full_ctx):
+            detected.append("Saffire-I")
             
         if re.search(r'\bcfi[- ]?g\b|\bacme[- ]?cfi\b', full_ctx):
             detected.append("ACME-CFI-G")
@@ -525,6 +492,61 @@ def refine_investigation_ids(doc_investigations: list, text: str, section_title:
         if detected:
             return list(dict.fromkeys(detected))
         return ["General"]
+
+    # Case 2: Single-experiment document -> already clean, return as-is
+    if len(doc_investigations) == 1:
+        return doc_investigations
+
+    # Case 3: Multi-experiment document -> narrow strictly within doc_investigations
+    allowed = set(doc_investigations)
+
+    # 3a: BASS / BASS-II / SPICE
+    if any("BASS" in inv for inv in doc_investigations):
+        matched = []
+        has_b2 = bool(re.search(r'\bbass[- ]?ii\b|\bbass[- ]?2\b|\bbass 2\b', full_ctx))
+        has_b1 = bool(re.search(r'\bbass[- ]?i\b|\bbass[- ]?1\b|\bbass 1\b', full_ctx))
+        has_spice = bool(re.search(r'\bspice\b', full_ctx))
+
+        if "BASS" in allowed and "BASS-II" in allowed:
+            if has_b2 and not has_b1:
+                matched.append("BASS-II")
+            elif has_b1 and not has_b2:
+                matched.append("BASS")
+            elif has_b1 and has_b2:
+                matched.extend(["BASS", "BASS-II"])
+            else:
+                matched.append("BASS-II")
+        else:
+            if "BASS-II" in allowed:
+                matched.append("BASS-II")
+            elif "BASS" in allowed:
+                matched.append("BASS")
+
+        if "SPICE" in allowed and has_spice:
+            matched.append("SPICE")
+        return matched if matched else [doc_investigations[0]]
+
+    # 3b: Saffire multi-experiment docs (S-017, S-020, S-021, S-022)
+    if any("Saffire" in inv for inv in doc_investigations):
+        s_matches = []
+        if "Saffire-I" in allowed and re.search(r'\bsaffire[- ]?i\b|\bsaffire[- ]?1\b|\bsaffire 1\b|\bi-[12]\b', full_ctx):
+            s_matches.append("Saffire-I")
+        if "Saffire-II" in allowed and re.search(r'\bsaffire[- ]?ii\b|\bsaffire[- ]?2\b|\bsaffire 2\b|\b2-[1-9]\b', full_ctx):
+            s_matches.append("Saffire-II")
+        if "Saffire-III" in allowed and re.search(r'\bsaffire[- ]?iii\b|\bsaffire[- ]?3\b|\bsaffire 3\b|\biii-[12]\b', full_ctx):
+            s_matches.append("Saffire-III")
+        if s_matches:
+            return s_matches
+        return doc_investigations
+
+    # 3c: FLEX / CFI (S-014)
+    if "FLEX" in allowed and "CFI" in allowed:
+        f_matches = []
+        if re.search(r'\bflex\b', full_ctx):
+            f_matches.append("FLEX")
+        if re.search(r'\bcfi\b|cool[- ]?flame', full_ctx):
+            f_matches.append("CFI")
+        return f_matches if f_matches else doc_investigations
 
     return doc_investigations
 
@@ -546,7 +568,7 @@ def main():
     doc_files = []
     for root, _, files in os.walk(RAW_DOCS_DIR):
         for f in sorted(files):
-            if f.lower().endswith((".pdf", ".docx")):
+            if f.lower().endswith((".pdf", ".docx", ".pptx")):
                 doc_files.append(os.path.join(root, f))
 
     print(f"Toplam {len(doc_files)} belge bulundu. İşleniyor...")
@@ -571,6 +593,64 @@ def main():
         doc_title = meta["doc_title"]
         stats["total_docs"] += 1
         print(f"  -> [{source_id}] {fname} işleniyor...")
+
+        if fname.lower().endswith(".pptx"):
+            try:
+                with zipfile.ZipFile(fpath, "r") as z:
+                    slide_files = sorted(
+                        [f for f in z.namelist() if re.match(r"ppt/slides/slide\d+\.xml", f)],
+                        key=lambda x: int(re.findall(r"\d+", x)[0])
+                    )
+                    for s_idx, sf in enumerate(slide_files, start=1):
+                        stats["total_pages"] += 1
+                        root = ET.fromstring(z.read(sf))
+                        paras = []
+                        for p in root.iter():
+                            if p.tag.endswith("}p"):
+                                line = "".join(t.text for t in p.iter() if t.tag.endswith("}t") and t.text).strip()
+                                if line:
+                                    paras.append(line)
+                        slide_text = clean_text("\n".join(paras))
+                        if len(slide_text) < 40:
+                            continue
+                        sec_title = paras[0] if paras else f"Slide {s_idx}"
+                        all_pages_records.append({
+                            "source_id": source_id,
+                            "filename": fname,
+                            "page": s_idx,
+                            "section_type": "methodology",
+                            "section_title": sec_title,
+                            "text": slide_text
+                        })
+                        slide_chunks = split_into_chunks(slide_text, target_tokens=380, overlap_tokens=55)
+                        for c_idx, ch_txt in enumerate(slide_chunks, start=1):
+                            refined_inv = refine_investigation_ids(meta["investigation_ids"], ch_txt, sec_title, source_id)
+                            refined_inv_str = ", ".join(refined_inv)
+                            prefix = f"[{refined_inv_str} | {source_id}: {doc_title} | {sec_title}]\n"
+                            final_txt = prefix + ch_txt
+                            all_chunks.append({
+                                "chunk_id": f"{source_id}_p{s_idx:03d}_c{c_idx:02d}",
+                                "source_id": source_id,
+                                "investigation_ids": refined_inv,
+                                "doc_type": meta["doc_type"],
+                                "year": meta["year"],
+                                "page": s_idx,
+                                "section_type": "methodology",
+                                "section_title": sec_title,
+                                "has_table": False,
+                                "has_numeric_conditions": bool(NUMERIC_COND_REGEX.search(ch_txt)),
+                                "hardware": meta["hardware"],
+                                "fuel_phase": meta["fuel_phase"],
+                                "ocr": False,
+                                "duplicate_of": None,
+                                "exclude_from_default_search": False,
+                                "token_estimate": estimate_tokens(final_txt),
+                                "text": final_txt
+                            })
+                            stats["text_chunks"] += 1
+            except Exception as e:
+                print(f"     [!] PPTX Hatası ({fname}): {e}")
+            continue
 
         if fname.lower().endswith(".docx"):
             try:

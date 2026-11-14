@@ -29,6 +29,8 @@ DENSE_PATH = os.path.join(INDEX_DIR, "dense_embeddings.npy")
 CHUNK_LOOKUP_PATH = os.path.join(INDEX_DIR, "chunk_lookup.json")
 ALL_CHUNKS_PATH = os.path.join(INDEX_DIR, "all_chunks_lookup.json")
 GOLDEN_TABLE_PATH = os.path.join(PROCESSED_DIR, "golden_table.csv")
+GOLDEN_CONFLICTS_PATH = os.path.join(PROCESSED_DIR, "golden_table_conflicts.csv")
+GOLDEN_EVIDENCE_PATH = os.path.join(PROCESSED_DIR, "golden_table_evidence.jsonl")
 FACTS_PATH = os.path.join(REFERENCE_DIR, "facts.yaml")
 MANIFEST_PATH = os.path.join(REFERENCE_DIR, "manifest.csv")
 
@@ -59,11 +61,22 @@ class CombustionQueryEngine:
         with open(ALL_CHUNKS_PATH, "r", encoding="utf-8") as f:
             self.all_chunks = json.load(f)
             
-        # 4. Load Golden Table
+        # 4. Load Golden Table & Conflicts & Evidence
         if os.path.exists(GOLDEN_TABLE_PATH):
             self.golden_df = pd.read_csv(GOLDEN_TABLE_PATH, encoding="utf-8")
         else:
             self.golden_df = pd.DataFrame()
+
+        if os.path.exists(GOLDEN_CONFLICTS_PATH):
+            self.conflicts_df = pd.read_csv(GOLDEN_CONFLICTS_PATH, encoding="utf-8")
+        else:
+            self.conflicts_df = pd.DataFrame()
+
+        if os.path.exists(GOLDEN_EVIDENCE_PATH):
+            with open(GOLDEN_EVIDENCE_PATH, "r", encoding="utf-8") as f:
+                self.evidence_records = [json.loads(line) for line in f if line.strip()]
+        else:
+            self.evidence_records = []
             
         # 5. Load Facts YAML
         if os.path.exists(FACTS_PATH):
@@ -78,7 +91,7 @@ class CombustionQueryEngine:
         else:
             self.manifest_df = pd.DataFrame()
             
-        print(f"Ready! Corpus: {len(self.chunks)} active chunks, {len(self.golden_df)} Golden Table experiments, {len(self.facts_data.get('facts', []))} verified facts.")
+        print(f"Ready! Corpus: {len(self.chunks)} active chunks, {len(self.golden_df)} Golden Table experiments, {len(self.conflicts_df)} documented conflicts, {len(self.facts_data.get('facts', []))} verified facts.")
 
     def search_hybrid(self, query: str, top_k: int = 5, experiment_filter: str = None, category_filter: str = None):
         """
@@ -183,7 +196,7 @@ class CombustionQueryEngine:
         q_tokens = set(tokenize(query))
         matching_facts = []
         
-        for f in facts:
+        for f in facts + calcs:
             topic = str(f.get("topic", "")).lower()
             claim = str(f.get("claim", "")).lower()
             claim_tokens = set(tokenize(topic + " " + claim))
@@ -191,7 +204,29 @@ class CombustionQueryEngine:
             if len(overlap) >= 2 or any(k in topic for k in q_tokens if len(k) > 3):
                 matching_facts.append(f)
                 
-        return matching_facts[:4]
+        return matching_facts[:5]
+
+    def get_conflicts(self, query: str, matched_exp_ids: list = None):
+        """
+        Retrieves documented cross-source discrepancies from golden_table_conflicts.csv.
+        """
+        if self.conflicts_df.empty:
+            return []
+
+        q_lower = query.lower()
+        q_tokens = set(tokenize(query))
+        exp_set = {str(e).lower() for e in (matched_exp_ids or [])}
+        matches = []
+
+        for _, row in self.conflicts_df.iterrows():
+            inv_id = str(row.get("investigation_id", "")).lower()
+            field = str(row.get("field", "")).lower()
+            rationale = str(row.get("rationale", "")).lower()
+            row_tokens = set(tokenize(f"{inv_id} {field} {rationale}"))
+            if (inv_id in exp_set or inv_id in q_lower) and len(q_tokens.intersection(row_tokens)) >= 1:
+                matches.append(row.to_dict())
+
+        return matches[:5]
 
     def build_rag_context(self, query: str, top_k: int = 5):
         """
@@ -200,6 +235,8 @@ class CombustionQueryEngine:
         search_results = self.search_hybrid(query, top_k=top_k)
         golden_matches = self.get_golden_facts(query)
         guardrails = self.get_guardrail_facts(query)
+        matched_exp_ids = [m.get("id") for m in golden_matches if m.get("id")]
+        conflicts = self.get_conflicts(query, matched_exp_ids=matched_exp_ids)
         
         context_parts = []
         
@@ -222,6 +259,18 @@ class CombustionQueryEngine:
                 context_parts.append(f"- Key Finding: {m.get('main_finding')}")
                 context_parts.append(f"- Citations: {m.get('pages')}")
                 context_parts.append("")
+
+        # 2b. Documented Source Conflicts
+        if conflicts:
+            context_parts.append("### DOCUMENTED CROSS-SOURCE CONFLICTS & RECONCILIATION:")
+            for c in conflicts:
+                context_parts.append(
+                    f"- [{c.get('investigation_id')} | {c.get('field')}] "
+                    f"Value 1: {c.get('value_1')} ({c.get('source_1')}) vs "
+                    f"Value 2: {c.get('value_2')} ({c.get('source_2')}) -> "
+                    f"Chosen: {c.get('chosen')} ({c.get('rationale')})"
+                )
+            context_parts.append("")
                 
         # 3. Microgravity Literature Chunks
         context_parts.append("### RETRIEVED RESEARCH PASSAGES & EXPERIMENT TABLES:")
@@ -236,6 +285,7 @@ class CombustionQueryEngine:
             "assembled_context": "\n".join(context_parts),
             "search_results": search_results,
             "golden_matches": golden_matches,
+            "conflicts": conflicts,
             "guardrails": guardrails
         }
 
