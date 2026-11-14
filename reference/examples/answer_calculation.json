@@ -1,0 +1,377 @@
+{
+  "text": "LLM answer not available - showing evidence summary.\n- Spacesuits are pressurized with 100% oxygen up to only 4.3 psi. [F-001]\n- At sea level on Earth, atmospheric pressure is 14.7 psi. [F-002]\n- To prevent decompression sickness ('the bends'), astronauts perform a pre-breathe protocol by inhaling 100% oxygen to purge dissolved nitrogen from body tissues. [F-003]\n- To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere. [F-004]\n- The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower. [F-005]\n- po2: 0.3 * 10.2 = 3.06 psi\n- po2_ratio_vs_earth: (0.3 * 10.2) / (0.209 * 14.7) = 0.996 x sea-level pO2\n- Earth sea level [F-002]: 0.209 * 14.7 = 3.072 psi\n- EVA spacesuit [F-001]: 1 * 4.3 = 4.3 psi\n- lunar habitat O2 vs. air [F-006]: 0.3 / 0.209 = 1.435 x air\n- Passages retrieved: [S-038:1], [S-039:1], [S-030:1], [S-036:1], [S-037:1]",
+  "model": "none/evidence-summary",
+  "answer_type": "answer",
+  "citations": [
+    "F-001",
+    "F-002",
+    "F-003",
+    "F-004",
+    "F-005",
+    "S-038:1",
+    "S-039:1",
+    "S-030:1",
+    "S-036:1",
+    "S-037:1"
+  ],
+  "validation": {
+    "passed": false,
+    "errors": [
+      "no LLM configured"
+    ],
+    "retried": false,
+    "fallback_used": true
+  },
+  "bundle": {
+    "schema_version": "1.0",
+    "question": "What is the oxygen partial pressure at 30% O2 and 10.2 psi, and how does it compare with sea-level air?",
+    "intent": "calculation",
+    "investigations": [],
+    "answer_type": "answer",
+    "facts": [
+      {
+        "id": "F-001",
+        "claim": "Spacesuits are pressurized with 100% oxygen up to only 4.3 psi.",
+        "topic": "spacesuit",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-002",
+        "claim": "At sea level on Earth, atmospheric pressure is 14.7 psi.",
+        "topic": "earth atmosphere",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-003",
+        "claim": "To prevent decompression sickness ('the bends'), astronauts perform a pre-breathe protocol by inhaling 100% oxygen to purge dissolved nitrogen from body tissues.",
+        "topic": "decompression",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-004",
+        "claim": "To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere.",
+        "topic": "lunar base atmosphere",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-005",
+        "claim": "The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower.",
+        "topic": "lunar base atmosphere",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      }
+    ],
+    "table_rows": [],
+    "tests": [],
+    "chunks": [
+      {
+        "chunk_id": "S-038_meta_c01",
+        "source_id": "S-038",
+        "page": 1,
+        "text": "[Saffire-I | S-038: Official PSI Metadata | Study Approach, Objective & Hardware]\nStudy Identifier: PSI-98\nStudy Title: Spacecraft Fire Safety Experiment-I\nComment[Approach]: The Saffire-1 experiments was performed on the Orbital Science’s Cygnus resupply vehicle after it deberthed from the ISS. The sample material for Saffire-I is a composite fabric called Sibal consisting of cotton on a fiberglass substrate (75% cotton, 25% fiberglass by weight). It has been used in many space experiments because it burns like cotton but maintains structural integrity after the cotton is consumed. The sample was approximately 0.94 meters long and 0.4 meters wide, simulating a large piece of flammable fabric. The Saffire-1 flight unit had a sample card installed in the middle of a large flow duct. Air is drawn through the flow duct by fans located at the top of the duct with flow straighteners at the bottom of the experiment module. Saffire-I was conducted at an air flow velocity of 20 cm/s. Once the sample was ignited flame images were captured using two cameras. In addition, thermocouples provided flow, flame, and plume temperatures, two radiometers recorded flame radiation, solid state sensors were used to measure pressure, CO2 and O2 mole faction, and two anemometer tracked flow velocity. All data was compressed, and subsequently downlinked.\nComment[Experiment Hardware]: Saffire 1 enclosure in Cygnus\nComment[Hypothesis]: This investigation hypothesizes that due to large differences between fire behavior in normal and reduced gravity, the use of terrestrial fires and fire standards to design spacecraft fire safety systems presents an inherent risk to the vehicle because of the significant level of uncertainty. While this approach has been successful thus far, the uncertainty and risk will increase as exploration missions venture further from earth with considerably longer transit times for a safe return. There is a significant lack of microgravity data available for spacecraft designers on which to base their fire safety designs and procedures. To address this knowledge gap, this investigation proposed to conduct large-scale fire safety experiments in an expendable spacecraft without risk to a crew.\nComment[Objective]: \"The objectives of this investigation were to:\nComment[Research Impacts]: The Saffire-I experiment provides a new way to study a realistic fire on an exploration vehicle, which has not been possible in the past because the risks are too high. Instruments on an unmanned cargo vessel measure oxygen, carbon dioxide, heat, pressure and flame growth, and two video cameras provide views of the flame. Results determine microgravity flammability limits for several spacecraft materials, help to validate NASA’s material selection criteria, and how microgravity and limited oxygen affect flame size. The investigation is crucial for the safety of current and future space missions. Studying fire in small, sealed environments such as the Cygnus cargo supply vehicle benefits fire safety and prevention efforts on Earth, including inside mines, airplanes, or submarines.\nStudy Design Type: Cygnus: Fire: SAFFIRE: Oxidizer flux: Flame Spread: Solid burning rate: Surface Combustion: Smoldering: Fire Safety\nStudy Design Type Term Accession Number: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/\nStudy Design Type Term Source REF: PSI: PSI: PSI: PSI: PSI: PSI: PSI: PSI: PSI",
+        "score": 0.01613,
+        "section_title": "Official PSI Metadata Summary",
+        "investigation_ids": [
+          "Saffire-I"
+        ]
+      },
+      {
+        "chunk_id": "S-039_meta_c01",
+        "source_id": "S-039",
+        "page": 1,
+        "text": "[Saffire-III | S-039: Official PSI Metadata | Study Approach, Objective & Hardware]\nStudy Identifier: PSI-100\nStudy Title: Spacecraft Fire Experiment-III\nComment[Approach]: The Saffire-III experiments were performed on the Orbital Science’s Cygnus resupply vehicle after it deberthed from the ISS. As a follow on to the Saffire 1 investigation, the Saffire III investigation also used SIBAL as the sample material. However, the experiments were conducted at a flow velocity of 30 cm/s compared to 20 cm/s during Saffire I. The flow was either concurrent or opposed. Once the sample was ignited flame images were captured using two cameras. In addition, thermocouples provided flow, flame, and plume temperatures, two radiometers recorded flame radiation, solid state sensors were used to measure pressure, CO2 and O2 mole faction, and two anemometer tracked flow velocity. All data was compressed, and subsequently downlinked. Details related to samples and experimental parameters are provided in the Experimental Details file in the Science document folder.\nComment[Experiment Hardware]: Saffire III enclosure in Cygnus\nComment[Hypothesis]: This investigation hypothesizes that due to large differences between fire behavior in normal and reduced gravity, the use of terrestrial fires and fire standards to design spacecraft fire safety systems presents an inherent risk to the vehicle because of the significant level of uncertainty. While this approach has been successful thus far, the uncertainty and risk will increase as exploration missions venture further from earth with considerably longer transit times for a safe return. There is a significant lack of microgravity data available for spacecraft designers on which to base their fire safety designs and procedures. To address this knowledge gap, this investigation proposed to conduct large-scale fire safety experiments in an expendable spacecraft without risk to a crew.\nComment[Objective]: \"The objectives of this investigation were to:\nComment[Research Impacts]: The Saffire-I experiment provides a new way to study a realistic fire on an exploration vehicle, which has not been possible in the past because the risks are too high. Instruments on an unmanned cargo vessel measure oxygen, carbon dioxide, heat, pressure and flame growth, and two video cameras provide views of the flame. Results determine microgravity flammability limits for several spacecraft materials, help to validate NASA’s material selection criteria, and how microgravity and limited oxygen affect flame size. The investigation is crucial for the safety of current and future space missions. Studying fire in small, sealed environments such as the Cygnus cargo supply vehicle benefits fire safety and prevention efforts on Earth, including inside mines, airplanes, or submarines.\nStudy Design Type: SAFFIRE: Flame Spread: Fire Safety: low-gravity fire testing: Surface Combustion: flammability: Smoldering\nStudy Design Type Term Accession Number: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/\nStudy Design Type Term Source REF: PSI: PSI: PSI: PSI: PSI: PSI: PSI",
+        "score": 0.01601,
+        "section_title": "Official PSI Metadata Summary",
+        "investigation_ids": [
+          "Saffire-III"
+        ]
+      },
+      {
+        "chunk_id": "S-030_meta_c01",
+        "source_id": "S-030",
+        "page": 1,
+        "text": "[BASS-II | S-030: Official PSI Metadata | Study Approach, Objective & Hardware]\nStudy Identifier: PSI-25\nStudy Title: Burning and Suppression of Solids - II\nComment[Approach]: To summarize, BASS-II's approach, microgravity combustion tests were performed aboard the International Space Station. Active crew support for real-time “lab partner” operations. The wind tunnel was installed in the Microgravity Science Glovebox which supplied power, imaging, and a level of containment. Fuel samples were mounted inside a small wind tunnel which could impose airflow speeds up to 40 cm/s. Main variables are airflow speed and oxygen concentration (oxygen varied below 21% by adding nitrogen). Flame appearance, flame growth, and spread rates were determined in both the opposed and concurrent flow.\nComment[Experiment Hardware]: Microgravity Science Glovebox (MSG)\nComment[Hypothesis]: \"BASS–II tests the hypothesis that materials in microgravity, with adequate ventilation, burn as well if not better than the same material in normal gravity with other conditions being identical (pressure, O2\nComment[Objective]: \"BASS-II results contribute to the combustion computational models used in the design of fire detection and suppression systems in microgravity and on Earth.\nComment[Research Impacts]: A primary goal of BASS-II is improved spacecraft fire safety, improved understanding of combustion in space and how to avoid it. If you’re on a mission far from Earth, a fire can be catastrophic. BASS-II helps engineers select the safest materials and improve firefighting methods on future space missions. In outer space, fuels burn as oval balls rather than with an upward pointed cone flame as they do on Earth. This simpler combustion process enables researchers to evaluate computer models of fuel burning. These models can then be used to more accurately study flames on Earth, such as in wildfires, building fires, energy recapture from waste recycling, and other combustion problems.\nStudy Design Type: Flame Spread: Solid Fuels: extinction limits: Forced Flow Velocity: MSG: BASS: Fire Suppression: Fire Safety\nStudy Design Type Term Accession Number: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/\nStudy Design Type Term Source REF: PSI: PSI: PSI: PSI: PSI: PSI: PSI: PSI",
+        "score": 0.0155,
+        "section_title": "Official PSI Metadata Summary",
+        "investigation_ids": [
+          "BASS-II"
+        ]
+      },
+      {
+        "chunk_id": "S-036_meta_c01",
+        "source_id": "S-036",
+        "page": 1,
+        "text": "[BASS | S-036: Official PSI Metadata | Study Approach, Objective & Hardware]\nStudy Identifier: PSI-26\nStudy Title: Burning and Suppression of Solids\nComment[Approach]: \"The experiment was conducted aboard the International Space Station (ISS) inside the Microgravity Glove Box (MSG). Custom-made fabric samples consisting of 75% cotton and 25% fiberglass (by mass) measuring were used as a fuel source as well as Nomex fabric and Ultem. A Kanthal wire (29-gage)igniter was used to initiate combustion at one end of the fabric. Airflow was controlled using a variable speed fan, with airflow speeds reaching as high as 40 cm/s. The airflow was directed along the fuel surface in either the opposed or concurrent direction.\nComment[Experiment Hardware]: Microgravity Science Glovebox\nComment[Hypothesis]: BASS experiments were based on the hypothesis that materials in microgravity, with adequate ventilation, burn as well if not better than the same material in normal gravity with other conditions being identical (pressure, oxygen concentration, temperature, etc.) To test this hypothesis with any but the thinnest materials requires extended microgravity time – longer than available in drop towers or parabolic aircraft.\nComment[Objective]: \"The two main objectives for BASS are to:\nComment[Research Impacts]: \"Current NASA spacecraft materials selection is based on a standard test method (NASA–STD–6001 Test 1) that segregates material based on 1-g behavior without consideration of low gravity effects. A critical element of this understanding is the radiative heat emission from the flame. These results are used in first order models and predictions of heat release in spacecraft fires and as a means to extend heat release data from tests like the NASA cone calorimeter test (NASA–STD–6001 Test 2) to a performance-based material selection process. Using nitrogen as a flame suppressant in microgravity provides a direct link to current and planned extinguishment techniques.\nStudy Design Type: Flame Spread: Fire safety: Fire suppression system: Forced Flow Flame: Damkohler number: Kinetic regime: Boundary layer\nStudy Design Type Term Accession Number: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/\nStudy Design Type Term Source REF: PSI: PSI: PSI: PSI: PSI: PSI: PSI",
+        "score": 0.01473,
+        "section_title": "Official PSI Metadata Summary",
+        "investigation_ids": [
+          "BASS"
+        ]
+      },
+      {
+        "chunk_id": "S-037_meta_c01",
+        "source_id": "S-037",
+        "page": 1,
+        "text": "[FLEX | S-037: Official PSI Metadata | Study Approach, Objective & Hardware]\nStudy Identifier: PSI-69\nStudy Title: Flame Extinguishment Experiment\nComment[Approach]: \"The FLEX experiments involve igniting and observing the burning behavior of relatively large droplets. A primary objective of the experiments is to determine the Limiting Oxygen Index (LOI) as a function of ambient pressure and determine how the presence of a suppressant influences the LOI .\nComment[Experiment Hardware]: Combustion Integrated Rack (CIR)-Fluids and Combustion Facility (FCF), Multi-user Droplet Combustion Appartatus (MDCA)\nComment[Hypothesis]: The primary hypothesis of the FLEX mission is that microgravity conditions fundamentally alter the combustion and extinction characteristics of liquid fuel droplets due to changes in species and energy transport dynamics, radiative heat loss, and chemical kinetics. Specifically, the hypothesis posits that the lack of buoyant convection in microgravity will lead to significant differences in the flammability limits and suppression efficacy of various fire suppressant agents compared to normal gravity conditions. This hypothesis underpins the design of the FLEX experiments, which aim to map flammability boundaries, quantify suppressant efficacy, and develop predictive models to improve fire safety in space environments.\nComment[Objective]: The FLEX (Flame Extinguishment Experiment) investigation aims to map the flammability limits of liquid fuels in microgravity environments, measure the effectiveness of various gaseous fire suppressants such as CO2, He, and SF6, and develop reliable predictive models for combustion limits under reduced gravity conditions. The mission seeks to validate and improve simplified models by incorporating detailed chemical reactions, heat transfer, and material movement, using both space-based data and extensive ground-based tests. Key flight experiment goals include obtaining high-resolution measurements of droplet burning rates, flame extinction behavior, heat radiation, soot levels, and temperature profiles, while systematically analyzing the effects of different ambient conditions and suppressant concentrations. These investigations are essential for advancing the fundamental understanding of combustion processes in microgravity and enhancing fire safety protocols for future space missions.\nComment[Research Impacts]: The research impacts and Earth benefits of the FLEX mission are significant and multifaceted. By enhancing our understanding of microgravity combustion, the mission directly contributes to improved fire safety protocols for future space missions, ensuring the safety of crew members in environments where traditional fire suppression methods may be ineffective. On Earth, the insights gained from these experiments have the potential to advance fire safety in confined and reduced-gravity environments, such as submarines or high-altitude aircraft. The mission's findings on the effectiveness of various fire suppressants, including CO2, He, and SF6, in microgravity can lead to the development of more efficient and less harmful fire suppression systems, reducing the risk of toxic byproducts during fire events. Additionally, the study of ''cool flames'' and low-temperature combustion processes observed in microgravity can inform the design of advanced combustion engines, leading to improved fuel efficiency and reduced emissions in automotive and industrial applications. Overall, the FLEX mission's contributions to combustion science have the potential to enhance both space exploration safety and terrestrial fire safety technologies.\nStudy Design Type: FLEX: Fuel Sooting: Droplet: Spacecraft Fire Safety: Diffusion Flames: Flames\nStudy Design Type Term Accession Number: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/\nStudy Design Type Term Source REF: PSI: PSI: PSI: PSI: PSI: PSI",
+        "score": 0.01452,
+        "section_title": "Official PSI Metadata Summary",
+        "investigation_ids": [
+          "FLEX"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "calculations": [
+      {
+        "name": "po2",
+        "formula": "0.3 * 10.2",
+        "inputs": {
+          "o2_fraction": 0.3,
+          "pressure": 10.2
+        },
+        "result": 3.06,
+        "unit": "psi",
+        "cross_check": {
+          "id": "C-001",
+          "expected": "3.06 psi",
+          "match": true
+        }
+      },
+      {
+        "name": "po2_ratio_vs_earth",
+        "formula": "(0.3 * 10.2) / (0.209 * 14.7)",
+        "inputs": {
+          "o2_fraction": 0.3,
+          "pressure_psi": 10.2
+        },
+        "result": 0.996,
+        "unit": "x sea-level pO2",
+        "cross_check": null
+      },
+      {
+        "name": "po2",
+        "formula": "0.209 * 14.7",
+        "inputs": {
+          "o2_fraction": 0.209,
+          "pressure": 14.7
+        },
+        "result": 3.072,
+        "unit": "psi",
+        "cross_check": {
+          "id": "C-002",
+          "expected": "3.07 psi",
+          "match": true
+        },
+        "label": "Earth sea level [F-002]"
+      },
+      {
+        "name": "po2",
+        "formula": "1 * 4.3",
+        "inputs": {
+          "o2_fraction": 1.0,
+          "pressure": 4.3
+        },
+        "result": 4.3,
+        "unit": "psi",
+        "cross_check": {
+          "id": "C-003",
+          "expected": "4.30 psi",
+          "match": true
+        },
+        "label": "EVA spacesuit [F-001]"
+      },
+      {
+        "name": "o2_ratio_vs_air",
+        "formula": "0.3 / 0.209",
+        "inputs": {
+          "o2_fraction": 0.3
+        },
+        "result": 1.435,
+        "unit": "x air",
+        "percent_increase": 43.5,
+        "cross_check": {
+          "id": "C-004",
+          "expected": "approximately 43.5% increase; matches challenge statement of 'more than 40%' [F-006]",
+          "match": true
+        },
+        "label": "lunar habitat O2 vs. air [F-006]"
+      }
+    ],
+    "gaps": [],
+    "rules": [
+      {
+        "id": "R-001",
+        "rule": "Do NOT extrapolate microgravity results directly to Lunar or Martian gravity without explicitly stating the lack of direct partial-gravity empirical data and explaining bounding logic ([F-019], [F-021])."
+      },
+      {
+        "id": "R-002",
+        "rule": "When queried regarding combustion in Lunar or Martian gravity, explicitly clarify that NASA PSI currently contains no partial-gravity test data [F-019]. Mention E-FIELD electric field chemi-ion simulation [F-020] and 0-g/1-g bounding methodology [F-021] if relevant."
+      },
+      {
+        "id": "R-003",
+        "rule": "Never assess spacecraft fire flammability solely on oxygen percentage. Always evaluate oxygen partial pressure (via calculation), total pressure, diluent inert species (N2, CO2, He), and ventilation forced flow velocity together."
+      },
+      {
+        "id": "R-004",
+        "rule": "If asked about rocket engine or thruster propellant fires, clearly state that propulsion systems are outside the scope of PSI microgravity science due to momentum-dominated flow regimes [F-022]."
+      },
+      {
+        "id": "R-005",
+        "rule": "For every experimental finding reported, cite the exact test conditions: fuel type, geometry, oxygen concentration, ambient pressure, flow velocity, and hardware facility. If a condition is omitted in the source, label it as 'unspecified'; do NOT guess."
+      },
+      {
+        "id": "R-006",
+        "rule": "If an empirical value or data point is absent from the indexed chunks and Golden Table, state 'data not available in repository'. Never fabricate numerical values from LLM parametric memory."
+      },
+      {
+        "id": "R-007",
+        "rule": "When source documents report conflicting findings or values, present both sources with their respective document citations, PI names, and publication years; do not arbitrarily select one."
+      },
+      {
+        "id": "R-008",
+        "rule": "Clearly distinguish between empirical flight experiment findings (PSI / peer-reviewed reports), challenge guidelines, mathematical derivations, and speculative engineering hypotheses. Never present interpretation as an empirical fact."
+      }
+    ],
+    "route": {
+      "intent": "calculation",
+      "investigations": [],
+      "matched_intents": [
+        "calculation",
+        "lunar_check",
+        "comparison"
+      ],
+      "ambiguous": true,
+      "decided_by": "rules (priority)",
+      "out_of_scope_reason": null,
+      "tools": [
+        "calculate",
+        "get_facts"
+      ],
+      "rules": [
+        "R-003"
+      ]
+    },
+    "versions": {
+      "data": "v2",
+      "index": "4aa3c9230f",
+      "golden_table": "draft"
+    },
+    "sources": [
+      {
+        "id": "F-001",
+        "found": true,
+        "kind": "fact",
+        "title": "Spacesuits are pressurized with 100% oxygen up to only 4.3 psi.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-002",
+        "found": true,
+        "kind": "fact",
+        "title": "At sea level on Earth, atmospheric pressure is 14.7 psi.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-003",
+        "found": true,
+        "kind": "fact",
+        "title": "To prevent decompression sickness ('the bends'), astronauts perform a pre-breathe protocol by inhaling 100% oxygen to purge dissolved nitrogen from body tissues.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-004",
+        "found": true,
+        "kind": "fact",
+        "title": "To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-005",
+        "found": true,
+        "kind": "fact",
+        "title": "The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "S-038",
+        "found": true,
+        "kind": "source",
+        "title": "PSI-98 investigation metadata (ISA-Tab)",
+        "authors": null,
+        "year": "2024",
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-98",
+        "doi": "10.60555/0t15-1z43",
+        "investigation": "Saffire-I",
+        "psi_id": "PSI-98",
+        "role": "metadata",
+        "file_type": "txt",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-039",
+        "found": true,
+        "kind": "source",
+        "title": "PSI-100 investigation metadata (ISA-Tab)",
+        "authors": null,
+        "year": "2024",
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-100",
+        "doi": null,
+        "investigation": "Saffire-III",
+        "psi_id": "PSI-100",
+        "role": "metadata",
+        "file_type": "txt",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-030",
+        "found": true,
+        "kind": "source",
+        "title": "PSI-25 investigation metadata (ISA-Tab)",
+        "authors": null,
+        "year": "2022",
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+        "doi": "10.60555/4qc4-de67",
+        "investigation": "BASS-II",
+        "psi_id": "PSI-25",
+        "role": "metadata",
+        "file_type": "txt",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-036",
+        "found": true,
+        "kind": "source",
+        "title": "PSI-26 investigation metadata (ISA-Tab)",
+        "authors": null,
+        "year": "2013",
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-26",
+        "doi": "10.60555/58h4-dy80",
+        "investigation": "BASS",
+        "psi_id": "PSI-26",
+        "role": "metadata",
+        "file_type": "txt",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-037",
+        "found": true,
+        "kind": "source",
+        "title": "PSI-69 investigation metadata (ISA-Tab)",
+        "authors": null,
+        "year": "2016",
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-69",
+        "doi": "10.60555/mbq8-0451",
+        "investigation": "FLEX",
+        "psi_id": "PSI-69",
+        "role": "metadata",
+        "file_type": "txt",
+        "in_corpus": true,
+        "status": "downloaded"
+      }
+    ]
+  },
+  "latency_ms": 0
+}

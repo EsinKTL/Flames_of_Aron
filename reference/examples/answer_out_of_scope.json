@@ -1,0 +1,104 @@
+{
+  "text": "LLM answer not available - showing evidence summary.\nThis question is outside the scope of the repository.\n- Gap: Out of scope: rocket propulsion, thruster and re-entry heating are outside the PSI microgravity combustion investigations [F-022].",
+  "model": "none/evidence-summary",
+  "answer_type": "out_of_scope",
+  "citations": [
+    "F-022"
+  ],
+  "validation": {
+    "passed": false,
+    "errors": [
+      "no LLM configured"
+    ],
+    "retried": false,
+    "fallback_used": true
+  },
+  "bundle": {
+    "schema_version": "1.0",
+    "question": "Is hydrazine thruster fire safety covered by PSI?",
+    "intent": "out_of_scope",
+    "investigations": [],
+    "answer_type": "out_of_scope",
+    "facts": [
+      {
+        "id": "F-022",
+        "claim": "Rocket propulsion and thruster fire safety are outside the scope of investigations in the NASA PSI repository; the extremely high gas velocities in rocket engines render combustion dynamics independent of gravitational acceleration.",
+        "topic": "out of scope",
+        "source": "Challenge text, 'Objectives' footnote"
+      }
+    ],
+    "table_rows": [],
+    "tests": [],
+    "chunks": [],
+    "conflicts": [],
+    "calculations": [],
+    "gaps": [
+      "Out of scope: rocket propulsion, thruster and re-entry heating are outside the PSI microgravity combustion investigations [F-022]."
+    ],
+    "rules": [
+      {
+        "id": "R-001",
+        "rule": "Do NOT extrapolate microgravity results directly to Lunar or Martian gravity without explicitly stating the lack of direct partial-gravity empirical data and explaining bounding logic ([F-019], [F-021])."
+      },
+      {
+        "id": "R-002",
+        "rule": "When queried regarding combustion in Lunar or Martian gravity, explicitly clarify that NASA PSI currently contains no partial-gravity test data [F-019]. Mention E-FIELD electric field chemi-ion simulation [F-020] and 0-g/1-g bounding methodology [F-021] if relevant."
+      },
+      {
+        "id": "R-003",
+        "rule": "Never assess spacecraft fire flammability solely on oxygen percentage. Always evaluate oxygen partial pressure (via calculation), total pressure, diluent inert species (N2, CO2, He), and ventilation forced flow velocity together."
+      },
+      {
+        "id": "R-004",
+        "rule": "If asked about rocket engine or thruster propellant fires, clearly state that propulsion systems are outside the scope of PSI microgravity science due to momentum-dominated flow regimes [F-022]."
+      },
+      {
+        "id": "R-005",
+        "rule": "For every experimental finding reported, cite the exact test conditions: fuel type, geometry, oxygen concentration, ambient pressure, flow velocity, and hardware facility. If a condition is omitted in the source, label it as 'unspecified'; do NOT guess."
+      },
+      {
+        "id": "R-006",
+        "rule": "If an empirical value or data point is absent from the indexed chunks and Golden Table, state 'data not available in repository'. Never fabricate numerical values from LLM parametric memory."
+      },
+      {
+        "id": "R-007",
+        "rule": "When source documents report conflicting findings or values, present both sources with their respective document citations, PI names, and publication years; do not arbitrarily select one."
+      },
+      {
+        "id": "R-008",
+        "rule": "Clearly distinguish between empirical flight experiment findings (PSI / peer-reviewed reports), challenge guidelines, mathematical derivations, and speculative engineering hypotheses. Never present interpretation as an empirical fact."
+      }
+    ],
+    "route": {
+      "intent": "out_of_scope",
+      "investigations": [],
+      "matched_intents": [
+        "out_of_scope"
+      ],
+      "ambiguous": false,
+      "decided_by": "rules",
+      "out_of_scope_reason": "propulsion",
+      "tools": [
+        "get_facts"
+      ],
+      "rules": [
+        "R-004"
+      ]
+    },
+    "versions": {
+      "data": "v2",
+      "index": "4aa3c9230f",
+      "golden_table": "draft"
+    },
+    "sources": [
+      {
+        "id": "F-022",
+        "found": true,
+        "kind": "fact",
+        "title": "Rocket propulsion and thruster fire safety are outside the scope of investigations in the NASA PSI repository; the extremely high gas velocities in rocket engines render combustion dynamics independent of gravitational acceleration.",
+        "source": "Challenge text, 'Objectives' footnote"
+      }
+    ]
+  },
+  "latency_ms": 0
+}

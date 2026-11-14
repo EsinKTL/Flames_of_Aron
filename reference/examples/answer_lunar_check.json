@@ -1,0 +1,851 @@
+{
+  "text": "LLM answer not available - showing evidence summary.\n- Gap: Saffire-II: pressure unknown.\n- Gap: Saffire-III: pressure unknown.\n- Gap: SAME: o2, pressure unknown.\n- Gap: SAME-R: o2, pressure unknown.\n- Gap: DAFT: o2, pressure unknown.\n- Gap: DAFT-2: no source in the repository.\n- Gap: FLEX-2: o2, pressure unknown.\n- Gap: CFI: o2, pressure unknown.\n- Gap: ACME-E-FIELD: o2, pressure unknown.\n- Gap: 263 of 536 PSI test rows have an unknown O2 or pressure and could not be screened; only FLEX test rows have both.\n- The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower. [F-005]\n- Spacesuits are pressurized with 100% oxygen up to only 4.3 psi. [F-001]\n- In free fall, buoyancy-driven natural convection and buoyant rise of hot exhaust gases are absent, causing flames to behave dramatically differently from terrestrial flames; for example, a candle flame becomes a dim blue, spherical diffusion flame. [F-008]\n- Currently, NASA PSI does not contain partial-gravity combustion test data. Future investigations such as the Lunar-g Combustion Investigation (LUCI) and Flammability of Materials on the Moon (FM2) are slated to address this gap. [F-019]\n- Results from reduced-gravity combustion experiments (e.g., aboard the ISS) are made publicly available through the NASA Physical Science Informatics (PSI) repository. [F-023]\n- Test screen: 0 of 273 PSI tests with known O2 and pressure meet O2 >= 0.3 and total pressure <= 10.2 psi in the same test.\n- FLEX test 37 (closest): O2 0.34, pressure 10.332 psi, 0.132 psi above the limit [PSI-69:test37]\n- FLEX test 41 (closest): O2 0.3, pressure 10.332 psi, 0.132 psi above the limit [PSI-69:test41]\n- FLEX test 38 (closest): O2 0.34, pressure 10.334 psi, 0.134 psi above the limit [PSI-69:test38]\n- FLEX test 121 (closest): O2 0.18, pressure 10.177 psi [PSI-69:test121]\n- lunar habitat [F-005]: 0.3 * 10.2 = 3.06 psi\n- Earth sea level [F-002]: 0.209 * 14.7 = 3.072 psi\n- EVA spacesuit [F-001]: 1 * 4.3 = 4.3 psi\n- lunar habitat O2 vs. air [F-006]: 0.3 / 0.209 = 1.435 x air\n- ACME-CFI-G (golden table, unverified draft): O2 0.12-0.85, pressure 6.672-43.511 psi, same-test lunar match: partial\n- ACME-BRE (golden table, unverified draft): O2 0.21-0.4, pressure 8.122-14.504 psi, same-test lunar match: partial\n- FLEX (golden table, unverified draft): O2 0.12-0.34, pressure 10.177-44.859 psi, same-test lunar match: partial\n- SPICE (golden table, unverified draft): O2 0.2-0.23, pressure 14.504-14.649 psi, same-test lunar match: no\n- BASS-II (golden table, unverified draft): O2 0.136-0.222, pressure 14.388-14.696 psi, same-test lunar match: no\n- BASS (golden table, unverified draft): O2 0.17-0.22, pressure 14.696-14.696 psi, same-test lunar match: no\n- Saffire-I (golden table, unverified draft): O2 0.215-0.217, pressure 14.4719-14.5369 psi, same-test lunar match: no\n- SLICE (golden table, unverified draft): O2 0.21-0.21, pressure 14.504-14.504 psi, same-test lunar match: no\n- Saffire-II (golden table, unverified draft): O2 0.219-0.221, pressure unknown-unknown psi, same-test lunar match: unknown\n- Saffire-III (golden table, unverified draft): O2 0.21-0.212, pressure unknown-unknown psi, same-test lunar match: unknown\n- SAME (golden table, unverified draft): O2 unknown-unknown, pressure unknown-unknown psi, same-test lunar match: unknown\n- SAME-R (golden table, unverified draft): O2 unknown-unknown, pressure unknown-unknown psi, same-test lunar match: unknown\n- DAFT (golden table, unverified draft): O2 unknown-unknown, pressure unknown-unknown psi, same-test lunar match: unknown\n- DAFT-2 (golden table, unverified draft): O2 unknown-unknown, pressure unknown-unknown psi, same-test lunar match: unknown\n- FLEX-2 (golden table, unverified draft): O2 unknown-unknown, pressure unknown-unknown psi, same-test lunar match: unknown\n- CFI (golden table, unverified draft): O2 unknown-unknown, pressure unknown-unknown psi, same-test lunar match: unknown\n- ACME-E-FIELD (golden table, unverified draft): O2 unknown-unknown, pressure unknown-unknown psi, same-test lunar match: unknown\n- Passages retrieved: [S-037:1], [S-023:10], [S-023:6], [S-023:8], [S-023:7]",
+  "model": "none/evidence-summary",
+  "answer_type": "answer",
+  "citations": [
+    "F-005",
+    "F-001",
+    "F-008",
+    "F-019",
+    "F-023",
+    "PSI-69:test37",
+    "PSI-69:test41",
+    "PSI-69:test38",
+    "PSI-69:test121",
+    "S-037:1",
+    "S-023:10",
+    "S-023:6",
+    "S-023:8",
+    "S-023:7"
+  ],
+  "validation": {
+    "passed": false,
+    "errors": [
+      "no LLM configured"
+    ],
+    "retried": false,
+    "fallback_used": true
+  },
+  "bundle": {
+    "schema_version": "1.0",
+    "question": "Which experiments are closest to lunar-base conditions?",
+    "intent": "lunar_check",
+    "investigations": [],
+    "answer_type": "answer",
+    "facts": [
+      {
+        "id": "F-005",
+        "claim": "The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower.",
+        "topic": "lunar base atmosphere",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-001",
+        "claim": "Spacesuits are pressurized with 100% oxygen up to only 4.3 psi.",
+        "topic": "spacesuit",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-008",
+        "claim": "In free fall, buoyancy-driven natural convection and buoyant rise of hot exhaust gases are absent, causing flames to behave dramatically differently from terrestrial flames; for example, a candle flame becomes a dim blue, spherical diffusion flame.",
+        "topic": "microgravity flame",
+        "source": "Challenge text, 'Background'"
+      },
+      {
+        "id": "F-019",
+        "claim": "Currently, NASA PSI does not contain partial-gravity combustion test data. Future investigations such as the Lunar-g Combustion Investigation (LUCI) and Flammability of Materials on the Moon (FM2) are slated to address this gap.",
+        "topic": "data gap",
+        "source": "Challenge text, 'Partial-gravity data'"
+      },
+      {
+        "id": "F-023",
+        "claim": "Results from reduced-gravity combustion experiments (e.g., aboard the ISS) are made publicly available through the NASA Physical Science Informatics (PSI) repository.",
+        "topic": "data access",
+        "source": "Challenge text, 'Objectives'"
+      }
+    ],
+    "table_rows": [
+      {
+        "id": "ACME-CFI-G",
+        "fields": {
+          "o2_min": 0.12,
+          "o2_max": 0.85,
+          "pressure_psi_min": 6.672,
+          "pressure_psi_max": 43.511,
+          "lunar_o2_flag": "yes",
+          "lunar_pressure_flag": "yes",
+          "lunar_joint_flag": "partial",
+          "evidence_level": "LLM draft",
+          "lunar_note": "Range endpoints come from the flame-category ranges in Table 1; O2 ≥ 0.30 and P ≤ 10.2 psi in the same test could not be shown (no per-test table). 0.85 is the O2 in the oxidizer flowing from the burner in inverse flames, not the ambient."
+        },
+        "evidence": {},
+        "verified": false
+      },
+      {
+        "id": "ACME-BRE",
+        "fields": {
+          "o2_min": 0.21,
+          "o2_max": 0.4,
+          "pressure_psi_min": 8.122,
+          "pressure_psi_max": 14.504,
+          "lunar_o2_flag": "yes",
+          "lunar_pressure_flag": "yes",
+          "lunar_joint_flag": "partial",
+          "evidence_level": "LLM draft",
+          "lunar_note": "Table 2.1 gives the O2 and pressure ranges separately; it could not be shown that O2 ≥ 0.30 and P ≤ 10.2 psi (≤ 0.70 bar) were met together in the same test."
+        },
+        "evidence": {},
+        "verified": false
+      },
+      {
+        "id": "FLEX",
+        "fields": {
+          "o2_min": 0.12,
+          "o2_max": 0.34,
+          "pressure_psi_min": 10.177,
+          "pressure_psi_max": 44.859,
+          "lunar_o2_flag": "yes",
+          "lunar_pressure_flag": "yes",
+          "lunar_joint_flag": "partial",
+          "evidence_level": "LLM draft",
+          "lunar_note": "Not met together in a single test (PSI-69 CSV checked row by row): among tests with O2 ≥ 0.30 the lowest pressure is 534.3 mmHg = 10.332 psi (220R001, O2 0.34, CSV row 38); the only valid test with pressure ≤ 10.2 psi, C12M101 (526.3 mmHg = 10.177 psi), has O2 0.18."
+        },
+        "evidence": {
+          "o2_min": [
+            {
+              "source_id": "S-032",
+              "page": "row 84"
+            }
+          ],
+          "o2_max": [
+            {
+              "source_id": "S-032",
+              "page": "row 20"
+            }
+          ],
+          "pressure_psi_min": [
+            {
+              "source_id": "S-032",
+              "page": "row 122"
+            }
+          ],
+          "pressure_psi_max": [
+            {
+              "source_id": "S-032",
+              "page": "row 13"
+            }
+          ],
+          "lunar_joint_flag": [
+            {
+              "source_id": "S-032",
+              "page": "row 38"
+            }
+          ]
+        },
+        "verified": false
+      },
+      {
+        "id": "SPICE",
+        "fields": {
+          "o2_min": 0.2,
+          "o2_max": 0.23,
+          "pressure_psi_min": 14.504,
+          "pressure_psi_max": 14.649,
+          "lunar_o2_flag": "no",
+          "lunar_pressure_flag": "no",
+          "lunar_joint_flag": "no",
+          "evidence_level": "LLM draft"
+        },
+        "evidence": {},
+        "verified": false
+      },
+      {
+        "id": "BASS-II",
+        "fields": {
+          "o2_min": 0.136,
+          "o2_max": 0.222,
+          "pressure_psi_min": 14.388,
+          "pressure_psi_max": 14.696,
+          "lunar_o2_flag": "no",
+          "lunar_pressure_flag": "no",
+          "lunar_joint_flag": "no",
+          "evidence_level": "LLM draft"
+        },
+        "evidence": {
+          "o2_min": [
+            {
+              "source_id": "S-031",
+              "page": "row 62"
+            }
+          ],
+          "o2_max": [
+            {
+              "source_id": "S-031",
+              "page": "row 2"
+            }
+          ]
+        },
+        "verified": false
+      },
+      {
+        "id": "BASS",
+        "fields": {
+          "o2_min": 0.17,
+          "o2_max": 0.22,
+          "pressure_psi_min": 14.696,
+          "pressure_psi_max": 14.696,
+          "lunar_o2_flag": "no",
+          "lunar_pressure_flag": "no",
+          "lunar_joint_flag": "no",
+          "evidence_level": "LLM draft"
+        },
+        "evidence": {
+          "o2_min": [
+            {
+              "source_id": "S-002",
+              "page": "p.2"
+            },
+            {
+              "source_id": "S-026",
+              "page": "p.19"
+            }
+          ],
+          "o2_max": [
+            {
+              "source_id": "S-002",
+              "page": "p.27"
+            },
+            {
+              "source_id": "S-006",
+              "page": "p.2"
+            }
+          ]
+        },
+        "verified": false
+      },
+      {
+        "id": "Saffire-I",
+        "fields": {
+          "o2_min": 0.215,
+          "o2_max": 0.217,
+          "pressure_psi_min": 14.4719,
+          "pressure_psi_max": 14.5369,
+          "lunar_o2_flag": "no",
+          "lunar_pressure_flag": "no",
+          "lunar_joint_flag": "no",
+          "evidence_level": "LLM draft"
+        },
+        "evidence": {
+          "pressure_psi_min": [
+            {
+              "source_id": "S-035",
+              "page": "CygnusPressureData!row 2"
+            }
+          ],
+          "pressure_psi_max": [
+            {
+              "source_id": "S-035",
+              "page": "CygnusPressureData!row 293"
+            }
+          ]
+        },
+        "verified": false
+      },
+      {
+        "id": "SLICE",
+        "fields": {
+          "o2_min": 0.21,
+          "o2_max": 0.21,
+          "pressure_psi_min": 14.504,
+          "pressure_psi_max": 14.504,
+          "lunar_o2_flag": "no",
+          "lunar_pressure_flag": "no",
+          "lunar_joint_flag": "no",
+          "evidence_level": "LLM draft"
+        },
+        "evidence": {},
+        "verified": false
+      },
+      {
+        "id": "Saffire-II",
+        "fields": {
+          "o2_min": 0.219,
+          "o2_max": 0.221,
+          "pressure_psi_min": "unknown",
+          "pressure_psi_max": "unknown",
+          "lunar_o2_flag": "no",
+          "lunar_pressure_flag": "unknown",
+          "lunar_joint_flag": "unknown",
+          "evidence_level": "LLM draft"
+        },
+        "evidence": {},
+        "verified": false
+      },
+      {
+        "id": "Saffire-III",
+        "fields": {
+          "o2_min": 0.21,
+          "o2_max": 0.212,
+          "pressure_psi_min": "unknown",
+          "pressure_psi_max": "unknown",
+          "lunar_o2_flag": "no",
+          "lunar_pressure_flag": "unknown",
+          "lunar_joint_flag": "unknown",
+          "evidence_level": "LLM draft"
+        },
+        "evidence": {},
+        "verified": false
+      },
+      {
+        "id": "SAME",
+        "fields": {
+          "o2_min": "unknown",
+          "o2_max": "unknown",
+          "pressure_psi_min": "unknown",
+          "pressure_psi_max": "unknown",
+          "lunar_o2_flag": "unknown",
+          "lunar_pressure_flag": "unknown",
+          "lunar_joint_flag": "unknown",
+          "evidence_level": "LLM draft"
+        },
+        "evidence": {},
+        "verified": false
+      },
+      {
+        "id": "SAME-R",
+        "fields": {
+          "o2_min": "unknown",
+          "o2_max": "unknown",
+          "pressure_psi_min": "unknown",
+          "pressure_psi_max": "unknown",
+          "lunar_o2_flag": "unknown",
+          "lunar_pressure_flag": "unknown",
+          "lunar_joint_flag": "unknown",
+          "evidence_level": "LLM draft"
+        },
+        "evidence": {},
+        "verified": false
+      },
+      {
+        "id": "DAFT",
+        "fields": {
+          "o2_min": "unknown",
+          "o2_max": "unknown",
+          "pressure_psi_min": "unknown",
+          "pressure_psi_max": "unknown",
+          "lunar_o2_flag": "unknown",
+          "lunar_pressure_flag": "unknown",
+          "lunar_joint_flag": "unknown",
+          "evidence_level": "LLM draft"
+        },
+        "evidence": {},
+        "verified": false
+      },
+      {
+        "id": "DAFT-2",
+        "fields": {
+          "o2_min": "unknown",
+          "o2_max": "unknown",
+          "pressure_psi_min": "unknown",
+          "pressure_psi_max": "unknown",
+          "lunar_o2_flag": "unknown",
+          "lunar_pressure_flag": "unknown",
+          "lunar_joint_flag": "unknown",
+          "evidence_level": "missing"
+        },
+        "evidence": {},
+        "verified": false
+      },
+      {
+        "id": "FLEX-2",
+        "fields": {
+          "o2_min": "unknown",
+          "o2_max": "unknown",
+          "pressure_psi_min": "unknown",
+          "pressure_psi_max": "unknown",
+          "lunar_o2_flag": "unknown",
+          "lunar_pressure_flag": "unknown",
+          "lunar_joint_flag": "unknown",
+          "evidence_level": "LLM draft"
+        },
+        "evidence": {},
+        "verified": false
+      },
+      {
+        "id": "CFI",
+        "fields": {
+          "o2_min": "unknown",
+          "o2_max": "unknown",
+          "pressure_psi_min": "unknown",
+          "pressure_psi_max": "unknown",
+          "lunar_o2_flag": "unknown",
+          "lunar_pressure_flag": "unknown",
+          "lunar_joint_flag": "unknown",
+          "evidence_level": "LLM draft"
+        },
+        "evidence": {},
+        "verified": false
+      },
+      {
+        "id": "ACME-E-FIELD",
+        "fields": {
+          "o2_min": "unknown",
+          "o2_max": "unknown",
+          "pressure_psi_min": "unknown",
+          "pressure_psi_max": "unknown",
+          "lunar_o2_flag": "unknown",
+          "lunar_pressure_flag": "unknown",
+          "lunar_joint_flag": "unknown",
+          "evidence_level": "LLM draft"
+        },
+        "evidence": {},
+        "verified": false
+      }
+    ],
+    "tests": [
+      {
+        "investigation": "FLEX",
+        "source_id": "S-032",
+        "psi_id": "PSI-69",
+        "row": 38,
+        "test": "37",
+        "flex_id": "220R001",
+        "fuel": "Methanol",
+        "o2": 0.34,
+        "o2_min": 0.34,
+        "o2_max": 0.34,
+        "pressure_psi": 10.332,
+        "flow_cm_s": null,
+        "pressure_excess_psi": 0.132,
+        "notes": [],
+        "match": "closest"
+      },
+      {
+        "investigation": "FLEX",
+        "source_id": "S-032",
+        "psi_id": "PSI-69",
+        "row": 42,
+        "test": "41",
+        "flex_id": "219F001",
+        "fuel": "Methanol",
+        "o2": 0.3,
+        "o2_min": 0.3,
+        "o2_max": 0.3,
+        "pressure_psi": 10.332,
+        "flow_cm_s": null,
+        "pressure_excess_psi": 0.132,
+        "notes": [],
+        "match": "closest"
+      },
+      {
+        "investigation": "FLEX",
+        "source_id": "S-032",
+        "psi_id": "PSI-69",
+        "row": 39,
+        "test": "38",
+        "flex_id": "220R002",
+        "fuel": "Methanol",
+        "o2": 0.34,
+        "o2_min": 0.34,
+        "o2_max": 0.34,
+        "pressure_psi": 10.334,
+        "flow_cm_s": null,
+        "pressure_excess_psi": 0.134,
+        "notes": [],
+        "match": "closest"
+      },
+      {
+        "investigation": "FLEX",
+        "source_id": "S-032",
+        "psi_id": "PSI-69",
+        "row": 122,
+        "test": "121",
+        "flex_id": "C12M101",
+        "fuel": "Methanol",
+        "o2": 0.18,
+        "o2_min": 0.18,
+        "o2_max": 0.18,
+        "pressure_psi": 10.177,
+        "flow_cm_s": null,
+        "o2_shortfall": 0.12,
+        "notes": [],
+        "match": "closest"
+      }
+    ],
+    "chunks": [
+      {
+        "chunk_id": "S-037_meta_c01",
+        "source_id": "S-037",
+        "page": 1,
+        "text": "[FLEX | S-037: Official PSI Metadata | Study Approach, Objective & Hardware]\nStudy Identifier: PSI-69\nStudy Title: Flame Extinguishment Experiment\nComment[Approach]: \"The FLEX experiments involve igniting and observing the burning behavior of relatively large droplets. A primary objective of the experiments is to determine the Limiting Oxygen Index (LOI) as a function of ambient pressure and determine how the presence of a suppressant influences the LOI .\nComment[Experiment Hardware]: Combustion Integrated Rack (CIR)-Fluids and Combustion Facility (FCF), Multi-user Droplet Combustion Appartatus (MDCA)\nComment[Hypothesis]: The primary hypothesis of the FLEX mission is that microgravity conditions fundamentally alter the combustion and extinction characteristics of liquid fuel droplets due to changes in species and energy transport dynamics, radiative heat loss, and chemical kinetics. Specifically, the hypothesis posits that the lack of buoyant convection in microgravity will lead to significant differences in the flammability limits and suppression efficacy of various fire suppressant agents compared to normal gravity conditions. This hypothesis underpins the design of the FLEX experiments, which aim to map flammability boundaries, quantify suppressant efficacy, and develop predictive models to improve fire safety in space environments.\nComment[Objective]: The FLEX (Flame Extinguishment Experiment) investigation aims to map the flammability limits of liquid fuels in microgravity environments, measure the effectiveness of various gaseous fire suppressants such as CO2, He, and SF6, and develop reliable predictive models for combustion limits under reduced gravity conditions. The mission seeks to validate and improve simplified models by incorporating detailed chemical reactions, heat transfer, and material movement, using both space-based data and extensive ground-based tests. Key flight experiment goals include obtaining high-resolution measurements of droplet burning rates, flame extinction behavior, heat radiation, soot levels, and temperature profiles, while systematically analyzing the effects of different ambient conditions and suppressant concentrations. These investigations are essential for advancing the fundamental understanding of combustion processes in microgravity and enhancing fire safety protocols for future space missions.\nComment[Research Impacts]: The research impacts and Earth benefits of the FLEX mission are significant and multifaceted. By enhancing our understanding of microgravity combustion, the mission directly contributes to improved fire safety protocols for future space missions, ensuring the safety of crew members in environments where traditional fire suppression methods may be ineffective. On Earth, the insights gained from these experiments have the potential to advance fire safety in confined and reduced-gravity environments, such as submarines or high-altitude aircraft. The mission's findings on the effectiveness of various fire suppressants, including CO2, He, and SF6, in microgravity can lead to the development of more efficient and less harmful fire suppression systems, reducing the risk of toxic byproducts during fire events. Additionally, the study of ''cool flames'' and low-temperature combustion processes observed in microgravity can inform the design of advanced combustion engines, leading to improved fuel efficiency and reduced emissions in automotive and industrial applications. Overall, the FLEX mission's contributions to combustion science have the potential to enhance both space exploration safety and terrestrial fire safety technologies.\nStudy Design Type: FLEX: Fuel Sooting: Droplet: Spacecraft Fire Safety: Diffusion Flames: Flames\nStudy Design Type Term Accession Number: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/: https://psi.nasa.gov/\nStudy Design Type Term Source REF: PSI: PSI: PSI: PSI: PSI: PSI",
+        "score": 0.0154,
+        "section_title": "Official PSI Metadata Summary",
+        "investigation_ids": [
+          "FLEX"
+        ]
+      },
+      {
+        "chunk_id": "S-023_p010_c02",
+        "source_id": "S-023",
+        "page": 10,
+        "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | IV. Results and Discussion]\nHence, when\nthe fan was turned back on, a deflagration wave ignited the flame again. RS3 and RS6 are in the flow path, therefore\nchanges in Saffire flow will affect those locations disproportionately. RS1 is likely the closest sensor location, so even\nthough it is out of the flow path, there is still some effect. The model predicted a larger dip than was realized by the\nsensors. The CO prediction in both burn events over-predicted the steady state CO value. A reason for the difference\n2 2\ncould be the assumption of stoichiometric combustion. There is a region of the microgravity flame under an oxygen\nshadow, cast by the upstream part of the flame, which prevents combustion from continuing9,15. Soot, CO, unburned\nhydrocarbons could contribute to the differences between model and experiment. Another reason for the discrepancy\nis the free volume could be different than what the model and NG predicted. Calculations were performed after the\nevent 2 CO release that predicted a higher free volume10. Pressure, temperature, and concentration data from event 2 were used in two independent models, which applied different assumptions to the equations of state. The secondary\nconstant mass (SCM) model divides the total vehicle volume into the free volume, where the released gasses can mix,\nand a sub-volume of constant mass that does not exchange with the free volume. This model was developed to reflect\ncargo and trash that approximates sealed volumes where gas cannot escape.",
+        "score": 0.01531,
+        "section_title": "IV. Results and Discussion",
+        "investigation_ids": [
+          "Saffire-IV"
+        ]
+      },
+      {
+        "chunk_id": "S-023_p006_c01",
+        "source_id": "S-023",
+        "page": 6,
+        "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | IV. Results and Discussion]\nThis could be due to a malfunction in the sensor or\npoor placement within Cygnus, such as being\nobstructed by too much trash. Figure 8 gives the temperature at the FFD. A\nvery weak experimental response is shown, while\nthe model response is closest to RS1, RS2, and\nRS5 that are not directly in the flow path. Also\nshown in Figure 8 is the mass mean temperature of\nthe model, which analogous to the CO response, compares well with the FFD temperature. Figure 9\ngives the RS behavior for the SIBAL burn\ntemperature. Similar to the CO response, the model has a higher temperature response than the\nexperiment. This is most prevalent in RS1, for\nwhich the experimental response is slow and does\nFigure 6. Normalized CO response from FFD and mean not reach steady state. This could be due to the\nvehicle CO concentration during SIBAL burn event. nadir bulkhead, and other items in that section of\nCygnus that absorb heat. This would increase the\nFigure 7. Normalized CO RS responses during SIBAL burn event. International Conference on Environmental Systems",
+        "score": 0.01495,
+        "section_title": "IV. Results and Discussion",
+        "investigation_ids": [
+          "Saffire-IV"
+        ]
+      },
+      {
+        "chunk_id": "S-023_p008_c01",
+        "source_id": "S-023",
+        "page": 8,
+        "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | IV. Results and Discussion]\npump to suck CO at that location to the actual sensor, even if it is a small area, it is averaging\nconcentration around the probe area, which likely\nsmooths out the turbulent effects, whereas in the\nmodel, the RS is measuring one node in space and\nit is directly in the air flow and subject to the\nturbulent air flow. Another reason for the\nmeasured profile being smoother is in the details\nof how the remote sensors are attached to the\nbeams. While in the model, the beams are just\nsolid rectangular prisms, the real beams resemble\nI-beams, and have strap hooks to keep the cargo in\nplace. In the experiment, the RS are often behind\nthese strap hooks which also shields it from\nturbulence. Figure 10. Normalized CO response from FFD during The PMMA sample was preheated with the\nPMMA burn event. igniter at a lower current (1.0 amp for 600 s), and\nthen ignited at 4 amps for 20 s. All charts that\nFigure 11. Normalized CO RS responses during PMMA burn event. International Conference on Environmental Systems",
+        "score": 0.01238,
+        "section_title": "IV. Results and Discussion",
+        "investigation_ids": [
+          "Saffire-IV"
+        ]
+      },
+      {
+        "chunk_id": "S-023_p007_c01",
+        "source_id": "S-023",
+        "page": 7,
+        "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | IV. Results and Discussion]\nsurface temperature of cargo and the spacecraft,\ndecreasing the rate at which heat decreases from\nthe gas phase, as opposed to the constant\ntemperature boundary condition currently use\nwhich allows for the maximum heat loss. RS2\nseemed unresponsive to the burn event, likely due\nto the reasons given for the CO response of RS2. As expected, the largest temperature response is\ngiven by RS3 and RS6 since they are directly in\nthe flow path, whereas heat response is more a\nfunction of mixing and diffusion at the other\nlocations. A counter intuitive result shows that in many\ninstances, especially for the RS locations in the\ndirect flow path (RS3, RS6), that the data is more\nFigure 8. Normalized temperature response from FFD\nnoisy in the model results as opposed to the\nand mass mean vehicle temperature during SIBAL burn\nexperimental results. There are two possible\nevent. reasons for this phenomenon. Since the RS uses a\nFigure 9. Normalized temperature RS responses during SIBAL burn event. International Conference on Environmental Systems",
+        "score": 0.012,
+        "section_title": "IV. Results and Discussion",
+        "investigation_ids": [
+          "Saffire-IV"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "calculations": [
+      {
+        "name": "po2",
+        "formula": "0.3 * 10.2",
+        "inputs": {
+          "o2_fraction": 0.3,
+          "pressure": 10.2
+        },
+        "result": 3.06,
+        "unit": "psi",
+        "cross_check": {
+          "id": "C-001",
+          "expected": "3.06 psi",
+          "match": true
+        },
+        "label": "lunar habitat [F-005]"
+      },
+      {
+        "name": "po2",
+        "formula": "0.209 * 14.7",
+        "inputs": {
+          "o2_fraction": 0.209,
+          "pressure": 14.7
+        },
+        "result": 3.072,
+        "unit": "psi",
+        "cross_check": {
+          "id": "C-002",
+          "expected": "3.07 psi",
+          "match": true
+        },
+        "label": "Earth sea level [F-002]"
+      },
+      {
+        "name": "po2",
+        "formula": "1 * 4.3",
+        "inputs": {
+          "o2_fraction": 1.0,
+          "pressure": 4.3
+        },
+        "result": 4.3,
+        "unit": "psi",
+        "cross_check": {
+          "id": "C-003",
+          "expected": "4.30 psi",
+          "match": true
+        },
+        "label": "EVA spacesuit [F-001]"
+      },
+      {
+        "name": "o2_ratio_vs_air",
+        "formula": "0.3 / 0.209",
+        "inputs": {
+          "o2_fraction": 0.3
+        },
+        "result": 1.435,
+        "unit": "x air",
+        "percent_increase": 43.5,
+        "cross_check": {
+          "id": "C-004",
+          "expected": "approximately 43.5% increase; matches challenge statement of 'more than 40%' [F-006]",
+          "match": true
+        },
+        "label": "lunar habitat O2 vs. air [F-006]"
+      }
+    ],
+    "gaps": [
+      "Saffire-II: pressure unknown.",
+      "Saffire-III: pressure unknown.",
+      "SAME: o2, pressure unknown.",
+      "SAME-R: o2, pressure unknown.",
+      "DAFT: o2, pressure unknown.",
+      "DAFT-2: no source in the repository.",
+      "FLEX-2: o2, pressure unknown.",
+      "CFI: o2, pressure unknown.",
+      "ACME-E-FIELD: o2, pressure unknown.",
+      "263 of 536 PSI test rows have an unknown O2 or pressure and could not be screened; only FLEX test rows have both."
+    ],
+    "rules": [
+      {
+        "id": "R-001",
+        "rule": "Do NOT extrapolate microgravity results directly to Lunar or Martian gravity without explicitly stating the lack of direct partial-gravity empirical data and explaining bounding logic ([F-019], [F-021])."
+      },
+      {
+        "id": "R-002",
+        "rule": "When queried regarding combustion in Lunar or Martian gravity, explicitly clarify that NASA PSI currently contains no partial-gravity test data [F-019]. Mention E-FIELD electric field chemi-ion simulation [F-020] and 0-g/1-g bounding methodology [F-021] if relevant."
+      },
+      {
+        "id": "R-003",
+        "rule": "Never assess spacecraft fire flammability solely on oxygen percentage. Always evaluate oxygen partial pressure (via calculation), total pressure, diluent inert species (N2, CO2, He), and ventilation forced flow velocity together."
+      },
+      {
+        "id": "R-004",
+        "rule": "If asked about rocket engine or thruster propellant fires, clearly state that propulsion systems are outside the scope of PSI microgravity science due to momentum-dominated flow regimes [F-022]."
+      },
+      {
+        "id": "R-005",
+        "rule": "For every experimental finding reported, cite the exact test conditions: fuel type, geometry, oxygen concentration, ambient pressure, flow velocity, and hardware facility. If a condition is omitted in the source, label it as 'unspecified'; do NOT guess."
+      },
+      {
+        "id": "R-006",
+        "rule": "If an empirical value or data point is absent from the indexed chunks and Golden Table, state 'data not available in repository'. Never fabricate numerical values from LLM parametric memory."
+      },
+      {
+        "id": "R-007",
+        "rule": "When source documents report conflicting findings or values, present both sources with their respective document citations, PI names, and publication years; do not arbitrarily select one."
+      },
+      {
+        "id": "R-008",
+        "rule": "Clearly distinguish between empirical flight experiment findings (PSI / peer-reviewed reports), challenge guidelines, mathematical derivations, and speculative engineering hypotheses. Never present interpretation as an empirical fact."
+      }
+    ],
+    "route": {
+      "intent": "lunar_check",
+      "investigations": [],
+      "matched_intents": [
+        "lunar_check"
+      ],
+      "ambiguous": false,
+      "decided_by": "rules",
+      "out_of_scope_reason": null,
+      "tools": [
+        "query_golden_table",
+        "query_psi_tests",
+        "calculate"
+      ],
+      "rules": [
+        "R-003",
+        "R-005",
+        "R-006"
+      ]
+    },
+    "versions": {
+      "data": "v2",
+      "index": "4aa3c9230f",
+      "golden_table": "draft"
+    },
+    "test_scan": {
+      "thresholds": {
+        "o2_min": 0.3,
+        "pressure_psi_max": 10.2,
+        "fact": "F-005"
+      },
+      "n_scanned": 536,
+      "n_known": 273,
+      "n_unknown_o2_or_pressure": 263,
+      "n_joint_matches": 0,
+      "investigations_with_known_tests": [
+        "FLEX"
+      ]
+    },
+    "sources": [
+      {
+        "id": "F-005",
+        "found": true,
+        "kind": "fact",
+        "title": "The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-001",
+        "found": true,
+        "kind": "fact",
+        "title": "Spacesuits are pressurized with 100% oxygen up to only 4.3 psi.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-008",
+        "found": true,
+        "kind": "fact",
+        "title": "In free fall, buoyancy-driven natural convection and buoyant rise of hot exhaust gases are absent, causing flames to behave dramatically differently from terrestrial flames; for example, a candle flame becomes a dim blue, spherical diffusion flame.",
+        "source": "Challenge text, 'Background'"
+      },
+      {
+        "id": "F-019",
+        "found": true,
+        "kind": "fact",
+        "title": "Currently, NASA PSI does not contain partial-gravity combustion test data. Future investigations such as the Lunar-g Combustion Investigation (LUCI) and Flammability of Materials on the Moon (FM2) are slated to address this gap.",
+        "source": "Challenge text, 'Partial-gravity data'"
+      },
+      {
+        "id": "F-023",
+        "found": true,
+        "kind": "fact",
+        "title": "Results from reduced-gravity combustion experiments (e.g., aboard the ISS) are made publicly available through the NASA Physical Science Informatics (PSI) repository.",
+        "source": "Challenge text, 'Objectives'"
+      },
+      {
+        "id": "S-032",
+        "found": true,
+        "kind": "source",
+        "title": "FLEX Experimental Table",
+        "authors": null,
+        "year": null,
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-69",
+        "doi": "10.60555/mbq8-0451",
+        "investigation": "FLEX",
+        "psi_id": "PSI-69",
+        "role": "data table",
+        "file_type": "csv",
+        "in_corpus": false,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-037",
+        "found": true,
+        "kind": "source",
+        "title": "PSI-69 investigation metadata (ISA-Tab)",
+        "authors": null,
+        "year": "2016",
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-69",
+        "doi": "10.60555/mbq8-0451",
+        "investigation": "FLEX",
+        "psi_id": "PSI-69",
+        "role": "metadata",
+        "file_type": "txt",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-023",
+        "found": true,
+        "kind": "source",
+        "title": "Model Development of Large-Scale Spacecraft Fires during the Saffire-IV Experiments (ICES-2022-278)",
+        "authors": "Brooker J., Niehaus J.",
+        "year": "2022",
+        "url": "https://ntrs.nasa.gov/citations/20220002714",
+        "doi": null,
+        "investigation": "Saffire-IV",
+        "psi_id": null,
+        "role": "results",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-031",
+        "found": true,
+        "kind": "source",
+        "title": "BASS-II Experimental Table",
+        "authors": null,
+        "year": null,
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+        "doi": "10.60555/4qc4-de67",
+        "investigation": "BASS-II",
+        "psi_id": "PSI-25",
+        "role": "data table",
+        "file_type": "csv",
+        "in_corpus": false,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-002",
+        "found": true,
+        "kind": "source",
+        "title": "Thickness and Fuel Preheating Effects on Material Flammability in Microgravity from the BASS Experiment",
+        "authors": "Ferkul P.V., Olson S.L., Takahashi F. vd.",
+        "year": "2013",
+        "url": "https://ntrs.nasa.gov/citations/20140011099",
+        "doi": null,
+        "investigation": "BASS",
+        "psi_id": "PSI-26",
+        "role": "results",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-026",
+        "found": true,
+        "kind": "source",
+        "title": "A Researcher's Guide to: Combustion Science (ISS mini-book, NP-2015-10-034-JSC)",
+        "authors": null,
+        "year": "2015",
+        "url": null,
+        "doi": null,
+        "investigation": "General",
+        "psi_id": null,
+        "role": "overview",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-006",
+        "found": true,
+        "kind": "source",
+        "title": "Effects of Confinement on Flame Spread in Microgravity (ICES-2020-407)",
+        "authors": "Li Y., Liao Y.-T.T., Ferkul P.V., Johnston M.C.",
+        "year": "2020",
+        "url": "https://ntrs.nasa.gov/citations/20205004657",
+        "doi": null,
+        "investigation": "BASS;Confined Combustion",
+        "psi_id": "PSI-25",
+        "role": "results",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-035",
+        "found": true,
+        "kind": "source",
+        "title": "Saffire-I Telemetry Data (Good Process Version)",
+        "authors": null,
+        "year": null,
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-98",
+        "doi": "10.60555/0t15-1z43",
+        "investigation": "Saffire-I",
+        "psi_id": "PSI-98",
+        "role": "data table",
+        "file_type": "xlsx",
+        "in_corpus": false,
+        "status": "downloaded"
+      }
+    ]
+  },
+  "latency_ms": 0
+}

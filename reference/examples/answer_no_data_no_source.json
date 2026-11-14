@@ -1,0 +1,311 @@
+{
+  "text": "LLM answer not available - showing evidence summary.\nData not available in repository.\n- Gap: DAFT-2: no source in the repository.\n- Gap: DAFT-2: o2 unknown.\n- To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere. [F-004]\n- The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower. [F-005]\n- According to the challenge text, this represents more than a 40% increase in oxygen concentration compared to Earth's atmosphere, substantially increasing material flammability. [F-006]\n- Flammability depends strongly on oxygen concentration; in microgravity, convective air flow speed is also critical. [F-007]\n- The highest oxygen concentration combustion tests in microgravity were conducted under ACME's Cool Flames Investigation with Gases (CFI-G). The combustion chamber was charged with nitrogen and fuel gas (e.g., propane), while an oxidizer stream containing up to 85% oxygen was delivered through a spherical porous burner to create an inverse diffusion flame. [F-018]\n- DAFT-2 (golden table, unverified draft): O2 unknown-unknown, pressure unknown-unknown psi, same-test lunar match: unknown\n- Passages retrieved: [S-023:10], [S-023:5], [S-023:3], [S-022:3], [S-011:9]",
+  "model": "none/evidence-summary",
+  "answer_type": "no_data",
+  "citations": [
+    "F-004",
+    "F-005",
+    "F-006",
+    "F-007",
+    "F-018",
+    "S-023:10",
+    "S-023:5",
+    "S-023:3",
+    "S-022:3",
+    "S-011:9"
+  ],
+  "validation": {
+    "passed": false,
+    "errors": [
+      "no LLM configured"
+    ],
+    "retried": false,
+    "fallback_used": true
+  },
+  "bundle": {
+    "schema_version": "1.0",
+    "question": "What oxygen concentration did DAFT-2 use?",
+    "intent": "general",
+    "investigations": [
+      "DAFT-2"
+    ],
+    "answer_type": "no_data",
+    "facts": [
+      {
+        "id": "F-004",
+        "claim": "To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere.",
+        "topic": "lunar base atmosphere",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-005",
+        "claim": "The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower.",
+        "topic": "lunar base atmosphere",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-006",
+        "claim": "According to the challenge text, this represents more than a 40% increase in oxygen concentration compared to Earth's atmosphere, substantially increasing material flammability.",
+        "topic": "lunar base atmosphere",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-007",
+        "claim": "Flammability depends strongly on oxygen concentration; in microgravity, convective air flow speed is also critical.",
+        "topic": "flammability",
+        "source": "Challenge text, 'Background'"
+      },
+      {
+        "id": "F-018",
+        "claim": "The highest oxygen concentration combustion tests in microgravity were conducted under ACME's Cool Flames Investigation with Gases (CFI-G). The combustion chamber was charged with nitrogen and fuel gas (e.g., propane), while an oxidizer stream containing up to 85% oxygen was delivered through a spherical porous burner to create an inverse diffusion flame.",
+        "topic": "highest O2 tests",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      }
+    ],
+    "table_rows": [
+      {
+        "id": "DAFT-2",
+        "fields": {
+          "name": "DAFT-2 (Dust and Aerosol measurement Feasibility Test-2) — no source found",
+          "category": "detection",
+          "fuel_type": "unknown",
+          "fuel_material": "unknown",
+          "fuel_shape_size": "unknown",
+          "o2_min": "unknown",
+          "o2_max": "unknown",
+          "o2_raw": "unknown",
+          "o2_note": "no source found",
+          "pressure_psi_min": "unknown",
+          "pressure_psi_max": "unknown",
+          "pressure_raw": "unknown",
+          "pressure_note": "no source found",
+          "flow_cm_s_min": "unknown",
+          "flow_cm_s_max": "unknown",
+          "flow_raw": "unknown",
+          "flow_note": "no source found",
+          "gravity_regime": "unknown",
+          "hardware": "unknown",
+          "lunar_o2_flag": "unknown",
+          "lunar_pressure_flag": "unknown",
+          "lunar_joint_flag": "unknown",
+          "lunar_note": "O2 upper bound and/or pressure lower bound unknown",
+          "main_finding": "unknown",
+          "test_count": "unknown",
+          "evidence_level": "missing",
+          "has_conflict": "yes"
+        },
+        "evidence": {},
+        "verified": false
+      }
+    ],
+    "tests": [],
+    "chunks": [
+      {
+        "chunk_id": "S-023_p010_c02",
+        "source_id": "S-023",
+        "page": 10,
+        "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | IV. Results and Discussion]\nHence, when\nthe fan was turned back on, a deflagration wave ignited the flame again. RS3 and RS6 are in the flow path, therefore\nchanges in Saffire flow will affect those locations disproportionately. RS1 is likely the closest sensor location, so even\nthough it is out of the flow path, there is still some effect. The model predicted a larger dip than was realized by the\nsensors. The CO prediction in both burn events over-predicted the steady state CO value. A reason for the difference\n2 2\ncould be the assumption of stoichiometric combustion. There is a region of the microgravity flame under an oxygen\nshadow, cast by the upstream part of the flame, which prevents combustion from continuing9,15. Soot, CO, unburned\nhydrocarbons could contribute to the differences between model and experiment. Another reason for the discrepancy\nis the free volume could be different than what the model and NG predicted. Calculations were performed after the\nevent 2 CO release that predicted a higher free volume10. Pressure, temperature, and concentration data from event 2 were used in two independent models, which applied different assumptions to the equations of state. The secondary\nconstant mass (SCM) model divides the total vehicle volume into the free volume, where the released gasses can mix,\nand a sub-volume of constant mass that does not exchange with the free volume. This model was developed to reflect\ncargo and trash that approximates sealed volumes where gas cannot escape.",
+        "score": 0.01471,
+        "section_title": "IV. Results and Discussion",
+        "investigation_ids": [
+          "Saffire-IV"
+        ]
+      },
+      {
+        "chunk_id": "S-023_p005_c03",
+        "source_id": "S-023",
+        "page": 5,
+        "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | IV. Results and Discussion]\nThe other four had\nto rely on mixing and diffusion before elevated CO was recorded. Experimentally, RS2 was by far the slowest to respond and did not even reach steady state, while all other responses reached steady state in at least 400 seconds. International Conference on Environmental Systems",
+        "score": 0.01162,
+        "section_title": "IV. Results and Discussion",
+        "investigation_ids": [
+          "Saffire-IV"
+        ]
+      },
+      {
+        "chunk_id": "S-023_p003_c01",
+        "source_id": "S-023",
+        "page": 3,
+        "text": "[Saffire-IV | S-023: Model Development of Large-Scale Spacecraft Fires During Saffire Experiments | I. Introduction]\nFor context, Table 1 gives\nTable 1. Summary of Saffire-IV events. Events 7 and 8 were not completed\nall the events completed\ndue to technical and logistical issues and hence are omitted from this table. during Saffire-IV. The test\nEvent\ncampaign began with a scrub Description of Event Purpose of Event\nNumber\nof CO by pulling cabin air Reduce background CO ,\nthrough the lithium 2\n1 CO Scrub evaluate CO scrubber\nhydroxide bed of the FFD. In 2 2\nperformance\nevent two, CO was released Track tracer gas transport\nto determine the volume,\nthroughout cabin for vehicle\nwhich helped determine how 2 CO and HClrelease\n2 volume calculation and observe\nmuch oxygen should be\nHCl surface adsorption\nadded later in the experiment. 3 Flow visualization test Assess SFU air flow\nHydrogen Chloride (HCl)\nBurn: 40.64 cm wide × 50 cm long Sample burn with\nwas released after the oxygen 4\nSIBAL concurrent HCl release\nscrub to study its adsorption\nBurn: 40 cm wide × 18 cm long × 1 cm Sample burn, no HCl\nto surfaces. HCl was also 5\nthick 2-sided PMMA release\nreleased during the event 4\nEvaluate CO scrubber\nSIBAL burn to determine if 6 CO Scrub 2\n2 performance\nadsorption changed as a\n9 Flow visualization test Assess SFU air flow\nfunction of temperature. Flow visualization tests were\nperformed before and after the completion of the last burn events to determine if any major differences in air flow\nthrough the SFU had occurred. The PMMA in event number 5 did not extinguish when planned, causing the\ncancelation of other events.",
+        "score": 0.01086,
+        "section_title": "I. Introduction",
+        "investigation_ids": [
+          "Saffire-IV"
+        ]
+      },
+      {
+        "chunk_id": "S-022_p003_c01",
+        "source_id": "S-022",
+        "page": 3,
+        "text": "[Saffire-I, Saffire-II, Saffire-III | S-022: Saffire: A Novel Approach to Study of Spacecraft Fire Safety (Saffire I-III Results) | Introduction]\nIntroduction\n• Despite millennia of experience with fire, over 3,000 people die from fires each\nyear in the U.S. • Fire is a catastrophic hazard for spacecraft\n• However, without any empirical results, it is impossible to be sure that our\npredictions of fire behavior in a spacecraft are realistic. • What will kill you first? • CO buildup? • Other toxic products? • Heat? • Smoke? • Pressure Rise? • How should the crew respond? All inhabited types of structure, vehicle, or even\nopen space on earth have been the subject of\nfull scale fire studies and/or training.",
+        "score": 0.01031,
+        "section_title": "Introduction",
+        "investigation_ids": [
+          "Saffire-I",
+          "Saffire-II",
+          "Saffire-III"
+        ]
+      },
+      {
+        "chunk_id": "S-011_p009_c02",
+        "source_id": "S-011",
+        "page": 9,
+        "text": "[BASS-II | S-011: Science Requirements Document (SRD) for BASS-II | Objectives:]\nObjectives:\n• To identify what is the worst case for material flammability in spacecraft\nenvironments, and how does that compare to the terrestrial upward burning used to\nscreen the materials for safe use aboard spacecraft. • To determine how quickly a fire in space can grow and if the flames reach a finite size\nor continue to grow. This has implications for firefighting strategies in spacecraft. Primary variables: The main variables to be tested are the effects of ambient oxygen\nconcentration, ventilation flow velocity, and fuel type, thickness, and geometry.",
+        "score": 0.0082,
+        "section_title": "Objectives:",
+        "investigation_ids": [
+          "BASS-II"
+        ]
+      }
+    ],
+    "conflicts": [],
+    "calculations": [],
+    "gaps": [
+      "DAFT-2: no source in the repository.",
+      "DAFT-2: o2 unknown."
+    ],
+    "rules": [
+      {
+        "id": "R-001",
+        "rule": "Do NOT extrapolate microgravity results directly to Lunar or Martian gravity without explicitly stating the lack of direct partial-gravity empirical data and explaining bounding logic ([F-019], [F-021])."
+      },
+      {
+        "id": "R-002",
+        "rule": "When queried regarding combustion in Lunar or Martian gravity, explicitly clarify that NASA PSI currently contains no partial-gravity test data [F-019]. Mention E-FIELD electric field chemi-ion simulation [F-020] and 0-g/1-g bounding methodology [F-021] if relevant."
+      },
+      {
+        "id": "R-003",
+        "rule": "Never assess spacecraft fire flammability solely on oxygen percentage. Always evaluate oxygen partial pressure (via calculation), total pressure, diluent inert species (N2, CO2, He), and ventilation forced flow velocity together."
+      },
+      {
+        "id": "R-004",
+        "rule": "If asked about rocket engine or thruster propellant fires, clearly state that propulsion systems are outside the scope of PSI microgravity science due to momentum-dominated flow regimes [F-022]."
+      },
+      {
+        "id": "R-005",
+        "rule": "For every experimental finding reported, cite the exact test conditions: fuel type, geometry, oxygen concentration, ambient pressure, flow velocity, and hardware facility. If a condition is omitted in the source, label it as 'unspecified'; do NOT guess."
+      },
+      {
+        "id": "R-006",
+        "rule": "If an empirical value or data point is absent from the indexed chunks and Golden Table, state 'data not available in repository'. Never fabricate numerical values from LLM parametric memory."
+      },
+      {
+        "id": "R-007",
+        "rule": "When source documents report conflicting findings or values, present both sources with their respective document citations, PI names, and publication years; do not arbitrarily select one."
+      },
+      {
+        "id": "R-008",
+        "rule": "Clearly distinguish between empirical flight experiment findings (PSI / peer-reviewed reports), challenge guidelines, mathematical derivations, and speculative engineering hypotheses. Never present interpretation as an empirical fact."
+      }
+    ],
+    "route": {
+      "intent": "general",
+      "investigations": [
+        "DAFT-2"
+      ],
+      "matched_intents": [],
+      "ambiguous": true,
+      "decided_by": "default",
+      "out_of_scope_reason": null,
+      "tools": [
+        "search_documents",
+        "query_golden_table"
+      ],
+      "rules": [
+        "R-006",
+        "R-008"
+      ]
+    },
+    "versions": {
+      "data": "v2",
+      "index": "4aa3c9230f",
+      "golden_table": "draft"
+    },
+    "sources": [
+      {
+        "id": "F-004",
+        "found": true,
+        "kind": "fact",
+        "title": "To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-005",
+        "found": true,
+        "kind": "fact",
+        "title": "The intermediate atmosphere for lunar operations is anticipated to feature an oxygen concentration of 30% or higher, with a total pressure of 10.2 psi or lower.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-006",
+        "found": true,
+        "kind": "fact",
+        "title": "According to the challenge text, this represents more than a 40% increase in oxygen concentration compared to Earth's atmosphere, substantially increasing material flammability.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-007",
+        "found": true,
+        "kind": "fact",
+        "title": "Flammability depends strongly on oxygen concentration; in microgravity, convective air flow speed is also critical.",
+        "source": "Challenge text, 'Background'"
+      },
+      {
+        "id": "F-018",
+        "found": true,
+        "kind": "fact",
+        "title": "The highest oxygen concentration combustion tests in microgravity were conducted under ACME's Cool Flames Investigation with Gases (CFI-G). The combustion chamber was charged with nitrogen and fuel gas (e.g., propane), while an oxidizer stream containing up to 85% oxygen was delivered through a spherical porous burner to create an inverse diffusion flame.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "S-023",
+        "found": true,
+        "kind": "source",
+        "title": "Model Development of Large-Scale Spacecraft Fires during the Saffire-IV Experiments (ICES-2022-278)",
+        "authors": "Brooker J., Niehaus J.",
+        "year": "2022",
+        "url": "https://ntrs.nasa.gov/citations/20220002714",
+        "doi": null,
+        "investigation": "Saffire-IV",
+        "psi_id": null,
+        "role": "results",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-022",
+        "found": true,
+        "kind": "source",
+        "title": "Saffire: A Novel Approach to Study of Spacecraft Fire Safety Using Un-manned Spacecraft",
+        "authors": "Urban D.L., Ferkul P., Olson S., Ruff G.A., Easton J.",
+        "year": "2017",
+        "url": "https://ntrs.nasa.gov/citations/20180005168",
+        "doi": null,
+        "investigation": "Saffire-I;Saffire-II;Saffire-III",
+        "psi_id": "PSI-99",
+        "role": "results",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-011",
+        "found": true,
+        "kind": "source",
+        "title": "BASS-II Science Requirements",
+        "authors": null,
+        "year": null,
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+        "doi": null,
+        "investigation": "BASS-II;SPICE",
+        "psi_id": "PSI-25",
+        "role": "design",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      }
+    ]
+  },
+  "latency_ms": 0
+}

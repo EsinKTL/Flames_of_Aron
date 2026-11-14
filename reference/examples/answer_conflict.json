@@ -1,0 +1,546 @@
+{
+  "text": "LLM answer not available - showing evidence summary.\n- To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere. [F-004]\n- According to the challenge text, this represents more than a 40% increase in oxygen concentration compared to Earth's atmosphere, substantially increasing material flammability. [F-006]\n- Flammability depends strongly on oxygen concentration; in microgravity, convective air flow speed is also critical. [F-007]\n- The flammability of solid materials such as fabrics (SIBAL, Nomex) and plastics (PMMA) has been investigated in the BASS, BASS-II, and Saffire-I, -II, -III flight experiments. [F-010]\n- Spacecraft fire detection in microgravity has been tested through the SAME and SAME-R (Smoke and Aerosol Measurement Experiment) flight investigations. [F-011]\n- BASS-II (golden table, unverified draft): O2 0.136-0.222, pressure 14.388-14.696 psi, same-test lunar match: no\n- Conflict [BASS-II | flow_cm_s_max]: up to 40 cm/s (S-030 row 40) vs 53 cm/s (Air display, T17) | ~55 cm/s hardware (S-031 row 117; S-007 p.12; S-005 p.7; S-004 p.3)\n- Passages retrieved: [S-007:134], [S-007:130], [S-007:106], [S-007:123], [S-007:108]",
+  "model": "none/evidence-summary",
+  "answer_type": "answer",
+  "citations": [
+    "F-004",
+    "F-006",
+    "F-007",
+    "F-010",
+    "F-011",
+    "S-007:134",
+    "S-007:130",
+    "S-007:106",
+    "S-007:123",
+    "S-007:108"
+  ],
+  "validation": {
+    "passed": false,
+    "errors": [
+      "no LLM configured"
+    ],
+    "retried": false,
+    "fallback_used": true
+  },
+  "bundle": {
+    "schema_version": "1.0",
+    "question": "What was the maximum flow speed in BASS-II?",
+    "intent": "conflict",
+    "investigations": [
+      "BASS-II"
+    ],
+    "answer_type": "answer",
+    "facts": [
+      {
+        "id": "F-004",
+        "claim": "To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere.",
+        "topic": "lunar base atmosphere",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-006",
+        "claim": "According to the challenge text, this represents more than a 40% increase in oxygen concentration compared to Earth's atmosphere, substantially increasing material flammability.",
+        "topic": "lunar base atmosphere",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-007",
+        "claim": "Flammability depends strongly on oxygen concentration; in microgravity, convective air flow speed is also critical.",
+        "topic": "flammability",
+        "source": "Challenge text, 'Background'"
+      },
+      {
+        "id": "F-010",
+        "claim": "The flammability of solid materials such as fabrics (SIBAL, Nomex) and plastics (PMMA) has been investigated in the BASS, BASS-II, and Saffire-I, -II, -III flight experiments.",
+        "topic": "prevention / solid materials",
+        "source": "Challenge text, 'Background'"
+      },
+      {
+        "id": "F-011",
+        "claim": "Spacecraft fire detection in microgravity has been tested through the SAME and SAME-R (Smoke and Aerosol Measurement Experiment) flight investigations.",
+        "topic": "detection",
+        "source": "Challenge text, 'Background'"
+      }
+    ],
+    "table_rows": [
+      {
+        "id": "BASS-II",
+        "fields": {
+          "name": "Burning and Suppression of Solids – II (BASS-II)",
+          "category": "prevention",
+          "fuel_type": "solid",
+          "fuel_material": "PMMA (clear/black rod, film, slab, sphere section) | SIBAL fabric | Nomex III | 1 Japan wax candle (F4)",
+          "fuel_shape_size": "PMMA rod (6.35-12.7 mm diameter) | thin PMMA film (0.1-0.4 mm; 1-2 cm wide) | thick PMMA slab (1-5 mm) | 4 cm diameter sphere section | SIBAL strip (1.2/2.2 cm × 10 cm)",
+          "o2_min": 0.136,
+          "o2_max": 0.222,
+          "o2_raw": "13.6 … 22.2 (Calibrated initial O2, 129 rows)",
+          "o2_note": "calibrated initial O2 column used (CSA-CP reading with fixed offset correction against the MCA); 5 impossible values in the 'Calibrated final O2' column (1.6, 0.6, 39.1, 0.9, 40.4) excluded",
+          "pressure_psi_min": 14.388,
+          "pressure_psi_max": 14.696,
+          "pressure_raw": "99.2 - 99.5 kPa (measured, reported film tests) | 1 atm (nominal)",
+          "pressure_note": "min = measured 99.2 kPa (14.388 psi); max = nominal 1 atm (14.696 psi); a combination of measured and nominal values",
+          "flow_cm_s_min": 0.0,
+          "flow_cm_s_max": 53.0,
+          "flow_raw": "Air display 0 … 53 (T17) | hardware: ~55 cm/s with no restrictors, ~35 cm/s with two restrictors",
+          "flow_note": "Air display has a ~1 min response time; row 63 (O13a) fan values are in the wrong column — excluded; 0 = flow off (explicit value in the source). The max of 53 comes only from T17, whose cell reads '6   53' (also '6→53' in S-004 p.9), most likely a 6→53 cm/s ramp; every other row is ≤ 15 cm/s — verify by hand",
+          "gravity_regime": "microgravity | normal (1-g and 5.18 s drop tower comparison)",
+          "hardware": "MSG: BASS/SPICE flow duct (7.6 × 7.6 × 17 cm), variable-speed fan, flow restrictors, hot-wire igniter, N2 nozzle; N2 dilution of the MSG work volume",
+          "lunar_o2_flag": "no",
+          "lunar_pressure_flag": "no",
+          "lunar_joint_flag": "no",
+          "lunar_note": "O2 upper bound 0.222 < 0.30; pressure lower bound 14.388 psi > 10.2",
+          "main_finding": "A 1/4-inch PMMA rod that blows off at 16% O2 in 1-g burned steadily at 13.6% O2 on the ISS; the source interprets this as a negative safety margin of −2.4% O2 and states that normal-gravity flammability limits should be lowered. None of the three Nomex samples ignited.",
+          "test_count": "129 (PSI-25 table); TM: 126 (2014) + 3 tests in 2016",
+          "evidence_level": "LLM draft",
+          "has_conflict": "yes"
+        },
+        "evidence": {
+          "name": [
+            {
+              "source_id": "S-030",
+              "page": "row 34"
+            }
+          ],
+          "category": [
+            {
+              "source_id": "S-007",
+              "page": "p.11"
+            },
+            {
+              "source_id": "S-011",
+              "page": "p.1"
+            }
+          ],
+          "fuel_material": [
+            {
+              "source_id": "S-010",
+              "page": "paragraph 9"
+            },
+            {
+              "source_id": "S-010",
+              "page": "paragraph 5"
+            },
+            {
+              "source_id": "S-031",
+              "page": "row 27"
+            }
+          ],
+          "fuel_shape_size": [
+            {
+              "source_id": "S-007",
+              "page": "p.13"
+            },
+            {
+              "source_id": "S-005",
+              "page": "p.12"
+            },
+            {
+              "source_id": "S-005",
+              "page": "p.16"
+            },
+            {
+              "source_id": "S-005",
+              "page": "p.20"
+            }
+          ],
+          "o2_min": [
+            {
+              "source_id": "S-031",
+              "page": "row 62"
+            }
+          ],
+          "o2_max": [
+            {
+              "source_id": "S-031",
+              "page": "row 2"
+            }
+          ],
+          "o2_raw": [
+            {
+              "source_id": "S-007",
+              "page": "p.72"
+            }
+          ],
+          "o2_note": [
+            {
+              "source_id": "S-010",
+              "page": "paragraph 21"
+            },
+            {
+              "source_id": "S-031",
+              "page": "row 129"
+            }
+          ],
+          "pressure_raw": [
+            {
+              "source_id": "S-007",
+              "page": "p.46"
+            },
+            {
+              "source_id": "S-004",
+              "page": "p.3"
+            }
+          ],
+          "flow_cm_s_min": [
+            {
+              "source_id": "S-031",
+              "page": "row 49"
+            }
+          ],
+          "flow_cm_s_max": [
+            {
+              "source_id": "S-031",
+              "page": "row 117"
+            }
+          ],
+          "flow_raw": [
+            {
+              "source_id": "S-007",
+              "page": "p.12"
+            }
+          ],
+          "gravity_regime": [
+            {
+              "source_id": "S-003",
+              "page": "p.5"
+            }
+          ],
+          "hardware": [
+            {
+              "source_id": "S-007",
+              "page": "p.12"
+            },
+            {
+              "source_id": "S-011",
+              "page": "p.9"
+            },
+            {
+              "source_id": "S-030",
+              "page": "row 44"
+            }
+          ],
+          "main_finding": [
+            {
+              "source_id": "S-005",
+              "page": "p.18"
+            },
+            {
+              "source_id": "S-005",
+              "page": "p.18"
+            },
+            {
+              "source_id": "S-007",
+              "page": "p.54"
+            }
+          ],
+          "test_count": [
+            {
+              "source_id": "S-007",
+              "page": "p.11"
+            },
+            {
+              "source_id": "S-011",
+              "page": "p.3"
+            }
+          ]
+        },
+        "verified": false
+      }
+    ],
+    "tests": [],
+    "chunks": [
+      {
+        "chunk_id": "S-007_p134_c01",
+        "source_id": "S-007",
+        "page": 134,
+        "text": "[BASS-II | S-007: NASA/TM-20210011385 BASS-II Summary Report | D.5 Analysis]\nThe maximum burn time is assumed to be the 2.5-min growth phase plus the 28-min sample\nregression phase, for a total of 30.5 min, as plotted in Figure D.5. The maximum temperatures reported in\nthe following information are for this maximum burn time. The heat release in the early phase is dominated by the ignition energy. Once the combustion heat\nrelease approaches steady state, the igniter is turned off and the flame is sustained. The maximum temperature will occur in the exhaust hardware. This metal (primarily copper)\nhardware is built to take the hot combustion gases and cool via conduction to the other hardware. The\nmaximum temperature if all of the combustion energy is only deposited in this heat sink under these\nworst-case assumptions, is 434 °C, which is below the melting point of the lowest melting material\n(aluminum at 660 °C) so this absolute worst-case maximum temperature will not cause damage to the\nhardware. This maximum temperature will not be realized in actuality because the heat will quickly\ndissipate to the main housing, which reaches a maximum temperature of 110 °C if all of the heat is\ndistributed only there. The experiment assembly dissipates the heat further, and the maximum\ntemperature of the entire experiment assembly is 62 °C. During the 10-min cooldown for these thick samples, both the flow through the BASS duct and the\nMSG air circulation fans help dissipate the heat.",
+        "score": 0.016,
+        "section_title": "D.5 Analysis",
+        "investigation_ids": [
+          "BASS-II"
+        ]
+      },
+      {
+        "chunk_id": "S-007_p130_c03",
+        "source_id": "S-007",
+        "page": 130,
+        "text": "[BASS-II | S-007: NASA/TM-20210011385 BASS-II Summary Report | D.5 Analysis]\nD.5 Analysis\nAs can be seen in Figure D.2, the base of the flame (at x = 0) has the highest burning rate and there is\nan exponential decay in the regression rate away from that peak burning rate. Using peak regression rate\n(r ) for the four flow profiles given, we can extrapolate down to the 30-cm/s flow of interest. max\nThe exposed base of the flame (the upstream most point) will be the strongest part of the flame, and\nthe burning rate is expected to be a maximum there. Based on data in the Section D.7 from a 1-cm-sphere\nBASS test, we estimate the regression rate to be 3.05 mm/min, which is in keeping with the estimates\nfrom Figure D.2, as shown in Figure D.3. The downstream regression rates will decay exponentially from\nthere, as shown in Figure D.2.",
+        "score": 0.01256,
+        "section_title": "D.5 Analysis",
+        "investigation_ids": [
+          "BASS-II"
+        ]
+      },
+      {
+        "chunk_id": "S-007_p106_c01",
+        "source_id": "S-007",
+        "page": 106,
+        "text": "[BASS-II | S-007: NASA/TM-20210011385 BASS-II Summary Report | 7.1.4 Results and Discussion]\nFigure 7.4.—Steady flame spread rate for both 2.2- and 1.2-cm-wide samples. Figure 7.5 shows a typical flame quenching sequence in the BASS–II experiment. A 2.2-cm-wide\nsample in 18.7 percent O was first ignited at 10-cm/s flow. Flow speed was decreased to 2.2 cm/s incrementally after ignition. Figure 7.6 shows flame tracking and flow speed versus time. After ignition,\nthe flame started to grow. As the flow speed was reduced, both flame length and flame width dropped\naccordingly with flow. After 25 s, flow velocity was reduced to 2.2 cm/s and held there for the remainder\nof the test. As shown in Figure 7.5, both the flame length and flame width continued to decrease\napproaching a circular-shaped blue flame seen from the top. The size of the flame continues to shrink\nuntil extinction is reached. This is typical in a quenching extinction sequence. As the quenching limit is\napproached (in this case by turning down the flow velocity), the fuel pyrolysis rate and combustion heat\nrelease rate (HRR) are reduced, and radiation loss becomes a significant fraction of the HRR from the\nshrinking flame. When the flame becomes small enough, conduction becomes the additional heat loss. The postburn photo of the sample in Figure 7.5 shows the narrowing of the burnt region as the flame\nshrinks toward extinction with a substantial part of the fuel left unburnt along the two sides of the sample\nholder. Although this is a concurrently spreading flame, the quenching sequence shows similar\ncharacteristics in opposed flow (Ref.",
+        "score": 0.01229,
+        "section_title": "7.1.4 Results and Discussion",
+        "investigation_ids": [
+          "BASS-II"
+        ]
+      },
+      {
+        "chunk_id": "S-007_p123_c02",
+        "source_id": "S-007",
+        "page": 123,
+        "text": "[BASS-II | S-007: NASA/TM-20210011385 BASS-II Summary Report | 2. Boundary and conditions:]\n2. Boundary and conditions:\na. Concentration of O coming into the work volume C = 0 (pure N )\n2 in 2\nb. C = c(t) (CSTR property)\nout\nc. Initial concentration of O in the work volume C(0) = C\n2 o\nThe rate of change of the O concentration c(t) with time t within the work volume V equation is given by the flow of gaseous N (r) multiplied by the difference between the inlet (C ) and outlet O\n2 in 2\nconcentrations (C )\nout\ndc\nV =r(C −C )=−rC =−rc(t) (B.1)\nin out out\ndt\n3. Integrating and applying initial conditions:\n−r \nc(t)=C\no\nexp t (B.2)\n V \nAstronaut Chris Cassidy conducted a calibration test on the morning of GMT (Greenwich Mean\nTime) 2013-095 in the Microgravity Science Glovebox (MSG) using a Compound Specific Analyzer-Combustion Products (CSA-CP) sensor taking O readings of the MSG working volume at intervals during the dilution. During dilution, the Burning and Suppression of Solids (BASS) duct fan was turned\nto maximum, and the working volume air circulation was deactivated. To validate the model, we used the\nfollowing values in the model based upon the test conditions:\n• MSG working volume (Ref. 1) = 0.255 m3\n• BASS–II hardware = ~0.005 m3\n• Net volume V = ~0.25 m3",
+        "score": 0.01216,
+        "section_title": "2. Boundary and conditions:",
+        "investigation_ids": [
+          "BASS-II"
+        ]
+      },
+      {
+        "chunk_id": "S-007_p108_c02",
+        "source_id": "S-007",
+        "page": 108,
+        "text": "[BASS-II | S-007: NASA/TM-20210011385 BASS-II Summary Report | 7.1.4 Results and Discussion]\nIn addition, because of the limited number of tests, the quenching limit for the 1.2-cm-wide sample was not resolved. But it can be seen that\nthe narrow sample has a smaller flammable domain, as expected. Figure 7.7.—Flammability map for Solid Inflammability Boundary at Low Speeds (SIBAL)\nfabric in concurrent flow in microgravity. Dotted line marks experimental quenching\nboundary for 2.2-cm-wide sample. Flow speed (U0).",
+        "score": 0.01157,
+        "section_title": "7.1.4 Results and Discussion",
+        "investigation_ids": [
+          "BASS-II"
+        ]
+      }
+    ],
+    "conflicts": [
+      {
+        "investigation_id": "BASS-II",
+        "field": "flow_cm_s_max",
+        "value_1": "up to 40 cm/s",
+        "source_1": "S-030 row 40",
+        "value_2": "53 cm/s (Air display, T17) | ~55 cm/s hardware",
+        "source_2": "S-031 row 117; S-007 p.12; S-005 p.7; S-004 p.3",
+        "chosen": "53",
+        "rationale": "highest measured value in the table (T17 cell reads '6   53', likely a 6→53 ramp; all other rows ≤ 15 cm/s); 40 appears copied from the BASS-I text — verify T17 by hand"
+      }
+    ],
+    "calculations": [],
+    "gaps": [],
+    "rules": [
+      {
+        "id": "R-001",
+        "rule": "Do NOT extrapolate microgravity results directly to Lunar or Martian gravity without explicitly stating the lack of direct partial-gravity empirical data and explaining bounding logic ([F-019], [F-021])."
+      },
+      {
+        "id": "R-002",
+        "rule": "When queried regarding combustion in Lunar or Martian gravity, explicitly clarify that NASA PSI currently contains no partial-gravity test data [F-019]. Mention E-FIELD electric field chemi-ion simulation [F-020] and 0-g/1-g bounding methodology [F-021] if relevant."
+      },
+      {
+        "id": "R-003",
+        "rule": "Never assess spacecraft fire flammability solely on oxygen percentage. Always evaluate oxygen partial pressure (via calculation), total pressure, diluent inert species (N2, CO2, He), and ventilation forced flow velocity together."
+      },
+      {
+        "id": "R-004",
+        "rule": "If asked about rocket engine or thruster propellant fires, clearly state that propulsion systems are outside the scope of PSI microgravity science due to momentum-dominated flow regimes [F-022]."
+      },
+      {
+        "id": "R-005",
+        "rule": "For every experimental finding reported, cite the exact test conditions: fuel type, geometry, oxygen concentration, ambient pressure, flow velocity, and hardware facility. If a condition is omitted in the source, label it as 'unspecified'; do NOT guess."
+      },
+      {
+        "id": "R-006",
+        "rule": "If an empirical value or data point is absent from the indexed chunks and Golden Table, state 'data not available in repository'. Never fabricate numerical values from LLM parametric memory."
+      },
+      {
+        "id": "R-007",
+        "rule": "When source documents report conflicting findings or values, present both sources with their respective document citations, PI names, and publication years; do not arbitrarily select one."
+      },
+      {
+        "id": "R-008",
+        "rule": "Clearly distinguish between empirical flight experiment findings (PSI / peer-reviewed reports), challenge guidelines, mathematical derivations, and speculative engineering hypotheses. Never present interpretation as an empirical fact."
+      }
+    ],
+    "route": {
+      "intent": "conflict",
+      "investigations": [
+        "BASS-II"
+      ],
+      "matched_intents": [],
+      "ambiguous": true,
+      "decided_by": "default + recorded conflict",
+      "out_of_scope_reason": null,
+      "tools": [
+        "get_conflicts",
+        "query_golden_table",
+        "search_documents"
+      ],
+      "rules": [
+        "R-007"
+      ]
+    },
+    "versions": {
+      "data": "v2",
+      "index": "4aa3c9230f",
+      "golden_table": "draft"
+    },
+    "sources": [
+      {
+        "id": "F-004",
+        "found": true,
+        "kind": "fact",
+        "title": "To reduce pre-breathe times and facilitate lunar surface extravehicular activities (EVAs), the atmosphere in lunar habitats and pressurized rovers is anticipated to have pressure and oxygen concentration intermediate between spacesuits and Earth sea-level atmosphere.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-006",
+        "found": true,
+        "kind": "fact",
+        "title": "According to the challenge text, this represents more than a 40% increase in oxygen concentration compared to Earth's atmosphere, substantially increasing material flammability.",
+        "source": "Challenge text, 'Spacesuits and oxygen concentration'"
+      },
+      {
+        "id": "F-007",
+        "found": true,
+        "kind": "fact",
+        "title": "Flammability depends strongly on oxygen concentration; in microgravity, convective air flow speed is also critical.",
+        "source": "Challenge text, 'Background'"
+      },
+      {
+        "id": "F-010",
+        "found": true,
+        "kind": "fact",
+        "title": "The flammability of solid materials such as fabrics (SIBAL, Nomex) and plastics (PMMA) has been investigated in the BASS, BASS-II, and Saffire-I, -II, -III flight experiments.",
+        "source": "Challenge text, 'Background'"
+      },
+      {
+        "id": "F-011",
+        "found": true,
+        "kind": "fact",
+        "title": "Spacecraft fire detection in microgravity has been tested through the SAME and SAME-R (Smoke and Aerosol Measurement Experiment) flight investigations.",
+        "source": "Challenge text, 'Background'"
+      },
+      {
+        "id": "S-007",
+        "found": true,
+        "kind": "source",
+        "title": "Burning and Suppression of Solids-II (BASS-II) Summary Report, NASA/TM-20210011385",
+        "authors": "Olson S.L., Ferkul P.V., Bhattacharjee S. vd.",
+        "year": "2021",
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+        "doi": null,
+        "investigation": "BASS-II",
+        "psi_id": "PSI-25",
+        "role": "results",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-030",
+        "found": true,
+        "kind": "source",
+        "title": "PSI-25 investigation metadata (ISA-Tab)",
+        "authors": null,
+        "year": "2022",
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+        "doi": "10.60555/4qc4-de67",
+        "investigation": "BASS-II",
+        "psi_id": "PSI-25",
+        "role": "metadata",
+        "file_type": "txt",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-011",
+        "found": true,
+        "kind": "source",
+        "title": "BASS-II Science Requirements",
+        "authors": null,
+        "year": null,
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+        "doi": null,
+        "investigation": "BASS-II;SPICE",
+        "psi_id": "PSI-25",
+        "role": "design",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-010",
+        "found": true,
+        "kind": "source",
+        "title": "BASS-II Data FAQ / ReadMe",
+        "authors": "Olson S.L.",
+        "year": "2017",
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+        "doi": null,
+        "investigation": "BASS-II",
+        "psi_id": "PSI-25",
+        "role": "overview",
+        "file_type": "docx",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-031",
+        "found": true,
+        "kind": "source",
+        "title": "BASS-II Experimental Table",
+        "authors": null,
+        "year": null,
+        "url": "https://psi.nasa.gov/physci/repo/data/investigations/PSI-25",
+        "doi": "10.60555/4qc4-de67",
+        "investigation": "BASS-II",
+        "psi_id": "PSI-25",
+        "role": "data table",
+        "file_type": "csv",
+        "in_corpus": false,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-005",
+        "found": true,
+        "kind": "source",
+        "title": "Combustion of Solids in Microgravity: Results from the BASS-II Experiment",
+        "authors": "Ferkul P.V., Bhattacharjee S., Fernandez-Pello C. vd.",
+        "year": "2014",
+        "url": "https://ntrs.nasa.gov/citations/20160000593",
+        "doi": null,
+        "investigation": "BASS-II",
+        "psi_id": "PSI-25",
+        "role": "results",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-004",
+        "found": true,
+        "kind": "source",
+        "title": "Concurrent flame growth, spread and extinction over composite fabric samples in low speed purely forced flow in microgravity",
+        "authors": "Zhao X., T'ien J.S., Ferkul P.V., Olson S.L.",
+        "year": "2015",
+        "url": "https://ntrs.nasa.gov/citations/20150008962",
+        "doi": null,
+        "investigation": "BASS;BASS-II",
+        "psi_id": "PSI-25",
+        "role": "results",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      },
+      {
+        "id": "S-003",
+        "found": true,
+        "kind": "source",
+        "title": "Microgravity Flammability of PMMA Rods in Concurrent Flow",
+        "authors": "Olson S.L., Ferkul P.V.",
+        "year": "2015",
+        "url": "https://ntrs.nasa.gov/citations/20150008961",
+        "doi": null,
+        "investigation": "BASS-II",
+        "psi_id": "PSI-25",
+        "role": "results",
+        "file_type": "pdf",
+        "in_corpus": true,
+        "status": "downloaded"
+      }
+    ]
+  },
+  "latency_ms": 0
+}
