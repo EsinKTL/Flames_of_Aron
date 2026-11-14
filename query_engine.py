@@ -19,6 +19,8 @@ import pandas as pd
 import yaml
 from sentence_transformers import SentenceTransformer
 
+from investigations import detect_investigations
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 INDEX_DIR = os.path.join(BASE_DIR, "indexes")
 PROCESSED_DIR = os.path.join(BASE_DIR, "processed")
@@ -93,57 +95,50 @@ class CombustionQueryEngine:
             
         print(f"Ready! Corpus: {len(self.chunks)} active chunks, {len(self.golden_df)} Golden Table experiments, {len(self.conflicts_df)} documented conflicts, {len(self.facts_data.get('facts', []))} verified facts.")
 
-    def search_hybrid(self, query: str, top_k: int = 5, experiment_filter: str = None, category_filter: str = None):
+    def search_hybrid(self, query: str, top_k: int = 5, experiment_filter=None, category_filter: str = None):
         """
         Executes hybrid search combining BM25 and dense vector cosine similarity via RRF.
-        Supports filtering by experiment (e.g. 'BASS', 'Saffire', 'FLEX') or category.
+
+        experiment_filter: canonical investigation ID or list of IDs (e.g. "BASS-II", ["FLEX", "FLEX-2"]).
+            Matching is exact: "BASS" never returns BASS-II chunks, "FLEX" never returns FLEX-2 chunks.
+            The filter is applied BEFORE ranking, so a filtered search always ranks the whole
+            filtered subset instead of only the global top-50 candidates.
+        category_filter: substring of doc_type (e.g. "results").
         """
+        wanted = None
+        if experiment_filter:
+            wanted = {experiment_filter} if isinstance(experiment_filter, str) else set(experiment_filter)
+
+        allowed = np.ones(len(self.chunks), dtype=bool)
+        for idx, chunk in enumerate(self.chunks):
+            if wanted is not None and not wanted.intersection(chunk.get("investigation_ids", [])):
+                allowed[idx] = False
+            elif category_filter and category_filter.lower() not in chunk.get("doc_type", "").lower():
+                allowed[idx] = False
+        candidates = np.flatnonzero(allowed)
+        if candidates.size == 0:
+            return []
+
         # BM25 scores
         q_toks = tokenize(query)
         bm25_scores = self.bm25.get_scores(q_toks)
-        
+
         # Dense similarity
         q_emb = self.encoder.encode([query], normalize_embeddings=True)[0]
         dense_scores = np.dot(self.embeddings, q_emb)
-        
-        # Reciprocal Rank Fusion (k=60)
+
+        # Reciprocal Rank Fusion (k=60) over the allowed subset
         rrf_scores = {}
-        top_bm25_candidates = np.argsort(bm25_scores)[::-1][:50]
-        top_dense_candidates = np.argsort(dense_scores)[::-1][:50]
-        
-        for rank, idx in enumerate(top_bm25_candidates, start=1):
+        top_bm25 = candidates[np.argsort(bm25_scores[candidates])[::-1][:50]]
+        top_dense = candidates[np.argsort(dense_scores[candidates])[::-1][:50]]
+        for rank, idx in enumerate(top_bm25, start=1):
             rrf_scores[idx] = rrf_scores.get(idx, 0.0) + (0.5 / (60 + rank))
-        for rank, idx in enumerate(top_dense_candidates, start=1):
+        for rank, idx in enumerate(top_dense, start=1):
             rrf_scores[idx] = rrf_scores.get(idx, 0.0) + (0.5 / (60 + rank))
-            
-        # Filter & Sort
-        sorted_indices = sorted(rrf_scores.items(), key=lambda x: x[1], reverse=True)
-        
+
         results = []
-        for idx, score in sorted_indices:
+        for idx, score in sorted(rrf_scores.items(), key=lambda x: x[1], reverse=True)[:top_k]:
             chunk = self.chunks[idx]
-            
-            # Apply filters if provided
-            if experiment_filter:
-                exp_matched = False
-                ef_lower = experiment_filter.lower().strip()
-                for exp in chunk.get("investigation_ids", []):
-                    e_lower = exp.lower().strip()
-                    if ef_lower == "bass":
-                        if e_lower in ("bass", "bass-i", "bass 1"):
-                            exp_matched = True
-                            break
-                    elif ef_lower == e_lower or (ef_lower in e_lower and not (ef_lower == "bass" and "bass-ii" in e_lower)):
-                        exp_matched = True
-                        break
-                if not exp_matched:
-                    continue
-                    
-            if category_filter:
-                cat = chunk.get("doc_type", "")
-                if category_filter.lower() not in cat.lower():
-                    continue
-                    
             results.append({
                 "chunk_id": chunk["chunk_id"],
                 "source_id": chunk["source_id"],
@@ -158,32 +153,21 @@ class CombustionQueryEngine:
                 "dense_score": float(dense_scores[idx]),
                 "text": chunk["text"]
             })
-            if len(results) >= top_k:
-                break
-                
         return results
 
     def get_golden_facts(self, query: str):
         """
-        Retrieves matching experiment rows from Golden Table based on experiment names in query.
+        Returns Golden Table rows for the investigations explicitly named in the query.
+        Uses investigations.detect_investigations (word boundaries + aliases), so
+        "BASS-II" returns only the BASS-II row and generic words ("flame", "fabric") match nothing.
         """
         if self.golden_df.empty:
             return []
-            
-        matches = []
-        q_lower = query.lower()
-        
-        for _, row in self.golden_df.iterrows():
-            exp_id = str(row.get("id", "")).lower()
-            exp_name = str(row.get("name", "")).lower()
-            
-            # Check for keyword overlap
-            if exp_id in q_lower or (len(exp_id) > 2 and exp_id in q_lower.replace("-", "")):
-                matches.append(row.to_dict())
-            elif any(token in q_lower for token in exp_name.split() if len(token) > 4):
-                matches.append(row.to_dict())
-                
-        return matches
+        ids = detect_investigations(query)
+        if not ids:
+            return []
+        rows = self.golden_df[self.golden_df["id"].isin(ids)]
+        return [r.to_dict() for _, r in rows.iterrows()]
 
     def get_guardrail_facts(self, query: str):
         """

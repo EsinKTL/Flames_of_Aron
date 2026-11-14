@@ -8,13 +8,13 @@ import pdfplumber
 import pypdf
 import docx
 
-BASE_DIR = r"C:\Users\ihsan\Desktop\NASA\Flames_of_Aron-main\Flames_of_Aron"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 RAW_DOCS_DIR = os.path.join(BASE_DIR, "raw", "docs")
 RAW_PSI_DIR = os.path.join(BASE_DIR, "raw", "psi")
 INTERIM_DIR = os.path.join(BASE_DIR, "interim")
 PROCESSED_DIR = os.path.join(BASE_DIR, "processed")
 LOGS_DIR = os.path.join(BASE_DIR, "logs")
-EVAL_DIR = os.path.join(BASE_DIR, "eval")
+EVAL_DIR = os.path.join(BASE_DIR, "evaluation")
 
 for d in [INTERIM_DIR, PROCESSED_DIR, LOGS_DIR, EVAL_DIR]:
     os.makedirs(d, exist_ok=True)
@@ -263,6 +263,8 @@ PROTECTED_HYPHENS = {
     "two-sided", "one-sided", "pre-breathe", "fine-water-mist", "Fine-Water-Mist", "NASA-STD-6001"
 }
 
+PROTECTED_HYPHENS_LOWER = {p.lower() for p in PROTECTED_HYPHENS}
+
 NUMERIC_COND_REGEX = re.compile(
     r"(\b\d+(?:[\.,]\d+)?\s*(?:%\s*O2|%\s*oxygen|psi|psia|kPa|atm|mmHg|cm/s|mm/s|m/s|W\b|ppm|micron|μm|\bmm\b|\bcm\b))",
     re.IGNORECASE
@@ -294,9 +296,8 @@ def clean_text(text: str) -> str:
 
     def fix_hyphen(match):
         full = match.group(0).replace("\n", "").replace(" ", "")
-        for p in PROTECTED_HYPHENS:
-            if full.lower() == p.lower():
-                return p
+        if full.lower() in PROTECTED_HYPHENS_LOWER:
+            return full  # kaynaktaki yazımı koru (set sırası çıktıyı değiştirmesin)
         w1, w2 = match.group(1), match.group(2)
         if w2 and w2[0].islower() and not w1.isupper():
             return w1 + w2
@@ -367,6 +368,71 @@ def extract_page_prose_column_aware(page, table_bboxes):
         return "\n\n".join(parts)
 
     return filtered_page.extract_text() or ""
+
+# --- Satır düzeyinde başlık tespiti -------------------------------------------
+# Öncelik sırası önemlidir: "Summary of Results" -> results, "Experimental Results" -> results.
+HEADING_PRIORITY = [
+    ("references",  r"references|bibliography|works cited|papers and presentations|publications(?: resulting)?|acknowledge?ments?"),
+    ("results",     r"conclusions?|concluding remarks|summary of results|summary and conclusions?"),
+    ("results",     r"results?|discussion|observations|findings|data analysis|analysis"),
+    ("conditions",  r"test matrix|test matrices|test conditions|experimental conditions|operating conditions|test parameters|test plan|flight matrix|conditions"),
+    ("methodology", r"experimental (?:setup|set-up|apparatus|hardware|methods?|approach|description|design|procedures?|details)|experiment description|hardware|apparatus|procedures?|methods?|methodology|approach|diagnostics|instrumentation|materials|sample preparation|facility"),
+    ("objective",   r"abstract|executive summary|summary|introduction|background|objectives?|motivation|overview|purpose"),
+]
+HEADING_NUM_RE = re.compile(r"^(?:\d{1,2}(?:\.\d{1,2}){0,3}\.?|[IVX]{1,5}\.|[A-H]\.|Appendix\s+[A-Z0-9]+[.:]?)\s+")
+
+def heading_section(line: str):
+    """Satır bir bölüm başlığıysa (section_type, başlık) döndürür, değilse None."""
+    l = line.strip()
+    if not (3 <= len(l) <= 75):
+        return None
+    m = HEADING_NUM_RE.match(l)
+    body = (l[m.end():] if m else l).strip().rstrip(":").strip()
+    words = body.split()
+    if not words or len(words) > (8 if m else 6):
+        return None
+    if re.search(r"[.;,]$", body) or re.search(r"\d{2,}", body) or not body[0].isalpha():
+        return None
+    long_words = [w for w in words if len(w) > 3]
+    titleish = body.isupper() or not long_words or (
+        sum(w[0].isupper() for w in long_words) / len(long_words) >= 0.5)
+    if not titleish or not words[0][0].isupper():
+        return None
+    low = body.lower()
+    if not m:
+        # Numarasız satırda anahtar sözcük başta olmalı ("Results show ..." gibi cümleleri ele)
+        for sec_type, pat in HEADING_PRIORITY:
+            if re.match(rf"(?:{pat})\b", low):
+                return sec_type, l[:80]
+        # "Experimental Results", "Flame Spread Results": kısa ve tamamen başlık biçiminde
+        strict = body.isupper() or (long_words and all(w[0].isupper() for w in long_words))
+        if strict and len(words) <= 4:
+            for sec_type, pat in HEADING_PRIORITY:
+                if re.search(rf"\b(?:{pat})\b", low):
+                    return sec_type, l[:80]
+        return None
+    for sec_type, pat in HEADING_PRIORITY:
+        if re.search(rf"\b(?:{pat})\b", low):
+            return sec_type, l[:80]
+    return None
+
+def split_sections(text_block: str, current_section_type: str, current_section_title: str):
+    """Sayfa metnini bölüm başlıklarından böler: [(section_type, section_title, metin), ...].
+    Başlıktan önceki kısım bir önceki sayfanın bölümünü sürdürür."""
+    segments = []
+    buf = []
+    cur_t, cur_ti = current_section_type, current_section_title
+    for line in text_block.split("\n"):
+        h = heading_section(line)
+        if h:
+            if "\n".join(buf).strip():
+                segments.append((cur_t, cur_ti, "\n".join(buf).strip()))
+            buf = []
+            cur_t, cur_ti = h
+        buf.append(line)
+    if "\n".join(buf).strip():
+        segments.append((cur_t, cur_ti, "\n".join(buf).strip()))
+    return segments or [(cur_t, cur_ti, text_block)]
 
 def detect_section(text_block: str, current_section_type: str, current_section_title: str):
     lines = [l.strip() for l in text_block.split("\n") if l.strip()]
@@ -477,7 +543,7 @@ def refine_investigation_ids(doc_investigations: list, text: str, section_title:
             
         if re.search(r'\bcfi[- ]?g\b|\bacme[- ]?cfi\b', full_ctx):
             detected.append("ACME-CFI-G")
-        elif re.search(r'\bcfi\b|\bcool flame\b', full_ctx):
+        elif re.search(r'\bcfi\b|cool flames? investigation', full_ctx):
             detected.append("CFI")
             
         if re.search(r'\bbre\b|\bburning rate emulator\b', full_ctx):
@@ -542,10 +608,13 @@ def refine_investigation_ids(doc_investigations: list, text: str, section_title:
     # 3c: FLEX / CFI (S-014)
     if "FLEX" in allowed and "CFI" in allowed:
         f_matches = []
-        if re.search(r'\bflex\b', full_ctx):
-            f_matches.append("FLEX")
-        if re.search(r'\bcfi\b|cool[- ]?flame', full_ctx):
+        # "cool flame" FLEX'in kendi bulgusudur; CFI yalnızca açıkça anılırsa etiketlenir
+        if re.search(r'\bcfi\b(?![- ]?g\b)|cool flames? investigation(?! with gases)', full_ctx):
             f_matches.append("CFI")
+        if re.search(r'\bflex[- ]?2\b|\bflex[- ]?ii\b', full_ctx):
+            f_matches.append("FLEX-2")
+        if re.search(r'\bflex\b(?![- ]?(?:2|ii)\b)', full_ctx):
+            f_matches.append("FLEX")
         return f_matches if f_matches else doc_investigations
 
     return doc_investigations
@@ -740,11 +809,12 @@ def main():
         try:
             fast_reader = pypdf.PdfReader(fpath) if fname == "Detailed Results FLEX.pdf" else None
             with pdfplumber.open(fpath) as pdf:
-                curr_sec_type = "objective"
-                curr_sec_title = "Introduction & Overview"
+                curr_sec_type = "unknown"
+                curr_sec_title = "Unknown section"
 
                 for p_idx, page in enumerate(pdf.pages, start=1):
                     stats["total_pages"] += 1
+                    forced = False
 
                     # ÖZEL KURAL 1: Detailed Results BAS-2.pdf (144 sayfa)
                     if fname == "Detailed Results BAS-2.pdf":
@@ -753,9 +823,11 @@ def main():
                         elif 111 <= p_idx <= 122:
                             curr_sec_type = "conditions"
                             curr_sec_title = "Appendix A - BASS-II Test Matrices"
+                            forced = True
                         elif 137 <= p_idx <= 144:
                             curr_sec_type = "references"
                             curr_sec_title = "Appendix E - Papers and Presentations"
+                            forced = True
 
                     # ÖZEL KURAL 2: Detailed Results FLEX.pdf (314 sayfa)
                     if fname == "Detailed Results FLEX.pdf":
@@ -764,12 +836,15 @@ def main():
                         elif 25 <= p_idx <= 34:
                             curr_sec_type = "conditions"
                             curr_sec_title = "Appendix A - FLEX Summary Data Tables"
+                            forced = True
                         elif 35 <= p_idx <= 310:
                             curr_sec_type = "figure_caption"
                             curr_sec_title = "Appendix B - Droplet and Flame Size Plots"
+                            forced = True
                         elif p_idx >= 311:
                             curr_sec_type = "references"
                             curr_sec_title = "References"
+                            forced = True
 
                     # 1) Tabloları Bul ve Çıkar (FLEX Appendix B grafik sayfaları hariç)
                     table_bboxes = []
@@ -823,53 +898,60 @@ def main():
                     if len(cleaned_page) < 40:
                         continue
 
-                    if curr_sec_type not in ("figure_caption",):
-                        curr_sec_type, curr_sec_title = detect_section(cleaned_page, curr_sec_type, curr_sec_title)
+                    if forced or curr_sec_type == "figure_caption":
+                        segments = [(curr_sec_type, curr_sec_title, cleaned_page)]
+                    else:
+                        segments = split_sections(cleaned_page, curr_sec_type, curr_sec_title)
+                    # Sonraki sayfa, bu sayfanın son bölümünden devam eder
+                    curr_sec_type, curr_sec_title = segments[-1][0], segments[-1][1]
 
                     all_pages_records.append({
                         "source_id": source_id,
                         "filename": fname,
                         "page": p_idx,
-                        "section_type": curr_sec_type,
-                        "section_title": curr_sec_title,
+                        "section_type": segments[0][0],
+                        "section_title": segments[0][1],
+                        "sections": [s_t for s_t, _, _ in segments],
                         "text": cleaned_page
                     })
 
-                    is_excluded = (curr_sec_type in ("references", "figure_caption"))
-                    if curr_sec_type == "figure_caption":
-                        stats["caption_chunks_filtered"] += 1
-                    elif curr_sec_type == "references":
-                        stats["ref_chunks_tagged"] += 1
+                    c_idx = 0
+                    for seg_type, seg_title, seg_text in segments:
+                        is_excluded = (seg_type in ("references", "figure_caption"))
+                        if seg_type == "figure_caption":
+                            stats["caption_chunks_filtered"] += 1
+                        elif seg_type == "references":
+                            stats["ref_chunks_tagged"] += 1
 
-                    # 3) Metni 350-450 Token (55 Token Overlap) Parçalara Böl
-                    page_chunks = split_into_chunks(cleaned_page, target_tokens=380, overlap_tokens=55)
-                    for c_idx, ch_txt in enumerate(page_chunks, start=1):
-                        if len(ch_txt.strip()) < 45:
-                            continue
-                        refined_inv = refine_investigation_ids(meta["investigation_ids"], ch_txt, curr_sec_title, source_id)
-                        refined_inv_str = ", ".join(refined_inv)
-                        prefix = f"[{refined_inv_str} | {source_id}: {doc_title} | {curr_sec_title}]\n"
-                        final_txt = prefix + ch_txt
-                        all_chunks.append({
-                            "chunk_id": f"{source_id}_p{p_idx:03d}_c{c_idx:02d}",
-                            "source_id": source_id,
-                            "investigation_ids": refined_inv,
-                            "doc_type": meta["doc_type"],
-                            "year": meta["year"],
-                            "page": p_idx,
-                            "section_type": curr_sec_type,
-                            "section_title": curr_sec_title,
-                            "has_table": False,
-                            "has_numeric_conditions": bool(NUMERIC_COND_REGEX.search(ch_txt)),
-                            "hardware": meta["hardware"],
-                            "fuel_phase": meta["fuel_phase"],
-                            "ocr": False,
-                            "duplicate_of": None,
-                            "exclude_from_default_search": is_excluded,
-                            "token_estimate": estimate_tokens(final_txt),
-                            "text": final_txt
-                        })
-                        stats["text_chunks"] += 1
+                        # 3) Metni 350-450 Token (55 Token Overlap) Parçalara Böl
+                        for ch_txt in split_into_chunks(seg_text, target_tokens=380, overlap_tokens=55):
+                            if len(ch_txt.strip()) < 45:
+                                continue
+                            c_idx += 1
+                            refined_inv = refine_investigation_ids(meta["investigation_ids"], ch_txt, seg_title, source_id)
+                            refined_inv_str = ", ".join(refined_inv)
+                            prefix = f"[{refined_inv_str} | {source_id}: {doc_title} | {seg_title}]\n"
+                            final_txt = prefix + ch_txt
+                            all_chunks.append({
+                                "chunk_id": f"{source_id}_p{p_idx:03d}_c{c_idx:02d}",
+                                "source_id": source_id,
+                                "investigation_ids": refined_inv,
+                                "doc_type": meta["doc_type"],
+                                "year": meta["year"],
+                                "page": p_idx,
+                                "section_type": seg_type,
+                                "section_title": seg_title,
+                                "has_table": False,
+                                "has_numeric_conditions": bool(NUMERIC_COND_REGEX.search(ch_txt)),
+                                "hardware": meta["hardware"],
+                                "fuel_phase": meta["fuel_phase"],
+                                "ocr": False,
+                                "duplicate_of": None,
+                                "exclude_from_default_search": is_excluded,
+                                "token_estimate": estimate_tokens(final_txt),
+                                "text": final_txt
+                            })
+                            stats["text_chunks"] += 1
 
         except Exception as e:
             print(f"     [!] PDF Hatası ({fname}): {e}")
