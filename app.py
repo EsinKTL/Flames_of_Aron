@@ -599,6 +599,14 @@ SLUGS = {"ask": PAGES[0], "explorer": PAGES[1], "atmosphere": PAGES[2], "about":
 SLUG_OF = {v: k for k, v in SLUGS.items()}
 qp = st.query_params
 
+# Each visitor gets a private chat history: a random id kept in the page link (?v=...), so a refresh
+# keeps the visitor's own conversations and nobody else's are listed.
+if "visitor" not in st.session_state:
+    v = str(qp.get("v", ""))
+    st.session_state.visitor = v if re.fullmatch(r"[0-9a-f]{16}", v) else uuid.uuid4().hex[:16]
+qp["v"] = st.session_state.visitor
+HISTORY_DIR = HISTORY_DIR / st.session_state.visitor
+
 if "nav" not in st.session_state:
     st.session_state.nav = SLUGS.get(qp.get("p", "ask"), PAGES[0])
 
@@ -696,7 +704,7 @@ def load_conversation(conv_id):
 
 
 def save_conversation(conv):
-    HISTORY_DIR.mkdir(exist_ok=True)
+    HISTORY_DIR.mkdir(parents=True, exist_ok=True)
     conv["updated"] = datetime.now().isoformat(timespec="seconds")
     (HISTORY_DIR / f"{conv['id']}.json").write_text(json.dumps(conv, ensure_ascii=False, indent=1), encoding="utf-8")
 
@@ -861,8 +869,8 @@ if page == "Ask the Expert":
         st.button("New chat", icon=":material/add:", use_container_width=True, key="new_chat", on_click=start_new)
         saved = list_conversations()
         if not saved:
-            st.html('<p class="ff-muted" style="font-size:.8rem;margin-top:var(--s-4)">Your conversations are saved here '
-                    "and stay available after a refresh or restart.</p>")
+            st.html('<p class="ff-muted" style="font-size:.8rem;margin-top:var(--s-4)">Your conversations are saved here. '
+                    "Only you see them, and they stay available after a refresh.</p>")
         last_day = None
         for c in saved:
             label = day_label(c["updated"])
