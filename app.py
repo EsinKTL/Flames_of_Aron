@@ -51,7 +51,7 @@ st.set_page_config(
     page_title="Flame in Freefall",
     page_icon="🔥",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="collapsed",
 )
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -169,7 +169,23 @@ st.markdown(
 [data-testid="stAppViewContainer"] > * {{ position:relative; z-index:1; }}
 [data-testid="stHeader"] {{ height:0; }}
 [data-testid="stSidebar"] {{ background:rgba(8,11,18,.88); border-right:1px solid var(--c-line); backdrop-filter:blur(10px); }}
-[data-testid="stSidebarCollapseButton"], [data-testid="stSidebarCollapsedControl"], [data-testid="stExpandSidebarButton"] {{ display:none !important; }}
+/* History rail: closed by default. A tab on the left edge opens it; the arrow at its top closes it. */
+[data-testid="stSidebarCollapseButton"] {{ visibility:visible !important; opacity:1 !important; display:inline-flex !important; }}
+[data-testid="stSidebarCollapseButton"] button {{ color:var(--c-text-2) !important; border:1px solid var(--c-line) !important; border-radius:var(--r-pill) !important; }}
+[data-testid="stSidebarCollapseButton"] button:hover {{ color:var(--c-flame) !important; border-color:rgba(255,122,77,.5) !important; }}
+[data-testid="stExpandSidebarButton"], [data-testid="stSidebarCollapsedControl"] {{
+  position:fixed !important; left:0 !important; top:42vh !important; z-index:1000000 !important;
+  display:flex !important; align-items:center; justify-content:center; gap:6px;
+  width:30px !important; height:132px !important; min-height:0 !important; padding:8px 0 !important; margin:0 !important;
+  background:rgba(15,21,32,.94) !important; border:1px solid var(--c-line-hi) !important; border-left:none !important;
+  border-radius:0 12px 12px 0 !important; color:var(--c-text-2) !important; cursor:pointer;
+  box-shadow:4px 0 18px rgba(0,0,0,.45); writing-mode:vertical-rl;
+  transition:width var(--dur-1) var(--ease), color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease); }}
+[data-testid="stExpandSidebarButton"]:hover, [data-testid="stSidebarCollapsedControl"]:hover {{
+  width:36px !important; color:var(--c-flame) !important; border-color:rgba(255,122,77,.55) !important; }}
+[data-testid="stExpandSidebarButton"]::after, [data-testid="stSidebarCollapsedControl"]::after {{
+  content:"CHATS"; font-family:var(--f-mono); font-size:.62rem; letter-spacing:.22em; }}
+[data-testid="stExpandSidebarButton"] span, [data-testid="stSidebarCollapsedControl"] span {{ writing-mode:horizontal-tb; }}
 [data-testid="stSidebar"] .stButton > button {{ justify-content:flex-start; text-align:left; min-height:2.3rem; font-size:.86rem;
   background:transparent; border-color:transparent; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }}
 [data-testid="stSidebar"] .stButton > button p {{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }}
@@ -412,6 +428,18 @@ def psi_test_data():
 
 
 @st.cache_data(show_spinner=False)
+def psi_file_counts():
+    """investigation -> number of PSI data-table files registered in the manifest (raw/psi)."""
+    out = {}
+    for r in tools.manifest_rows():
+        if r.get("role") == "data table" and r.get("status") == "downloaded":
+            for inv in str(r.get("investigation", "")).split(";"):
+                if inv.strip():
+                    out[inv.strip()] = out.get(inv.strip(), 0) + 1
+    return out
+
+
+@st.cache_data(show_spinner=False)
 def lunar_screen():
     return tools.lunar_check()
 
@@ -522,6 +550,12 @@ st.markdown(
 .st-key-logo_key:focus-within .st-key-logo_key_panel { display:flex; flex-direction:column; }
 .st-key-logo_key_panel { width:300px !important; min-width:300px !important; max-width:300px !important; }
 .st-key-logo_key_panel > div { width:100% !important; }
+/* No key yet: the logo pulses so the visitor can find the API key panel */
+.ff-logo.need-key { animation:ff-need-key 1.8s ease-in-out infinite; border-color:rgba(255,122,77,.45); }
+.ff-logo:focus { outline:none; }
+@keyframes ff-need-key { 0%,100% { box-shadow:0 0 0 0 rgba(255,122,77,.55); } 50% { box-shadow:0 0 0 9px rgba(255,122,77,0); } }
+@media (prefers-reduced-motion: reduce) { .ff-logo.need-key { animation:none; } }
+.st-key-key_notice { max-width:980px; margin:0 auto var(--s-3); width:100%; }
 </style>""",
     unsafe_allow_html=True,
 )
@@ -589,7 +623,8 @@ h_left, h_mid, h_right = st.columns([1.15, 2.75, 1.1], vertical_alignment="cente
 with h_left:
     with st.container(key="brand_logo", horizontal=True, vertical_alignment="center", gap="small"):
         with st.container(key="logo_key", width="content"):
-            st.html(f'<div class="ff-logo" title="LLM API key">{logo_html(34)}</div>')
+            st.html(f'<div class="ff-logo{"" if PROVIDER != "none" else " need-key"}" tabindex="0" '
+                    f'title="LLM API key: hover or click">{logo_html(34)}</div>')
             with st.container(key="logo_key_panel"):
                 llm_settings_panel()
         st.html('<div class="ff-brand">FLAME IN FREEFALL</div>' + drifting_embers(16, 11))
@@ -605,8 +640,22 @@ with h_right:
     )
     st.html(
         '<div style="display:flex;justify-content:flex-end;gap:6px;flex-wrap:wrap">'
-        f'{llm_chip}<span class="ff-chip">DATA {esc(VERSIONS.get("data", ""))}</span></div>'
+        f'{llm_chip}</div>'
     )
+
+# First thing a visitor without a key sees, on every page, until a key is entered
+if PROVIDER == "none":
+    with st.container(key="key_notice"):
+        st.warning(
+            "**This site needs an LLM API key to work properly.** Without one, Ask the Expert cannot write answers: "
+            "it only lists the raw evidence it found (sources and values).  \n"
+            "**How to add your key:** move the mouse over (or click) the **Flames of Aron logo** in the top-left corner, "
+            "next to FLAME IN FREEFALL. A small panel opens: choose Gemini, Groq or Mistral, paste your key and press Enter. "
+            "The key stays in this browser session only. Free keys: "
+            "[Gemini](https://aistudio.google.com/apikey) · [Groq](https://console.groq.com/keys) · "
+            "[Mistral](https://console.mistral.ai/api-keys).",
+            icon=":material/key:",
+        )
 
 page = choice or st.session_state.get("last_page", PAGES[0])
 st.session_state.last_page = page
@@ -894,12 +943,11 @@ if page == "Ask the Expert":
             save_conversation(conv)
             st.session_state.pending = None
 
-        if PROVIDER == "none":
-            st.warning(
-                "Evidence mode · no API key entered, so replies show the validated evidence summary instead of "
-                "LLM-written prose. To get written answers, hover over the logo next to FLAME IN FREEFALL (top left) "
-                "and enter a Gemini, Groq or Mistral API key.",
-                icon=":material/key_off:",
+        if PROVIDER == "none" and conv["messages"]:
+            st.html(
+                '<p class="ff-muted" style="font-size:.76rem;text-align:center;margin:var(--s-5) 0 var(--s-3)">'
+                "Evidence mode · no API key, so replies are evidence lists, not written answers. "
+                "Hover over the logo (top left) to enter a Gemini, Groq or Mistral key.</p>"
             )
 
     question = st.chat_input("Ask a follow-up…" if conv["messages"] else "Ask about an experiment, condition or comparison…")
@@ -914,6 +962,15 @@ elif page == "Experiment Explorer":
     counts = dataset_counts()
     _, per_inv, n_rows = psi_test_data()
     golden = tools.golden_rows()
+    psi_files = psi_file_counts()
+
+    def test_rows_label(inv, html=True):
+        """Per-test rows if the table is parsed; else the PSI files held in raw/psi; else none."""
+        if per_inv.get(inv):
+            return str(per_inv[inv])
+        n = psi_files.get(inv, 0)
+        text = f"{n} PSI data file{'' if n == 1 else 's'} · summary only" if n else "no PSI table"
+        return f'<span class="ff-muted">{text}</span>' if html else text
 
     eyebrow("Structured dataset")
     st.title("Experiment Explorer")
@@ -965,7 +1022,7 @@ elif page == "Experiment Explorer":
         "Pressure (psi)": rng(r["pressure_psi_min"], r["pressure_psi_max"]) or "unknown",
         "Flow (cm/s)": rng(r["flow_cm_s_min"], r["flow_cm_s_max"], digits=1) or "unknown",
         "Lunar match": r.get("lunar_joint_flag") or "unknown",
-        "PSI test rows": per_inv.get(r["id"], 0),
+        "PSI test rows": test_rows_label(r["id"], html=False),
         "Review status": review_status(r)[0],
     } for r in golden])
 
@@ -1005,7 +1062,6 @@ elif page == "Experiment Explorer":
                 for c in cats(r))
             label, tone = review_status(r)
             dot = f'<span class="ff-dot{" ff-live" if tone == "pending" else ""}" style="background:currentColor"></span>'
-            n_tests = per_inv.get(r["id"], 0)
             cards.append(
                 f'<div class="ff-card hover ff-enter" style="animation-delay:{i*40}ms">'
                 '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">'
@@ -1016,7 +1072,7 @@ elif page == "Experiment Explorer":
                 f'<span class="ff-muted">HARDWARE</span><span>{cell(hardware_short(r.get("hardware")))}</span>'
                 f'<span class="ff-muted">O₂</span><span>{cell(rng(r["o2_min"], r["o2_max"], " %", 100, 1))}</span>'
                 f'<span class="ff-muted">PRESSURE</span><span>{cell(rng(r["pressure_psi_min"], r["pressure_psi_max"], " psi"))}</span>'
-                f'<span class="ff-muted">TEST ROWS</span><span>{n_tests if n_tests else '<span class="ff-muted">no PSI table</span>'}</span></div>'
+                f'<span class="ff-muted">TEST ROWS</span><span>{test_rows_label(r["id"])}</span></div>'
                 f'<div style="margin-top:var(--s-4)"><span class="ff-chip {tone}">{dot}{label}</span></div>'
                 "</div>"
             )
@@ -1067,7 +1123,10 @@ elif page == "Experiment Explorer":
                 st.html(f'<table class="ff-table"><tr><th>ID</th><th>Title</th><th>Role</th><th>Year</th></tr>{body}</table>')
 
     st.html(
-        f'<p class="ff-muted" style="font-size:.78rem;margin-top:var(--s-5)">{counts["verified"]} of {counts["investigations"]} rows '
+        '<p class="ff-muted" style="font-size:.78rem;margin-top:var(--s-5)">"Summary only" means the PSI data files are in the '
+        "repository and searchable by Ask the Expert, but they give no per-test oxygen and pressure row, so they are not "
+        "counted as test rows or screened on the Atmosphere Check page.</p>"
+        f'<p class="ff-muted" style="font-size:.78rem;margin-top:var(--s-2)">{counts["verified"]} of {counts["investigations"]} rows '
         "have been verified by a domain expert. Unknown values stay unknown; they are never filled with 0 or an estimate.</p>"
     )
     footer()
@@ -1249,6 +1308,7 @@ elif page == "Atmosphere Check":
 
     with st.expander("How this page works", icon=":material/help:"):
         inv_txt = ", ".join(f"{k} {v}" for k, v in per_inv.items())
+        other_txt = ", ".join(k for k in sorted(psi_file_counts()) if k not in per_inv) or "none"
         st.markdown(
             f"""
 **What it calculates.** Oxygen partial pressure, p(O₂) = oxygen fraction × total pressure. The ring shows that value and how it compares
@@ -1265,6 +1325,7 @@ The dashed curve joins all atmospheres with the same p(O₂) as Earth sea level:
 
 **Why only FLEX appears.** The repository holds {n_rows} PSI test rows ({inv_txt}). Only FLEX recorded both oxygen fraction and chamber pressure per test
 ({len(tests)} rows). The BASS, BASS-II and Saffire tables give no per-test pressure, so those rows cannot be placed on the chart or screened; they are counted as "not screened" rather than guessed.
+The PSI files of the other investigations ({other_txt}) are in the repository and searchable in Ask the Expert, but they are not read test by test here.
 
 **Lunar screen.** `tools.lunar_check()` scans every test row. No test meets both limits at once. FLEX #37 (34% O₂ at 10.33 psi) is the closest from the oxygen side;
 the only test under {LUNAR_P_MAX} psi ran at 18% O₂.
