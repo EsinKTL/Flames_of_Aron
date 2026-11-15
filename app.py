@@ -440,7 +440,122 @@ def dataset_counts():
 
 
 VERSIONS = evidence.versions()
-PROVIDER, MODEL = llm_status()
+PROVIDER, MODEL = llm_status()  # key from the environment / .env / host secrets, if any
+SERVER_PROVIDER = PROVIDER
+
+# ------------------------------------------------------------
+# Optional API key typed by the visitor (hover panel under the team logo, top left)
+# Kept only in this browser session's memory: never written to disk, chat history or the
+# process environment, so one visitor's key is never used for another visitor's questions.
+# ------------------------------------------------------------
+LLM_CHOICES = {"Gemini": "gemini", "Groq": "groq", "Mistral": "mistral"}
+LLM_KEY_LINKS = {
+    "Gemini": "https://aistudio.google.com/apikey",
+    "Groq": "https://console.groq.com/keys",
+    "Mistral": "https://console.mistral.ai/api-keys",
+}
+st.session_state.setdefault("llm_provider", "Gemini")
+st.session_state.setdefault("llm_key", "")
+USER_KEY = st.session_state.llm_key.strip()
+if USER_KEY:
+    PROVIDER = LLM_CHOICES[st.session_state.llm_provider]
+    MODEL = agent.DEFAULT_MODELS[PROVIDER]
+
+
+def llm_kwargs():
+    """Arguments for agent.answer_question: the visitor's own key if typed, else the server default."""
+    if not USER_KEY:
+        return {}
+    prov, mod, key = PROVIDER, MODEL, USER_KEY
+    return {"llm_fn": lambda msgs: agent.call_llm(msgs, provider=prov, model=mod, api_key=key)}
+
+
+def _sync_llm_settings():
+    st.session_state.llm_provider = st.session_state._llm_provider_input
+    st.session_state.llm_key = (st.session_state._llm_key_input or "").strip()
+
+
+def _clear_llm_key():
+    st.session_state.llm_key = ""
+    st.session_state._llm_key_input = ""
+
+
+LOGO_CANDIDATES = ("logo.png", "logo.svg", "logo.jpg", "logo.jpeg", "logo.webp")
+
+
+@st.cache_data(show_spinner=False)
+def _logo_data_uri():
+    """Team logo from assets/ as a data URI, or '' when no logo file is present."""
+    import base64
+    import mimetypes
+    for name in LOGO_CANDIDATES:
+        path = Path(__file__).resolve().parent / "assets" / name
+        if path.exists():
+            mime = mimetypes.guess_type(name)[0] or "image/png"
+            return f"data:{mime};base64," + base64.b64encode(path.read_bytes()).decode("ascii")
+    return ""
+
+
+def logo_html(size):
+    uri = _logo_data_uri()
+    if uri:
+        return f'<img src="{uri}" alt="Team logo" style="height:{size}px;width:auto;display:block;border-radius:50%">'
+    return flame_orb(size - 6, 0, 1)
+
+
+# Hovering the logo (or typing in the panel) opens the API key panel under it.
+st.markdown(
+    """<style>
+/* Streamlit's transparent top toolbar sits over the header row; let the mouse reach the logo */
+[data-testid="stHeader"] { pointer-events:none; }
+[data-testid="stHeader"] button, [data-testid="stHeader"] a { pointer-events:auto; }
+.st-key-brand_logo { flex-wrap:nowrap; position:relative; z-index:1000001; }
+.st-key-logo_key { position:relative; cursor:pointer; }
+.ff-logo { display:flex; align-items:center; padding:4px; margin-top:8px; border-radius:10px;
+  border:1px solid transparent; transition:border-color .15s ease, box-shadow .15s ease; }
+.st-key-logo_key:hover .ff-logo, .st-key-logo_key:focus-within .ff-logo {
+  border-color:rgba(255,122,77,.55); box-shadow:0 0 14px rgba(255,122,77,.35); }
+.st-key-logo_key_panel { display:none; position:absolute; top:100%; left:0; z-index:1000002; width:300px;
+  padding:14px; background:#0f1520; border:1px solid rgba(255,255,255,.12);
+  border-radius:12px; box-shadow:0 18px 40px rgba(0,0,0,.55); }
+.st-key-logo_key:hover .st-key-logo_key_panel,
+.st-key-logo_key:focus-within .st-key-logo_key_panel { display:flex; flex-direction:column; }
+.st-key-logo_key_panel { width:300px !important; min-width:300px !important; max-width:300px !important; }
+.st-key-logo_key_panel > div { width:100% !important; }
+</style>""",
+    unsafe_allow_html=True,
+)
+
+
+def llm_settings_panel():
+    """Provider picker + password field. Empty field -> warning and evidence-summary mode."""
+    # Widget state is dropped when the visitor opens another page; re-seed it from the stored values.
+    if "_llm_provider_input" not in st.session_state:
+        st.session_state._llm_provider_input = st.session_state.llm_provider
+    if "_llm_key_input" not in st.session_state:
+        st.session_state._llm_key_input = st.session_state.llm_key
+    st.html('<div class="ff-eyebrow" style="margin:4px 0 10px">LLM API key · optional</div>')
+    st.selectbox("Provider", list(LLM_CHOICES), key="_llm_provider_input", on_change=_sync_llm_settings)
+    st.text_input(
+        "API key", type="password", key="_llm_key_input", on_change=_sync_llm_settings,
+        placeholder="Paste your key and press Enter",
+        help="Used only for this browser session to write answers. It is not saved anywhere.",
+    )
+    link = LLM_KEY_LINKS[st.session_state.llm_provider]
+    if USER_KEY:
+        st.success(f"Key set · answers are written by {PROVIDER}/{MODEL} and checked against the evidence.",
+                   icon=":material/key:")
+        st.button("Remove key", icon=":material/close:", use_container_width=True, key="clear_key",
+                  on_click=_clear_llm_key)
+    elif SERVER_PROVIDER != "none":
+        st.info(f"No key entered · using this server's {SERVER_PROVIDER} key. "
+                "Enter your own key to use your quota instead.", icon=":material/info:")
+    else:
+        st.warning(
+            "No API key entered. Answers will show the validated evidence summary (sources and values) "
+            f"instead of written prose. Free keys: [{st.session_state.llm_provider}]({link}).",
+            icon=":material/warning:",
+        )
 
 # ------------------------------------------------------------
 # Routing state (kept in the URL so a refresh returns to the same page and chat)
@@ -472,7 +587,12 @@ if not st.session_state.get("intro_done"):
 # ------------------------------------------------------------
 h_left, h_mid, h_right = st.columns([1.15, 2.75, 1.1], vertical_alignment="center")
 with h_left:
-    st.html(f'<div class="ff-brand">{flame_orb(22, 0, 1)}FLAME IN FREEFALL</div>' + drifting_embers(16, 11))
+    with st.container(key="brand_logo", horizontal=True, vertical_alignment="center", gap="small"):
+        with st.container(key="logo_key", width="content"):
+            st.html(f'<div class="ff-logo" title="LLM API key">{logo_html(34)}</div>')
+            with st.container(key="logo_key_panel"):
+                llm_settings_panel()
+        st.html('<div class="ff-brand">FLAME IN FREEFALL</div>' + drifting_embers(16, 11))
 with h_mid:
     choice = st.segmented_control("Workspace", PAGES, key="nav", label_visibility="collapsed")
 with h_right:
@@ -480,7 +600,7 @@ with h_right:
         f'<span class="ff-chip" title="Answers are written by {esc(PROVIDER)}/{esc(MODEL)} and validated against the evidence bundle">'
         f'<span class="ff-dot ff-live" style="background:{AURORA}"></span>{esc(PROVIDER.upper())}</span>'
         if PROVIDER != "none" else
-        '<span class="ff-chip pending" title="No MISTRAL_API_KEY / GEMINI_API_KEY / GROQ_API_KEY found in the environment or .env. '
+        '<span class="ff-chip pending" title="No API key entered (hover over the logo, top left) and none configured on the server. '
         'Answers show the validated evidence summary instead of LLM prose.">EVIDENCE MODE</span>'
     )
     st.html(
@@ -593,7 +713,26 @@ def compact_answer(ans, context_hint):
         "sources": [{"id": s["id"], "title": s.get("title") or "", "url": s.get("url") or "", "kind": s.get("kind") or ""}
                     for s in sources[:10]],
         "n_sources": len(sources),
+        "llm_error": short_llm_error(ans["validation"]["errors"]),
     }
+
+
+def short_llm_error(errors):
+    """First 'LLM API error' entry, reduced to the provider's own message (e.g. 'API key not valid')."""
+    err = next((str(e) for e in errors if str(e).startswith("LLM API error")), "")
+    if not err:
+        return ""
+    found = re.search(r'"message"\s*:\s*"([^"]+)"', err)
+    code = re.search(r"HTTP (\d{3})", err)
+    text = found.group(1) if found else err.replace("LLM API error: ", "")
+    return (f"HTTP {code.group(1)} · " if code else "") + text[:160]
+
+
+def llm_error_note(m):
+    """Say plainly when the LLM call itself failed (wrong key, quota, network) rather than the validator."""
+    if m.get("llm_error"):
+        st.warning("The LLM call failed, so this reply is the evidence summary. Hover over the logo (top left) "
+                   f"to check the API key and provider. Details: {m['llm_error']}", icon=":material/error:")
 
 
 def stream_tokens(text, delay=0.012):
@@ -615,7 +754,8 @@ def evidence_drawer(m):
     more = m.get("n_sources", 0) - len(m.get("sources", []))
     if more > 0:
         rows += f'<div class="row"><span class="ff-muted">+ {more} more in the evidence bundle</span></div>'
-    check = ("Evidence summary · no LLM" if m.get("fallback") and m.get("model", "").startswith("none")
+    check = ("LLM call failed · evidence summary" if m.get("llm_error")
+             else "Evidence summary · no LLM" if m.get("fallback") and m.get("model", "").startswith("none")
              else "Validator fallback · evidence summary" if m.get("fallback")
              else "Validated · retried once" if m.get("retried") else "Validated against evidence")
     meta = [f'intent · {esc(m.get("intent", ""))}', esc(m.get("model", "")), check,
@@ -729,6 +869,7 @@ if page == "Ask the Expert":
                 st.markdown(m["content"])
                 if m["role"] == "assistant":
                     evidence_drawer(m)
+                    llm_error_note(m)
 
         if st.session_state.pending:
             job = st.session_state.pending
@@ -739,7 +880,7 @@ if page == "Ask the Expert":
                     '<span class="dots"><i></i><i></i><i></i></span></div>'
                 )
                 try:
-                    result = agent.answer_question(job["asked"], get_engine())
+                    result = agent.answer_question(job["asked"], get_engine(), **llm_kwargs())
                     msg = compact_answer(result, job["hint"])
                 except Exception as exc:  # index missing, network error, ...
                     msg = {"role": "assistant", "error": True, "answer_type": "error",
@@ -748,15 +889,17 @@ if page == "Ask the Expert":
                 answer_badge(msg)
                 st.write_stream(stream_tokens(msg["content"]))
                 evidence_drawer(msg)
+                llm_error_note(msg)
             conv["messages"].append(msg)
             save_conversation(conv)
             st.session_state.pending = None
 
         if PROVIDER == "none":
-            st.html(
-                '<p class="ff-muted" style="font-size:.74rem;text-align:center;margin:var(--s-6) 0 var(--s-4)">'
-                "Evidence mode · no LLM key found, so replies show the validated evidence summary. "
-                "Add MISTRAL_API_KEY, GEMINI_API_KEY or GROQ_API_KEY to a .env file in the repository root for written answers.</p>"
+            st.warning(
+                "Evidence mode · no API key entered, so replies show the validated evidence summary instead of "
+                "LLM-written prose. To get written answers, hover over the logo next to FLAME IN FREEFALL (top left) "
+                "and enter a Gemini, Groq or Mistral API key.",
+                icon=":material/key_off:",
             )
 
     question = st.chat_input("Ask a follow-up…" if conv["messages"] else "Ask about an experiment, condition or comparison…")
