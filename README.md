@@ -17,9 +17,15 @@ What makes it different from a plain chatbot:
 
 ## Open the website
 
-There is no public hosted link yet, so the site runs on your own computer. It takes one download and one double-click.
+### **▶ [flames-of-aron.streamlit.app](https://flames-of-aron.streamlit.app)**
 
-### Option A: download and double-click (easiest)
+Click the link: the site opens in your browser, nothing to install. If it has not been used for a while it
+shows a "wake up" button first, and the first question can take about a minute while the search model loads.
+Then [add an API key](#add-an-llm-api-key-needed-for-written-answers) to get written answers.
+
+You can also run the site on your own computer:
+
+### Option A: download and double-click
 
 1. Install **Python 3.10 or newer** from [python.org/downloads](https://www.python.org/downloads/). On Windows, tick **"Add python.exe to PATH"** in the installer.
 2. **[Download this repository as a ZIP](https://github.com/SE-220717006/Flames_of_Aron/archive/refs/heads/main.zip)** and unzip it.
@@ -39,13 +45,11 @@ cd Flames_of_Aron
 pip install -r requirements.txt && streamlit run app.py
 ```
 
-### Option C: put it online (for the team)
+### Hosting
 
-To get a public link that needs no installation, deploy the repository on
-[Streamlit Community Cloud](https://share.streamlit.io): sign in with GitHub, choose **Create app**, select this
-repository, branch `main`, main file `app.py`, and deploy. Optionally add `GEMINI_API_KEY` (or `GROQ_API_KEY` /
-`MISTRAL_API_KEY`) under the app's **Secrets** so visitors get written answers without their own key.
-Once deployed, paste the app link at the top of this section.
+The public site is deployed from the `main` branch on [Streamlit Community Cloud](https://share.streamlit.io)
+(main file `app.py`) and updates automatically after each merge. A server-side key can be added under the app's
+**Secrets** (`GEMINI_API_KEY`, `GROQ_API_KEY` or `MISTRAL_API_KEY`) so visitors get written answers without their own key.
 
 ## Add an LLM API key (needed for written answers)
 
@@ -67,7 +71,7 @@ line such as `GEMINI_API_KEY=your-key`. The file is git-ignored; never commit a 
 
 | Page | What it does |
 | --- | --- |
-| **Ask the Expert** | Chat with the assistant. Each reply has an "Evidence used" drawer with its sources. Past conversations are in the **CHATS** tab on the left edge of the screen: click it to open the list, click the arrow at the top of the list to close it. |
+| **Ask the Expert** | Chat with the assistant. Each reply has an "Evidence used" drawer with its sources. Past conversations (private to each visitor) are in the **CHATS** tab on the left edge of the screen: click it to open the list, click the arrow at the top of the list to close it. |
 | **Experiment Explorer** | The golden table: one card per investigation with fuel, hardware, oxygen, pressure, flow, source conflicts and sources. |
 | **Atmosphere Check** | Set an oxygen fraction and pressure, see the oxygen partial pressure, compare with the lunar habitat envelope (O2 >= 30 %, P <= 10.2 psi) and find the nearest documented tests. |
 | **Sources & About** | How an answer is produced, the data layers, the source registry and the agent rules. |
@@ -144,7 +148,7 @@ answer = agent.answer_question("Which experiments are closest to lunar-base cond
 
 * `python app.py` also works: it starts Streamlit for you.
 * Server-side keys: `MISTRAL_API_KEY`, `GEMINI_API_KEY` or `GROQ_API_KEY` in the environment or in `.env`. A key typed in the site overrides it for that visitor only.
-* Chat history is stored in `chat_history/` (git-ignored) on the machine that runs the site.
+* Chat history is stored in `chat_history/<visitor id>/` (git-ignored) on the machine that runs the site. Each visitor sees only their own conversations; the visitor id is the `v` value in the page link.
 * Tests: `python -m pytest -q tests` (no model download needed).
 
 ## Rebuild order
