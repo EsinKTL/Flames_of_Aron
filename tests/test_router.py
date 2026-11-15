@@ -65,7 +65,7 @@ def test_scope_patterns_match_query_engine(stub_engine):
     ("What medical treatment protocol applies after smoke exposure?", "out_of_scope", "medical"),
     ("How would cabin fabric burn in lunar gravity?", "no_data", "F-019"),
     ("What oxygen concentration did DAFT-2 use?", "no_data", "DAFT-2: no source"),
-    ("What particle sizes did SAME-R measure?", "no_data", "SAME-R: no results document"),
+    ("What ion current did ACME-E-FIELD measure?", "no_data", "ACME-E-FIELD: no results document"),
     ("What total pressure did Saffire-II run at?", "no_data", "Saffire-II: pressure unknown"),
     ("How do lithium-ion battery fires spread in microgravity?", "no_data", "G-001"),
     ("What triggered the smoke alarm on Artemis II?", "no_data", "G-002"),

@@ -253,6 +253,167 @@ DOC_REGISTRY = {
         "year": 2015,
         "hardware": "MSG / CIR",
         "fuel_phase": "multi-phase"
+    },
+
+    # SAME / SAME-R / DAFT
+    "SAME_20120012884.pdf": {
+        "source_id": "S-044",
+        "doc_title": "Properties of Smoke from Overheated Materials in Low-Gravity (SAME)",
+        "investigation_ids": ["SAME"],
+        "doc_type": "results",
+        "year": 2012,
+        "hardware": "MSG",
+        "fuel_phase": "solid"
+    },
+    "SAME-R_20130000422.pdf": {
+        "source_id": "S-046",
+        "doc_title": "Particle Morphology and Size Results from SAME-R (SAME-2)",
+        "investigation_ids": ["SAME-R"],
+        "doc_type": "results",
+        "year": 2012,
+        "hardware": "MSG",
+        "fuel_phase": "solid"
+    },
+    "DAFT_20050215648.pdf": {
+        "source_id": "S-049",
+        "doc_title": "Fundamental Research Applied To Enable Hardware Performance (DAFT)",
+        "investigation_ids": ["DAFT"],
+        "doc_type": "design",
+        "year": 2005,
+        "hardware": "ISS Destiny",
+        "fuel_phase": "solid"
+    },
+    "SAME_20070031686.pdf": {
+        "source_id": "S-072",
+        "doc_title": "Particle and Smoke Detection on ISS for Next Generation Smoke Detectors (SAME & DAFT)",
+        "investigation_ids": ["SAME", "DAFT"],
+        "doc_type": "results",
+        "year": 2007,
+        "hardware": "MSG / ISS Destiny",
+        "fuel_phase": "solid"
+    },
+
+    # CFI / FLEX-2
+    "CFI_2017_Quad.pdf": {
+        "source_id": "S-051",
+        "doc_title": "Cool Flames Investigation (CFI) Overview",
+        "investigation_ids": ["CFI"],
+        "doc_type": "design",
+        "year": 2017,
+        "hardware": "CIR (MDCA)",
+        "fuel_phase": "liquid"
+    },
+    "CFI_20190002838.pdf": {
+        "source_id": "S-065",
+        "doc_title": "Three Stage Cool Flame Droplet Burning Behavior of n-alkane Droplets (CFI / FLEX-2)",
+        "investigation_ids": ["CFI", "FLEX-2"],
+        "doc_type": "results",
+        "year": 2019,
+        "hardware": "CIR (MDCA)",
+        "fuel_phase": "liquid"
+    },
+
+    # ACME (CFI-G, BRE, E-FIELD)
+    "ACME_CFI-G_par_10426596.pdf": {
+        "source_id": "S-052",
+        "doc_title": "Spherical Gas-Fueled Cool Diffusion Flames (ACME CFI-G)",
+        "investigation_ids": ["ACME-CFI-G"],
+        "doc_type": "results",
+        "year": 2023,
+        "hardware": "CIR (ACME)",
+        "fuel_phase": "gas"
+    },
+    "ACME_20210022542_JASMAC.pdf": {
+        "source_id": "S-053",
+        "doc_title": "Recent Research on Flames of Gaseous Fuel Aboard the ISS (ACME JASMAC-33)",
+        "investigation_ids": ["ACME-CFI-G", "ACME-BRE", "ACME-E-FIELD"],
+        "doc_type": "design",
+        "year": 2021,
+        "hardware": "CIR (ACME)",
+        "fuel_phase": "gas"
+    },
+    "ACME_20210021781_JASMAC.pdf": {
+        "source_id": "S-056",
+        "doc_title": "Recent Research on Flames of Gaseous Fuel Aboard the International Space Station (ACME JASMAC)",
+        "investigation_ids": ["ACME-CFI-G", "ACME-BRE", "ACME-E-FIELD"],
+        "doc_type": "overview",
+        "year": 2021,
+        "hardware": "CIR (ACME)",
+        "fuel_phase": "gas"
+    },
+    "ACME_BRE_20160010073.pdf": {
+        "source_id": "S-073",
+        "doc_title": "A Burning Rate Emulator (BRE) for Study in Microgravity",
+        "investigation_ids": ["ACME-BRE"],
+        "doc_type": "results",
+        "year": 2016,
+        "hardware": "CIR (ACME)",
+        "fuel_phase": "gas"
+    },
+    "ACME_BRE_20170009141.pdf": {
+        "source_id": "S-074",
+        "doc_title": "Emulation of Condensed Fuel Flames Using a Burning Rate Emulator (BRE) in Microgravity",
+        "investigation_ids": ["ACME-BRE"],
+        "doc_type": "results",
+        "year": 2017,
+        "hardware": "CIR (ACME)",
+        "fuel_phase": "gas"
+    },
+
+    # SPICE & SLICE
+    "SPICE_Dotson_2011_FSJ.pdf": {
+        "source_id": "S-059",
+        "doc_title": "Laminar Smoke Points of Coflowing Flames in Microgravity (SPICE)",
+        "investigation_ids": ["SPICE"],
+        "doc_type": "results",
+        "year": 2011,
+        "hardware": "MSG",
+        "fuel_phase": "gas"
+    },
+    "SPICE_SLICE_20140009169.pdf": {
+        "source_id": "S-060",
+        "doc_title": "Gaseous Non-Premixed Flame Research Planned for the International Space Station (SPICE / SLICE)",
+        "investigation_ids": ["SPICE", "SLICE"],
+        "doc_type": "overview",
+        "year": 2014,
+        "hardware": "MSG",
+        "fuel_phase": "gas"
+    },
+    "SLICE_20140017780.pdf": {
+        "source_id": "S-061",
+        "doc_title": "Soot Formation in Coflow Jet Flames in Microgravity and Normal Gravity (SLICE)",
+        "investigation_ids": ["SLICE"],
+        "doc_type": "results",
+        "year": 2014,
+        "hardware": "MSG",
+        "fuel_phase": "gas"
+    },
+    "SLICE_20150002322.pdf": {
+        "source_id": "S-070",
+        "doc_title": "Coflow Laminar Methane/Air Diffusion Flames: Effects of Dilution, Inlet Velocity and Gravity (SLICE)",
+        "investigation_ids": ["SLICE"],
+        "doc_type": "results",
+        "year": 2015,
+        "hardware": "MSG",
+        "fuel_phase": "gas"
+    },
+    "SLICE_20160012298.pdf": {
+        "source_id": "S-071",
+        "doc_title": "Quantitative Measurements of CH* Concentration in 1g and ug Coflow Laminar Diffusion Flames (SLICE)",
+        "investigation_ids": ["SLICE"],
+        "doc_type": "results",
+        "year": 2016,
+        "hardware": "MSG",
+        "fuel_phase": "gas"
+    },
+    "SPICE_20090014827.pdf": {
+        "source_id": "S-076",
+        "doc_title": "Smoke Point in Co-flow Experiment Summary (SPICE)",
+        "investigation_ids": ["SPICE"],
+        "doc_type": "overview",
+        "year": 2009,
+        "hardware": "MSG",
+        "fuel_phase": "gas"
     }
 }
 
@@ -617,6 +778,52 @@ def refine_investigation_ids(doc_investigations: list, text: str, section_title:
         if re.search(r'\bflex\b(?![- ]?(?:2|ii)\b)', full_ctx):
             f_matches.append("FLEX")
         return f_matches if f_matches else doc_investigations
+
+    # 3d: SAME / DAFT / DAFT-2 (S-044, S-072)
+    if any(inv in ("SAME", "DAFT", "DAFT-2") for inv in doc_investigations):
+        matched = []
+        if "SAME-R" in allowed and re.search(r'\bsame[- ]?(?:r|2)\b', full_ctx):
+            matched.append("SAME-R")
+        elif "SAME" in allowed and re.search(r'\bsame\b|\bsmoke aerosol\b', full_ctx):
+            matched.append("SAME")
+        if "DAFT-2" in allowed and re.search(r'\bdaft[- ]?2\b', full_ctx):
+            matched.append("DAFT-2")
+        elif "DAFT" in allowed and re.search(r'\bdaft\b|\bdust aerosol\b', full_ctx):
+            matched.append("DAFT")
+        if matched:
+            return matched
+
+    # 3e: ACME (ACME-CFI-G, ACME-BRE, ACME-E-FIELD) (S-053, S-056)
+    if any("ACME" in inv for inv in doc_investigations):
+        matched = []
+        if "ACME-CFI-G" in allowed and re.search(r'\bcfi[- ]?g\b|\bcool flames? investigation with gases\b|\bspherical.*?cool', full_ctx):
+            matched.append("ACME-CFI-G")
+        if "ACME-BRE" in allowed and re.search(r'\bbre\b|\bburning rate emulator\b', full_ctx):
+            matched.append("ACME-BRE")
+        if "ACME-E-FIELD" in allowed and re.search(r'\be[- ]?field\b|\belectric[- ]field\b', full_ctx):
+            matched.append("ACME-E-FIELD")
+        if matched:
+            return matched
+
+    # 3f: SPICE / SLICE (S-060)
+    if "SPICE" in allowed and "SLICE" in allowed:
+        matched = []
+        if re.search(r'\bspice\b|\bsmoke point\b', full_ctx):
+            matched.append("SPICE")
+        if re.search(r'\bslice\b|\blift-?off\b|\bstructure\b', full_ctx):
+            matched.append("SLICE")
+        if matched:
+            return matched
+
+    # 3g: CFI / FLEX-2 (S-065)
+    if "CFI" in allowed and "FLEX-2" in allowed:
+        matched = []
+        if re.search(r'\bcfi\b|\bcool flames?\b', full_ctx):
+            matched.append("CFI")
+        if re.search(r'\bflex[- ]?2\b|\bflex 1268\b', full_ctx):
+            matched.append("FLEX-2")
+        if matched:
+            return matched
 
     return doc_investigations
 
@@ -989,13 +1196,22 @@ def main():
         except Exception as e:
             print(f"     [!] PDF Hatası ({fname}): {e}")
 
-    # 3. PSI Metadata (.txt) Dosyalarını da K1/K2 Bağlam Parçası Olarak Ekle (manifest.csv S-030 .. S-039)
+    # 3. PSI Metadata (.txt) Dosyalarını da K1/K2 Bağlam Parçası Olarak Ekle (manifest.csv S-030 .. S-039, S-078 .. S-086)
     psi_meta_map = {
         "bass_metadata.txt": ("S-036", ["BASS"], "MSG", "solid", 2013),
         "Bass-2_metadata.txt": ("S-030", ["BASS-II"], "MSG", "solid", 2022),
         "flex_metadata.txt": ("S-037", ["FLEX"], "CIR (MDCA)", "liquid", 2016),
         "saffire-1_metadata.txt": ("S-038", ["Saffire-I"], "Cygnus", "solid", 2024),
         "safire-3_metadata.txt": ("S-039", ["Saffire-III"], "Cygnus", "solid", 2024),
+        "same_metadata.txt": ("S-078", ["SAME"], "MSG", "solid", 2007),
+        "same_r_metadata.txt": ("S-079", ["SAME-R"], "MSG", "solid", 2010),
+        "daft_metadata.txt": ("S-080", ["DAFT", "DAFT-2"], "PEMS/MSG", "solid", 2006),
+        "cfi_metadata.txt": ("S-081", ["CFI"], "CIR (MDCA)", "liquid", 2017),
+        "acme_cfi_g_metadata.txt": ("S-082", ["ACME-CFI-G"], "CIR (ACME)", "gas", 2021),
+        "acme_bre_metadata.txt": ("S-083", ["ACME-BRE"], "CIR (ACME)", "gas", 2019),
+        "acme_efield_metadata.txt": ("S-084", ["ACME-E-FIELD"], "CIR (ACME)", "gas", 2016),
+        "spice_metadata.txt": ("S-085", ["SPICE"], "MSG", "gas", 2009),
+        "slice_metadata.txt": ("S-086", ["SLICE"], "MSG", "gas", 2012),
     }
     for mfile, (psi_id, inv_list, hw, fphase, yr) in psi_meta_map.items():
         mpath = os.path.join(RAW_PSI_DIR, mfile)
@@ -1004,7 +1220,12 @@ def main():
                 lines = f.readlines()
             important_lines = []
             for line in lines:
-                if any(line.startswith(k) for k in ["Study Identifier", "Study Title", "Comment[Approach]", "Comment[Hypothesis]", "Comment[Objective]", "Comment[Research Impacts]", "Comment[Experiment Hardware]", "Study Design Type"]):
+                if any(line.startswith(k) for k in [
+                    "Study Identifier", "Study Title", "Comment[Approach]", "Comment[Hypothesis]",
+                    "Comment[Objective]", "Comment[Objectives]", "Comment[Research Impacts",
+                    "Comment[Experiment Hardware]", "Comment[Keywords]", "Comment[Acronym]",
+                    "Investigation Title", "Investigation Description", "Study Design Type"
+                ]):
                     important_lines.append(line.strip().replace("\t", ": "))
             summary_txt = clean_text("\n".join(important_lines))
             prefix = f"[{', '.join(inv_list)} | {psi_id}: Official PSI Metadata | Study Approach, Objective & Hardware]\n"
@@ -1029,6 +1250,51 @@ def main():
                 "text": final_txt
             })
             stats["text_chunks"] += 1
+
+    # 4. PSI Experimental Tables (.csv)
+    psi_tables = [
+        ("PSI-102_Experimental table_SAME.csv", "S-077", ["SAME"], "SAME Smoke Detection Flight Table", 2007, "MSG", "solid"),
+        ("PSI-106_Experimental table_Slice.csv", "S-087", ["SLICE"], "SLICE Experimental Table", 2012, "MSG", "gas"),
+        ("PSI-20_Experimental table_ACME BRE.csv", "S-088", ["ACME-BRE"], "ACME BRE Experimental Table", 2019, "CIR (ACME)", "gas"),
+        ("PSI-159_Experimental table_CFI-G_Normal Flames.csv", "S-089", ["ACME-CFI-G"], "ACME CFI-G Normal Flames Experimental Table", 2021, "CIR (ACME)", "gas"),
+        ("PSI-159_Experimental table_CFI-G_Inverse Flames.csv", "S-090", ["ACME-CFI-G"], "ACME CFI-G Inverse Flames Experimental Table", 2021, "CIR (ACME)", "gas"),
+    ]
+    import csv as csv_mod
+    for tbl_file, sid, invs, tbl_title, yr, hw, fphase in psi_tables:
+        tbl_path = os.path.join(RAW_PSI_DIR, tbl_file)
+        if os.path.exists(tbl_path):
+            with open(tbl_path, "r", encoding="utf-8-sig", errors="ignore") as f:
+                reader = list(csv_mod.reader(f))
+            hdr_md, body_lines = format_table_markdown(reader)
+            if hdr_md and body_lines:
+                batch_size = 15
+                inv_str = ", ".join(invs)
+                for b_i in range(0, len(body_lines), batch_size):
+                    batch_rows = body_lines[b_i:b_i + batch_size]
+                    tbl_md = hdr_md + "\n" + "\n".join(batch_rows)
+                    part_str = f" (Part {b_i//batch_size + 1})" if len(body_lines) > batch_size else ""
+                    prefix = f"[{inv_str} | {sid}: {tbl_title}{part_str} | ISS Flight Data Table (PSI)]\n"
+                    final_tbl_txt = prefix + tbl_md
+                    all_chunks.append({
+                        "chunk_id": f"{sid}_p001_t01_{b_i//batch_size + 1}",
+                        "source_id": sid,
+                        "investigation_ids": invs,
+                        "doc_type": "results",
+                        "year": yr,
+                        "page": 1,
+                        "section_type": "conditions",
+                        "section_title": f"{tbl_title}{part_str}",
+                        "has_table": True,
+                        "has_numeric_conditions": True,
+                        "hardware": hw,
+                        "fuel_phase": fphase,
+                        "ocr": False,
+                        "duplicate_of": None,
+                        "exclude_from_default_search": False,
+                        "token_estimate": estimate_tokens(final_tbl_txt),
+                        "text": final_tbl_txt
+                    })
+                    stats["table_chunks"] += 1
 
     with open(interim_pages_path, "w", encoding="utf-8") as f:
         for rec in all_pages_records:
