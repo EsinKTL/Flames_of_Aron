@@ -139,4 +139,5 @@ def test_get_facts_by_id_keeps_order():
 
 def test_local_result_sources():
     assert "S-032" in tools.local_result_sources("FLEX")
-    assert tools.local_result_sources("SAME") == [] and tools.local_result_sources("DAFT-2") == []
+    assert "S-044" in tools.local_result_sources("SAME")
+    assert tools.local_result_sources("ACME-E-FIELD") == [] and tools.local_result_sources("DAFT-2") == []
