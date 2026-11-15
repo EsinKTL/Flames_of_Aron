@@ -1196,13 +1196,22 @@ def main():
         except Exception as e:
             print(f"     [!] PDF Hatası ({fname}): {e}")
 
-    # 3. PSI Metadata (.txt) Dosyalarını da K1/K2 Bağlam Parçası Olarak Ekle (manifest.csv S-030 .. S-039)
+    # 3. PSI Metadata (.txt) Dosyalarını da K1/K2 Bağlam Parçası Olarak Ekle (manifest.csv S-030 .. S-039, S-078 .. S-086)
     psi_meta_map = {
         "bass_metadata.txt": ("S-036", ["BASS"], "MSG", "solid", 2013),
         "Bass-2_metadata.txt": ("S-030", ["BASS-II"], "MSG", "solid", 2022),
         "flex_metadata.txt": ("S-037", ["FLEX"], "CIR (MDCA)", "liquid", 2016),
         "saffire-1_metadata.txt": ("S-038", ["Saffire-I"], "Cygnus", "solid", 2024),
         "safire-3_metadata.txt": ("S-039", ["Saffire-III"], "Cygnus", "solid", 2024),
+        "same_metadata.txt": ("S-078", ["SAME"], "MSG", "solid", 2007),
+        "same_r_metadata.txt": ("S-079", ["SAME-R"], "MSG", "solid", 2010),
+        "daft_metadata.txt": ("S-080", ["DAFT", "DAFT-2"], "PEMS/MSG", "solid", 2006),
+        "cfi_metadata.txt": ("S-081", ["CFI"], "CIR (MDCA)", "liquid", 2017),
+        "acme_cfi_g_metadata.txt": ("S-082", ["ACME-CFI-G"], "CIR (ACME)", "gas", 2021),
+        "acme_bre_metadata.txt": ("S-083", ["ACME-BRE"], "CIR (ACME)", "gas", 2019),
+        "acme_efield_metadata.txt": ("S-084", ["ACME-E-FIELD"], "CIR (ACME)", "gas", 2016),
+        "spice_metadata.txt": ("S-085", ["SPICE"], "MSG", "gas", 2009),
+        "slice_metadata.txt": ("S-086", ["SLICE"], "MSG", "gas", 2012),
     }
     for mfile, (psi_id, inv_list, hw, fphase, yr) in psi_meta_map.items():
         mpath = os.path.join(RAW_PSI_DIR, mfile)
@@ -1211,7 +1220,12 @@ def main():
                 lines = f.readlines()
             important_lines = []
             for line in lines:
-                if any(line.startswith(k) for k in ["Study Identifier", "Study Title", "Comment[Approach]", "Comment[Hypothesis]", "Comment[Objective]", "Comment[Research Impacts]", "Comment[Experiment Hardware]", "Study Design Type"]):
+                if any(line.startswith(k) for k in [
+                    "Study Identifier", "Study Title", "Comment[Approach]", "Comment[Hypothesis]",
+                    "Comment[Objective]", "Comment[Objectives]", "Comment[Research Impacts",
+                    "Comment[Experiment Hardware]", "Comment[Keywords]", "Comment[Acronym]",
+                    "Investigation Title", "Investigation Description", "Study Design Type"
+                ]):
                     important_lines.append(line.strip().replace("\t", ": "))
             summary_txt = clean_text("\n".join(important_lines))
             prefix = f"[{', '.join(inv_list)} | {psi_id}: Official PSI Metadata | Study Approach, Objective & Hardware]\n"
@@ -1237,37 +1251,50 @@ def main():
             })
             stats["text_chunks"] += 1
 
-    # 4. SAME PSI Flight Data Table (S-077)
-    same_table_path = os.path.join(RAW_PSI_DIR, "PSI-102_Experimental table_SAME.csv")
-    if os.path.exists(same_table_path):
-        import csv as csv_mod
-        with open(same_table_path, "r", encoding="utf-8-sig", errors="ignore") as f:
-            reader = list(csv_mod.reader(f))
-        hdr_md, body_lines = format_table_markdown(reader)
-        if hdr_md and body_lines:
-            tbl_md = hdr_md + "\n" + "\n".join(body_lines)
-            prefix = "[SAME | S-077: SAME Smoke Detection Flight Table | ISS Flight Data Table (PSI-102)]\n"
-            final_tbl_txt = prefix + tbl_md
-            all_chunks.append({
-                "chunk_id": "S-077_p001_t01_1",
-                "source_id": "S-077",
-                "investigation_ids": ["SAME"],
-                "doc_type": "results",
-                "year": 2007,
-                "page": 1,
-                "section_type": "conditions",
-                "section_title": "SAME Smoke Detection Flight Table (PSI-102)",
-                "has_table": True,
-                "has_numeric_conditions": True,
-                "hardware": "MSG",
-                "fuel_phase": "solid",
-                "ocr": False,
-                "duplicate_of": None,
-                "exclude_from_default_search": False,
-                "token_estimate": estimate_tokens(final_tbl_txt),
-                "text": final_tbl_txt
-            })
-            stats["table_chunks"] += 1
+    # 4. PSI Experimental Tables (.csv)
+    psi_tables = [
+        ("PSI-102_Experimental table_SAME.csv", "S-077", ["SAME"], "SAME Smoke Detection Flight Table", 2007, "MSG", "solid"),
+        ("PSI-106_Experimental table_Slice.csv", "S-087", ["SLICE"], "SLICE Experimental Table", 2012, "MSG", "gas"),
+        ("PSI-20_Experimental table_ACME BRE.csv", "S-088", ["ACME-BRE"], "ACME BRE Experimental Table", 2019, "CIR (ACME)", "gas"),
+        ("PSI-159_Experimental table_CFI-G_Normal Flames.csv", "S-089", ["ACME-CFI-G"], "ACME CFI-G Normal Flames Experimental Table", 2021, "CIR (ACME)", "gas"),
+        ("PSI-159_Experimental table_CFI-G_Inverse Flames.csv", "S-090", ["ACME-CFI-G"], "ACME CFI-G Inverse Flames Experimental Table", 2021, "CIR (ACME)", "gas"),
+    ]
+    import csv as csv_mod
+    for tbl_file, sid, invs, tbl_title, yr, hw, fphase in psi_tables:
+        tbl_path = os.path.join(RAW_PSI_DIR, tbl_file)
+        if os.path.exists(tbl_path):
+            with open(tbl_path, "r", encoding="utf-8-sig", errors="ignore") as f:
+                reader = list(csv_mod.reader(f))
+            hdr_md, body_lines = format_table_markdown(reader)
+            if hdr_md and body_lines:
+                batch_size = 15
+                inv_str = ", ".join(invs)
+                for b_i in range(0, len(body_lines), batch_size):
+                    batch_rows = body_lines[b_i:b_i + batch_size]
+                    tbl_md = hdr_md + "\n" + "\n".join(batch_rows)
+                    part_str = f" (Part {b_i//batch_size + 1})" if len(body_lines) > batch_size else ""
+                    prefix = f"[{inv_str} | {sid}: {tbl_title}{part_str} | ISS Flight Data Table (PSI)]\n"
+                    final_tbl_txt = prefix + tbl_md
+                    all_chunks.append({
+                        "chunk_id": f"{sid}_p001_t01_{b_i//batch_size + 1}",
+                        "source_id": sid,
+                        "investigation_ids": invs,
+                        "doc_type": "results",
+                        "year": yr,
+                        "page": 1,
+                        "section_type": "conditions",
+                        "section_title": f"{tbl_title}{part_str}",
+                        "has_table": True,
+                        "has_numeric_conditions": True,
+                        "hardware": hw,
+                        "fuel_phase": fphase,
+                        "ocr": False,
+                        "duplicate_of": None,
+                        "exclude_from_default_search": False,
+                        "token_estimate": estimate_tokens(final_tbl_txt),
+                        "text": final_tbl_txt
+                    })
+                    stats["table_chunks"] += 1
 
     with open(interim_pages_path, "w", encoding="utf-8") as f:
         for rec in all_pages_records:
