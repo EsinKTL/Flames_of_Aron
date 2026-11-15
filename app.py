@@ -444,7 +444,7 @@ PROVIDER, MODEL = llm_status()  # key from the environment / .env / host secrets
 SERVER_PROVIDER = PROVIDER
 
 # ------------------------------------------------------------
-# Optional API key typed by the visitor (sidebar of Ask the Expert)
+# Optional API key typed by the visitor (hover panel under the team logo, top left)
 # Kept only in this browser session's memory: never written to disk, chat history or the
 # process environment, so one visitor's key is never used for another visitor's questions.
 # ------------------------------------------------------------
@@ -478,6 +478,53 @@ def _sync_llm_settings():
 def _clear_llm_key():
     st.session_state.llm_key = ""
     st.session_state._llm_key_input = ""
+
+
+LOGO_CANDIDATES = ("logo.png", "logo.svg", "logo.jpg", "logo.jpeg", "logo.webp")
+
+
+@st.cache_data(show_spinner=False)
+def _logo_data_uri():
+    """Team logo from assets/ as a data URI, or '' when no logo file is present."""
+    import base64
+    import mimetypes
+    for name in LOGO_CANDIDATES:
+        path = Path(__file__).resolve().parent / "assets" / name
+        if path.exists():
+            mime = mimetypes.guess_type(name)[0] or "image/png"
+            return f"data:{mime};base64," + base64.b64encode(path.read_bytes()).decode("ascii")
+    return ""
+
+
+def logo_html(size):
+    uri = _logo_data_uri()
+    if uri:
+        return f'<img src="{uri}" alt="Team logo" style="height:{size}px;width:auto;display:block;border-radius:50%">'
+    return flame_orb(size - 6, 0, 1)
+
+
+# Hovering the logo (or typing in the panel) opens the API key panel under it.
+st.markdown(
+    """<style>
+/* Streamlit's transparent top toolbar sits over the header row; let the mouse reach the logo */
+[data-testid="stHeader"] { pointer-events:none; }
+[data-testid="stHeader"] button, [data-testid="stHeader"] a { pointer-events:auto; }
+.st-key-brand_logo { flex-wrap:nowrap; position:relative; z-index:1000001; }
+.st-key-logo_key { position:relative; cursor:pointer; }
+.ff-logo { display:flex; align-items:center; padding:4px; margin-top:8px; border-radius:10px;
+  border:1px solid transparent; transition:border-color .15s ease, box-shadow .15s ease; }
+.st-key-logo_key:hover .ff-logo, .st-key-logo_key:focus-within .ff-logo {
+  border-color:rgba(255,122,77,.55); box-shadow:0 0 14px rgba(255,122,77,.35); }
+.st-key-logo_key_panel { display:none; position:absolute; top:100%; left:0; z-index:1000002; width:300px;
+  padding:14px; background:#0f1520; border:1px solid rgba(255,255,255,.12);
+  border-radius:12px; box-shadow:0 18px 40px rgba(0,0,0,.55); }
+.st-key-logo_key:hover .st-key-logo_key_panel,
+.st-key-logo_key:focus-within .st-key-logo_key_panel { display:flex; flex-direction:column; }
+.st-key-logo_key_panel { width:300px !important; min-width:300px !important; max-width:300px !important; }
+.st-key-logo_key_panel > div { width:100% !important; }
+</style>""",
+    unsafe_allow_html=True,
+)
 
 
 def llm_settings_panel():
@@ -540,7 +587,12 @@ if not st.session_state.get("intro_done"):
 # ------------------------------------------------------------
 h_left, h_mid, h_right = st.columns([1.15, 2.75, 1.1], vertical_alignment="center")
 with h_left:
-    st.html(f'<div class="ff-brand">{flame_orb(22, 0, 1)}FLAME IN FREEFALL</div>' + drifting_embers(16, 11))
+    with st.container(key="brand_logo", horizontal=True, vertical_alignment="center", gap="small"):
+        with st.container(key="logo_key", width="content"):
+            st.html(f'<div class="ff-logo" title="LLM API key">{logo_html(34)}</div>')
+            with st.container(key="logo_key_panel"):
+                llm_settings_panel()
+        st.html('<div class="ff-brand">FLAME IN FREEFALL</div>' + drifting_embers(16, 11))
 with h_mid:
     choice = st.segmented_control("Workspace", PAGES, key="nav", label_visibility="collapsed")
 with h_right:
@@ -548,7 +600,7 @@ with h_right:
         f'<span class="ff-chip" title="Answers are written by {esc(PROVIDER)}/{esc(MODEL)} and validated against the evidence bundle">'
         f'<span class="ff-dot ff-live" style="background:{AURORA}"></span>{esc(PROVIDER.upper())}</span>'
         if PROVIDER != "none" else
-        '<span class="ff-chip pending" title="No API key entered in the sidebar and none configured on the server. '
+        '<span class="ff-chip pending" title="No API key entered (hover over the logo, top left) and none configured on the server. '
         'Answers show the validated evidence summary instead of LLM prose.">EVIDENCE MODE</span>'
     )
     st.html(
@@ -679,8 +731,8 @@ def short_llm_error(errors):
 def llm_error_note(m):
     """Say plainly when the LLM call itself failed (wrong key, quota, network) rather than the validator."""
     if m.get("llm_error"):
-        st.warning("The LLM call failed, so this reply is the evidence summary. Check the API key and provider "
-                   f"in the sidebar. Details: {m['llm_error']}", icon=":material/error:")
+        st.warning("The LLM call failed, so this reply is the evidence summary. Hover over the logo (top left) "
+                   f"to check the API key and provider. Details: {m['llm_error']}", icon=":material/error:")
 
 
 def stream_tokens(text, delay=0.012):
@@ -756,8 +808,6 @@ if page == "Ask the Expert":
 
     # ---- History rail ----
     with st.sidebar:
-        llm_settings_panel()
-        st.divider()
         st.html('<div class="ff-eyebrow" style="margin:4px 0 10px">Conversations</div>')
         st.button("New chat", icon=":material/add:", use_container_width=True, key="new_chat", on_click=start_new)
         saved = list_conversations()
@@ -847,7 +897,8 @@ if page == "Ask the Expert":
         if PROVIDER == "none":
             st.warning(
                 "Evidence mode · no API key entered, so replies show the validated evidence summary instead of "
-                "LLM-written prose. Enter a Gemini, Groq or Mistral key in the sidebar (LLM API key) for written answers.",
+                "LLM-written prose. To get written answers, hover over the logo next to FLAME IN FREEFALL (top left) "
+                "and enter a Gemini, Groq or Mistral API key.",
                 icon=":material/key_off:",
             )
 
