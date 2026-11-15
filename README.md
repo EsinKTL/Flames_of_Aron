@@ -23,6 +23,7 @@ tools.py           tools without index or model: query_psi_tests, lunar_check, c
 router.py          rule-based intent router (optional LLM classifier hook)
 evidence.py        answer type (answer / no_data / out_of_scope), gaps and the evidence bundle
 contracts.py       EvidenceBundle and Answer schemas + validators (writes reference/schemas/)
+app.py             Streamlit interface (streamlit run app.py)
 agent.py           LLM writer (Mistral / Gemini / Groq), post-generation validator, retry and fallback
 ```
 
@@ -41,6 +42,15 @@ answer = agent.answer_question("Which experiments are closest to lunar-base cond
   `unknown` in the golden table, and the topic gaps listed in `reference/known_gaps.yaml`.
 * `tools.py`, `router.py` and `evidence.assess()` need no index and no model, so the table pages of the
   interface can use them directly.
+
+## Interface
+
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+Put `MISTRAL_API_KEY`, `GEMINI_API_KEY` or `GROQ_API_KEY` in a `.env` file in the repository root for written answers; without a key the app shows the validated evidence summary. Chat history is stored in `chat_history/` (git-ignored).
 
 ## Rebuild order
 
