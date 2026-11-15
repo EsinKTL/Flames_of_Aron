@@ -1,0 +1,14 @@
+[theme]
+base = "dark"
+primaryColor = "#ff7a4d"
+backgroundColor = "#05070d"
+secondaryBackgroundColor = "#0f1520"
+textColor = "#e9eef6"
+borderColor = "rgba(255,255,255,0.08)"
+baseRadius = "12px"
+font = "DM Sans:https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap"
+headingFont = "Space Grotesk:https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap"
+codeFont = "JetBrains Mono:https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+
+[client]
+toolbarMode = "minimal"
